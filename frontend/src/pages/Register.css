@@ -1,0 +1,21 @@
+/* ========================================
+   Register Page Styles
+   Shares auth layout with Login.css
+   ======================================== */
+
+/* All shared auth styles (auth-page, auth-grid, auth-form-card, etc.)
+   are defined in Login.css which is imported by Login.jsx.
+   
+   Register.jsx also imports Login.css indirectly through the shared
+   class names. If Login.css is not loaded (e.g. navigating directly
+   to /register), we duplicate the critical styles here. */
+
+@import './Login.css';
+
+/* Register-specific overrides (if any) */
+.register-extra-info {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--spacing-sm);
+}

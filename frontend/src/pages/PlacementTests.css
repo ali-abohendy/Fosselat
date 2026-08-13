@@ -1,0 +1,58 @@
+/* ========================================
+   Placement Tests Page Styles
+   ======================================== */
+
+.placement-section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.placement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.placement-card {
+  background: var(--gradient-card);                     /* was: --color-bg-secondary (undefined) */
+  border: 1px solid rgba(200, 167, 99, 0.15);           /* was: --color-gold-muted (undefined) */
+  border-radius: var(--radius-lg);                      /* was: --border-radius-lg (undefined) */
+  padding: var(--spacing-xl);
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.placement-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-gold);
+}
+
+.placement-card-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.placement-card h3 {
+  color: var(--color-cream);
+  margin-bottom: var(--spacing-sm);
+}
+
+.placement-card p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.placement-meta {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-gold);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-full {
+  width: 100%;
+}

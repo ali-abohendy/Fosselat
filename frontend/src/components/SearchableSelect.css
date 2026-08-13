@@ -1,0 +1,107 @@
+.searchable-select-wrapper {
+  position: relative;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.searchable-select-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-cream);
+  font-size: 14px;
+}
+
+.searchable-select-input-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-bg);
+  border: 1px solid rgba(200, 167, 99, 0.2);
+  border-radius: 6px;
+  padding: 0 12px;
+  height: 40px;
+  cursor: text;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.searchable-select-input-container:hover,
+.searchable-select-input-container.open {
+  border-color: var(--color-gold);
+}
+
+.searchable-select-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--color-cream);
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  padding: 0;
+  text-overflow: ellipsis;
+}
+
+.searchable-select-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.searchable-select-clear {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchable-select-clear:hover {
+  color: var(--color-gold);
+}
+
+.searchable-select-arrow {
+  color: var(--color-text-muted);
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.searchable-select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: var(--color-card);
+  border: 1px solid rgba(200, 167, 99, 0.2);
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.searchable-select-option {
+  padding: 10px 12px;
+  color: var(--color-cream);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchable-select-option:hover {
+  background-color: rgba(200, 167, 99, 0.1);
+}
+
+.searchable-select-option.selected {
+  background-color: rgba(200, 167, 99, 0.2);
+  color: var(--color-gold);
+}
+
+.searchable-select-no-options {
+  padding: 10px 12px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  text-align: center;
+}

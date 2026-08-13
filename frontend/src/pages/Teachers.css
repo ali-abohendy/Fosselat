@@ -1,0 +1,25 @@
+/* ========================================
+   TEACHERS PAGE — Styles
+   ======================================== */
+
+/* page-hero styles are shared from Courses.css — 
+   they use the same .page-hero, .page-hero-overlay, .page-hero-content classes */
+
+.teachers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .teachers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .teachers-grid {
+    grid-template-columns: 1fr;
+  }
+}

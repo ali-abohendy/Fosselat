@@ -1,0 +1,332 @@
+/* ========================================
+   About Page Styles
+   ======================================== */
+
+/* Hero */
+.about-hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-hero), var(--gradient-dark);
+  padding-top: var(--navbar-height);
+  overflow: hidden;
+}
+
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(200, 167, 99, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(15, 61, 70, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.about-hero-content {
+  position: relative;
+  text-align: center;
+  padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+  animation: fadeInDown 0.7s ease;
+}
+
+.about-hero-content h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-sm);
+}
+
+.about-hero-content p {
+  color: var(--color-gold);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Mission Section */
+.about-mission {
+  background: var(--color-bg);
+}
+
+.about-mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4xl);
+  align-items: center;
+}
+
+.about-label {
+  display: inline-block;
+  color: var(--color-gold);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.about-mission-text h2 {
+  margin-bottom: var(--spacing-md);
+}
+
+.about-mission-text .gold-line {
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-gold);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--spacing-xl);
+}
+
+.mission-statement {
+  font-size: var(--font-size-lg);
+  color: var(--color-cream);
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.8;
+}
+
+.about-mission-text p {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Values */
+.about-values {
+  margin-top: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.about-value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--gradient-card);
+  border: 1px solid rgba(200, 167, 99, 0.1);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.about-value-item:hover {
+  border-color: rgba(200, 167, 99, 0.3);
+  box-shadow: var(--shadow-gold);
+}
+
+.about-value-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200, 167, 99, 0.1);
+  border-radius: var(--radius-md);
+}
+
+.about-value-item h4 {
+  font-size: var(--font-size-base);
+  margin-bottom: 2px;
+}
+
+.about-value-item p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Decorative Islamic Art Panel */
+.about-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.islamic-frame {
+  width: 340px;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  background: var(--gradient-card);
+  border: 2px solid rgba(200, 167, 99, 0.25);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  box-shadow: var(--shadow-gold-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.islamic-frame::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(200, 167, 99, 0.12);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+}
+
+.islamic-arch {
+  width: 180px;
+  height: 240px;
+  border: 2px solid var(--color-gold);
+  border-radius: 90px 90px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: rgba(200, 167, 99, 0.03);
+}
+
+.islamic-arch::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: -1px;
+  border: 1px solid rgba(200, 167, 99, 0.3);
+  border-radius: 82px 82px 0 0;
+}
+
+.islamic-arch-inner {
+  width: 120px;
+  height: 160px;
+  border: 1px solid rgba(200, 167, 99, 0.4);
+  border-radius: 60px 60px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200, 167, 99, 0.05);
+}
+
+/* Rotating star pattern */
+.islamic-star {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+
+.star-layer {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-gold);
+  border-radius: 4px;
+}
+
+.star-layer-1 {
+  transform: rotate(0deg);
+}
+
+.star-layer-2 {
+  transform: rotate(30deg);
+  border-color: var(--color-gold-light);
+}
+
+.star-layer-3 {
+  transform: rotate(60deg);
+  border-color: var(--color-gold-dark);
+}
+
+/* Pattern row (small diamond shapes) */
+.islamic-pattern-row {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.islamic-pattern-row span {
+  width: 10px;
+  height: 10px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+  opacity: 0.6;
+}
+
+.islamic-pattern-row span:nth-child(odd) {
+  opacity: 0.9;
+}
+
+.islamic-text {
+  font-size: var(--font-size-2xl);
+  color: var(--color-gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+  direction: rtl;
+}
+
+/* Stats Section */
+.about-stats {
+  background: var(--color-bg-light);
+  border-top: 1px solid rgba(200, 167, 99, 0.08);
+  border-bottom: 1px solid rgba(200, 167, 99, 0.08);
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-xl);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .about-mission-grid { gap: var(--spacing-3xl); }
+}
+
+@media (max-width: 992px) {
+  .about-mission-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+
+  .about-decoration {
+    order: -1;
+  }
+
+  .islamic-frame {
+    width: 280px;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    min-height: 260px;
+  }
+
+  .about-hero-content {
+    padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+  }
+
+  .about-hero-content h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .about-decoration {
+    display: none;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .about-mission-grid { gap: var(--spacing-lg); }
+  .about-mission-text { padding: 0 16px; }
+  .about-values { gap: var(--spacing-md); }
+}
+
+@media (max-width: 480px) {
+  .about-hero-content h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
