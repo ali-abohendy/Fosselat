@@ -1,5 +1,4 @@
-import API from '../config.js';
-const API_BASE = API;
+const API_BASE = 'http://localhost:5000/api';
 
 // Helper to get auth header
 function getAuthHeaders() {
