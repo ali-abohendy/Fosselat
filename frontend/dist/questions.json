@@ -1,0 +1,4126 @@
+{
+  "meta": {
+    "academy": "Fosselat Academy",
+    "version": "1.0",
+    "audiences": [
+      {
+        "id": "kids",
+        "label": "Kids"
+      },
+      {
+        "id": "adults",
+        "label": "Adults"
+      }
+    ]
+  },
+  "tracks": [
+    {
+      "id": "quran",
+      "label": "Qur'an",
+      "icon": "quran",
+      "tagline": "Reading, Tajweed, memorization and ijazah pathways",
+      "programs": [
+        {
+          "id": "reading-tajweed",
+          "label": "Reading & Tajweed",
+          "description": "Builds accurate, rule-governed Qur'anic reading from first letter recognition through fluent, beautified recitation (tarteel).",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Makharij & Letter Foundations",
+                "ageRange": "5-8",
+                "weeks": 12,
+                "lessons": 24,
+                "hours": 24,
+                "desc": "Identify and name all 28 letters; articulate each from its correct makhraj."
+              },
+              {
+                "id": 2,
+                "name": "Word Building & Basic Tajweed",
+                "ageRange": "6-9",
+                "weeks": 16,
+                "lessons": 32,
+                "hours": 32,
+                "desc": "Blend letters and harakat into words; recognise Noon Sakinah & Tanween rules."
+              },
+              {
+                "id": 3,
+                "name": "Fluent Reading & Applied Tajweed",
+                "ageRange": "8-12",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Recite a full juz applying major tajweed rules; self-correct without prompting."
+              },
+              {
+                "id": 4,
+                "name": "Mastery & Tarteel",
+                "ageRange": "10+",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Recite with tarteel across multiple juz; command advanced rules and waqf signs."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Letter Mastery & Foundational Tajweed",
+                "ageRange": "Adult",
+                "weeks": 16,
+                "lessons": 32,
+                "hours": 32,
+                "desc": "Articulate all 28 letters correctly; read joined words; apply foundational Noon Sakinah rules."
+              },
+              {
+                "id": 2,
+                "name": "Fluent Reading & Core Tajweed",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Recite a full juz applying major tajweed rules; self-monitor and correct errors."
+              },
+              {
+                "id": 3,
+                "name": "Mastery & Tarteel",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Recite with tarteel across multiple juz; command advanced rules (Qalqalah, Ghunnah, waqf)."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.85,
+                "levelId": 4
+              },
+              {
+                "minScore": 0.6,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.35,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.75,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.4,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Letter Recognition",
+              "difficulty": 1,
+              "skill": "Letter Recognition",
+              "routing": {
+                "pass": {
+                  "minScore": 0.8,
+                  "next": "C"
+                },
+                "mid": {
+                  "minScore": 0.5,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QT-A1",
+                  "type": "mcq",
+                  "prompt": "What is the name of this letter?",
+                  "arabic": "ب",
+                  "options": [
+                    "Baa",
+                    "Taa",
+                    "Thaa",
+                    "Noon"
+                  ],
+                  "correct": 0,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-A2",
+                  "type": "mcq",
+                  "prompt": "What is the name of this letter?",
+                  "arabic": "ج",
+                  "options": [
+                    "Haa",
+                    "Jeem",
+                    "Khaa",
+                    "Daal"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-A3",
+                  "type": "mcq",
+                  "prompt": "Which letter has three dots above it?",
+                  "options": [
+                    "ب",
+                    "ت",
+                    "ث",
+                    "ن"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-A4",
+                  "type": "mcq",
+                  "prompt": "What is the name of this letter?",
+                  "arabic": "ع",
+                  "options": [
+                    "Ghayn",
+                    "'Ayn",
+                    "Haa",
+                    "Haa (heavy)"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-A5",
+                  "type": "mcq",
+                  "prompt": "Which letter comes right after 'ت' in the standard Arabic alphabet order?",
+                  "options": [
+                    "ث",
+                    "ج",
+                    "خ",
+                    "ب"
+                  ],
+                  "correct": 0,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-A6",
+                  "type": "mcq",
+                  "prompt": "Which two letters look almost identical but differ only by a dot underneath?",
+                  "options": [
+                    "ب and ت",
+                    "ج and ح",
+                    "د and ر",
+                    "س and ص"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                }
+              ]
+            },
+            "B": {
+              "name": "Harakat (Short Vowels) & Basic Joining",
+              "difficulty": 2,
+              "skill": "Phonics / Harakat",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "C"
+                },
+                "mid": {
+                  "minScore": 0.45,
+                  "next": "C"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QT-B1",
+                  "type": "mcq",
+                  "prompt": "Which vowel mark is a 'fatha' (short a sound)?",
+                  "options": [
+                    "  َ  (a small dash above)",
+                    "  ِ  (a small dash below)",
+                    "  ُ  (a small curl above)",
+                    "  ْ  (a small circle above)"
+                  ],
+                  "correct": 0,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-B2",
+                  "type": "mcq",
+                  "prompt": "Which of these is read as 'bi' (a short 'i' sound)?",
+                  "options": [
+                    "بَ",
+                    "بِ",
+                    "بُ",
+                    "بْ"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-B3",
+                  "type": "mcq",
+                  "prompt": "Which of these is read as 'bu' (a short 'u' sound)?",
+                  "options": [
+                    "بَ",
+                    "بِ",
+                    "بُ",
+                    "بْ"
+                  ],
+                  "correct": 2,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-B4",
+                  "type": "mcq",
+                  "prompt": "Which of these has NO vowel sound at all (a sukoon)?",
+                  "options": [
+                    "بَ",
+                    "بِ",
+                    "بُ",
+                    "بْ"
+                  ],
+                  "correct": 3,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-B5",
+                  "type": "mcq",
+                  "prompt": "A letter with a small circle above it (سُكُوْن) has no vowel sound and is pronounced how?",
+                  "options": [
+                    "With a long 'aa' sound",
+                    "Stopped short, with no vowel",
+                    "Doubled",
+                    "Silently, not pronounced at all"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-B6",
+                  "type": "mcq",
+                  "prompt": "How is 'مَنْ' correctly pronounced?",
+                  "options": [
+                    "'man' — stopped short, no vowel after the ن",
+                    "'manu'",
+                    "'mani'",
+                    "'manna'"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "C": {
+              "name": "Word-Level Reading & Basic Makharij",
+              "difficulty": 2,
+              "skill": "Word Reading / Makharij",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": "D"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "D"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QT-C1",
+                  "type": "mcq",
+                  "prompt": "Which word is read as 'qalam' (pen)?",
+                  "options": [
+                    "قَلَمْ",
+                    "كَرَمْ",
+                    "قَدَمْ",
+                    "عَلَمْ"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-C2",
+                  "type": "mcq",
+                  "prompt": "Which word is read as 'masjid'?",
+                  "options": [
+                    "مَسْجِد",
+                    "مَسْعُد",
+                    "مَشْهَد",
+                    "مَرْصِد"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-C3",
+                  "type": "mcq",
+                  "prompt": "Which word is read as 'kitab' (book)?",
+                  "options": [
+                    "كِتَاب",
+                    "كَبَاب",
+                    "كِتَابَة",
+                    "كُتَّاب"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-C4",
+                  "type": "mcq",
+                  "prompt": "Which letter is pronounced from deep in the throat and is often confused with a plain 'H'?",
+                  "options": [
+                    "ه (haa)",
+                    "ح (haa - heavy)",
+                    "ك (kaaf)",
+                    "ق (qaaf)"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "skillOverride": "Makharij",
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-C5",
+                  "type": "mcq",
+                  "prompt": "Which letter is pronounced with the tip of the tongue and is heavier / more forceful than 'seen' (س)?",
+                  "options": [
+                    "ث (thaa)",
+                    "ز (zaa)",
+                    "ص (saad)",
+                    "ش (sheen)"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "skillOverride": "Makharij",
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-C6",
+                  "type": "mcq",
+                  "prompt": "'ط' (taa - heavy) differs from 'ت' (taa - light) mainly in:",
+                  "options": [
+                    "Where the tongue touches and the heaviness of the sound",
+                    "Loudness only",
+                    "It is only used at the end of words",
+                    "There is no real difference"
+                  ],
+                  "correct": 0,
+                  "points": 1,
+                  "skillOverride": "Makharij",
+                  "audience": "both"
+                }
+              ]
+            },
+            "D": {
+              "name": "Verse-Level Reading Fluency",
+              "difficulty": 3,
+              "skill": "Reading Fluency",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "E"
+                },
+                "mid": {
+                  "minScore": 0.45,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QT-D1",
+                  "type": "mcq",
+                  "prompt": "Read the passage below (Surah Al-Fatiha), then answer: which word comes right before 'الدِّينِ'?",
+                  "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+                  "options": [
+                    "يَوْمِ",
+                    "رَبِّ",
+                    "مَالِكِ",
+                    "الْعَالَمِينَ"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-D2",
+                  "type": "mcq",
+                  "prompt": "Read the passage below (Surah Al-Ikhlas), then answer: which word comes right after the SECOND time 'اللَّهُ' appears?",
+                  "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
+                  "options": [
+                    "الصَّمَدُ",
+                    "أَحَدٌ",
+                    "يَلِدْ",
+                    "كُفُوًا"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-D3",
+                  "type": "mcq",
+                  "prompt": "Read the passage below (Surah Al-Kawthar), then answer: which word comes right after 'فَصَلِّ'?",
+                  "arabic": "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ ۝ فَصَلِّ لِرَبِّكَ وَانْحَرْ ۝ إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ",
+                  "options": [
+                    "لِرَبِّكَ",
+                    "وَانْحَرْ",
+                    "الْأَبْتَرُ",
+                    "شَانِئَكَ"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-D4",
+                  "type": "timedRead",
+                  "prompt": "Read the passage below (Surah Al-'Asr) at your natural pace.",
+                  "arabic": "وَالْعَصْرِ ۝ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
+                  "benchmarkSeconds": 14,
+                  "points": 3,
+                  "audience": "both"
+                }
+              ]
+            },
+            "E": {
+              "name": "Tajweed Rule Application",
+              "difficulty": 4,
+              "skill": "Tajweed Rules",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "F"
+                },
+                "mid": {
+                  "minScore": 0.45,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QT-E1",
+                  "type": "mcq",
+                  "prompt": "In the phrase below, Noon Sakinah is followed by a 'Baa'. Which Tajweed rule applies?",
+                  "arabic": "مِنۢ بَعْدِ",
+                  "options": [
+                    "Izhar (clear)",
+                    "Idgham (merging)",
+                    "Iqlab (changing to a Meem sound)",
+                    "Ikhfa (hiding)"
+                  ],
+                  "correct": 2,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E2",
+                  "type": "mcq",
+                  "prompt": "Noon Sakinah followed by one of the throat letters (ء ه ع ح غ خ) takes which rule?",
+                  "arabic": "مَنْ آمَنَ",
+                  "options": [
+                    "Izhar - pronounced clearly",
+                    "Idgham - merged completely",
+                    "Iqlab",
+                    "Ikhfa - hidden with a nasal sound"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E3",
+                  "type": "mcq",
+                  "prompt": "Which rule applies when Noon Sakinah is followed by one of the 15 'Ikhfa' letters, such as 'thaa'?",
+                  "arabic": "مِن ثَمَرَةٍ",
+                  "options": [
+                    "Izhar",
+                    "Idgham with Ghunnah",
+                    "Iqlab",
+                    "Ikhfa - a hidden, nasalised sound"
+                  ],
+                  "correct": 3,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E4",
+                  "type": "mcq",
+                  "prompt": "A Meem Sakinah followed directly by another Meem is an example of:",
+                  "options": [
+                    "Ikhfa Shafawi",
+                    "Idgham Shafawi",
+                    "Izhar Shafawi",
+                    "Qalqalah"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E5",
+                  "type": "mcq",
+                  "prompt": "Which group of letters produces a distinctive 'bounce' or echo when they carry a sukoon?",
+                  "options": [
+                    "ق ط ب ج د (Qalqalah letters)",
+                    "ل ر (the two liquid letters)",
+                    "ن م (the nasal letters)",
+                    "ص ض ط ظ (the heavy letters)"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E6",
+                  "type": "mcq",
+                  "prompt": "Which of these words requires a Qalqalah 'bounce' when read?",
+                  "options": [
+                    "يَقْطَعُونَ",
+                    "يَعْلَمُونَ",
+                    "يَذْهَبُونَ",
+                    "يَسْمَعُونَ"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E7",
+                  "type": "mcq",
+                  "prompt": "A natural Madd (elongation) on a letter such as in 'qaala' should normally be held for:",
+                  "arabic": "قَالَ",
+                  "options": [
+                    "1 count",
+                    "2 counts",
+                    "4-5 counts",
+                    "6 counts"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E8",
+                  "type": "mcq",
+                  "prompt": "When a Madd letter is immediately followed by a Hamzah in the SAME word (e.g. jaa'a), this Madd is called:",
+                  "arabic": "جَاءَ",
+                  "options": [
+                    "Madd Tabee'i (natural)",
+                    "Madd Muttasil (connected)",
+                    "Madd Munfasil (separate)",
+                    "Madd Lazim (obligatory)"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-E9",
+                  "type": "mcq",
+                  "prompt": "In 'اَلشَّمْسُ', what happens to the Lam of 'اَل'?",
+                  "arabic": "اَلشَّمْسُ",
+                  "options": [
+                    "It is silent - the ش is doubled instead (a 'sun letter')",
+                    "It is pronounced clearly",
+                    "It changes to a nasal sound",
+                    "The whole word is skipped"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "F": {
+              "name": "Advanced Fluency, Waqf & Confidence",
+              "difficulty": 5,
+              "skill": "Advanced Reading",
+              "routing": {
+                "pass": {
+                  "minScore": 0.8,
+                  "next": null
+                },
+                "mid": {
+                  "minScore": 0.5,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QT-F1",
+                  "type": "timedRead",
+                  "prompt": "Read the passage below (Surah An-Nas) in full, applying Tajweed rules as you go.",
+                  "arabic": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",
+                  "benchmarkSeconds": 22,
+                  "points": 4,
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-F2",
+                  "type": "mcq",
+                  "prompt": "A waqf sign of '  مـ  ' (meem) over a word means:",
+                  "options": [
+                    "You must stop here",
+                    "You must not stop here",
+                    "Stopping is preferred but optional",
+                    "Stopping here changes the meaning incorrectly"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "skillOverride": "Stopping & Starting",
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-F3",
+                  "type": "mcq",
+                  "prompt": "A waqf sign of '  لا  ' over a word means:",
+                  "options": [
+                    "You must stop here",
+                    "Do not stop here",
+                    "Stop only if reading in a group",
+                    "Stop and repeat the verse"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "skillOverride": "Stopping & Starting",
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-F4",
+                  "type": "mcq",
+                  "prompt": "After stopping at a waqf sign, how should you restart (Ibtida)?",
+                  "options": [
+                    "From a point that keeps the sentence's meaning clear and complete",
+                    "From the exact same word every time, regardless of meaning",
+                    "It doesn't matter where you restart",
+                    "Restarting is not necessary in Qur'an reading"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "skillOverride": "Stopping & Starting",
+                  "audience": "both"
+                },
+                {
+                  "id": "QT-F5",
+                  "type": "mcq",
+                  "prompt": "What is the key difference between Idgham and Ikhfa?",
+                  "options": [
+                    "Idgham fully merges the Noon into the next letter; Ikhfa produces a hidden, nasalised sound without full merging",
+                    "They are two names for exactly the same rule",
+                    "Idgham only applies to Meem Sakinah; Ikhfa only applies to Noon Sakinah",
+                    "Idgham is used only when stopping; Ikhfa is used only when continuing"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "memorization",
+          "label": "Memorization & Revision",
+          "description": "A staged memorization pathway building the Qur'an into long-term memory through structured new-memorization and revision cycles.",
+          "startBlock": "A",
+          "fastPaceNote": "3-5x / week recommended for faster progress",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Juz Amma (Juz 30)",
+                "ageRange": "6+",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Memorise all 37 surahs of Juz 30 with correct tajweed."
+              },
+              {
+                "id": 2,
+                "name": "Juz 29 & Core Surahs",
+                "ageRange": "7+",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Memorise Juz 29 plus a bank of high-value surahs (Yasin, Al-Mulk...)."
+              },
+              {
+                "id": 3,
+                "name": "Half-Qur'an Memorization",
+                "ageRange": "9+",
+                "weeks": 96,
+                "lessons": 192,
+                "hours": 192,
+                "desc": "Memorise 15 additional juz with a personal revision system."
+              },
+              {
+                "id": 4,
+                "name": "Complete Hifz (Khatm)",
+                "ageRange": "10+",
+                "weeks": null,
+                "lessons": null,
+                "hours": null,
+                "desc": "Complete memorization of the entire Qur'an."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Juz Amma & Foundational Surahs",
+                "ageRange": "Adult",
+                "weeks": 28,
+                "lessons": 56,
+                "hours": 56,
+                "desc": "Memorise Juz 30 in full with correct tajweed."
+              },
+              {
+                "id": 2,
+                "name": "Extended Memorization (Juz 29 & Key Surahs)",
+                "ageRange": "Adult",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Memorise Juz 29 plus high-value surahs, sustaining a self-managed revision schedule."
+              },
+              {
+                "id": 3,
+                "name": "Extended Hifz Track",
+                "ageRange": "Adult",
+                "weeks": null,
+                "lessons": null,
+                "hours": null,
+                "desc": "Individualized progression through additional juz toward complete Hifz."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.85,
+                "levelId": 4
+              },
+              {
+                "minScore": 0.6,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.35,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.75,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.4,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Current Memorisation Inventory",
+              "difficulty": 1,
+              "skill": "Current Memorisation",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": "B"
+                }
+              },
+              "questions": [
+                {
+                  "id": "QM-A1",
+                  "type": "mcq",
+                  "prompt": "How much of the Qur'an have you memorised so far?",
+                  "options": [
+                    "Less than 1 Juz (Juz 'Amma or less)",
+                    "2-5 Juz",
+                    "6-15 Juz",
+                    "16-29 Juz",
+                    "All 30 Juz"
+                  ],
+                  "correct": null,
+                  "points": 5,
+                  "scoreMap": [
+                    0.1,
+                    0.3,
+                    0.55,
+                    0.8,
+                    1.0
+                  ],
+                  "audience": "both"
+                },
+                {
+                  "id": "QM-A2",
+                  "type": "mcq",
+                  "prompt": "Was your memorisation guided by a teacher, or self-taught?",
+                  "options": [
+                    "Teacher-guided, with regular correction",
+                    "Mostly self-taught with occasional checking",
+                    "Entirely self-taught, no correction"
+                  ],
+                  "correct": null,
+                  "points": 2,
+                  "scoreMap": [
+                    1.0,
+                    0.6,
+                    0.3
+                  ],
+                  "audience": "both"
+                },
+                {
+                  "id": "QM-A3",
+                  "type": "mcq",
+                  "prompt": "Juz 30 — the final Juz of the Qur'an, containing the shortest surahs — is also commonly known as:",
+                  "options": [
+                    "Juz 'Amma",
+                    "Juz Tabarak",
+                    "Juz Qad Sami'a",
+                    "Juz Yaseen"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "B": {
+              "name": "Recitation Accuracy Check",
+              "difficulty": 3,
+              "skill": "Accuracy & Fluency",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": "C"
+                }
+              },
+              "questions": [
+                {
+                  "id": "QM-B1",
+                  "type": "mcq",
+                  "prompt": "Complete this ayah from Surah Al-'Asr: '...وَتَوَاصَوْا بِالْحَقِّ وَ ___'",
+                  "options": [
+                    "تَوَاصَوْا بِالصَّبْرِ",
+                    "تَوَاصَوْا بِالْعَدْلِ",
+                    "تَوَاصَوْا بِالتَّقْوَى",
+                    "تَوَاصَوْا بِالْيَقِينِ"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QM-B2",
+                  "type": "mcq",
+                  "prompt": "When you recite, how many times on average does your teacher (or self-check) need to prompt you per page?",
+                  "options": [
+                    "0 times",
+                    "1-2 times",
+                    "3-5 times",
+                    "More than 5 times"
+                  ],
+                  "correct": null,
+                  "points": 3,
+                  "scoreMap": [
+                    1.0,
+                    0.7,
+                    0.4,
+                    0.1
+                  ],
+                  "skillOverride": "Mistake Rate",
+                  "audience": "both"
+                },
+                {
+                  "id": "QM-B3",
+                  "type": "mcq",
+                  "prompt": "Complete this ayah from Surah An-Nasr: 'إِذَا جَاءَ نَصْرُ اللَّهِ وَ ___'",
+                  "options": [
+                    "الْفَتْحُ",
+                    "الْيُسْرُ",
+                    "الْحَقُّ",
+                    "النَّصْرُ"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "skillOverride": "Fluency",
+                  "audience": "both"
+                }
+              ]
+            },
+            "C": {
+              "name": "Retention Check",
+              "difficulty": 3,
+              "skill": "Retention",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": "D"
+                }
+              },
+              "questions": [
+                {
+                  "id": "QM-C1",
+                  "type": "mcq",
+                  "prompt": "Complete this ayah from Surah Al-Kawthar (a surah you likely learned a while ago): 'إِنَّ شَانِئَكَ هُوَ ___'",
+                  "options": [
+                    "الْأَبْتَرُ",
+                    "الْأَكْبَرُ",
+                    "الْأَظْلَمُ",
+                    "الْأَبْعَدُ"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QM-C2",
+                  "type": "mcq",
+                  "prompt": "If you do not revise a surah for 2-3 weeks, what typically happens?",
+                  "options": [
+                    "I still recite it perfectly",
+                    "I make a few small mistakes",
+                    "I forget several words or verses",
+                    "I forget most of it"
+                  ],
+                  "correct": null,
+                  "points": 3,
+                  "scoreMap": [
+                    1.0,
+                    0.7,
+                    0.35,
+                    0.1
+                  ],
+                  "audience": "both"
+                }
+              ]
+            },
+            "D": {
+              "name": "Revision Habits & Consistency",
+              "difficulty": 2,
+              "skill": "Revision Habits",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QM-D1",
+                  "type": "mcq",
+                  "prompt": "How often do you revise previously memorised portions?",
+                  "options": [
+                    "Daily",
+                    "A few times a week",
+                    "Weekly",
+                    "Rarely"
+                  ],
+                  "correct": null,
+                  "points": 2,
+                  "scoreMap": [
+                    1.0,
+                    0.75,
+                    0.45,
+                    0.15
+                  ],
+                  "audience": "both"
+                },
+                {
+                  "id": "QM-D2",
+                  "type": "mcq",
+                  "prompt": "Do you follow a structured revision cycle (e.g. revisiting older Juz on a rotation)?",
+                  "options": [
+                    "Yes, a clear structured cycle",
+                    "Somewhat, informally",
+                    "No structure at all"
+                  ],
+                  "correct": null,
+                  "points": 2,
+                  "scoreMap": [
+                    1.0,
+                    0.55,
+                    0.15
+                  ],
+                  "audience": "both"
+                },
+                {
+                  "id": "QM-D3",
+                  "type": "mcq",
+                  "prompt": "When you revise, how do you usually do it?",
+                  "options": [
+                    "Reciting aloud from memory, rarely looking at the mus'haf",
+                    "A mix of reciting from memory and checking the text",
+                    "Mostly reading along while looking at the text",
+                    "I don't have a consistent method"
+                  ],
+                  "correct": null,
+                  "points": 2,
+                  "scoreMap": [
+                    1.0,
+                    0.6,
+                    0.3,
+                    0.1
+                  ],
+                  "audience": "both"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "ijazah",
+          "label": "Ijazah Preparation",
+          "description": "Prepares advanced reciters for a formal Ijazah — a certified, chained authorization to transmit the Qur'an.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Ijazah Foundation (Pre-Sanad)",
+                "ageRange": "12+",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Recite extended passages error-free; explain tajweed ahkam in detail."
+              },
+              {
+                "id": 2,
+                "name": "Ijazah Certification (Sanad)",
+                "ageRange": "13+",
+                "weeks": 40,
+                "lessons": 80,
+                "hours": 80,
+                "desc": "Recite the complete assigned portion to a certified Sheikh with an unbroken sanad."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Ijazah Foundation (Pre-Sanad)",
+                "ageRange": "Adult",
+                "weeks": 22,
+                "lessons": 44,
+                "hours": 44,
+                "desc": "Recite extended passages error-free; explain tajweed ahkam in scholarly detail."
+              },
+              {
+                "id": 2,
+                "name": "Ijazah Certification (Sanad)",
+                "ageRange": "Adult",
+                "weeks": 38,
+                "lessons": 76,
+                "hours": 76,
+                "desc": "Recite the complete assigned portion to a certified Sheikh with an unbroken sanad."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Advanced Rule Recognition",
+              "difficulty": 5,
+              "skill": "Complete Qur'an Reading",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": "B"
+                }
+              },
+              "questions": [
+                {
+                  "id": "QI-A1",
+                  "type": "mcq",
+                  "prompt": "Which of the following contains a Madd Lazim (obligatory, 6-count elongation)?",
+                  "options": [
+                    "الضَّالِّينَ",
+                    "الْعَالَمِينَ",
+                    "الرَّحِيمِ",
+                    "نَسْتَعِينُ"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QI-A2",
+                  "type": "mcq",
+                  "prompt": "The 'mysterious letters' (al-Muqatta'at) that open some surahs, such as 'الم', are recited by:",
+                  "options": [
+                    "Naming each letter separately, each with its own Madd (Alif — Laam — Meem)",
+                    "Reading them together as a normal word",
+                    "Skipping them entirely",
+                    "Translating their meaning aloud"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QI-A3",
+                  "type": "mcq",
+                  "prompt": "When two identical letters meet across two words — the first sakin, the second voweled (e.g. 'اضْرِب بِّعَصَاكَ') — this is an example of:",
+                  "options": [
+                    "Idgham Mutamathilayn (merging of identical letters)",
+                    "Iqlab",
+                    "Tafkheem",
+                    "A stop (waqf)"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                }
+              ]
+            },
+            "B": {
+              "name": "Advanced Tajweed & Makharij Precision",
+              "difficulty": 5,
+              "skill": "Advanced Tajweed",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": "C"
+                }
+              },
+              "questions": [
+                {
+                  "id": "QI-B1",
+                  "type": "mcq",
+                  "prompt": "Which pair of letters are both classed as 'heavy / emphatic' and are commonly conflated by learners despite having different precise Makharij?",
+                  "options": [
+                    "ض and ظ",
+                    "ب and م",
+                    "ت and ك",
+                    "و and ي"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QI-B2",
+                  "type": "mcq",
+                  "prompt": "A Madd Lazim is held for 6 counts rather than the 2 of a natural Madd because:",
+                  "options": [
+                    "The madd letter is followed by a sukoon or shaddah within the same word",
+                    "The madd letter appears at the end of a surah",
+                    "It is the reciter's personal choice",
+                    "It only occurs in Surah Al-Baqarah"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QI-B3",
+                  "type": "mcq",
+                  "prompt": "When reciting, obligatory Madd Lazim (e.g. in Surah Al-Baqarah's opening letters) should be held for:",
+                  "options": [
+                    "2 counts",
+                    "4 counts",
+                    "6 counts",
+                    "8 counts"
+                  ],
+                  "correct": 2,
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "C": {
+              "name": "Breadth of Supervised Practice",
+              "difficulty": 5,
+              "skill": "Consistency",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": "D"
+                }
+              },
+              "questions": [
+                {
+                  "id": "QI-C1",
+                  "type": "mcq",
+                  "prompt": "Roughly how many of the 30 Juz have you read aloud under a qualified teacher's direct correction?",
+                  "options": [
+                    "25-30 Juz",
+                    "15-24 Juz",
+                    "5-14 Juz",
+                    "Fewer than 5 Juz"
+                  ],
+                  "correct": null,
+                  "points": 3,
+                  "scoreMap": [
+                    1.0,
+                    0.7,
+                    0.4,
+                    0.15
+                  ],
+                  "audience": "both"
+                },
+                {
+                  "id": "QI-C2",
+                  "type": "mcq",
+                  "prompt": "Have you completed a full Khatm (cover-to-cover reading) with a qualified teacher listening throughout?",
+                  "options": [
+                    "Yes, more than once",
+                    "Yes, once",
+                    "Partially",
+                    "Not yet"
+                  ],
+                  "correct": null,
+                  "points": 4,
+                  "scoreMap": [
+                    1.0,
+                    0.8,
+                    0.4,
+                    0.1
+                  ],
+                  "audience": "both"
+                }
+              ]
+            },
+            "D": {
+              "name": "Teaching & Diagnostic Readiness",
+              "difficulty": 5,
+              "skill": "Teaching Readiness",
+              "routing": {
+                "pass": {
+                  "minScore": 0,
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "QI-D1",
+                  "type": "mcq",
+                  "prompt": "A student reads 'مِنْ بَعْدِ' but pronounces the Noon Sakinah clearly instead of converting it to a Meem-like sound. Which rule did they fail to apply?",
+                  "options": [
+                    "Iqlab",
+                    "Izhar",
+                    "Idgham",
+                    "Qalqalah"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QI-D2",
+                  "type": "mcq",
+                  "prompt": "A student consistently reads 'ق' (qaf) exactly like 'ك' (kaf), softening it. What is the correct guidance?",
+                  "options": [
+                    "Guide them to articulate 'ق' from the back of the tongue against the soft palate — deeper and heavier than 'ك'",
+                    "Tell them the two letters sound identical and no correction is needed",
+                    "Have them skip the letter 'ق' entirely",
+                    "Explain this is a regional accent that needs no correction"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "QI-D3",
+                  "type": "mcq",
+                  "prompt": "Do you intend to pursue teaching Qur'an after receiving ijazah?",
+                  "options": [
+                    "Yes, actively",
+                    "Possibly in future",
+                    "No, personal certification only"
+                  ],
+                  "correct": null,
+                  "points": 1,
+                  "scoreMap": [
+                    1.0,
+                    0.6,
+                    0.6
+                  ],
+                  "audience": "both"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "arabic",
+      "label": "Arabic Language",
+      "icon": "arabic",
+      "tagline": "Modern Standard Arabic for non-native speakers",
+      "programs": [
+        {
+          "id": "foundation",
+          "label": "Arabic Foundation",
+          "description": "Introduces absolute beginners to Arabic letter shapes, sounds, and basic reading mechanics.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Letter Shapes & Sounds (F1)",
+                "ageRange": "4-6",
+                "weeks": 10,
+                "lessons": 20,
+                "hours": 20,
+                "desc": "Recognise and name all Arabic letters in isolated form; reproduce their sounds."
+              },
+              {
+                "id": 2,
+                "name": "Connected Letters & Harakat (F2)",
+                "ageRange": "5-7",
+                "weeks": 12,
+                "lessons": 24,
+                "hours": 24,
+                "desc": "Identify letters in initial/medial/final/connected forms; read syllables with harakat."
+              },
+              {
+                "id": 3,
+                "name": "Word Formation & Simple Reading (F3)",
+                "ageRange": "6-8",
+                "weeks": 14,
+                "lessons": 28,
+                "hours": 28,
+                "desc": "Read simple 2-4 letter words fluently; apply tanween and sukoon."
+              },
+              {
+                "id": 4,
+                "name": "Fluency & Transition Readiness (F4)",
+                "ageRange": "7-9",
+                "weeks": 12,
+                "lessons": 24,
+                "hours": 24,
+                "desc": "Read connected, vocalised text fluently at a natural pace."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Letters, Sounds & Vowels (F1)",
+                "ageRange": "Adult",
+                "weeks": 10,
+                "lessons": 20,
+                "hours": 20,
+                "desc": "Recognise and pronounce all letters isolated and connected; apply the three short vowels."
+              },
+              {
+                "id": 2,
+                "name": "Word Formation & Basic Reading (F2)",
+                "ageRange": "Adult",
+                "weeks": 12,
+                "lessons": 24,
+                "hours": 24,
+                "desc": "Read simple vocalised words and short sentences; apply tanween and sukoon."
+              },
+              {
+                "id": 3,
+                "name": "Fluency & Transition Readiness (F3)",
+                "ageRange": "Adult",
+                "weeks": 12,
+                "lessons": 24,
+                "hours": 24,
+                "desc": "Read connected vocalised text fluently at a natural pace."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.85,
+                "levelId": 4
+              },
+              {
+                "minScore": 0.6,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.35,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.75,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.4,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Letter Recognition & Writing",
+              "difficulty": 1,
+              "skill": "Arabic Letters",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "C"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AF-A1",
+                  "type": "mcq",
+                  "prompt": "What is the name of this letter?",
+                  "arabic": "س",
+                  "options": [
+                    "Seen",
+                    "Sheen",
+                    "Saad",
+                    "Sad"
+                  ],
+                  "correct": 0,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-A2",
+                  "type": "mcq",
+                  "prompt": "What is the name of this letter?",
+                  "arabic": "م",
+                  "options": [
+                    "Noon",
+                    "Meem",
+                    "Laam",
+                    "Waw"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-A3",
+                  "type": "mcq",
+                  "prompt": "Which of these letters does NOT connect to the letter that follows it (it always keeps its stand-alone shape)?",
+                  "options": [
+                    "ب",
+                    "د",
+                    "ت",
+                    "ك"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-A4",
+                  "type": "mcq",
+                  "prompt": "Which letter comes directly after 'ت' in the Arabic alphabet?",
+                  "options": [
+                    "ث",
+                    "ج",
+                    "خ",
+                    "ب"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-A5",
+                  "type": "mcq",
+                  "prompt": "What is the name of this letter?",
+                  "arabic": "ذ",
+                  "options": [
+                    "Daal",
+                    "Thaal",
+                    "Zaay",
+                    "Raa"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                }
+              ]
+            },
+            "B": {
+              "name": "Phonics & Short Vowels",
+              "difficulty": 2,
+              "skill": "Phonics",
+              "routing": {
+                "pass": {
+                  "minScore": 0.6,
+                  "next": "C"
+                },
+                "mid": {
+                  "minScore": 0.3,
+                  "next": "C"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AF-B1",
+                  "type": "mcq",
+                  "prompt": "Which vowel mark makes an 'oo' sound (as in 'moon')?",
+                  "options": [
+                    "Fatha ( َ )",
+                    "Kasra ( ِ )",
+                    "Damma ( ُ )",
+                    "Sukoon ( ْ )"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-B2",
+                  "type": "mcq",
+                  "prompt": "Which of these is read as 'si' (a short 'i' sound)?",
+                  "options": [
+                    "سَ",
+                    "سِ",
+                    "سُ",
+                    "سْ"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-B3",
+                  "type": "mcq",
+                  "prompt": "A 'shaddah' ( ّ ) placed over a letter means:",
+                  "options": [
+                    "The letter is silent",
+                    "The letter is doubled / held longer",
+                    "The letter changes sound entirely",
+                    "The word ends there"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                }
+              ]
+            },
+            "C": {
+              "name": "Basic Vocabulary & Reading",
+              "difficulty": 2,
+              "skill": "Vocabulary",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": "D"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "D"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AF-C1",
+                  "type": "mcq",
+                  "prompt": "What does this word mean?",
+                  "arabic": "بَيْت",
+                  "options": [
+                    "Book",
+                    "House",
+                    "Water",
+                    "Sun"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-C2",
+                  "type": "mcq",
+                  "prompt": "What does this word mean?",
+                  "arabic": "كِتَاب",
+                  "options": [
+                    "Pen",
+                    "Door",
+                    "Book",
+                    "Boy"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-C3",
+                  "type": "mcq",
+                  "prompt": "What does this word mean?",
+                  "arabic": "مَاء",
+                  "options": [
+                    "Water",
+                    "Moon",
+                    "Milk",
+                    "Fire"
+                  ],
+                  "correct": 0,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-C4",
+                  "type": "mcq",
+                  "prompt": "Which word means 'pen'?",
+                  "options": [
+                    "قَلَم",
+                    "قَمَر",
+                    "قَلْب",
+                    "كَلْب"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "skillOverride": "Reading",
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-C5",
+                  "type": "mcq",
+                  "prompt": "Which word means 'girl'?",
+                  "options": [
+                    "وَلَد",
+                    "بِنْت",
+                    "رَجُل",
+                    "اِمْرَأَة"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                }
+              ]
+            },
+            "D": {
+              "name": "Listening & Speaking",
+              "difficulty": 2,
+              "skill": "Listening / Speaking",
+              "routing": {
+                "pass": {
+                  "minScore": 0.65,
+                  "next": "E"
+                },
+                "mid": {
+                  "minScore": 0.35,
+                  "next": "E"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AF-D1",
+                  "type": "mcq",
+                  "prompt": "What does 'مرحبا' (marhaban) mean?",
+                  "options": [
+                    "Goodbye",
+                    "Hello",
+                    "Thank you",
+                    "Please"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-D2",
+                  "type": "mcq",
+                  "prompt": "How do you say 'thank you' in Arabic?",
+                  "options": [
+                    "عَفْوًا",
+                    "شُكْرًا",
+                    "أَهْلًا",
+                    "مَعَ السَّلَامَة"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-D3",
+                  "type": "mcq",
+                  "prompt": "Which of these numbers is 'ثَلَاثَة'?",
+                  "options": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-D4",
+                  "type": "mcq",
+                  "prompt": "Someone asks you: 'كَيْفَ حَالُكَ؟' (How are you?). Which is an appropriate reply?",
+                  "options": [
+                    "بِخَيْر، الْحَمْدُ لِلَّه (Fine, thank God)",
+                    "مَعَ السَّلَامَة (Goodbye)",
+                    "مِنْ فَضْلِك (Please)",
+                    "لَا أَعْرِف (I don't know)"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "E": {
+              "name": "Simple Sentences & Reading Speed",
+              "difficulty": 3,
+              "skill": "Reading Speed",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AF-E1",
+                  "type": "mcq",
+                  "prompt": "Which of these means 'This is a big house'?",
+                  "options": [
+                    "هَذَا بَيْتٌ كَبِيرٌ",
+                    "هَذَا بَيْتٌ صَغِيرٌ",
+                    "هَذِهِ مَدْرَسَةٌ كَبِيرَةٌ",
+                    "ذَلِكَ كِتَابٌ جَدِيدٌ"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-E2",
+                  "type": "mcq",
+                  "prompt": "What does the sentence below mean?",
+                  "arabic": "هَذَا بَيْتٌ كَبِيرٌ.",
+                  "options": [
+                    "This is a small book",
+                    "This is a big house",
+                    "That is my school",
+                    "This is a new pen"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AF-E3",
+                  "type": "timedRead",
+                  "prompt": "Read this short passage below at your natural pace.",
+                  "arabic": "أَنَا اسْمِي أَحْمَد. عِنْدِي كِتَابٌ جَدِيدٌ. الْكِتَابُ جَمِيلٌ وَمُفِيدٌ.",
+                  "benchmarkSeconds": 15,
+                  "points": 3,
+                  "audience": "both"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "advanced",
+          "label": "Arabic Post-Foundation",
+          "description": "Develops functional Arabic literacy, grammar, and conversational ability for non-native speakers.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Beginner Communicative Arabic (PF1)",
+                "ageRange": "7-9",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Introduce oneself and family; use everyday vocabulary in short exchanges."
+              },
+              {
+                "id": 2,
+                "name": "Elementary Arabic (PF2)",
+                "ageRange": "8-11",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Construct simple present-tense sentences; describe a daily routine."
+              },
+              {
+                "id": 3,
+                "name": "Intermediate Arabic (PF3)",
+                "ageRange": "10-13",
+                "weeks": 28,
+                "lessons": 56,
+                "hours": 56,
+                "desc": "Use past/present/future tenses; write a structured paragraph; hold a 10-min conversation."
+              },
+              {
+                "id": 4,
+                "name": "Advanced Arabic & Fluency (PF4)",
+                "ageRange": "12-15",
+                "weeks": 32,
+                "lessons": 64,
+                "hours": 64,
+                "desc": "Read authentic unvocalised texts; write multi-paragraph compositions; discuss abstract topics."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Beginner Communicative Arabic (PF1)",
+                "ageRange": "Adult",
+                "weeks": 16,
+                "lessons": 32,
+                "hours": 32,
+                "desc": "Introduce oneself; hold basic personal-information exchanges."
+              },
+              {
+                "id": 2,
+                "name": "Elementary Arabic (PF2)",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Construct present-tense sentences; describe daily routines and simple plans."
+              },
+              {
+                "id": 3,
+                "name": "Intermediate Arabic (PF3)",
+                "ageRange": "Adult",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Use past/present/future tenses; write a structured paragraph; hold a 15-min conversation."
+              },
+              {
+                "id": 4,
+                "name": "Advanced Arabic & Fluency (PF4)",
+                "ageRange": "Adult",
+                "weeks": 28,
+                "lessons": 56,
+                "hours": 56,
+                "desc": "Read authentic unvocalised texts; write multi-paragraph compositions; discuss professional topics."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.85,
+                "levelId": 4
+              },
+              {
+                "minScore": 0.6,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.35,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.85,
+                "levelId": 4
+              },
+              {
+                "minScore": 0.6,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.35,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Grammar Fundamentals",
+              "difficulty": 3,
+              "skill": "Grammar",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AA-A1",
+                  "type": "mcq",
+                  "prompt": "Which word correctly means 'a female teacher'?",
+                  "options": [
+                    "مُعَلِّم",
+                    "مُعَلِّمَة",
+                    "مُعَلِّمُونَ",
+                    "مُعَلِّمَات"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-A2",
+                  "type": "mcq",
+                  "prompt": "'كَتَبَتْ' (she wrote) is the past-tense verb 'to write' conjugated for:",
+                  "options": [
+                    "He",
+                    "She",
+                    "They (masculine)",
+                    "We"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-A3",
+                  "type": "mcq",
+                  "prompt": "'بَيْتُ الرَّجُلِ' (the man's house) is an example of which construction?",
+                  "options": [
+                    "Idafa (possessive construction)",
+                    "A verbal sentence",
+                    "A conditional sentence",
+                    "A passive verb"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-A4",
+                  "type": "mcq",
+                  "prompt": "What is the correct plural of 'كِتَاب' (book)?",
+                  "options": [
+                    "كِتَابَات",
+                    "كُتُب",
+                    "كِتَابُون",
+                    "كِتَابِين"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-A5",
+                  "type": "mcq",
+                  "prompt": "Which sentence correctly uses the definite article?",
+                  "options": [
+                    "بَيْت الْكَبِير",
+                    "الْبَيْت الْكَبِير",
+                    "بَيْت كَبِير الْ",
+                    "الْ بَيْت كَبِير"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "B": {
+              "name": "Reading Comprehension",
+              "difficulty": 3,
+              "skill": "Reading Comprehension",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": "C"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "C"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AA-B1",
+                  "type": "timedRead",
+                  "prompt": "Read this paragraph below at your natural pace.",
+                  "arabic": "فِي الصَّبَاحِ، يَذْهَبُ أَحْمَدُ إِلَى الْمَدْرَسَةِ. هُوَ يُحِبُّ الْقِرَاءَةَ كَثِيرًا، وَيَقْرَأُ كِتَابًا جَدِيدًا كُلَّ أُسْبُوعٍ.",
+                  "benchmarkSeconds": 16,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-B2",
+                  "type": "mcq",
+                  "prompt": "Where does Ahmad go in the morning, according to the paragraph you just read?",
+                  "options": [
+                    "To the mosque",
+                    "To the market",
+                    "To school",
+                    "To his grandmother's house"
+                  ],
+                  "correct": 2,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-B3",
+                  "type": "mcq",
+                  "prompt": "How often does Ahmad read a new book, according to the paragraph?",
+                  "options": [
+                    "Every day",
+                    "Every week",
+                    "Every month",
+                    "It doesn't say"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-B4",
+                  "type": "mcq",
+                  "prompt": "What is the best synonym, in context, for 'يُحِبُّ' (he loves) as used above?",
+                  "options": [
+                    "يَكْرَهُ (hates)",
+                    "يُفَضِّلُ (prefers/likes)",
+                    "يَنْسَى (forgets)",
+                    "يَبِيعُ (sells)"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "C": {
+              "name": "Vocabulary & Sentence Formation",
+              "difficulty": 3,
+              "skill": "Sentence Formation",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": "D"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "D"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AA-C1",
+                  "type": "mcq",
+                  "prompt": "Put these words into the correct sentence order: [ الْمَدْرَسَةِ / إِلَى / الطَّالِبُ / ذَهَبَ ]",
+                  "options": [
+                    "ذَهَبَ الطَّالِبُ إِلَى الْمَدْرَسَةِ",
+                    "الطَّالِبُ إِلَى ذَهَبَ الْمَدْرَسَةِ",
+                    "إِلَى الْمَدْرَسَةِ ذَهَبَ الطَّالِبُ",
+                    "الْمَدْرَسَةِ الطَّالِبُ إِلَى ذَهَبَ"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-C2",
+                  "type": "shortAnswer",
+                  "prompt": "Complete the sentence with the correct word: 'أَنَا ___ فِي دِمَشْقَ' (I ___ in Damascus / I live in Damascus).",
+                  "acceptable": [
+                    "اسكن",
+                    "أسكن",
+                    "اعيش",
+                    "أعيش"
+                  ],
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-C3",
+                  "type": "mcq",
+                  "prompt": "Which word does NOT belong with the others (odd one out)?",
+                  "options": [
+                    "تُفَّاحَة (apple)",
+                    "بُرْتُقَالَة (orange)",
+                    "سَيَّارَة (car)",
+                    "مَوْزَة (banana)"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "audience": "both"
+                }
+              ]
+            },
+            "D": {
+              "name": "Writing",
+              "difficulty": 4,
+              "skill": "Writing",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": "E"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "E"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AA-D1",
+                  "type": "mcq",
+                  "prompt": "Which sentence is grammatically correct?",
+                  "options": [
+                    "هِيَ مُعَلِّمَةٌ نَشِيطَةٌ",
+                    "هِيَ مُعَلِّم نَشِيط",
+                    "هُوَ مُعَلِّمَةٌ نَشِيطَةٌ",
+                    "هِيَ مُعَلِّمُونَ نَشِيطُونَ"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-D2",
+                  "type": "shortAnswer",
+                  "prompt": "Translate into Arabic: 'I read a book every day.'",
+                  "acceptable": [
+                    "اقرأ كتابا كل يوم",
+                    "أقرأ كتابا كل يوم",
+                    "انا اقرأ كتابا كل يوم"
+                  ],
+                  "points": 2,
+                  "audience": "both"
+                }
+              ]
+            },
+            "E": {
+              "name": "Listening, Speaking & Conversation",
+              "difficulty": 3,
+              "skill": "Conversation",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": null
+                },
+                "mid": {
+                  "minScore": 0.45,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AA-E1",
+                  "type": "mcq",
+                  "prompt": "Someone asks: 'كَمْ عَدَدُ أَفْرَادِ عَائِلَتِكَ؟' (How many people are in your family?). Which is a natural reply?",
+                  "options": [
+                    "عَائِلَتِي خَمْسَةُ أَفْرَادٍ (My family has five members)",
+                    "أَنَا بِخَيْر (I am fine)",
+                    "السَّاعَةُ الآنَ الرَّابِعَة (It is 4 o'clock now)",
+                    "هَذَا كِتَابِي (This is my book)"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-E2",
+                  "type": "mcq",
+                  "prompt": "Someone asks you: 'مَاذَا تَعْمَلُ؟' (What do you do / What is your job?). Which is an appropriate response?",
+                  "options": [
+                    "أَنَا بِخَيْر، شُكْرًا",
+                    "أَنَا طَالِب",
+                    "نَعَمْ، مِنْ فَضْلِك",
+                    "السَّلَامُ عَلَيْكُم"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "audience": "both"
+                },
+                {
+                  "id": "AA-E3",
+                  "type": "mcq",
+                  "allowListen": true,
+                  "prompt": "Press Listen to hear the sentence below read aloud, then answer: what is being described?",
+                  "arabic": "الطَّقْسُ الْيَوْمَ مُشْمِسٌ وَجَمِيلٌ، وَلَكِنَّهُ بَارِدٌ قَلِيلًا.",
+                  "options": [
+                    "The weather today",
+                    "A new book",
+                    "A family trip",
+                    "A school lesson"
+                  ],
+                  "correct": 0,
+                  "points": 3,
+                  "skillOverride": "Listening",
+                  "audience": "both"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "islamic-studies",
+      "label": "Islamic Studies",
+      "icon": "islamic",
+      "tagline": "Aqeedah, Fiqh, Seerah, Hadith, Tafsir and Islamic character",
+      "programs": [
+        {
+          "id": "comprehensive",
+          "label": "Comprehensive Islamic Studies",
+          "description": "The academy's primary, age-graded Islamic Studies pathway covering belief, worship, character and history.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Islamic Foundations for Young Learners",
+                "ageRange": "5-7",
+                "weeks": 16,
+                "lessons": 32,
+                "hours": 32,
+                "desc": "Recite the Six Pillars of Iman and Five Pillars of Islam; perform basic wudu/salah."
+              },
+              {
+                "id": 2,
+                "name": "Building Islamic Identity",
+                "ageRange": "7-9",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Explain the Shahadah; describe major Seerah events in order; apply basic manners."
+              },
+              {
+                "id": 3,
+                "name": "Foundations of Belief & Worship",
+                "ageRange": "9-12",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Differentiate core Aqeedah concepts; explain the wisdom behind key acts of worship."
+              },
+              {
+                "id": 4,
+                "name": "Applied Islamic Knowledge",
+                "ageRange": "12-15",
+                "weeks": 28,
+                "lessons": 56,
+                "hours": 56,
+                "desc": "Research and present a Seerah/Fiqh/Aqeedah topic; lead a short peer discussion."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Foundations of Belief & Practice",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Explain the Six Pillars of Iman and Five Pillars of Islam with supporting evidence."
+              },
+              {
+                "id": 2,
+                "name": "Deepening Belief & Worship",
+                "ageRange": "Adult",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Differentiate core Aqeedah concepts and common misconceptions."
+              },
+              {
+                "id": 3,
+                "name": "Applied Islamic Knowledge",
+                "ageRange": "Adult",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Research and present a topic using multiple sources; facilitate a discussion or halaqah."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.85,
+                "levelId": 4
+              },
+              {
+                "minScore": 0.6,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.35,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.75,
+                "levelId": 3
+              },
+              {
+                "minScore": 0.4,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Foundational Survey",
+              "difficulty": 1,
+              "skill": "General Knowledge",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "IC-A1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "How many pillars of Islam are there?",
+                  "options": [
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "skillOverride": "Fiqh"
+                },
+                {
+                  "id": "IC-A2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "How many pillars of Iman (faith) are there?",
+                  "options": [
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "skillOverride": "Aqeedah"
+                },
+                {
+                  "id": "IC-A3",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "In which city was Prophet Muhammad (peace be upon him) born?",
+                  "options": [
+                    "Madinah",
+                    "Makkah",
+                    "Ta'if",
+                    "Jerusalem"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "skillOverride": "Seerah"
+                },
+                {
+                  "id": "IC-A4",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What should a Muslim say before starting to eat?",
+                  "options": [
+                    "Alhamdulillah",
+                    "Bismillah",
+                    "SubhanAllah",
+                    "Astaghfirullah"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "skillOverride": "Manners"
+                },
+                {
+                  "id": "IC-A5",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What is a 'Hadith'?",
+                  "options": [
+                    "A chapter of the Qur'an",
+                    "A saying, action or approval of the Prophet ﷺ",
+                    "An Islamic law court",
+                    "A type of prayer"
+                  ],
+                  "correct": 1,
+                  "points": 1,
+                  "skillOverride": "Hadith"
+                },
+                {
+                  "id": "IC-A6",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What does 'Tafsir' mean?",
+                  "options": [
+                    "Memorisation",
+                    "Recitation rules",
+                    "Explanation / interpretation of the Qur'an",
+                    "Arabic grammar"
+                  ],
+                  "correct": 2,
+                  "points": 1,
+                  "skillOverride": "Tafsir"
+                }
+              ]
+            },
+            "B": {
+              "name": "Applied & Conceptual Survey",
+              "difficulty": 3,
+              "skill": "Applied Knowledge",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "IC-B1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What are the three categories Islamic scholars traditionally divide Tawheed into?",
+                  "options": [
+                    "Salah, Zakah, Sawm",
+                    "Ruboobiyyah, Uloohiyyah, Asma wa Sifat",
+                    "Makki, Madani, Mixed",
+                    "Fard, Sunnah, Mustahabb"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "skillOverride": "Aqeedah"
+                },
+                {
+                  "id": "IC-B2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What term describes the historical circumstances behind why a particular verse was revealed?",
+                  "options": [
+                    "Asbab al-Nuzul",
+                    "Isnad",
+                    "Ijtihad",
+                    "Qiyas"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "skillOverride": "Tafsir"
+                },
+                {
+                  "id": "IC-B3",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What is the 'Isnad' of a hadith?",
+                  "options": [
+                    "Its main lesson",
+                    "Its chain of narrators",
+                    "The surah it relates to",
+                    "Its ruling in Fiqh"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "skillOverride": "Hadith"
+                },
+                {
+                  "id": "IC-B4",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What was the outcome of the Treaty of Hudaybiyyah, broadly speaking?",
+                  "options": [
+                    "War immediately resumed",
+                    "A ten-year truce that ultimately favoured the Muslims",
+                    "Makkah was conquered that same year",
+                    "The Muslims left Madinah"
+                  ],
+                  "correct": 1,
+                  "points": 2,
+                  "skillOverride": "Seerah"
+                },
+                {
+                  "id": "IC-B5",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Your sibling accidentally breaks something of yours. Which response best reflects good Islamic manners (akhlaq)?",
+                  "options": [
+                    "Forgive them and speak kindly about it",
+                    "Yell at them and break something of theirs back",
+                    "Refuse to speak to them for weeks",
+                    "Complain about them to everyone you know"
+                  ],
+                  "correct": 0,
+                  "points": 2,
+                  "skillOverride": "Manners"
+                },
+                {
+                  "id": "IC-B6",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What is the ruling category that describes an act that is obligatory in Islam?",
+                  "options": [
+                    "Mustahabb",
+                    "Makruh",
+                    "Fard / Wajib",
+                    "Mubah"
+                  ],
+                  "correct": 2,
+                  "points": 2,
+                  "skillOverride": "Fiqh"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "aqeedah",
+          "label": "Aqeedah",
+          "description": "Islamic creed and belief.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Foundations of Aqeedah",
+                "ageRange": "8-11",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Explain the three categories of Tawheed simply; list the six pillars of Iman."
+              },
+              {
+                "id": 2,
+                "name": "Applied Aqeedah",
+                "ageRange": "11-14",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Differentiate correct beliefs from misconceptions; build evidence-based arguments."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Foundations of Tawheed",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Explain the three categories of Tawheed with supporting evidence."
+              },
+              {
+                "id": 2,
+                "name": "Applied Aqeedah & Contemporary Issues",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Differentiate correct belief from contemporary misconceptions."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Foundations of Belief",
+              "difficulty": 1,
+              "skill": "Aqeedah",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AQ-A1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "How many pillars of Iman (faith) are there in Islam?",
+                  "options": [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "AQ-A2",
+                  "type": "mcq",
+                  "audience": "kids",
+                  "prompt": "What are angels made of, according to Islamic belief?",
+                  "options": [
+                    "Fire",
+                    "Light",
+                    "Clay",
+                    "Smoke"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "AQ-A3",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "Angels, according to Islamic belief, are created from:",
+                  "options": [
+                    "Light",
+                    "Fire",
+                    "Clay",
+                    "Water"
+                  ],
+                  "correct": 0,
+                  "points": 1
+                },
+                {
+                  "id": "AQ-A4",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What does 'Tawheed' mean?",
+                  "options": [
+                    "Prayer five times a day",
+                    "The Oneness of Allah",
+                    "Fasting in Ramadan",
+                    "The Islamic pilgrimage"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "AQ-A5",
+                  "type": "shortAnswer",
+                  "audience": "both",
+                  "prompt": "Name one of the Prophets mentioned in the Qur'an.",
+                  "acceptable": [
+                    "muhammad",
+                    "ibrahim",
+                    "abraham",
+                    "musa",
+                    "moses",
+                    "isa",
+                    "jesus",
+                    "nuh",
+                    "noah",
+                    "adam",
+                    "yusuf",
+                    "joseph",
+                    "dawud",
+                    "david",
+                    "sulaiman",
+                    "solomon",
+                    "yunus",
+                    "jonah",
+                    "ayyub",
+                    "job",
+                    "lut",
+                    "lot",
+                    "ismail",
+                    "ishmael",
+                    "ishaq",
+                    "isaac",
+                    "yaqub",
+                    "jacob",
+                    "harun",
+                    "aaron",
+                    "zakariya",
+                    "zechariah",
+                    "yahya",
+                    "john",
+                    "idris",
+                    "shuayb",
+                    "salih",
+                    "hud",
+                    "ilyas",
+                    "elijah"
+                  ],
+                  "points": 1
+                }
+              ]
+            },
+            "B": {
+              "name": "Deeper Concepts",
+              "difficulty": 3,
+              "skill": "Aqeedah",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "AQ-B1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "'Ruboobiyyah' refers to belief in Allah's Oneness in:",
+                  "options": [
+                    "His right to be worshipped alone",
+                    "His Lordship - creating, sustaining, controlling all things",
+                    "His beautiful names only",
+                    "Human free will"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "AQ-B2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Belief in Al-Qadar means believing in:",
+                  "options": [
+                    "Angels",
+                    "Revealed books",
+                    "Allah's divine decree and predestination",
+                    "The Day of Judgement only"
+                  ],
+                  "correct": 2,
+                  "points": 2
+                },
+                {
+                  "id": "AQ-B3",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "Why is ascribing human limitations to Allah (tashbih) avoided in sound Aqeedah?",
+                  "options": [
+                    "Because Allah is unlike His creation in every way; nothing resembles Him",
+                    "Because it is a minor, unimportant detail",
+                    "Because human limitations are actually accurate descriptions of Allah",
+                    "Because only scholars are affected by this issue"
+                  ],
+                  "correct": 0,
+                  "points": 2
+                },
+                {
+                  "id": "AQ-B4",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Which of the following is one of the 99 Names of Allah?",
+                  "options": [
+                    "Ar-Rahman (The Most Merciful)",
+                    "Al-Muhammad",
+                    "As-Sahabah",
+                    "Al-Qur'an"
+                  ],
+                  "correct": 0,
+                  "points": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "fiqh",
+          "label": "Fiqh",
+          "description": "Islamic jurisprudence and daily practice.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Fiqh of Worship Basics",
+                "ageRange": "7-10",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Perform wudu and salah correctly; identify what invalidates them."
+              },
+              {
+                "id": 2,
+                "name": "Fiqh of Daily Life",
+                "ageRange": "10-13",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Explain basic rulings on fasting, zakat awareness, and halal/haram."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Fiqh of Worship",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Perform wudu, ghusl and salah correctly per fiqh rulings."
+              },
+              {
+                "id": 2,
+                "name": "Fiqh of Daily Life & Transactions",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Explain rulings on fasting, zakat basics, and halal/haram in finance and conduct."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Foundations of Practice",
+              "difficulty": 1,
+              "skill": "Fiqh",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "FQ-A1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "How many obligatory prayers does a Muslim pray each day?",
+                  "options": [
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ],
+                  "correct": 2,
+                  "points": 1
+                },
+                {
+                  "id": "FQ-A2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What must be performed before Salah if a person is not already in a state of purity?",
+                  "options": [
+                    "Ghusl only",
+                    "Wudu (ablution)",
+                    "Tayammum only",
+                    "Nothing is required"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "FQ-A3",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "In which Islamic month is fasting obligatory?",
+                  "options": [
+                    "Muharram",
+                    "Rajab",
+                    "Ramadan",
+                    "Shawwal"
+                  ],
+                  "correct": 2,
+                  "points": 1
+                },
+                {
+                  "id": "FQ-A4",
+                  "type": "mcq",
+                  "audience": "kids",
+                  "prompt": "Which direction do Muslims face when they pray?",
+                  "options": [
+                    "North",
+                    "Towards the Ka'bah (Qiblah)",
+                    "Towards the sunrise",
+                    "It doesn't matter"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "FQ-A5",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "The direction Muslims face in prayer is called:",
+                  "options": [
+                    "Qiblah",
+                    "Sunnah",
+                    "Fatwa",
+                    "Hajj"
+                  ],
+                  "correct": 0,
+                  "points": 1
+                },
+                {
+                  "id": "FQ-A6",
+                  "type": "shortAnswer",
+                  "audience": "both",
+                  "prompt": "Name one thing that breaks (invalidates) wudu.",
+                  "acceptable": [
+                    "using the bathroom",
+                    "sleep",
+                    "sleeping",
+                    "passing gas",
+                    "urination",
+                    "bleeding",
+                    "toilet",
+                    "vomit",
+                    "unconscious",
+                    "loss of consciousness",
+                    "defecation",
+                    "flatulence"
+                  ],
+                  "points": 1
+                }
+              ]
+            },
+            "B": {
+              "name": "Applied Fiqh",
+              "difficulty": 3,
+              "skill": "Fiqh",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "FQ-B1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What distinguishes a 'Fard' act from a 'Sunnah' act in worship?",
+                  "options": [
+                    "No real difference",
+                    "Fard is obligatory; Sunnah is recommended, following the Prophet's ﷺ practice",
+                    "Sunnah is obligatory; Fard is optional",
+                    "Fard only applies to men"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "FQ-B2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Zakah is generally due on wealth that:",
+                  "options": [
+                    "Is spent immediately",
+                    "Reaches a minimum threshold (nisab) and is held for a year",
+                    "Belongs to someone else",
+                    "Is used to buy a home"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "FQ-B3",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "Which of the following is generally considered an excuse allowing a fasting person to break their fast in Ramadan?",
+                  "options": [
+                    "Feeling slightly tired",
+                    "Genuine illness or travel, per the relevant conditions",
+                    "Forgetting it is Ramadan for a moment",
+                    "Personal preference"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "FQ-B4",
+                  "type": "shortAnswer",
+                  "audience": "both",
+                  "prompt": "What is the Hajj, in one sentence?",
+                  "acceptable": [
+                    "pilgrimage",
+                    "makkah",
+                    "mecca",
+                    "kaaba"
+                  ],
+                  "points": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "seerah",
+          "label": "Seerah",
+          "description": "The life of Prophet Muhammad (peace be upon him).",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Seerah Stories & Timeline",
+                "ageRange": "6-9",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Sequence major life events of the Prophet ﷺ; retell key stories in your own words."
+              },
+              {
+                "id": 2,
+                "name": "Seerah Analysis & Application",
+                "ageRange": "10-13",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Analyse the reasoning behind key decisions; apply lessons in a reflection journal."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Seerah Timeline & Themes",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Sequence and summarise the major events of the Seerah."
+              },
+              {
+                "id": 2,
+                "name": "Analytical Seerah Study",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Analyse the reasoning behind the Prophet's ﷺ decisions in specific incidents."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Key Life Events",
+              "difficulty": 1,
+              "skill": "Seerah",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "SR-A1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "In which cave did the Prophet ﷺ first receive revelation?",
+                  "options": [
+                    "Cave of Thawr",
+                    "Cave of Hira",
+                    "Cave of the Companions",
+                    "None, it was in his home"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "SR-A2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Who was the Prophet's ﷺ first wife?",
+                  "options": [
+                    "Aisha",
+                    "Fatimah",
+                    "Khadijah",
+                    "Hafsah"
+                  ],
+                  "correct": 2,
+                  "points": 1
+                },
+                {
+                  "id": "SR-A3",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "The migration of the Prophet ﷺ and his companions from Makkah to Madinah is called:",
+                  "options": [
+                    "The Hajj",
+                    "The Hijrah",
+                    "The Mi'raj",
+                    "The Fath"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "SR-A4",
+                  "type": "shortAnswer",
+                  "audience": "both",
+                  "prompt": "Name one companion (Sahabi) of the Prophet ﷺ.",
+                  "acceptable": [
+                    "abu bakr",
+                    "umar",
+                    "uthman",
+                    "ali",
+                    "bilal",
+                    "khadijah",
+                    "aisha",
+                    "khalid",
+                    "hamza",
+                    "zubayr",
+                    "talha",
+                    "saad",
+                    "salman",
+                    "abdullah ibn masud",
+                    "anas",
+                    "muadh",
+                    "zayd",
+                    "hafsah",
+                    "jafar",
+                    "umm salamah",
+                    "abu ubaydah",
+                    "abu talib",
+                    "uthman ibn affan",
+                    "abu hurairah",
+                    "fatimah"
+                  ],
+                  "points": 1
+                }
+              ]
+            },
+            "B": {
+              "name": "Deeper Historical Understanding",
+              "difficulty": 3,
+              "skill": "Seerah",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "SR-B1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What was significant about the Treaty of Hudaybiyyah, despite appearing unfavourable to the Muslims at first?",
+                  "options": [
+                    "It ended in immediate war",
+                    "It brought a period of peace that allowed Islam to spread widely",
+                    "It cancelled the Hijrah",
+                    "It had no lasting effect"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "SR-B2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "'Al-Isra wal Mi'raj' refers to:",
+                  "options": [
+                    "The first revelation",
+                    "The Prophet's ﷺ night journey and ascension",
+                    "The Battle of Badr",
+                    "The final sermon"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "SR-B3",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "The Conquest of Makkah (Fath Makkah) is generally dated to which year of the Hijrah calendar?",
+                  "options": [
+                    "1 AH",
+                    "3 AH",
+                    "8 AH",
+                    "15 AH"
+                  ],
+                  "correct": 2,
+                  "points": 2
+                },
+                {
+                  "id": "SR-B4",
+                  "type": "shortAnswer",
+                  "audience": "both",
+                  "prompt": "Name one major battle from the Seerah.",
+                  "acceptable": [
+                    "badr",
+                    "uhud",
+                    "khandaq",
+                    "trench",
+                    "hunayn",
+                    "khaybar",
+                    "mutah",
+                    "tabuk"
+                  ],
+                  "points": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "hadith",
+          "label": "Hadith",
+          "description": "Prophetic sayings, traditions and their sciences.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Foundations of Hadith",
+                "ageRange": "8-11",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Memorise 20 short authentic hadiths with correct wording."
+              },
+              {
+                "id": 2,
+                "name": "Understanding Hadith Sciences",
+                "ageRange": "11-14",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Define basic hadith terminology (sahih, da'if, sanad, matn)."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Core Hadith & Themes",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Memorise and correctly explain 20+ authentic hadiths."
+              },
+              {
+                "id": 2,
+                "name": "Hadith Sciences & Application",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Define key hadith terminology and classify example hadiths."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Foundations",
+              "difficulty": 1,
+              "skill": "Hadith",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "HD-A1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What is a Hadith?",
+                  "options": [
+                    "A verse of the Qur'an",
+                    "A saying, action, or approval of the Prophet ﷺ",
+                    "A rule made by scholars only",
+                    "A type of supplication"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "HD-A2",
+                  "type": "shortAnswer",
+                  "audience": "both",
+                  "prompt": "Complete this famous hadith: 'Actions are judged by ___.'",
+                  "acceptable": [
+                    "intentions",
+                    "intention",
+                    "niyyah"
+                  ],
+                  "points": 1
+                },
+                {
+                  "id": "HD-A3",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "True or False: every reported hadith is considered equally reliable.",
+                  "options": [
+                    "True",
+                    "False - hadith are graded by their authenticity"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "HD-A4",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Which of the following is something we can learn about from authentic Hadith?",
+                  "options": [
+                    "How the Prophet ﷺ prayed, spoke, and treated others",
+                    "Only the geography of Arabia",
+                    "Only mathematics",
+                    "Nothing beyond what's already in the Qur'an"
+                  ],
+                  "correct": 0,
+                  "points": 1
+                }
+              ]
+            },
+            "B": {
+              "name": "Hadith Sciences",
+              "difficulty": 3,
+              "skill": "Hadith",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "HD-B1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What does 'Sahih' mean when describing a hadith?",
+                  "options": [
+                    "Weak",
+                    "Fabricated",
+                    "Authentic, meeting the highest reliability criteria",
+                    "Unclear"
+                  ],
+                  "correct": 2,
+                  "points": 2
+                },
+                {
+                  "id": "HD-B2",
+                  "type": "shortAnswer",
+                  "audience": "adults",
+                  "prompt": "Name one of the six major hadith collections (Al-Kutub As-Sittah).",
+                  "acceptable": [
+                    "bukhari",
+                    "muslim",
+                    "abu dawud",
+                    "tirmidhi",
+                    "nasai",
+                    "ibn majah"
+                  ],
+                  "points": 2
+                },
+                {
+                  "id": "HD-B3",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "The chain of narrators through which a hadith is transmitted is called the:",
+                  "options": [
+                    "Matn",
+                    "Isnad / Sanad",
+                    "Tafsir",
+                    "Fatwa"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "tafsir",
+          "label": "Tafsir",
+          "description": "Explanation and understanding of the Qur'an's meanings.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Introductory Tafsir (Juz Amma Focus)",
+                "ageRange": "9-12",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Summarise the general meaning of selected short surahs."
+              },
+              {
+                "id": 2,
+                "name": "Applied Tafsir & Thematic Study",
+                "ageRange": "12-15",
+                "weeks": 24,
+                "lessons": 48,
+                "hours": 48,
+                "desc": "Analyse thematic verse groupings; compare simplified scholarly interpretations."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Introductory Tafsir",
+                "ageRange": "Adult",
+                "weeks": 22,
+                "lessons": 44,
+                "hours": 44,
+                "desc": "Summarise the meaning and context (asbab al-nuzul) of selected surahs."
+              },
+              {
+                "id": 2,
+                "name": "Thematic & Applied Tafsir",
+                "ageRange": "Adult",
+                "weeks": 22,
+                "lessons": 44,
+                "hours": 44,
+                "desc": "Analyse thematic verse groupings across multiple surahs."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Foundations",
+              "difficulty": 1,
+              "skill": "Tafsir",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "TF-A1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What does 'Tafsir' mean?",
+                  "options": [
+                    "Memorising the Qur'an",
+                    "Explaining / interpreting the meanings of the Qur'an",
+                    "Reciting with correct rules",
+                    "Translating into any language"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "TF-A2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Surah Al-Fatiha is often known as:",
+                  "options": [
+                    "The Opening / Mother of the Book",
+                    "The Closing surah",
+                    "The Surah of Light",
+                    "The Surah of Stories"
+                  ],
+                  "correct": 0,
+                  "points": 1
+                },
+                {
+                  "id": "TF-A3",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What is the central theme of Surah Al-Ikhlas?",
+                  "options": [
+                    "Stories of past prophets",
+                    "The pure Oneness of Allah",
+                    "Rules of inheritance",
+                    "The Day of Judgement in detail"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "TF-A4",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Why is Tafsir important for understanding the Qur'an?",
+                  "options": [
+                    "It explains context, word meanings, and lessons not always obvious from the text alone",
+                    "It replaces the need to read the Qur'an itself",
+                    "It is only useful for translation into English",
+                    "It has no real importance"
+                  ],
+                  "correct": 0,
+                  "points": 1
+                }
+              ]
+            },
+            "B": {
+              "name": "Deeper Understanding",
+              "difficulty": 3,
+              "skill": "Tafsir",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "TF-B1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "'Asbab al-Nuzul' refers to:",
+                  "options": [
+                    "The rules of Tajweed",
+                    "The occasions/reasons behind a verse's revelation",
+                    "The order of the Mus'haf",
+                    "The seven modes of recitation"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "TF-B2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Surahs are broadly classified as Makki or Madani based on:",
+                  "options": [
+                    "Their length only",
+                    "Whether they were revealed before or after the Hijrah",
+                    "Whether they mention Paradise",
+                    "Their position in the Mus'haf"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "TF-B3",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "Surah Al-Kawthar is generally understood to be a response to:",
+                  "options": [
+                    "Mockery from opponents who taunted the Prophet ﷺ for having no surviving sons",
+                    "A request for more wealth",
+                    "A question about the Day of Judgement",
+                    "A dispute over land ownership"
+                  ],
+                  "correct": 0,
+                  "points": 2
+                },
+                {
+                  "id": "TF-B4",
+                  "type": "mcq",
+                  "audience": "kids",
+                  "prompt": "The stories of past Prophets in the Qur'an, such as Yunus or Yusuf, are mainly included to teach us:",
+                  "options": [
+                    "Lessons like patience and trust in Allah",
+                    "Ancient geography",
+                    "How to build ships",
+                    "Nothing important — they are just old stories"
+                  ],
+                  "correct": 0,
+                  "points": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "manners",
+          "label": "Manners & Islamic Character",
+          "description": "Akhlaq and everyday Islamic etiquette.",
+          "startBlock": "A",
+          "levelsByAudience": {
+            "kids": [
+              {
+                "id": 1,
+                "name": "Everyday Islamic Manners",
+                "ageRange": "4-7",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Demonstrate correct manners for greeting, eating, sleeping, entering/leaving home."
+              },
+              {
+                "id": 2,
+                "name": "Character Development & Social Conduct",
+                "ageRange": "7-11",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Identify praiseworthy vs blameworthy traits; apply conflict-resolution steps."
+              }
+            ],
+            "adults": [
+              {
+                "id": 1,
+                "name": "Foundations of Adab",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Apply Islamic manners in family, social and professional settings."
+              },
+              {
+                "id": 2,
+                "name": "Character Refinement & Leadership",
+                "ageRange": "Adult",
+                "weeks": 20,
+                "lessons": 40,
+                "hours": 40,
+                "desc": "Evaluate personal character against Islamic standards; apply conflict resolution."
+              }
+            ]
+          },
+          "placementBandsByAudience": {
+            "kids": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ],
+            "adults": [
+              {
+                "minScore": 0.7,
+                "levelId": 2
+              },
+              {
+                "minScore": 0.0,
+                "levelId": 1
+              }
+            ]
+          },
+          "blocks": {
+            "A": {
+              "name": "Everyday Etiquette",
+              "difficulty": 1,
+              "skill": "Manners",
+              "routing": {
+                "pass": {
+                  "minScore": 0.75,
+                  "next": "B"
+                },
+                "mid": {
+                  "minScore": 0.4,
+                  "next": "B"
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "MN-A1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What should a Muslim say before eating?",
+                  "options": [
+                    "Bismillah",
+                    "Alhamdulillah",
+                    "Astaghfirullah",
+                    "Insha'Allah"
+                  ],
+                  "correct": 0,
+                  "points": 1
+                },
+                {
+                  "id": "MN-A2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "What should you say after sneezing?",
+                  "options": [
+                    "Bismillah",
+                    "SubhanAllah",
+                    "Alhamdulillah",
+                    "Ameen"
+                  ],
+                  "correct": 2,
+                  "points": 1
+                },
+                {
+                  "id": "MN-A3",
+                  "type": "mcq",
+                  "audience": "kids",
+                  "prompt": "Your friend at school drops all their books. What is the best Islamic manner to show?",
+                  "options": [
+                    "Walk past quickly",
+                    "Laugh",
+                    "Help them pick the books up",
+                    "Tell the teacher on them"
+                  ],
+                  "correct": 2,
+                  "points": 1
+                },
+                {
+                  "id": "MN-A4",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "A colleague at work makes a mistake that affects you. Which response best reflects Islamic character?",
+                  "options": [
+                    "Publicly embarrass them",
+                    "Address it privately, with patience and fairness",
+                    "Ignore them from then on",
+                    "Report them immediately without speaking to them first"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                },
+                {
+                  "id": "MN-A5",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "Islam places strong emphasis on kindness towards:",
+                  "options": [
+                    "Only close relatives",
+                    "Parents, neighbours, and people in general",
+                    "Only fellow Muslims",
+                    "No one in particular"
+                  ],
+                  "correct": 1,
+                  "points": 1
+                }
+              ]
+            },
+            "B": {
+              "name": "Character in Practice",
+              "difficulty": 3,
+              "skill": "Manners",
+              "routing": {
+                "pass": {
+                  "minScore": 0.7,
+                  "next": null
+                },
+                "fail": {
+                  "next": null
+                }
+              },
+              "questions": [
+                {
+                  "id": "MN-B1",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "'Birr al-Waalidayn' refers to:",
+                  "options": [
+                    "Charity to strangers",
+                    "Dutifulness and kindness to one's parents",
+                    "Fasting extra days",
+                    "Visiting the mosque often"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                },
+                {
+                  "id": "MN-B2",
+                  "type": "mcq",
+                  "audience": "both",
+                  "prompt": "You are having a very frustrating, difficult day. Which response best reflects the Islamic value of sabr (patience)?",
+                  "options": [
+                    "Stay calm, keep trying, and trust that the difficulty will ease",
+                    "Give up immediately",
+                    "Lash out at people around you",
+                    "Complain constantly without trying to improve things"
+                  ],
+                  "correct": 0,
+                  "points": 2
+                },
+                {
+                  "id": "MN-B3",
+                  "type": "mcq",
+                  "audience": "adults",
+                  "prompt": "When someone wrongs you, Islamic teaching generally encourages responding with:",
+                  "options": [
+                    "Immediate harsh retaliation only",
+                    "Patience, and forgiveness where possible, while allowing legitimate redress",
+                    "Complete silence forever",
+                    "Public shaming"
+                  ],
+                  "correct": 1,
+                  "points": 2
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

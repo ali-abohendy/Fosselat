@@ -1,8 +1,10 @@
-# 🕌 Fossclat Academy — Islamic Qur'an School
+# 🕌 Fosselat Academy — Islamic Qur'an School
 
-> **Learn Qur'an. The Right Way.**
+> **كِتَابٌ فُصِّلَتْ آيَاتُهُ قُرْآنًا عَرَبِيًّا لِّقَوْمٍ يَعْلَمُونَ**
+>
+> *Inspiring Faith through Qur'an, Arabic, and Islamic Studies*
 
-A full-stack web application for an online Islamic Qur'an academy featuring course listings, teacher profiles, student enrollment, authentication, and contact functionality — wrapped in a premium dark-themed UI with gold accents.
+A full-stack web application for an online Islamic Qur'an academy — featuring student enrollment, teacher management, session scheduling, attendance tracking, payment recording, placement tests, and a role-based dashboard system for admins, teachers, and students.
 
 ---
 
@@ -11,117 +13,271 @@ A full-stack web application for an online Islamic Qur'an academy featuring cour
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React 18 + Vite |
-| Styling | Vanilla CSS (Cairo font) |
+| Styling | Vanilla CSS (Cairo + Amiri fonts) |
 | Backend | Python Flask |
 | Database | MongoDB |
 | Auth | JWT (Flask-JWT-Extended) |
+| Deployment | Vercel (frontend) + Railway (backend) |
 
-## 🎨 Design
+## 🎨 Design System
 
-- **Color Palette**: Dark navy (`#0A1A28`) + Teal (`#0F3D46`) + Gold (`#C8A763`) + Cream (`#F7F3E6`)
-- **Typography**: Cairo (Google Fonts)
+- **Primary Background**: Dark navy `#0A1A28`
+- **Accent**: Gold `#C8A763` / `#B8952D`
+- **Secondary**: Teal `#0F3D46`
+- **Text**: Cream `#F7F3E6`
+- **Typography**: Cairo (UI), Amiri (Arabic Qur'anic text)
 - **Theme**: Premium dark with Islamic aesthetics
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started (Local Development)
 
 ### Prerequisites
 - Node.js 18+
 - Python 3.9+
 - MongoDB (local or Atlas)
 
-### Frontend
+### 1. Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/fosselat.git
+cd fosselat
+```
 
+### 2. Frontend
 ```bash
 cd frontend
 npm install
+cp .env.example .env        # Edit .env with your backend URL
 npm run dev
 ```
+Frontend runs at [http://localhost:5173](http://localhost:5173)
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-### Backend
-
+### 3. Backend
 ```bash
 cd backend
 pip install -r requirements.txt
 
-# Seed the database with sample data
-python seed_data.py
+# Copy and configure environment variables
+cp .env.example .env        # Edit with your MongoDB URI and JWT secret
 
 # Start the Flask server
 python run.py
 ```
+Backend API runs at [http://localhost:5000](http://localhost:5000)
 
-API runs at [http://localhost:5000](http://localhost:5000)
+### 4. Environment Variables
+
+**Frontend** (`frontend/.env`):
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+**Backend** (`backend/.env`):
+```env
+MONGO_URI=mongodb://localhost:27017/fosselat
+JWT_SECRET_KEY=your-secret-key-here
+FLASK_ENV=development
+```
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Foselat/
-├── frontend/                   # React SPA
+Fosselat/
+├── frontend/                        # React SPA (Vite)
+│   ├── public/
+│   │   ├── logo.png                 # Academy logo
+│   │   ├── hero-bg.jpg              # Hero section background
+│   │   └── curriculum.pdf           # Downloadable curriculum
 │   ├── src/
-│   │   ├── components/         # Reusable UI components
-│   │   ├── pages/              # 10 page components
-│   │   ├── context/            # AuthContext (JWT)
-│   │   ├── services/           # API client + fallback data
-│   │   ├── index.css           # Design system tokens
-│   │   └── App.jsx             # Router + Layout
-│   └── ...
+│   │   ├── components/              # Reusable UI components
+│   │   │   ├── Navbar.jsx/.css      # Navigation bar
+│   │   │   ├── Footer.jsx/.css      # Footer
+│   │   │   ├── Button.jsx/.css      # Button component
+│   │   │   ├── DashboardLayout.jsx  # Sidebar layout for dashboards
+│   │   │   └── ...
+│   │   ├── pages/
+│   │   │   ├── Home.jsx             # Landing page
+│   │   │   ├── Curriculum.jsx       # Curriculum page
+│   │   │   ├── PlacementTests.jsx   # Placement test selector
+│   │   │   ├── PlacementTest.jsx    # Active test (Qur'an/Arabic/Islamic)
+│   │   │   ├── Pricing.jsx          # Pricing plans
+│   │   │   ├── About.jsx            # About the academy
+│   │   │   ├── Contact.jsx          # Contact form
+│   │   │   ├── Login.jsx            # Authentication
+│   │   │   ├── admin/               # Admin dashboard pages
+│   │   │   │   ├── AdminDashboard.jsx
+│   │   │   │   ├── AdminStudents.jsx
+│   │   │   │   ├── AdminTeachers.jsx
+│   │   │   │   ├── AdminSchedule.jsx
+│   │   │   │   ├── AdminAttendance.jsx
+│   │   │   │   ├── AdminStudentPayments.jsx
+│   │   │   │   └── AdminTeacherPayments.jsx
+│   │   │   ├── teacher/             # Teacher dashboard pages
+│   │   │   │   ├── TeacherDashboard.jsx
+│   │   │   │   ├── TeacherCalendar.jsx
+│   │   │   │   ├── TeacherRecordSession.jsx
+│   │   │   │   └── TeacherTimeSlots.jsx
+│   │   │   └── student/             # Student dashboard pages
+│   │   │       ├── StudentDashboard.jsx
+│   │   │       ├── StudentReview.jsx
+│   │   │       └── StudentTimeSlots.jsx
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx      # JWT auth context
+│   │   ├── services/
+│   │   │   └── api.js               # API client
+│   │   ├── config.js                # Central API URL config
+│   │   ├── index.css                # Global design tokens
+│   │   └── App.jsx                  # Router + protected routes
+│   ├── vercel.json                  # Vercel deployment config
+│   └── vite.config.js
 │
-├── backend/                    # Flask API
+├── backend/                         # Flask REST API
 │   ├── app/
-│   │   ├── models/             # MongoDB document helpers
-│   │   ├── routes/             # API route blueprints
-│   │   └── utils/              # Validators
-│   ├── seed_data.py            # Database seeder
-│   └── run.py                  # Entry point
+│   │   ├── routes/
+│   │   │   ├── auth.py              # Login, register, JWT
+│   │   │   ├── admin.py             # Admin-only endpoints
+│   │   │   ├── teacher_dash.py      # Teacher endpoints
+│   │   │   └── student_dash.py      # Student endpoints
+│   │   ├── __init__.py              # Flask app factory
+│   │   └── extensions.py           # MongoDB, JWT setup
+│   └── run.py                       # Entry point
 │
 └── README.md
 ```
 
-## 📄 Pages
+---
+
+## 👥 User Roles
+
+| Role | Access |
+|------|--------|
+| **Admin** | Full access — manage students, teachers, schedule, attendance, payments |
+| **Teacher** | Dashboard, calendar, record sessions, time slots |
+| **Student** | Dashboard, session history, time slots, reviews |
+
+---
+
+## 📄 Public Pages
 
 | Page | Route | Description |
 |------|-------|-------------|
-| Home | `/` | Hero, features, courses, stats |
-| Courses | `/courses` | All courses grid |
-| Course Detail | `/courses/:id` | Single course info |
-| Teachers | `/teachers` | Teacher profiles grid |
-| Teacher Profile | `/teachers/:id` | Single teacher bio |
-| About | `/about` | Mission & stats |
+| Home | `/` | Hero, features, stats, placement test teaser, blog |
+| Curriculum | `/curriculum` | Full course curriculum (PDF viewer) |
+| Placement Tests | `/placement-tests` | Choose a test track |
+| Placement Test | `/placement-tests/take` | Interactive placement test |
+| Pricing | `/pricing` | Plans and packages *(hidden from teachers)* |
+| About | `/about` | Mission, team, stats |
 | Contact | `/contact` | Contact form |
-| Enroll | `/enroll` | Enrollment form |
-| Login | `/login` | Authentication |
-| Register | `/register` | Create account |
+| Blog | `/blog` | Articles and posts |
+| Login | `/login` | Role-based authentication |
 
-## 🔌 API Endpoints
+---
 
-| Method | Endpoint | Auth |
-|--------|----------|------|
-| POST | `/api/auth/register` | No |
-| POST | `/api/auth/login` | No |
-| GET | `/api/auth/me` | Yes |
-| GET | `/api/courses` | No |
-| GET | `/api/courses/popular` | No |
-| GET | `/api/courses/:id` | No |
-| GET | `/api/teachers` | No |
-| GET | `/api/teachers/:id` | No |
-| POST | `/api/enrollments` | No |
-| GET | `/api/enrollments/my` | Yes |
-| POST | `/api/contact` | No |
+## 🔒 Dashboard Routes
+
+| Role | Route |
+|------|-------|
+| Admin | `/admin/dashboard` |
+| Teacher | `/teacher/dashboard` |
+| Student | `/student/dashboard` |
+
+---
+
+## 💰 Payment & Pricing Logic
+
+### Student Payments
+- Standard hourly rate: **$8/hr**
+- Elite plan discount: **$7.20/hr** (10% off)
+- Total due = sum of each student's `(actual hours attended × hourly rate)`
+- Sessions counted per student independently within the selected month
+
+### Teacher Payments
+- Teacher hourly rates are stored in **Egyptian Pounds (L.E)**
+- Conversion: **50 L.E = $1 USD**
+- Net salary displayed in L.E with USD equivalent shown
+- Elite plan students get 10% discount applied to their rate
+
+### Plans
+
+| Plan | Sessions/Week |
+|------|--------------|
+| Starter | 2 |
+| Growth | 3 |
+| Excellence | 4 |
+| Elite | 5 (+ 10% discount) |
+
+---
+
+## 🔌 Key API Endpoints
+
+### Auth
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/login` | Login, returns JWT |
+| GET | `/api/auth/me` | Get current user |
+
+### Admin
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/admin/dashboard` | Stats overview |
+| GET/POST | `/api/admin/students` | List / create students |
+| GET/POST | `/api/admin/teachers` | List / create teachers |
+| POST | `/api/admin/schedule` | Assign student to teacher slot |
+| GET | `/api/admin/attendance` | Attendance records |
+| GET/POST | `/api/admin/payments/students` | Student payment records |
+| GET/POST | `/api/admin/payments/teachers` | Teacher payroll records |
+
+### Teacher
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/teacher/dashboard` | Today's sessions + stats |
+| GET | `/api/teacher/calendar` | Weekly schedule |
+| POST | `/api/teacher/sessions` | Record a session |
+| GET/POST | `/api/teacher/timeslots` | Availability slots |
+
+### Student
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/student/dashboard` | Student overview |
+| GET | `/api/student/sessions` | Session history |
+| POST | `/api/student/review` | Submit session review |
+
+---
+
+## 🌐 Deployment
+
+### Frontend → Vercel
+1. Push `frontend/` to a GitHub repository
+2. Import on [vercel.com](https://vercel.com)
+3. Set environment variable: `VITE_API_URL=https://your-backend.up.railway.app/api`
+4. Deploy — auto-redeploys on every `git push`
+
+### Backend → Railway
+1. Push `backend/` to a GitHub repository
+2. Import on [railway.app](https://railway.app)
+3. Set environment variables:
+   - `MONGO_URI` — your MongoDB Atlas connection string
+   - `JWT_SECRET_KEY` — a long random secret
+   - `FLASK_ENV=production`
+4. Railway auto-detects Python and deploys
+
+### Domain → Namecheap + Vercel
+1. Buy `fosselat.com` on [namecheap.com](https://namecheap.com)
+2. In Vercel: Project → Domains → Add `fosselat.com`
+3. Copy DNS records from Vercel to Namecheap DNS settings
+4. SSL certificate is issued automatically by Vercel
 
 ---
 
 ## 📝 Notes
 
-- The frontend works **standalone** with built-in fallback data — no backend needed to preview the UI
-- MongoDB connection defaults to `mongodb://localhost:27017/fossclat`
-- Set a `MONGO_URI` environment variable for MongoDB Atlas
+- The `Pricing` page and navbar link are **automatically hidden** for users logged in as teachers
+- Meeting links (Zoom / Google Meet) are set per teacher by the admin — without them the Join buttons won't appear
+- Session conflict checking in the admin schedule is intentionally disabled by design
+- Blog posts are stored as static data in `src/data/blogPosts.jsx`
 
 ---
 
-© 2026 Fossclat Academy. All rights reserved.
+© 2026 Fosselat Academy. All rights reserved.
