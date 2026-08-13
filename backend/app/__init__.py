@@ -18,7 +18,15 @@ def create_app(config_class=Config):
     # ---------- Extensions ----------
     mongo.init_app(app)
     jwt.init_app(app)
-    CORS(app, resources={r"/api/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}})
+    CORS(app, resources={r"/api/*": {"origins": [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://fosselat.vercel.app",
+        "https://fosselat-git-main-ali-abo-hendys-projects.vercel.app",
+        "https://fosselat-8e9lg7uev-ali-abo-hendys-projects.vercel.app",
+        "https://fosselat.com",
+        "https://www.fosselat.com"
+    ]}})
 
     # ---------- JWT error handlers ----------
     @jwt.expired_token_loader
