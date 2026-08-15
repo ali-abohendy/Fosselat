@@ -1,11 +1,15 @@
+import os
+from dotenv import load_dotenv
 from pymongo import MongoClient
 import bcrypt
 from datetime import datetime
 
-MONGO_URI = "mongodb+srv://aliabohendy_db_user:AdC0biDZRVjSMzca@cluster0.3glgo1u.mongodb.net/fosselat?retryWrites=true&w=majority&appName=Cluster0"
+load_dotenv()
+
+MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://mostafaapoqura1732003_db_user:kqjmQICcKnfFrJLj@cluster0.l217ixe.mongodb.net/fossclat?retryWrites=true&w=majority')
 
 client = MongoClient(MONGO_URI)
-db = client['fosselat']
+db = client.get_default_database()
 
 admins = [
     {"email": "amrabohendy@fosselat.com",     "password": "amrabohendy123",     "full_name": "Amr Abo Hendy"},
@@ -14,22 +18,25 @@ admins = [
     {"email": "ahmeddaif@fosselat.com",        "password": "ahmeddaif123",        "full_name": "Ahmed Daif"},
 ]
 
+from werkzeug.security import generate_password_hash
+
 for admin in admins:
-    existing = db.users.find_one({"email": admin["email"]})
-    if existing:
-        print(f"Already exists: {admin['email']}")
-        continue
-    hashed = bcrypt.hashpw(admin["password"].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-    user_doc = {
-        "email": admin["email"],
-        "password": hashed,
-        "full_name": admin["full_name"],
-        "role": "admin",
-        "created_at": datetime.utcnow(),
-        "is_active": True,
-    }
-    result = db.users.insert_one(user_doc)
-    print(f"Created: {admin['email']}")
+    hashed = generate_password_hash(admin["password"])
+    db.users.update_one(
+        {"email": admin["email"]},
+        {
+            "$set": {
+                "email": admin["email"],
+                "password": hashed,
+                "full_name": admin["full_name"],
+                "role": "admin",
+                "status": "active",
+                "is_active": True,
+            }
+        },
+        upsert=True
+    )
+    print(f"Updated/Created admin: {admin['email']}")
 
 print("Done!")
 client.close()

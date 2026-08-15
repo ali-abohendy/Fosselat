@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from flask import Flask
 from flask_cors import CORS
 from flask_pymongo import PyMongo
@@ -18,7 +19,7 @@ def create_app(config_class=Config):
     # ---------- Extensions ----------
     mongo.init_app(app)
     jwt.init_app(app)
-    CORS(app, resources={r"/api/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}})
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # ---------- JWT error handlers ----------
     @jwt.expired_token_loader

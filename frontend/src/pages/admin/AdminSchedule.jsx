@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
 import SearchableSelect from '../../components/SearchableSelect';
-
-const API = 'http://localhost:5000/api';
+import API from '../../config';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,

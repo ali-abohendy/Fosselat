@@ -1,4 +1,5 @@
-const API_BASE = 'http://localhost:5000/api';
+import API from '../config';
+const API_BASE = API;
 
 // Helper to get auth header
 function getAuthHeaders() {

@@ -37,6 +37,12 @@ def find_user_by_id(user_id):
 
 def verify_password(stored_hash, password):
     """Check a plain-text password against the stored hash."""
+    if stored_hash and (stored_hash.startswith('$2b$') or stored_hash.startswith('$2a$')):
+        try:
+            import bcrypt
+            return bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8'))
+        except Exception:
+            return False
     return check_password_hash(stored_hash, password)
 
 
