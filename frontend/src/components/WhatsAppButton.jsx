@@ -1,7 +1,7 @@
 import './WhatsAppButton.css';
 
 const WHATSAPP_NUMBER = '966595796177';
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20Fosselat%20Academy.`;
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20would%20like%20to%20know%20more%20about%20Fosselat%20Academy.`;
 
 export default function WhatsAppButton() {
   return (

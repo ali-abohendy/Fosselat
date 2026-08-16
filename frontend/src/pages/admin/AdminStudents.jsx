@@ -26,8 +26,8 @@ const PLANS = [
 ];
 
 const DURATIONS = [
-  { minutes: 30, rate: 4 }, { minutes: 40, rate: 5.33 }, { minutes: 45, rate: 6 },
-  { minutes: 60, rate: 8 }, { minutes: 90, rate: 12 }, { minutes: 120, rate: 16 },
+  { minutes: 30, rate: 5 }, { minutes: 40, rate: 6.67 }, { minutes: 45, rate: 7.5 },
+  { minutes: 60, rate: 10 }, { minutes: 90, rate: 15 }, { minutes: 120, rate: 20 },
 ];
 
 const emptyForm = {

@@ -10,7 +10,7 @@ export default function About() {
   }, []);
 
   const WHATSAPP_NUMBER = '966595796177';
-  const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20would%20like%20to%20book%20a%20free%20trial%20lesson.`;
+  const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please.`;
 
   const values = [
     { icon: <GraduationCap size={24} />, title: 'Certified & Ijazah-Certified Teachers', desc: 'Learn from qualified teachers with authenticated chains of transmission.' },

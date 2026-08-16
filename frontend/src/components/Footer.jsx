@@ -6,15 +6,20 @@ export default function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
-          {/* Islamic Quote */}
-          <div className="footer-quote">
-            <div className="footer-quote-icon">📖</div>
-            <div>
-              <blockquote>
-                The best of you are those who learn the Qur'an and teach it.
-                <cite>— Prophet Muhammad ﷺ</cite>
-              </blockquote>
+          <div className="footer-brand">
+            <div className="footer-logo">
+              <div className="footer-logo-icon">
+                <img src="/logo.png" alt="Fosselat Academy" />
+              </div>
+              <div className="footer-logo-text">
+                <span className="footer-logo-name">Fosselat</span>
+                <span className="footer-logo-tagline">Islamic Qur'an School</span>
+              </div>
             </div>
+            <p className="footer-brand-desc">
+              The best of you are those who learn the Qur'an and teach it.<br/>
+              <span className="footer-quote-author">— Prophet Muhammad ﷺ</span>
+            </p>
           </div>
 
           {/* Quick Links */}
@@ -71,6 +76,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} <Link to="/">Fosselat Academy</Link>. All rights reserved.</p>
+          <p className="footer-support">For support contact: <a href="mailto:support@fosselatacademy.com">support@fosselatacademy.com</a></p>
         </div>
       </div>
     </footer>

@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './PlacementTest.css';
 
-const STORAGE_KEY = "fosselat_placement_progress_v1";
+const STORAGE_KEY = "fosselat_placement_v2";
+const LEGACY_KEYS = ["fosselat_placement_progress_v1"];
 const MAX_SAVE_AGE_MS = 7 * 24 * 3600 * 1000;
 
 const ACCENTS = {
@@ -11,523 +12,847 @@ const ACCENTS = {
   "islamic-studies": "var(--maroon)",
 };
 const INITIALS = { quran: "Q", arabic: "A", "islamic-studies": "I" };
-const LETTERS = ["A", "B", "C", "D", "E"];
 
-// --- Scoring Module ---
-const Scoring = {
-  filterQuestionsForAudience(questions, audience) {
-    return questions.filter(q => !q.audience || q.audience === "both" || q.audience === audience);
-  },
-  gradeAnswer(question, response) {
-    const max = question.points || 0;
-    if (response === undefined || response === null) return { earned: 0, max };
-    if (question.type === "mcq") {
-      if (Array.isArray(question.scoreMap)) {
-        const w = question.scoreMap[response] ?? 0;
-        return { earned: +(max * w).toFixed(3), max };
+/* ──────────────────────────────────────────────────────────────────────
+   Placement Engine — ported from scoring.js v3.0
+   Pure logic, no DOM.  Every function is deterministic given its inputs.
+   ────────────────────────────────────────────────────────────────────── */
+const Placement = (() => {
+  const CONFIG = {
+    MASTERY_THRESHOLD: 0.60,
+    QUESTIONS_PER_LEVEL: { kids: 10, adults: 12 },
+    DIFFICULTY_MIX: { easy: 0.3, medium: 0.45, hard: 0.25 },
+    PREREQUISITE_LOOKBACK: 1,
+    PLACEMENT_MODE: "firstUnmastered",
+    EPSILON: 1e-9,
+  };
+
+  function configure(meta) {
+    const c = (meta && meta.config) || {};
+    if (typeof c.masteryThreshold === "number") CONFIG.MASTERY_THRESHOLD = c.masteryThreshold;
+    if (c.questionsPerLevel) CONFIG.QUESTIONS_PER_LEVEL = c.questionsPerLevel;
+    if (c.difficultyMix) CONFIG.DIFFICULTY_MIX = c.difficultyMix;
+    if (typeof c.prerequisiteLookback === "number") CONFIG.PREREQUISITE_LOOKBACK = c.prerequisiteLookback;
+    if (typeof c.placementMode === "string") CONFIG.PLACEMENT_MODE = c.placementMode;
+    return CONFIG;
+  }
+
+  function pct(earned, max) { return max ? earned / max : 0; }
+  function isMastered(levelPct) { return levelPct >= CONFIG.MASTERY_THRESHOLD - CONFIG.EPSILON; }
+
+  function shuffled(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function serveCount(audience) {
+    const c = CONFIG.QUESTIONS_PER_LEVEL;
+    return typeof c === "number" ? c : (c[audience] || c.adults || 10);
+  }
+
+  // Data access
+  function levelsOf(program, audience) {
+    return (program.levelsByAudience[audience] || []).slice().sort((a, b) => a.id - b.id);
+  }
+  function levelIdsOf(program, audience) { return levelsOf(program, audience).map(l => l.id); }
+  function levelInfo(program, audience, levelId) {
+    return levelsOf(program, audience).find(l => l.id === levelId) || null;
+  }
+  function bankOf(program, audience, levelId) {
+    const banks = program.levelBanksByAudience[audience] || [];
+    return banks.find(b => b.level === levelId) || null;
+  }
+  function questionById(program, audience, qid) {
+    const banks = program.levelBanksByAudience[audience] || [];
+    for (const b of banks) {
+      const q = b.questions.find(x => x.id === qid);
+      if (q) return q;
+    }
+    return null;
+  }
+  function selfReportOf(program, audience) {
+    return program.selfReportByAudience[audience];
+  }
+
+  // Question selection
+  function skillRoundRobin(items) {
+    const bySkill = {};
+    shuffled(items).forEach(q => { (bySkill[q.skill] = bySkill[q.skill] || []).push(q); });
+    const groups = shuffled(Object.keys(bySkill)).map(k => bySkill[k]);
+    const out = [];
+    let moved = true;
+    while (moved) {
+      moved = false;
+      for (const g of groups) { if (g.length) { out.push(g.shift()); moved = true; } }
+    }
+    return out;
+  }
+
+  function selectLevelQuestions(program, audience, levelId, excludeIds, count) {
+    const bank = bankOf(program, audience, levelId);
+    if (!bank) return [];
+    const exclude = excludeIds instanceof Set ? excludeIds : new Set(excludeIds || []);
+    const pool = bank.questions.filter(q => !exclude.has(q.id));
+    const usable = pool.length ? pool : bank.questions.slice();
+    const want = Math.min(count || serveCount(audience), usable.length);
+
+    const BANDS = ["easy", "medium", "hard"];
+    const byBand = { easy: [], medium: [], hard: [] };
+    usable.forEach(q => (byBand[q.difficulty] || byBand.medium).push(q));
+    BANDS.forEach(b => { byBand[b] = skillRoundRobin(byBand[b]); });
+
+    const target = {};
+    let assigned = 0;
+    BANDS.forEach((b, i) => {
+      target[b] = i === BANDS.length - 1 ? want - assigned
+        : Math.min(byBand[b].length, Math.round(want * (CONFIG.DIFFICULTY_MIX[b] || 0)));
+      assigned += target[b];
+    });
+
+    const picked = [];
+    BANDS.forEach(b => {
+      for (let i = 0; i < target[b] && byBand[b].length; i++) picked.push(byBand[b].shift());
+    });
+    const leftovers = skillRoundRobin(BANDS.reduce((a, b) => a.concat(byBand[b]), []));
+    while (picked.length < want && leftovers.length) picked.push(leftovers.shift());
+
+    const rank = { easy: 0, medium: 1, hard: 2 };
+    picked.sort((a, b) => (rank[a.difficulty] || 1) - (rank[b.difficulty] || 1));
+    return picked.map(q => ({ id: q.id, order: shuffled(q.options.map((_, i) => i)), response: null }));
+  }
+
+  function present(program, audience, slot) {
+    const q = questionById(program, audience, slot.id);
+    if (!q) return null;
+    const order = slot.order && slot.order.length === q.options.length ? slot.order : q.options.map((_, i) => i);
+    return {
+      id: q.id, level: q.level, skill: q.skill, difficulty: q.difficulty,
+      prompt: q.prompt, arabic: q.arabic || null,
+      options: order.map(i => q.options[i]),
+      optionsArabic: !!q.optionsArabic, points: q.points || 1,
+    };
+  }
+
+  function gradeSlot(program, audience, slot) {
+    const q = questionById(program, audience, slot.id);
+    if (!q) return { earned: 0, max: 0, correct: false, skill: null };
+    const max = q.points || 1;
+    if (slot.response === null || slot.response === undefined) {
+      return { earned: 0, max, correct: false, skill: q.skill, skipped: true };
+    }
+    const order = slot.order && slot.order.length === q.options.length ? slot.order : q.options.map((_, i) => i);
+    const originalIdx = order[slot.response];
+    const correct = originalIdx === q.correct;
+    return { earned: correct ? max : 0, max, correct, skill: q.skill, skipped: false };
+  }
+
+  // Session lifecycle
+  function startPlacement(trackId, programId, audience, program) {
+    return {
+      v: 2, trackId, programId, audience,
+      levelIds: levelIdsOf(program, audience),
+      claimLevel: null, phase: "selfReport", direction: "up",
+      currentLevel: null, slots: [], index: 0,
+      levelResults: [], askedIds: [], order: [],
+    };
+  }
+
+  function getStartingLevel(session, claimLevel) {
+    const ids = session.levelIds;
+    let claim = Number(claimLevel);
+    if (!isFinite(claim)) claim = ids[0];
+    claim = Math.max(ids[0], Math.min(ids[ids.length - 1], claim));
+    const idx = ids.indexOf(claim);
+    return ids[Math.max(0, idx - CONFIG.PREREQUISITE_LOOKBACK)];
+  }
+
+  function applySelfReport(session, program, claimLevel) {
+    session.claimLevel = claimLevel;
+    session.phase = "testing";
+    session.direction = "up";
+    loadLevelQuestions(session, program, getStartingLevel(session, claimLevel));
+    return session;
+  }
+
+  function loadLevelQuestions(session, program, levelId) {
+    session.currentLevel = levelId;
+    session.index = 0;
+    session.slots = selectLevelQuestions(
+      program, session.audience, levelId, new Set(session.askedIds), serveCount(session.audience));
+    session.slots.forEach(s => { if (session.askedIds.indexOf(s.id) === -1) session.askedIds.push(s.id); });
+    return session.slots;
+  }
+
+  function currentSlot(session) { return session.slots[session.index] || null; }
+  function currentQuestion(session, program) {
+    const slot = currentSlot(session);
+    return slot ? present(program, session.audience, slot) : null;
+  }
+
+  function answerCurrent(session, response) {
+    const slot = currentSlot(session);
+    if (!slot) return false;
+    slot.response = (response === null || response === undefined) ? null : Number(response);
+    return true;
+  }
+
+  function goNext(session) {
+    if (session.index < session.slots.length) session.index++;
+    return session.index >= session.slots.length;
+  }
+  function goBack(session) {
+    if (session.index > 0) { session.index--; return true; }
+    return false;
+  }
+  function canGoBack(session) { return session.index > 0; }
+
+  function evaluateLevel(session, program) {
+    let earned = 0, max = 0;
+    const answers = session.slots.map(slot => {
+      const g = gradeSlot(program, session.audience, slot);
+      earned += g.earned; max += g.max;
+      return { id: slot.id, order: slot.order, response: slot.response, earned: g.earned, max: g.max, correct: g.correct, skill: g.skill };
+    });
+    const p = pct(earned, max);
+    return { level: session.currentLevel, earned, max, pct: p, passed: isMastered(p), answers };
+  }
+
+  function completeLevel(session, program) {
+    const result = evaluateLevel(session, program);
+    const existing = session.levelResults.findIndex(r => r.level === result.level);
+    if (existing >= 0) session.levelResults[existing] = result;
+    else session.levelResults.push(result);
+    if (session.order.indexOf(result.level) === -1) session.order.push(result.level);
+
+    const ids = session.levelIds;
+    const min = ids[0], max = ids[ids.length - 1];
+    const at = ids.indexOf(result.level);
+    const tested = lvl => session.levelResults.some(r => r.level === lvl);
+
+    let next = null;
+    if (result.passed) {
+      if (session.direction === "up" && result.level !== max) next = ids[at + 1];
+    } else {
+      if (result.level !== min && !tested(ids[at - 1])) {
+        next = ids[at - 1];
+        session.direction = "down";
       }
-      return { earned: response === question.correct ? max : 0, max };
     }
-    if (question.type === "shortAnswer") {
-      if (question.freeform) {
-        const attempted = typeof response === "string" && response.trim().length > 0;
-        return { earned: attempted ? max : 0, max };
-      }
-      const text = (typeof response === "string" ? response : "").toLowerCase().trim();
-      const hit = (question.acceptable || []).some(k => text.includes(k.toLowerCase()));
-      return { earned: hit ? max : 0, max };
+
+    if (next === null || next === undefined) {
+      session.phase = "complete";
+      session.slots = []; session.index = 0;
+      return { result, done: true, passed: result.passed, direction: session.direction, nextLevel: null, isTopLevel: result.level === max };
     }
-    if (question.type === "timedRead") {
-      const seconds = Number(response);
-      if (!isFinite(seconds) || seconds <= 0) return { earned: 0, max };
-      const ratio = seconds / (question.benchmarkSeconds || 20);
-      let w;
-      if (ratio <= 1.2) w = 1.0;
-      else if (ratio <= 1.8) w = 0.7;
-      else if (ratio <= 2.5) w = 0.4;
-      else w = 0.15;
-      return { earned: +(max * w).toFixed(3), max };
-    }
-    return { earned: 0, max };
-  },
-  pct(earned, max) {
-    if (!max) return 0;
-    return earned / max;
-  },
-  routeNext(block, blockPct) {
-    const r = block.routing;
-    const order = ["pass", "mid", "fail"];
-    for (const key of order) {
-      const rule = r[key];
-      if (!rule) continue;
-      if (blockPct >= (rule.minScore ?? 0)) {
-        return rule.next ? { terminal: false, next: rule.next } : { terminal: true };
-      }
-    }
-    return { terminal: true };
-  },
-  pickLevelFromBands(bands, overallPct) {
-    for (const b of bands) {
-      if (overallPct >= b.minScore) return b.levelId;
-    }
-    return bands[bands.length - 1].levelId;
-  },
-  aggregateSkills(answerLog) {
+    loadLevelQuestions(session, program, next);
+    return { result, done: false, passed: result.passed, direction: session.direction, nextLevel: next, isTopLevel: false };
+  }
+
+  // Reporting
+  function aggregateSkills(levelResults) {
     const map = {};
-    for (const a of answerLog) {
+    levelResults.forEach(r => r.answers.forEach(a => {
+      if (!a.skill || !a.max) return;
       if (!map[a.skill]) map[a.skill] = { skill: a.skill, earned: 0, max: 0 };
       map[a.skill].earned += a.earned;
       map[a.skill].max += a.max;
-    }
-    return Object.values(map).map(s => ({ ...s, pct: Scoring.pct(s.earned, s.max) }));
-  },
-  buildStrengthsWeaknesses(skillArr) {
-    const withScores = skillArr.filter(s => s.max > 0);
-    const descByPct = [...withScores].sort((a, b) => b.pct - a.pct);
-    const ascByPct = [...withScores].sort((a, b) => a.pct - b.pct);
-    let strengths = descByPct.filter(s => s.pct >= 0.65).slice(0, 3);
-    if (strengths.length === 0 && descByPct.length && descByPct[0].pct >= 0.4) {
-      strengths = descByPct.slice(0, Math.min(2, descByPct.length));
-    }
-    const strengthSkills = new Set(strengths.map(s => s.skill));
-    let weaknesses = ascByPct.filter(s => s.pct < 0.5 && !strengthSkills.has(s.skill)).slice(0, 3);
-    if (weaknesses.length === 0 && withScores.length) {
-      const lowest = ascByPct[0];
-      if (lowest && !strengthSkills.has(lowest.skill) && lowest.pct < 0.6) {
-        weaknesses = [lowest];
-      }
-    }
+    }));
+    return Object.keys(map).map(k => ({ ...map[k], pct: pct(map[k].earned, map[k].max) }));
+  }
+
+  function buildStrengthsWeaknesses(skillArr) {
+    const scored = skillArr.filter(s => s.max > 0);
+    const desc = [...scored].sort((a, b) => b.pct - a.pct);
+    const asc = [...scored].sort((a, b) => a.pct - b.pct);
+    let strengths = desc.filter(s => s.pct >= 0.65).slice(0, 3);
+    if (!strengths.length && desc.length && desc[0].pct >= 0.5) strengths = desc.slice(0, 1);
+    const strong = new Set(strengths.map(s => s.skill));
+    let weaknesses = asc.filter(s => s.pct < 0.6 && !strong.has(s.skill)).slice(0, 3);
+    if (!weaknesses.length && asc.length && asc[0].pct < 0.9 && !strong.has(asc[0].skill)) weaknesses = [asc[0]];
     return { strengths, weaknesses };
-  },
-  estimateDuration(level, program) {
+  }
+
+  function estimateDuration(level, program) {
     const fastPace = program.fastPaceNote;
-    if (!level.weeks) {
-      return {
-        label: level.durationText || "Individualized pace",
-        note: "Paced with your teacher based on personal progress",
-        lessonsPerWeek: fastPace || "2x / week (standard pace)",
-      };
+    if (!level || !level.weeks) {
+      return { label: "Individualized pace", note: "Planned with your teacher around your own progress", lessonsPerWeek: fastPace || "2x / week (standard pace)" };
     }
-    const label = level.weeks % 4.345 < 1 || level.weeks < 14
-      ? `${level.weeks} weeks`
-      : `${Math.round(level.weeks / 4.345)} months`;
-    return {
-      label,
-      note: `${level.lessons || Math.round(level.weeks * 2)} lessons to complete this level`,
-      lessonsPerWeek: fastPace || "2x / week (standard pace)",
-    };
-  },
-  finalizeResult({ program, audience, path, terminalOutcome }) {
-    const answerLog = [];
-    let totalEarned = 0, totalMax = 0;
-    path.forEach(block => {
-      block.answers.forEach(a => {
-        const skill = a.question.skillOverride || block.skill;
-        answerLog.push({ skill, earned: a.earned, max: a.max });
-        totalEarned += a.earned;
-        totalMax += a.max;
-      });
+    const label = level.weeks < 14 ? level.weeks + " weeks" : Math.round(level.weeks / 4.345) + " months";
+    return { label, note: (level.lessons || Math.round(level.weeks * 2)) + " lessons to complete this level", lessonsPerWeek: fastPace || "2x / week (standard pace)" };
+  }
+
+  function listLevels(nums) {
+    if (!nums.length) return "";
+    if (nums.length === 1) return "Level " + nums[0];
+    return "Levels " + nums.slice(0, -1).join(", ") + " and " + nums[nums.length - 1];
+  }
+
+  function finalizePlacement(session, program, track) {
+    const ids = session.levelIds;
+    const min = ids[0], max = ids[ids.length - 1];
+    const results = session.levelResults.slice().sort((a, b) => a.level - b.level);
+    const passedLevels = results.filter(r => r.passed).map(r => r.level);
+    const failedLevels = results.filter(r => !r.passed).map(r => r.level);
+    const highestMastered = passedLevels.length ? Math.max(...passedLevels) : null;
+
+    let recommendedId;
+    if (CONFIG.PLACEMENT_MODE === "highestMastered") {
+      recommendedId = highestMastered === null ? min : highestMastered;
+    } else {
+      recommendedId = highestMastered === null ? min : ids[Math.min(ids.indexOf(highestMastered) + 1, ids.length - 1)];
+    }
+
+    const recommended = levelInfo(program, session.audience, recommendedId);
+    const mastered = highestMastered === null ? null : levelInfo(program, session.audience, highestMastered);
+    const levelScores = results.map(r => {
+      const info = levelInfo(program, session.audience, r.level);
+      const bank = bankOf(program, session.audience, r.level);
+      return { level: r.level, name: info ? info.name : "Level " + r.level, focus: bank ? bank.focus : "", correct: r.earned, total: r.max, pct: r.pct, passed: r.passed };
     });
-    const overallPct = Scoring.pct(totalEarned, totalMax);
-    const levels = program.levelsByAudience[audience];
-    const bands = program.placementBandsByAudience[audience];
-    const levelId = Scoring.pickLevelFromBands(bands, overallPct);
-    const level = levels.find(l => l.id === levelId) || levels[0];
-    const sortedLevels = [...levels].sort((a, b) => a.id - b.id);
-    const levelPosition = sortedLevels.findIndex(l => l.id === level.id) + 1;
-    const skillAgg = Scoring.aggregateSkills(answerLog);
-    const { strengths, weaknesses } = Scoring.buildStrengthsWeaknesses(skillAgg);
-    const duration = Scoring.estimateDuration(level, program);
+
+    const skills = aggregateSkills(results);
+    const sw = buildStrengthsWeaknesses(skills);
+    const duration = estimateDuration(recommended, program);
+
+    let summary;
+    if (!passedLevels.length) {
+      summary = "You are all set to begin at " + (recommended ? recommended.name : "Level " + recommendedId) + ". Starting here builds the foundations properly, and you will move up quickly once they are solid.";
+    } else if (highestMastered === max && recommendedId === max) {
+      summary = "You showed a strong command of " + listLevels(passedLevels) + ", including the highest level in this program. You are recommended to begin at " + (recommended ? recommended.name : "Level " + recommendedId) + ".";
+    } else {
+      summary = "Based on your assessment, you demonstrated mastery of " + listLevels(passedLevels) + ". You are therefore recommended to begin at Level " + recommendedId + (recommended ? " — " + recommended.name : "") + ".";
+    }
+
+    const nextStep = "Share these results with Fosselat Academy to enrol in " + (recommended ? recommended.name : "Level " + recommendedId) + " of " + program.label + ". No further testing is needed — your placement is complete.";
+
+    const claimOption = (selfReportOf(program, session.audience).options || []).find(o => o.claimLevel === session.claimLevel);
+
     return {
-      programId: program.id,
-      programLabel: program.label,
-      level,
-      levelPosition,
-      totalLevels: sortedLevels.length,
-      overallPct,
-      totalEarned,
-      totalMax,
-      skillAgg,
-      strengths,
-      weaknesses,
-      duration,
-      blocksVisited: path.map(p => p.blockName),
+      audience: session.audience,
+      audienceLabel: session.audience === "kids" ? "Kids" : "Adults",
+      trackId: track ? track.id : session.trackId,
+      trackLabel: track ? track.label : session.trackId,
+      programId: program.id, programLabel: program.label,
+      claimLevel: session.claimLevel,
+      claimLabel: claimOption ? claimOption.label : "",
+      recommendedLevel: recommended, recommendedLevelId: recommendedId,
+      recommendedPosition: ids.indexOf(recommendedId) + 1,
+      totalLevels: ids.length,
+      highestMasteredLevel: mastered, highestMasteredId: highestMastered,
+      levelsPassed: passedLevels, levelsNotPassed: failedLevels,
+      levelScores, skills,
+      strengths: sw.strengths, weaknesses: sw.weaknesses,
+      duration, summary, nextStep,
+      masteryThreshold: CONFIG.MASTERY_THRESHOLD,
     };
   }
-};
 
+  function rehydrate(session, program) {
+    if (!session || session.v !== 2) return null;
+    const ids = levelIdsOf(program, session.audience);
+    if (!ids.length) return null;
+    session.levelIds = ids;
+    session.levelResults = (session.levelResults || []).filter(r => ids.indexOf(r.level) !== -1 && Array.isArray(r.answers));
+    session.levelResults.forEach(r => {
+      r.answers = r.answers.filter(a => questionById(program, session.audience, a.id));
+      r.earned = r.answers.reduce((s, a) => s + (a.earned || 0), 0);
+      r.max = r.answers.reduce((s, a) => s + (a.max || 0), 0);
+      r.pct = pct(r.earned, r.max);
+      r.passed = isMastered(r.pct);
+    });
+    session.order = (session.order || []).filter(l => ids.indexOf(l) !== -1);
+    session.askedIds = (session.askedIds || []).filter(id => questionById(program, session.audience, id));
+    if (session.phase === "testing") {
+      if (ids.indexOf(session.currentLevel) === -1) return null;
+      session.slots = (session.slots || []).filter(s => questionById(program, session.audience, s.id));
+      if (!session.slots.length) loadLevelQuestions(session, program, session.currentLevel);
+      session.index = Math.max(0, Math.min(session.index || 0, session.slots.length - 1));
+    }
+    if (session.phase === "selfReport") { session.slots = []; session.index = 0; }
+    return session;
+  }
+
+  function progressFraction(session) {
+    const total = session.levelIds.length;
+    if (session.phase === "selfReport") return 0.04;
+    if (session.phase === "complete") return 1;
+    const done = session.levelResults.length;
+    const within = session.slots.length ? session.index / session.slots.length : 0;
+    const expected = Math.min(total, Math.max(2, done + 1));
+    return Math.min(0.96, (done + within) / (expected + 0.35));
+  }
+
+  return {
+    CONFIG, configure, levelsOf, levelIdsOf, levelInfo, bankOf, questionById, selfReportOf,
+    startPlacement, getStartingLevel, applySelfReport, loadLevelQuestions, serveCount,
+    selectLevelQuestions, present, currentSlot, currentQuestion,
+    answerCurrent, goNext, goBack, canGoBack,
+    evaluateLevel, completeLevel, finalizePlacement,
+    gradeSlot, pct, isMastered, aggregateSkills, buildStrengthsWeaknesses,
+    estimateDuration, rehydrate, progressFraction,
+  };
+})();
+
+/* ──────────────────────────────────────────────────────────────────────
+   Main Component
+   ────────────────────────────────────────────────────────────────────── */
 export default function PlacementTest() {
   const [data, setData] = useState(null);
   const [screen, setScreen] = useState('welcome');
-  const [state, setState] = useState({
-    audience: null,
-    track: null,
-    program: null,
-    blockId: null,
-    path: [],
-    currentBlockQuestions: [],
-    currentBlockAnswers: [],
-    currentQIndex: 0,
-  });
-  const [resumeData, setResumeData] = useState(null);
+  const [track, setTrack] = useState(null);
+  const [program, setProgram] = useState(null);
+  const [session, setSession] = useState(null);
+  const [pendingAudience, setPendingAudience] = useState(null);
   const [resultData, setResultData] = useState(null);
-  const [progressVisible, setProgressVisible] = useState(false);
+  const [resumeData, setResumeData] = useState(null);
   const [progressPct, setProgressPct] = useState(0);
   const [progressLabel, setProgressLabel] = useState("");
+  const [progressVisible, setProgressVisible] = useState(false);
+  const [stageInfo, setStageInfo] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [sendingEmail, setSendingEmail] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState(null);
+
+  // User info state
+  const [userInfo, setUserInfo] = useState({ name: '', age: '', email: '' });
+  const [userInfoErrors, setUserInfoErrors] = useState({});
+
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    if (resumeData) return;
-    if (!data) return;
-    const trackParam = searchParams.get('track');
-    const programParam = searchParams.get('program');
-    const audienceParam = searchParams.get('audience');
-    
-    if (trackParam) {
-      const track = data.tracks.find(t => t.id === trackParam);
-      if (track) {
-        document.documentElement.style.setProperty('--accent', ACCENTS[track.id] || 'var(--color-gold)');
-        document.documentElement.style.setProperty('--accent-dim', ACCENTS[track.id] || 'var(--color-gold-dim)');
-        
-        if (programParam) {
-          const program = track.programs.find(p => p.id === programParam);
-          if (program && audienceParam) {
-            // Direct to test intro with everything selected
-            setState(prev => ({ ...prev, audience: audienceParam, track, program }));
-            setScreen('testintro');
-            return;
-          } else if (program) {
-            // Have track+program, need audience
-            setState(prev => ({ ...prev, track, program }));
-            setScreen('audience'); // Ask audience first, but we'll need to handle this
-            return;
-          }
-        }
-        if (audienceParam) {
-          // Have track+audience, need program
-          setState(prev => ({ ...prev, audience: audienceParam, track }));
-          setScreen('program');
-          return;
-        }
-        // Just track - go to audience selection
-        setState(prev => ({ ...prev, track }));
-        setScreen('audience');
-      }
-    }
-  }, [data, searchParams, resumeData]);
+  const sessionRef = useRef(session);
+  useEffect(() => { sessionRef.current = session; }, [session]);
 
+  // ─── Data loading ───
   useEffect(() => {
     fetch('/questions.json')
       .then(r => r.json())
       .then(d => {
+        Placement.configure(d.meta);
         setData(d);
-        checkResume(d);
       })
       .catch(e => console.error("Error loading questions:", e));
   }, []);
 
-  // --- Persistence ---
+  // ─── Resume check ───
+  useEffect(() => {
+    if (!data) return;
+    const found = loadSnapshot(data);
+    if (found) setResumeData(found);
+  }, [data]);
+
+  // ─── URL params deep-linking ───
+  useEffect(() => {
+    if (!data || resumeData) return;
+    const trackParam = searchParams.get('track');
+    const programParam = searchParams.get('program');
+    const audienceParam = searchParams.get('audience');
+    if (!trackParam) return;
+    const t = data.tracks.find(tr => tr.id === trackParam);
+    if (!t) return;
+    setAccent(t.id);
+    setTrack(t);
+    if (audienceParam) setPendingAudience(audienceParam);
+    if (programParam) {
+      const p = t.programs.find(pr => pr.id === programParam);
+      if (p) {
+        setProgram(p);
+      }
+    }
+    setScreen('userinfo');
+  }, [data, searchParams, resumeData]);
+
+  // ─── LocalStorage ───
   function safeStorage() {
     try {
-      const testKey = "__test__";
-      window.localStorage.setItem(testKey, "1");
-      window.localStorage.removeItem(testKey);
+      const k = "__fosselat_probe__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
       return window.localStorage;
-    } catch (e) {
-      return null;
-    }
+    } catch { return null; }
   }
 
-  function saveProgress(currentState) {
-    const storage = safeStorage();
-    if (!storage || !currentState.program) return;
-    try {
-      const snapshot = {
-        v: 1,
-        audience: currentState.audience,
-        trackId: currentState.track.id,
-        programId: currentState.program.id,
-        blockId: currentState.blockId,
-        path: currentState.path.map(b => ({
-          blockId: b.blockId,
-          answers: b.answers.map(a => ({ qid: a.question.id, response: a.response }))
-        })),
-        currentBlockAnswers: currentState.currentBlockAnswers.map(a => ({ qid: a.question.id, response: a.response })),
-        currentQIndex: currentState.currentQIndex,
-        savedAt: Date.now(),
-      };
-      storage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
-    } catch (e) { }
+  function saveProgress(sess) {
+    const s = safeStorage();
+    if (!s || !sess) return;
+    try { s.setItem(STORAGE_KEY, JSON.stringify({ v: 2, savedAt: Date.now(), session: sess })); }
+    catch { /* quota */ }
   }
 
   function clearProgress() {
-    const storage = safeStorage();
-    if (!storage) return;
-    try { storage.removeItem(STORAGE_KEY); } catch (e) { }
+    const s = safeStorage();
+    if (!s) return;
+    try { s.removeItem(STORAGE_KEY); LEGACY_KEYS.forEach(k => s.removeItem(k)); } catch {}
   }
 
-  function checkResume(appData) {
-    const storage = safeStorage();
-    if (!storage) return;
+  function loadSnapshot(appData) {
+    const s = safeStorage();
+    if (!s) return null;
     try {
-      const raw = storage.getItem(STORAGE_KEY);
-      if (!raw) return;
+      const raw = s.getItem(STORAGE_KEY);
+      if (!raw) return null;
       const snap = JSON.parse(raw);
-      if (!snap || snap.v !== 1 || !snap.trackId || !snap.programId || !snap.audience || !snap.blockId) return;
-      if (!snap.savedAt || Date.now() - snap.savedAt > MAX_SAVE_AGE_MS) return;
-      
-      const track = appData.tracks.find(t => t.id === snap.trackId);
-      const program = track && track.programs.find(p => p.id === snap.programId);
-      if (!track || !program || !program.blocks[snap.blockId]) return;
-      
-      setResumeData({ snap, track, program });
-    } catch (e) { }
+      if (!snap || snap.v !== 2 || !snap.session) return null;
+      if (!snap.savedAt || Date.now() - snap.savedAt > MAX_SAVE_AGE_MS) return null;
+      const sess = snap.session;
+      const t = appData.tracks.find(tr => tr.id === sess.trackId);
+      const p = t && t.programs.find(pr => pr.id === sess.programId);
+      if (!t || !p || (sess.audience !== "kids" && sess.audience !== "adults")) return null;
+      const fixed = Placement.rehydrate(sess, p);
+      if (!fixed) return null;
+      return { track: t, program: p, session: fixed };
+    } catch { return null; }
   }
 
-  function findQuestion(program, blockId, qid) {
-    const block = program.blocks[blockId];
-    return block && block.questions.find(q => q.id === qid);
+  function setAccent(trackId) {
+    document.documentElement.style.setProperty("--accent", ACCENTS[trackId] || "var(--color-gold)");
+    document.documentElement.style.setProperty("--accent-dim", ACCENTS[trackId] || "var(--color-gold-dim)");
   }
 
-  function rebuildAnswers(program, blockId, plainAnswers) {
-    return plainAnswers
-      .map(a => {
-        const q = findQuestion(program, blockId, a.qid);
-        if (!q) return null;
-        const g = Scoring.gradeAnswer(q, a.response);
-        return { question: q, response: a.response, earned: g.earned, max: g.max };
-      })
-      .filter(Boolean);
+  // ─── User info validation ───
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function doResume() {
-    if (!resumeData) return;
-    const { snap, track, program } = resumeData;
-    
-    document.documentElement.style.setProperty("--accent", ACCENTS[track.id] || "var(--color-gold)");
-    document.documentElement.style.setProperty("--accent-dim", ACCENTS[track.id] || "var(--color-gold-dim)");
-
-    const rebuiltPath = snap.path.map(b => {
-      const block = program.blocks[b.blockId];
-      return {
-        blockId: b.blockId,
-        blockName: block.name,
-        skill: block.skill,
-        difficulty: block.difficulty,
-        answers: rebuildAnswers(program, b.blockId, b.answers),
-      };
-    });
-
-    const currentBlock = program.blocks[snap.blockId];
-    const filteredQ = Scoring.filterQuestionsForAudience(currentBlock.questions, snap.audience);
-    const currentAnswers = rebuildAnswers(program, snap.blockId, snap.currentBlockAnswers);
-    
-    const newState = {
-      audience: snap.audience,
-      track: track,
-      program: program,
-      blockId: snap.blockId,
-      path: rebuiltPath,
-      currentBlockQuestions: filteredQ,
-      currentBlockAnswers: currentAnswers,
-      currentQIndex: Math.min(snap.currentQIndex, filteredQ.length),
-    };
-    
-    setState(newState);
-    setResumeData(null);
-    runBlockLoop(newState);
+  function validateUserInfo() {
+    const errors = {};
+    if (!userInfo.name.trim()) errors.name = "Please enter your name";
+    if (!userInfo.age.trim()) errors.age = "Please enter your age";
+    else if (isNaN(Number(userInfo.age)) || Number(userInfo.age) < 3 || Number(userInfo.age) > 100) errors.age = "Please enter a valid age (3-100)";
+    if (!userInfo.email.trim()) errors.email = "Please enter your email";
+    else if (!validateEmail(userInfo.email)) errors.email = "Please enter a valid email address";
+    setUserInfoErrors(errors);
+    return Object.keys(errors).length === 0;
   }
 
-  function discardResume() {
-    clearProgress();
-    setResumeData(null);
-  }
-
-  // --- Flow Actions ---
-  function resetAll() {
-    clearProgress();
-    setState({
-      audience: null, track: null, program: null, blockId: null,
-      path: [], currentBlockQuestions: [], currentBlockAnswers: [], currentQIndex: 0
-    });
-    setResultData(null);
-    setProgressVisible(false);
-    document.documentElement.style.setProperty("--accent", "var(--color-gold)");
-    document.documentElement.style.setProperty("--accent-dim", "var(--color-gold-dim)");
-    checkResume(data);
-    setScreen('welcome');
-  }
-
-  function updateProgressUI(st) {
-    if (!st.program || !st.blockId) return;
-    const order = Object.keys(st.program.blocks);
-    const idx = order.indexOf(st.blockId);
-    const total = order.length;
-    const withinFrac = st.currentBlockQuestions.length ? st.currentQIndex / st.currentBlockQuestions.length : 0;
-    const pct = Math.min(0.97, (idx + withinFrac) / total);
-    const label = `Stage ${idx + 1} of ${total} · Question ${st.currentQIndex + 1} of ${st.currentBlockQuestions.length}`;
-    setProgressPct(pct);
+  // ─── Progress ───
+  function updateProgressUI(sess) {
+    const s = sess || sessionRef.current;
+    if (!s) return;
+    const total = s.slots.length;
+    let label;
+    if (s.phase === "selfReport") {
+      label = "Getting started";
+    } else {
+      const setNo = s.order.length + (s.order.indexOf(s.currentLevel) === -1 ? 1 : 0);
+      label = `Set ${Math.max(1, setNo)} · Question ${Math.min(s.index + 1, total)} of ${total}`;
+    }
+    setProgressPct(Placement.progressFraction(s));
     setProgressLabel(label);
     setProgressVisible(true);
   }
 
-  function runBlockLoop(st) {
-    if (st.currentQIndex >= st.currentBlockQuestions.length) {
-      finishBlock(st);
+  function focusLine(sess, prog) {
+    const info = Placement.levelInfo(prog, sess.audience, sess.currentLevel);
+    const bank = Placement.bankOf(prog, sess.audience, sess.currentLevel);
+    const name = info ? info.name : "";
+    const focus = bank ? bank.focus : "";
+    if (!name) return focus;
+    if (!focus) return name;
+    const norm = x => x.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const a = norm(name), b = norm(focus);
+    const shorter = a.length <= b.length ? a : b;
+    const longer = a.length <= b.length ? b : a;
+    if (longer.indexOf(shorter.slice(0, 8)) !== -1) return name;
+    return name + " — " + focus;
+  }
+
+  // ─── Flow actions ───
+  function resetAll() {
+    clearProgress();
+    setTrack(null); setProgram(null); setSession(null);
+    setPendingAudience(null); setResultData(null); setStageInfo(null);
+    setProgressVisible(false); setSelected(null);
+    setEmailSent(false); setEmailError(null);
+    setAccent(null);
+    const found = data ? loadSnapshot(data) : null;
+    setResumeData(found);
+    setScreen('welcome');
+  }
+
+  function doResume() {
+    if (!resumeData) return;
+    const { track: t, program: p, session: s } = resumeData;
+    setTrack(t); setProgram(p); setSession(s);
+    setPendingAudience(s.audience);
+    setAccent(t.id);
+    setResumeData(null);
+    if (s.phase === "complete") {
+      const result = Placement.finalizePlacement(s, p, t);
+      clearProgress();
+      setResultData(result);
+      setProgressVisible(false);
+      setScreen('results');
+    } else if (s.phase === "selfReport") {
+      updateProgressUI(s);
+      setScreen('selfreport');
     } else {
-      updateProgressUI(st);
-      setState({ ...st });
+      updateProgressUI(s);
       setScreen('question');
     }
   }
 
-  function startTest(prog = state.program, aud = state.audience, trk = state.track) {
-    clearProgress();
-    const st = {
-      ...state,
-      program: prog,
-      audience: aud,
-      track: trk,
-      blockId: prog.startBlock,
-      path: [],
-    };
-    const block = prog.blocks[prog.startBlock];
-    st.currentBlockQuestions = Scoring.filterQuestionsForAudience(block.questions, aud);
-    st.currentBlockAnswers = [];
-    st.currentQIndex = 0;
-    runBlockLoop(st);
-  }
+  function handleUserInfoSubmit() {
+    if (!validateUserInfo()) return;
+    const ageNum = parseInt(userInfo.age, 10);
+    const determinedAudience = ageNum < 16 ? 'kids' : 'adults';
+    setPendingAudience(determinedAudience);
 
-  function onAnswer(response) {
-    const q = state.currentBlockQuestions[state.currentQIndex];
-    const g = Scoring.gradeAnswer(q, response);
-    const newAnswers = [...state.currentBlockAnswers, { question: q, response, earned: g.earned, max: g.max }];
-    
-    const st = {
-      ...state,
-      currentBlockAnswers: newAnswers,
-      currentQIndex: state.currentQIndex + 1
-    };
-    saveProgress(st);
-    runBlockLoop(st);
-  }
-
-  function finishBlock(st) {
-    const block = st.program.blocks[st.blockId];
-    const earned = st.currentBlockAnswers.reduce((s, a) => s + a.earned, 0);
-    const max = st.currentBlockAnswers.reduce((s, a) => s + a.max, 0);
-    const blockPct = Scoring.pct(earned, max);
-
-    const newPath = [...st.path, {
-      blockId: st.blockId,
-      blockName: block.name,
-      skill: block.skill,
-      difficulty: block.difficulty,
-      answers: st.currentBlockAnswers,
-    }];
-    
-    const outcome = Scoring.routeNext(block, blockPct);
-    
-    if (outcome.terminal) {
-      finalize(st, newPath, outcome);
+    if (!track) {
+      setScreen('track');
+    } else if (!program) {
+      setScreen('program');
     } else {
-      const nextBlockId = outcome.next;
-      const nextBlock = st.program.blocks[nextBlockId];
-      const nextSt = {
-        ...st,
-        path: newPath,
-        blockId: nextBlockId,
-        currentBlockQuestions: Scoring.filterQuestionsForAudience(nextBlock.questions, st.audience),
-        currentBlockAnswers: [],
-        currentQIndex: 0
-      };
-      saveProgress(nextSt);
-      runBlockLoop(nextSt);
+      setScreen('testintro');
     }
   }
 
-  function finalize(st, finalPath, terminalOutcome) {
+  function handleTrackSelect(t) {
+    setTrack(t);
+    setAccent(t.id);
+    if (!program) { setScreen('program'); }
+    else { setScreen('testintro'); }
+  }
+
+  function handleProgramSelect(p) {
+    setProgram(p);
+    setScreen('testintro');
+  }
+
+  function startTest() {
+    if (!track || !program || !pendingAudience) { resetAll(); return; }
     clearProgress();
-    const res = Scoring.finalizeResult({
-      program: st.program,
-      audience: st.audience,
-      path: finalPath,
-      terminalOutcome,
+    const sess = Placement.startPlacement(track.id, program.id, pendingAudience, program);
+    setSession(sess);
+    saveProgress(sess);
+    updateProgressUI(sess);
+    setScreen('selfreport');
+  }
+
+  function handleSelfReport(idx) {
+    const sr = Placement.selfReportOf(program, pendingAudience);
+    const claim = sr.options[idx] ? sr.options[idx].claimLevel : session.levelIds[0];
+    const updated = { ...session };
+    Placement.applySelfReport(updated, program, claim);
+    setSession(updated);
+    saveProgress(updated);
+    updateProgressUI(updated);
+
+    setStageInfo({
+      eyebrow: "Thanks!",
+      title: "Let's start here.",
+      message: "Answer a few short questions. If you do well, we'll move you up to the next level automatically.",
+      focus: focusLine(updated, program),
+      cta: "Start",
     });
-    setResultData(res);
-    setState({ ...st, path: finalPath });
+    setScreen('stage');
+  }
+
+  function askQuestion() {
+    const sess = sessionRef.current;
+    if (!sess || sess.phase === "complete") { finalize(sess); return; }
+    const q = Placement.currentQuestion(sess, program);
+    if (!q) { handleLevelComplete(); return; }
+    setSelected(Placement.currentSlot(sess)?.response ?? null);
+    updateProgressUI(sess);
+    setScreen('question');
+  }
+
+  function submitAnswer(response) {
+    const sess = { ...sessionRef.current };
+    Placement.answerCurrent(sess, response);
+    const levelDone = Placement.goNext(sess);
+    setSession(sess);
+    saveProgress(sess);
+    if (levelDone) {
+      handleLevelCompleteWith(sess);
+    } else {
+      setSelected(null);
+      updateProgressUI(sess);
+    }
+  }
+
+  function handleLevelComplete() {
+    handleLevelCompleteWith(sessionRef.current);
+  }
+
+  function handleLevelCompleteWith(sess) {
+    const outcome = Placement.completeLevel(sess, program);
+    setSession({ ...sess });
+    saveProgress(sess);
+
+    if (outcome.done) {
+      finalize(sess);
+      return;
+    }
+
+    updateProgressUI(sess);
+    const focus = focusLine(sess, program);
+
+    const up = [
+      { eyebrow: "Well done!", title: "Great job!", message: "Let's see if you're ready for the next level." },
+      { eyebrow: "Excellent!", title: "Nicely done.", message: "You're doing well — let's try a few more questions." },
+      { eyebrow: "Great work!", title: "That was strong.", message: "Let's check the next level and see how far you can go." },
+    ];
+    const down = [
+      { eyebrow: "Thank you!", title: "Let's try something else.", message: "Those were a little tricky, so here are some questions that fit you better." },
+      { eyebrow: "No problem!", title: "Let's adjust.", message: "We'll ask a few different questions so we can find the best starting point for you." },
+    ];
+    const pool = outcome.passed ? up : down;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+
+    setStageInfo({ ...pick, focus, cta: "Continue" });
+    setScreen('stage');
+  }
+
+  function goBackQuestion() {
+    const sess = { ...sessionRef.current };
+    Placement.goBack(sess);
+    setSession(sess);
+    saveProgress(sess);
+    const slot = Placement.currentSlot(sess);
+    setSelected(slot?.response ?? null);
+    updateProgressUI(sess);
+  }
+
+  function finalize(sess) {
+    const s = sess || sessionRef.current;
+    const result = Placement.finalizePlacement(s, program, track);
+    clearProgress();
+    setResultData(result);
     setProgressVisible(false);
     setScreen('results');
   }
 
-  function handleAudienceSelect(aud) {
-    setState({ ...state, audience: aud });
-    setScreen('track');
+  // ─── Send to Academy ───
+  async function sendToAcademy() {
+    if (!resultData || !userInfo.email) return;
+    setSendingEmail(true);
+    setEmailError(null);
+    try {
+      const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const res = await fetch(`${API}/placement/send-results`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userInfo: { name: userInfo.name, age: userInfo.age, email: userInfo.email },
+          results: {
+            trackLabel: resultData.trackLabel,
+            programLabel: resultData.programLabel,
+            audienceLabel: resultData.audienceLabel,
+            recommendedLevel: resultData.recommendedLevel?.name || `Level ${resultData.recommendedLevelId}`,
+            recommendedLevelId: resultData.recommendedLevelId,
+            totalLevels: resultData.totalLevels,
+            score: Math.round(resultData.levelScores.reduce((a, l) => a + l.pct, 0) / (resultData.levelScores.length || 1) * 100),
+            levelScores: resultData.levelScores,
+            strengths: resultData.strengths.map(s => ({ skill: s.skill, pct: Math.round(s.pct * 100) })),
+            weaknesses: resultData.weaknesses.map(s => ({ skill: s.skill, pct: Math.round(s.pct * 100) })),
+            duration: resultData.duration,
+            summary: resultData.summary,
+            nextStep: resultData.nextStep,
+          },
+        }),
+      });
+      const json = await res.json();
+      if (json.success) { setEmailSent(true); }
+      else { setEmailError(json.message || 'Failed to send results'); }
+    } catch (err) {
+      setEmailError('Network error. Please try again.');
+    } finally {
+      setSendingEmail(false);
+    }
   }
 
-  function handleTrackSelect(trk) {
-    document.documentElement.style.setProperty("--accent", ACCENTS[trk.id] || "var(--color-gold)");
-    document.documentElement.style.setProperty("--accent-dim", ACCENTS[trk.id] || "var(--color-gold-dim)");
-    setState({ ...state, track: trk, program: null });
-    setScreen('program');
-  }
 
-  function handleProgramSelect(prog) {
-    setState({ ...state, program: prog });
-    setScreen('testintro');
-  }
-
-  // --- Render Helpers ---
+  // ─── Render Screens ───
   const renderWelcome = () => (
     <div className="pt-screen">
       <div className="pt-card pt-card-hero">
         <h1 className="pt-display">Determine your path.</h1>
         <p className="pt-lede">Our adaptive assessment finds exactly where you should start in our curriculum.</p>
-        
         {resumeData && (
           <div className="pt-resume-banner">
-            <p className="pt-resume-text">You have an assessment in progress.</p>
-            <p className="pt-resume-summary">
-              {resumeData.track.label} — {resumeData.program.label} ({resumeData.snap.audience === "kids" ? "Kids" : "Adults"})
-            </p>
-            <div className="pt-resume-actions">
+            <p>You have a saved session: <strong>{resumeData.track.label} — {resumeData.program.label}</strong></p>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
               <button className="pt-btn pt-btn-primary" onClick={doResume}>Resume</button>
-              <button className="pt-btn pt-btn-ghost" onClick={discardResume}>Start Fresh Instead</button>
+              <button className="pt-btn pt-btn-ghost" onClick={() => { clearProgress(); setResumeData(null); }}>Start Fresh Instead</button>
             </div>
           </div>
         )}
-        
-        <button className="pt-btn pt-btn-primary pt-btn-lg" onClick={() => setScreen('audience')} style={{ marginTop: '28px', padding: '16px 30px', fontSize: '1rem' }}>Begin Assessment</button>
+        <button className="pt-btn pt-btn-primary pt-btn-lg" onClick={() => setScreen('userinfo')}>
+          Begin Assessment
+        </button>
       </div>
     </div>
   );
 
-  const renderAudience = () => (
+  const renderUserInfo = () => (
     <div className="pt-screen">
-      <div className="pt-step-head">
-        <div className="pt-eyebrow">Step 1</div>
-        <h1 className="pt-display-sm">Who is taking the test?</h1>
-      </div>
-      <div className="pt-choice-grid pt-choice-grid-2">
-        <button className="pt-choice-card" onClick={() => handleAudienceSelect('kids')}>
-          <span className="cc-icon">K</span>
-          <span className="cc-title">Kids</span>
-          <span className="cc-desc">Ages roughly 5–12. Simpler wording, shorter tasks.</span>
-        </button>
-        <button className="pt-choice-card" onClick={() => handleAudienceSelect('adults')}>
-          <span className="cc-icon">A</span>
-          <span className="cc-title">Adults</span>
-          <span className="cc-desc">Teens and adults. Full-length assessment.</span>
-        </button>
+      <div className="pt-card" style={{ maxWidth: 480 }}>
+        <p className="pt-step-label">Before we begin</p>
+        <h2 className="pt-card-title">Tell us about yourself</h2>
+        <div className="pt-userinfo-form">
+          <div className="pt-form-group">
+            <label>Full Name <span style={{ color: 'var(--color-gold)' }}>*</span></label>
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              value={userInfo.name}
+              onChange={e => setUserInfo({ ...userInfo, name: e.target.value })}
+              className={userInfoErrors.name ? 'pt-input-error' : ''}
+              required
+            />
+            {userInfoErrors.name && <span className="pt-error-text">{userInfoErrors.name}</span>}
+          </div>
+          <div className="pt-form-group">
+            <label>Age <span style={{ color: 'var(--color-gold)' }}>*</span></label>
+            <input
+              type="number"
+              placeholder="Enter your age"
+              value={userInfo.age}
+              onChange={e => setUserInfo({ ...userInfo, age: e.target.value })}
+              className={userInfoErrors.age ? 'pt-input-error' : ''}
+              min="3" max="100"
+              required
+            />
+            {userInfoErrors.age && <span className="pt-error-text">{userInfoErrors.age}</span>}
+          </div>
+          <div className="pt-form-group">
+            <label>Email <span style={{ color: 'var(--color-gold)' }}>*</span></label>
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              value={userInfo.email}
+              onChange={e => setUserInfo({ ...userInfo, email: e.target.value })}
+              className={userInfoErrors.email ? 'pt-input-error' : ''}
+              required
+            />
+            {userInfoErrors.email && <span className="pt-error-text">{userInfoErrors.email}</span>}
+          </div>
+          <button
+            className="pt-btn pt-btn-primary pt-btn-lg"
+            onClick={handleUserInfoSubmit}
+            style={{ marginTop: '16px', width: '100%' }}
+          >
+            Continue
+          </button>
+        </div>
       </div>
     </div>
   );
 
   const renderTrack = () => (
     <div className="pt-screen">
+      <div style={{ width: '100%', marginBottom: '20px' }}>
+        <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => setScreen('userinfo')}>← Back</button>
+      </div>
       <div className="pt-step-head">
-        <div className="pt-eyebrow">Step 2</div>
+        <div className="pt-eyebrow">Step 1</div>
         <h1 className="pt-display-sm">Choose a subject track</h1>
       </div>
       <div className="pt-choice-grid pt-choice-grid-3">
@@ -542,15 +867,20 @@ export default function PlacementTest() {
     </div>
   );
 
-  const renderProgram = () => (
-    <div className="pt-screen">
-      <div className="pt-step-head">
-        <div className="pt-eyebrow">Step 3</div>
-        <h1 className="pt-display-sm">Choose a program — {state.track?.label}</h1>
-      </div>
+  const renderProgram = () => {
+    const trackParam = searchParams.get('track');
+    return (
+      <div className="pt-screen">
+        <div style={{ width: '100%', marginBottom: '20px' }}>
+          <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => trackParam ? setScreen('userinfo') : setScreen('track')}>← Back</button>
+        </div>
+        <div className="pt-step-head">
+          <div className="pt-eyebrow">Step 2</div>
+          <h1 className="pt-display-sm">Choose a program — {track?.label}</h1>
+        </div>
       <div className="pt-choice-list">
-        {state.track?.programs.map(p => (
-          <button key={p.id} className="pt-choice-row" style={{ '--card-accent': ACCENTS[state.track.id] }} onClick={() => handleProgramSelect(p)}>
+        {track?.programs.map(p => (
+          <button key={p.id} className="pt-choice-row" style={{ '--card-accent': ACCENTS[track.id] }} onClick={() => handleProgramSelect(p)}>
             <span>
               <span className="cr-title">{p.label}</span>
               <span className="cr-desc">{p.description}</span>
@@ -558,62 +888,191 @@ export default function PlacementTest() {
             <span className="cr-arrow">→</span>
           </button>
         ))}
-      </div>
     </div>
-  );
+      </div>
+    );
+  };
 
   const renderTestIntro = () => {
-    if (!state.program) return null;
-    const allBlocks = Object.values(state.program.blocks);
-    const minQ = allBlocks[0].questions.length;
-    const maxQ = allBlocks.reduce((s, b) => s + b.questions.length, 0);
-    const minMin = Math.max(2, Math.round((minQ * 35) / 60));
-    const maxMin = Math.max(minMin + 3, Math.round((maxQ * 40) / 60));
-    
+    const qpl = Placement.serveCount(pendingAudience);
+    const levels = program ? Placement.levelsOf(program, pendingAudience) : [];
+    const minQ = 1 + qpl;
+    const maxQ = 1 + qpl * Math.min(levels.length, 4);
+    const hasProgramParam = searchParams.get('program');
+    const handleBack = () => {
+      if (hasProgramParam) setScreen('userinfo');
+      else setScreen('program');
+    };
     return (
       <div className="pt-screen">
-        <div className="pt-card pt-card-narrow">
-          <div className="pt-eyebrow">{state.track?.label} · {state.program.label}</div>
-          <h2 className="pt-display-sm">Ready when you are.</h2>
-          <p className="pt-lede">This assessment adapts as you go — strong answers move you ahead faster, so you won't repeat what you already know.</p>
+        <div style={{ width: '100%', maxWidth: 480, marginBottom: '20px' }}>
+          <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={handleBack}>← Back</button>
+        </div>
+        <div className="pt-card" style={{ maxWidth: 480 }}>
+          <p className="pt-step-label">{track?.label} · {program?.label}</p>
+          <h2 className="pt-card-title">Ready when you are.</h2>
+          <p className="pt-lede" style={{ fontSize: '0.95rem', marginBottom: '24px' }}>
+            A short adaptive test. Each level has its own small set of questions — the system adjusts as you go.
+          </p>
           <div className="pt-intro-stats">
             <div><dt>Questions</dt><dd>{minQ}–{maxQ}</dd></div>
-            <div><dt>Est. Time</dt><dd>{minMin}–{maxMin} min</dd></div>
-            <div><dt>Format</dt><dd>Adaptive</dd></div>
+            <div><dt>Est. Time</dt><dd>{Math.max(2, Math.round(minQ * 0.4))}–{Math.max(4, Math.round(maxQ * 0.5))} min</dd></div>
+            <div><dt>Choices</dt><dd>Multiple choice</dd></div>
           </div>
-          <button className="pt-btn pt-btn-primary pt-btn-block" style={{ marginTop: '20px' }} onClick={() => startTest()}>Start Test</button>
+          <button className="pt-btn pt-btn-primary pt-btn-block" onClick={startTest}>
+            Start Test
+          </button>
         </div>
+      </div>
+    );
+  };
+
+  const renderSelfReport = () => {
+    if (!session || !program || !pendingAudience) return null;
+    const sr = Placement.selfReportOf(program, pendingAudience);
+    if (!sr) return null;
+    return (
+      <div className="pt-screen">
+        <div className="pt-card" style={{ maxWidth: 540 }}>
+          <p className="pt-step-label">{track?.label} · {program?.label}</p>
+          <h2 className="pt-card-title" style={{ fontSize: '1.15rem' }}>{sr.prompt}</h2>
+          <div className="pt-program-list">
+            {sr.options.map((opt, idx) => (
+              <button key={idx} className="pt-choice-row" onClick={() => handleSelfReport(idx)}>
+                <span className="pt-choice-row-label">{opt.label}</span>
+                <span className="pt-choice-row-arrow">→</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderStage = () => {
+    if (!stageInfo) return null;
+    return (
+      <div className="pt-screen">
+        <div className="pt-card pt-card-hero" style={{ maxWidth: 500 }}>
+          <p className="pt-step-label">{stageInfo.eyebrow}</p>
+          <h2 className="pt-display" style={{ fontSize: '1.6rem' }}>{stageInfo.title}</h2>
+          <p className="pt-lede">{stageInfo.message}</p>
+          {stageInfo.focus && <p className="pt-stage-focus">{stageInfo.focus}</p>}
+          <button className="pt-btn pt-btn-primary pt-btn-lg" onClick={() => { setSelected(null); askQuestion(); }}>
+            {stageInfo.cta}
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const renderQuestion = () => {
+    if (!session || !program) return null;
+    const q = Placement.currentQuestion(session, program);
+    if (!q) return null;
+    const info = Placement.levelInfo(program, session.audience, session.currentLevel);
+    const bank = Placement.bankOf(program, session.audience, session.currentLevel);
+    const isLast = session.index === session.slots.length - 1;
+    const canBack = Placement.canGoBack(session);
+
+    return (
+      <div className="pt-screen">
+        <div className="pt-card pt-card-question" style={{ maxWidth: 600 }}>
+          <div className="pt-q-meta">
+            <span>{info?.name || ''}</span>
+            {bank?.focus && <span className="pt-q-meta-focus">{bank.focus}</span>}
+          </div>
+          <h3 className="pt-q-prompt">{q.prompt}</h3>
+          {q.arabic && (
+            <div className="pt-arabic-stimulus">
+              <p className="pt-arabic-text" dir="rtl" lang="ar">{q.arabic}</p>
+            </div>
+          )}
+          <div className={`pt-q-options${q.optionsArabic ? ' pt-options-arabic' : ''}`}>
+            {q.options.map((opt, idx) => (
+              <button
+                key={idx}
+                className={`pt-q-option${selected === idx ? ' selected' : ''}`}
+                onClick={() => setSelected(idx)}
+              >
+                <span className="pt-q-option-letter">{String.fromCharCode(65 + idx)}</span>
+                <span className={q.optionsArabic ? 'pt-option-arabic-text' : ''}>{opt}</span>
+              </button>
+            ))}
+          </div>
+          <div className="pt-q-actions">
+            {canBack && (
+              <button className="pt-btn pt-btn-ghost" onClick={goBackQuestion}>← Back</button>
+            )}
+            <button className="pt-btn pt-btn-ghost" onClick={() => { submitAnswer(null); setSelected(null); }}>
+              Skip
+            </button>
+            <button
+              className="pt-btn pt-btn-primary"
+              disabled={selected === null}
+              onClick={() => { submitAnswer(selected); setSelected(null); }}
+            >
+              {isLast ? 'Finish' : 'Continue'}
+            </button>
+          </div>
+        </div>
+        {progressVisible && (
+          <div className="pt-progress-bottom">
+            <div className="pt-progress-label">{progressLabel}</div>
+            <div className="pt-progress-track">
+              <div className="pt-progress-fill" style={{ width: `${Math.round(progressPct * 100)}%`, transition: 'width 0.5s ease' }} />
+            </div>
+          </div>
+        )}
       </div>
     );
   };
 
   const renderResults = () => {
     if (!resultData) return null;
-    const accent = ACCENTS[state.track.id] || "var(--color-gold)";
-    
+    const accent = ACCENTS[resultData.trackId] || "var(--color-gold)";
+
     return (
       <div className="pt-screen">
         <div className="pt-results-hero" style={{ '--card-accent': accent }}>
           <svg className="rh-motif" viewBox="0 0 100 100" aria-hidden="true">
-            <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7"/>
-            <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" transform="rotate(45 50 50)"/>
+            <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" />
+            <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" transform="rotate(45 50 50)" />
           </svg>
           <p className="pt-rh-eyebrow">Recommended Starting Level</p>
-          <p className="pt-rh-level-tag">Level {resultData.level.id} of {resultData.totalLevels}</p>
-          <h2 className="pt-rh-level">{resultData.level.name}</h2>
-          <p className="pt-rh-program">{state.track.label} — {resultData.programLabel}</p>
-          {resultData.level.desc && <p className="pt-rh-level-desc">“{resultData.level.desc}”</p>}
-          <div className="pt-rh-score">
-            <span className="num">{Math.round(resultData.overallPct * 100)}</span><span className="pct">%</span>
-          </div>
-          <p className="pt-rh-score-label">Overall Score</p>
+          <p className="pt-rh-level-tag">Level {resultData.recommendedLevelId} of {resultData.totalLevels}</p>
+          <h2 className="pt-rh-level">{resultData.recommendedLevel?.name || `Level ${resultData.recommendedLevelId}`}</h2>
+          <p className="pt-rh-program">{resultData.trackLabel} — {resultData.programLabel}</p>
+          {resultData.recommendedLevel?.desc && (
+            <p className="pt-rh-level-desc">"{resultData.recommendedLevel.desc}"</p>
+          )}
         </div>
+
+        {/* Level score bars */}
+        {resultData.levelScores.length > 0 && (
+          <div className="pt-level-scores">
+            <h3>Level-by-Level Results</h3>
+            {resultData.levelScores.map(ls => (
+              <div key={ls.level} className={`pt-level-row ${ls.passed ? 'passed' : 'failed'}`}>
+                <div className="pt-level-row-header">
+                  <span className="pt-level-row-name">{ls.name}</span>
+                  <span className="pt-level-row-score">{ls.correct}/{ls.total} ({Math.round(ls.pct * 100)}%)</span>
+                </div>
+                <div className="pt-level-bar-track">
+                  <div className="pt-level-bar-fill" style={{ width: `${Math.round(ls.pct * 100)}%` }} />
+                  <div className="pt-level-bar-threshold" style={{ left: '60%' }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="pt-results-grid">
           <div className="pt-results-card">
             <h3>Strengths</h3>
             <ul>
               {resultData.strengths.length ? resultData.strengths.map(s => (
-                <li key={s.skill}><span className="tag-dot ok"></span><span>{s.skill} <strong>({Math.round(s.pct * 100)}%)</strong></span></li>
+                <li key={s.skill}><span className="tag-dot ok" /><span>{s.skill} <strong>({Math.round(s.pct * 100)}%)</strong></span></li>
               )) : <li>Building across the board — a full profile will sharpen as you continue.</li>}
             </ul>
           </div>
@@ -621,7 +1080,7 @@ export default function PlacementTest() {
             <h3>Areas to Build</h3>
             <ul>
               {resultData.weaknesses.length ? resultData.weaknesses.map(s => (
-                <li key={s.skill}><span className="tag-dot watch"></span><span>{s.skill} <strong>({Math.round(s.pct * 100)}%)</strong></span></li>
+                <li key={s.skill}><span className="tag-dot watch" /><span>{s.skill} <strong>({Math.round(s.pct * 100)}%)</strong></span></li>
               )) : <li>No specific gaps stood out — nicely balanced.</li>}
             </ul>
           </div>
@@ -636,154 +1095,65 @@ export default function PlacementTest() {
             <div className="stat-sub">Suggested weekly lessons to progress steadily</div>
           </div>
         </div>
+
+        {/* Summary */}
+        <div className="pt-results-summary">
+          <p>{resultData.summary}</p>
+          <p className="pt-results-nextstep">{resultData.nextStep}</p>
+        </div>
+
         <div className="pt-results-actions">
-          <button className="pt-btn pt-btn-primary" onClick={() => { clearProgress(); setScreen('track'); }}>Explore Another Program</button>
-          <button className="pt-btn pt-btn-ghost" onClick={() => startTest()}>Retake This Assessment</button>
-        </div>
-      </div>
-    );
-  };
-
-  // --- Sub-components for Question types ---
-  const MCQ = ({ q, onSubmit }) => {
-    const [selected, setSelected] = useState(null);
-    return (
-      <>
-        <div className="pt-q-options" role="group">
-          {q.options.map((opt, i) => (
-            <button key={i} type="button" className={`pt-q-option ${selected === i ? 'is-picked' : ''}`} onClick={() => setSelected(i)}>
-              <span className="opt-mark">{LETTERS[i] || i + 1}</span><span>{opt}</span>
+          {!emailSent ? (
+            <button
+              className="pt-btn pt-btn-primary pt-btn-lg"
+              onClick={sendToAcademy}
+              disabled={sendingEmail}
+            >
+              {sendingEmail ? 'Sending...' : '📩 Send to Academy'}
             </button>
-          ))}
-        </div>
-        <div className="pt-q-actions">
-          <button className="pt-btn pt-btn-primary" disabled={selected === null} onClick={() => onSubmit(selected)}>Continue</button>
-        </div>
-      </>
-    );
-  };
-
-  const ShortAnswer = ({ q, onSubmit }) => {
-    const [val, setVal] = useState("");
-    return (
-      <>
-        <textarea className="pt-q-textarea" placeholder="Type your answer…" value={val} onChange={e => setVal(e.target.value)} />
-        <div className="pt-q-actions">
-          <button className="pt-btn pt-btn-primary" onClick={() => onSubmit(val)}>Continue</button>
-        </div>
-      </>
-    );
-  };
-
-  const TimedRead = ({ q, onSubmit }) => {
-    const [running, setRunning] = useState(false);
-    const [elapsed, setElapsed] = useState(0);
-    const [started, setStarted] = useState(false);
-    const startTs = useRef(null);
-    const rafId = useRef(null);
-
-    const updateClock = () => {
-      if (startTs.current) {
-        setElapsed((performance.now() - startTs.current) / 1000);
-        rafId.current = requestAnimationFrame(updateClock);
-      }
-    };
-
-    const start = () => {
-      startTs.current = performance.now();
-      setStarted(true);
-      setRunning(true);
-      rafId.current = requestAnimationFrame(updateClock);
-    };
-
-    const finish = () => {
-      if (rafId.current) cancelAnimationFrame(rafId.current);
-      setRunning(false);
-      const finalTime = (performance.now() - startTs.current) / 1000;
-      onSubmit(finalTime);
-    };
-
-    return (
-      <div className="pt-timed-panel">
-        <div className="pt-timed-clock">{elapsed.toFixed(1)}s</div>
-        {!started ? (
-          <button className="pt-btn pt-btn-primary" onClick={start}>Start Reading</button>
-        ) : (
-          <button className="pt-btn pt-btn-primary" onClick={finish} disabled={!running}>I've Finished</button>
-        )}
-        <p className="pt-timed-hint">Read the passage above at your natural pace, then press the button.</p>
-      </div>
-    );
-  };
-
-  const renderQuestion = () => {
-    const q = state.currentBlockQuestions[state.currentQIndex];
-    if (!q || !state.program) return null;
-    const block = state.program.blocks[state.blockId];
-    const canSpeak = typeof window !== "undefined" && "speechSynthesis" in window;
-
-    const speak = (text) => {
-      if (!canSpeak) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = "ar-SA";
-      u.rate = 0.82;
-      const voices = window.speechSynthesis.getVoices();
-      const arVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("ar"));
-      if (arVoice) u.voice = arVoice;
-      window.speechSynthesis.speak(u);
-    };
-
-    return (
-      <div className="pt-screen" key={q.id}>
-        <div className="pt-card pt-card-question">
-          <div className="pt-q-stage">{state.track?.label} · {block.name}</div>
-          <h2 className="pt-q-prompt">{q.prompt}</h2>
-          
-          {q.arabic && (
-            <div className="pt-q-stimulus-wrap">
-              <div className={`pt-q-stimulus ${q.arabic.length > 24 ? '' : 'small'}`}>{q.arabic}</div>
-              {q.allowListen && canSpeak && (
-                <button type="button" className="pt-listen-btn" onClick={() => speak(q.arabic)}>🔊 Listen</button>
-              )}
+          ) : (
+            <div className="pt-email-success">
+              <span>✅</span> Results sent to <strong>{userInfo.email}</strong> and to the Academy!
             </div>
           )}
-          
-          {q.type === 'mcq' && <MCQ q={q} onSubmit={onAnswer} />}
-          {q.type === 'shortAnswer' && <ShortAnswer q={q} onSubmit={onAnswer} />}
-          {q.type === 'timedRead' && <TimedRead q={q} onSubmit={onAnswer} />}
+          {emailError && <p className="pt-error-text" style={{ marginTop: '8px' }}>{emailError}</p>}
+          <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
+            <button className="pt-btn pt-btn-primary" onClick={() => { clearProgress(); setSession(null); setResultData(null); setEmailSent(false); setScreen('track'); }}>
+              Explore Another Program
+            </button>
+            <button className="pt-btn pt-btn-ghost" onClick={() => { setEmailSent(false); startTest(); }}>
+              Retake This Assessment
+            </button>
+          </div>
         </div>
       </div>
     );
   };
 
-  if (!data) return <div className="placement-test-container"><div className="pt-main">Loading...</div></div>;
+  // ─── Main Render ───
+  if (!data) {
+    return (
+      <div className="placement-test-container">
+        <div className="pt-screen">
+          <div className="pt-card" style={{ textAlign: 'center', padding: '60px 40px' }}>
+            <div className="pt-loading-spinner" />
+            <p style={{ marginTop: '20px', color: 'var(--color-text-muted)' }}>Loading assessment…</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="placement-test-container">
-      <div className="pt-topbar">
-        <button className="pt-brand" onClick={() => navigate('/')}>
-          <svg className="brand-mark" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-            <path d="M12 2L2 12l10 10 10-10L12 2zm0 14.5L7.5 12 12 7.5 16.5 12 12 16.5z"/>
-          </svg>
-          Fosselat <em>Academy</em>
-        </button>
-        {progressVisible && (
-          <div className="pt-progress-wrap">
-            <div className="pt-progress-label">{progressLabel}</div>
-            <div className="pt-progress-track">
-              <div className="pt-progress-fill" style={{ width: `${Math.round(progressPct * 100)}%` }}></div>
-            </div>
-          </div>
-        )}
-      </div>
-
       <main className="pt-main">
         {screen === 'welcome' && renderWelcome()}
-        {screen === 'audience' && renderAudience()}
+        {screen === 'userinfo' && renderUserInfo()}
         {screen === 'track' && renderTrack()}
         {screen === 'program' && renderProgram()}
         {screen === 'testintro' && renderTestIntro()}
+        {screen === 'selfreport' && renderSelfReport()}
+        {screen === 'stage' && renderStage()}
         {screen === 'question' && renderQuestion()}
         {screen === 'results' && renderResults()}
       </main>

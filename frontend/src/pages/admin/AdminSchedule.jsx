@@ -17,6 +17,7 @@ export default function AdminSchedule() {
   const [form, setForm] = useState({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
   const [alert, setAlert] = useState(null);
   const [filterTeacher, setFilterTeacher] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchData = () => {
     fetch(`${API}/admin/schedule`, { headers: getHeaders() })
@@ -185,12 +186,41 @@ export default function AdminSchedule() {
 
       {/* Scheduled Sessions */}
       <div className="dash-table-container">
-        <div className="dash-table-header"><h3>Scheduled Sessions ({scheduled.length})</h3></div>
+        <div className="dash-table-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3>Scheduled Sessions ({scheduled.length})</h3>
+          <input
+            type="text"
+            placeholder="Search by student or teacher..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            style={{
+              padding: '8px 14px',
+              background: 'rgba(200,167,99,0.06)',
+              border: '1px solid rgba(200,167,99,0.2)',
+              borderRadius: '8px',
+              color: 'var(--color-cream)',
+              fontSize: '13px',
+              minWidth: '220px',
+              outline: 'none',
+              fontFamily: 'var(--font-family)',
+            }}
+          />
+        </div>
         <div style={{overflowX:'auto'}}>
           <table className="dash-table">
             <thead><tr><th>Student ID</th><th>Student</th><th>Teacher</th><th>Day</th><th>Time</th><th>Duration</th><th>Room</th></tr></thead>
             <tbody>
-              {scheduled.map(s => (
+              {scheduled
+                .filter(s => {
+                  if (!searchQuery.trim()) return true;
+                  const q = searchQuery.toLowerCase();
+                  return (
+                    (s.student_name && s.student_name.toLowerCase().includes(q)) ||
+                    (s.teacher_name && s.teacher_name.toLowerCase().includes(q)) ||
+                    (s.student_family_id && s.student_family_id.toLowerCase().includes(q))
+                  );
+                })
+                .map(s => (
                 <tr key={s._id}>
                   <td style={{color:'var(--color-gold)',fontWeight:600}}>{s.student_family_id}</td>
                   <td>{s.student_name}</td><td>{s.teacher_name}</td>

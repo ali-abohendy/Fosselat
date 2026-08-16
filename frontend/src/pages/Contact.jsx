@@ -149,7 +149,7 @@ export default function Contact() {
                 <span className="contact-info-icon"><Mail size={24} /></span>
                 <div>
                   <h4>Email</h4>
-                  <a href="mailto:fosselatacademy2001@gmail.com">fosselatacademy2001@gmail.com</a>
+                  <a href="mailto:info@fosselatacademy.com">info@fosselatacademy.com</a>
                 </div>
               </div>
             </div>

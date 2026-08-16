@@ -42,7 +42,7 @@ export default function TeacherProfile() {
 
   useEffect(() => {
     if (teacher) {
-      document.title = `${teacher.name} — FOSSCLAT Academy`;
+      document.title = `${teacher.name} — Fosselat Academy`;
     }
   }, [teacher]);
 

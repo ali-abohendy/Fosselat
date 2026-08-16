@@ -333,10 +333,10 @@ export default function Curriculum() {
       <section className="section" style={{ paddingBottom: 0, paddingTop: '40px', display: 'flex', justifyContent: 'center' }}>
         <div className="cur-track-tabs" style={{ margin: 0, padding: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}>
           <button className={`cur-track-tab ${activeDivision === 'kids' ? 'active' : ''}`} onClick={() => setActiveDivision('kids')}>
-            🧒 Kids Division
+            Kids Division
           </button>
           <button className={`cur-track-tab ${activeDivision === 'adults' ? 'active' : ''}`} onClick={() => setActiveDivision('adults')}>
-            👨 Adults Division
+            Adults Division
           </button>
         </div>
       </section>
@@ -371,7 +371,7 @@ export default function Curriculum() {
       </section>
 
       {/* Structure Overview */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section">
         <div className="container">
           <div className="section-title">
             <h2>Curriculum <span className="text-gold">Structure</span></h2>

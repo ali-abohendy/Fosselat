@@ -6,6 +6,10 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/DashboardLayout';
+import { 
+  BarChart, GraduationCap, Users, ClipboardList, Calendar, 
+  DollarSign, Wallet, Video, Clock 
+} from './components/Icons';
 
 // Public pages
 import Home from './pages/Home';
@@ -17,7 +21,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Enroll from './pages/Enroll';
 import Login from './pages/Login';
-import Register from './pages/Register';
+
 import Pricing from './pages/Pricing';
 import Curriculum from './pages/Curriculum';
 import Blog from './pages/Blog';
@@ -47,24 +51,24 @@ import './App.css';
 
 // Menu configs for each dashboard
 const adminMenu = [
-  { path: '/admin/dashboard', label: 'Dashboard', icon: '📊', end: true },
-  { path: '/admin/students', label: 'Students', icon: '🎓' },
-  { path: '/admin/teachers', label: 'Teachers', icon: '👨‍🏫' },
-  { path: '/admin/attendance', label: 'Attendance', icon: '📋' },
-  { path: '/admin/schedule', label: 'Schedule', icon: '📅' },
-  { path: '/admin/payments/students', label: 'Student Payments', icon: '💰' },
-  { path: '/admin/payments/teachers', label: 'Teacher Payroll', icon: '💵' },
+  { path: '/admin/dashboard', label: 'Dashboard', icon: <BarChart size={18} />, end: true },
+  { path: '/admin/students', label: 'Students', icon: <GraduationCap size={18} /> },
+  { path: '/admin/teachers', label: 'Teachers', icon: <Users size={18} /> },
+  { path: '/admin/attendance', label: 'Attendance', icon: <ClipboardList size={18} /> },
+  { path: '/admin/schedule', label: 'Schedule', icon: <Calendar size={18} /> },
+  { path: '/admin/payments/students', label: 'Student Payments', icon: <DollarSign size={18} /> },
+  { path: '/admin/payments/teachers', label: 'Teacher Payroll', icon: <Wallet size={18} /> },
 ];
 
 const teacherMenu = [
-  { path: '/teacher/dashboard', label: 'Dashboard', icon: '📊', end: true },
-  { path: '/teacher/record', label: 'Record Session', icon: '📝' },
-  { path: '/teacher/slots', label: 'Time Slots', icon: '🕐' },
-  { path: '/teacher/calendar', label: 'Calendar', icon: '📅' },
+  { path: '/teacher/dashboard', label: 'Dashboard', icon: <BarChart size={18} />, end: true },
+  { path: '/teacher/record', label: 'Record Session', icon: <ClipboardList size={18} /> },
+  { path: '/teacher/slots', label: 'Time Slots', icon: <Clock size={18} /> },
+  { path: '/teacher/calendar', label: 'Calendar', icon: <Calendar size={18} /> },
 ];
 
 const studentMenu = [
-  { path: '/student/dashboard', label: 'Dashboard', icon: '📊', end: true },
+  { path: '/student/dashboard', label: 'Dashboard', icon: <BarChart size={18} />, end: true },
 ];
 
 // Scroll to top on route change
@@ -169,7 +173,7 @@ function AppRoutes() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/enroll" element={<Enroll />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/placement-tests" element={<PlacementTest />} />
         <Route path="/blog" element={<Blog />} />

@@ -42,7 +42,7 @@ const _quranPosts = [
       <p>Before you begin, we highly recommend taking our <Link to="/placement-tests">Placement Test</Link>.</p>
       <p>Also, read our post on <Link to="/blog/how-long-does-it-take-to-memorize-quran">how long it takes to memorize the Quran</Link>.</p>
     
-          <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
+          <a href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
         </div>
       </>
     )
@@ -87,7 +87,7 @@ const _quranPosts = [
       <p>Take a <Link to="/placement-tests">Placement Test</Link> to ensure you start at the right level.</p>
       <p>View our <Link to="/curriculum">Curriculum</Link> to understand our step-by-step approach.</p>
     
-          <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
+          <a href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
         </div>
       </>
     )
@@ -130,7 +130,7 @@ const _quranPosts = [
       <p>Explore our structured <Link to="/curriculum">Hifz Levels</Link>.</p>
       <p>Read more tips in our <Link to="/blog/how-to-memorize-quran-faster">How to Memorize the Quran Faster</Link> guide.</p>
     
-          <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
+          <a href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
         </div>
       </>
     )
@@ -174,7 +174,7 @@ const _quranPosts = [
       <p>Meet our certified <Link to="/teachers">Teachers</Link>.</p>
       <p>Take the <Link to="/placement-tests">Placement Test</Link> to find your level.</p>
     
-          <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
+          <a href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
         </div>
       </>
     )
@@ -218,7 +218,7 @@ const _quranPosts = [
       <p>Learn more <Link to="/about">About Us</Link>.</p>
       <p>Check out our <Link to="/curriculum">Curriculum</Link>.</p>
     
-          <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
+          <a href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
         </div>
       </>
     )
@@ -262,7 +262,7 @@ const _quranPosts = [
       <p>Meet our <Link to="/teachers">Teachers</Link>.</p>
       <p>View our affordable <Link to="/pricing">Pricing Plans</Link>.</p>
     
-          <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
+          <a href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
         </div>
       </>
     )
@@ -306,7 +306,7 @@ const _quranPosts = [
       <p>Connect with expert <Link to="/teachers">Teachers</Link>.</p>
       <p>Evaluate yourself with a <Link to="/placement-tests">Placement Test</Link>.</p>
     
-          <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
+          <a href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-block', marginTop: '10px' }}>Book a Free Trial</a>
         </div>
       </>
     )

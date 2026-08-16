@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
 import Button from '../components/Button';
+import { Leaf, BookOpen, Star, Trophy, Clock } from '../components/Icons';
 import './Pricing.css';
 
 const WHATSAPP_BASE = 'https://wa.me/966595796177';
-const WHATSAPP_TRIAL = 'https://wa.me/966595796177?text=Hello!%20I%20would%20like%20to%20book%20a%20free%20trial%20lesson.';
+const WHATSAPP_TRIAL = 'https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please.';
 
 const PLANS = [
-  { id: 'starter', name: 'Starter', icon: '🌱', classes: 2, desc: 'Perfect for steady progress.' },
-  { id: 'growth', name: 'Growth', icon: '📚', classes: 3, desc: 'Balanced learning and consistent improvement.', popular: true },
-  { id: 'excellence', name: 'Excellence', icon: '🚀', classes: 4, desc: 'Faster progress and greater achievement.' },
-  { id: 'elite', name: 'Elite', icon: '🏆', classes: 5, desc: 'Maximum progress and intensive learning.', discount: 0.10 },
+  { id: 'starter', name: 'Starter', icon: <Leaf size={32} color="#4ade80" />, classes: 2, desc: 'Perfect for steady progress.' },
+  { id: 'growth', name: 'Growth', icon: <BookOpen size={32} color="#60a5fa" />, classes: 3, desc: 'Balanced learning and consistent improvement.', popular: true },
+  { id: 'excellence', name: 'Excellence', icon: <Star size={32} color="#f472b6" />, classes: 4, desc: 'Faster progress and greater achievement.' },
+  { id: 'elite', name: 'Elite', icon: <Trophy size={32} color="var(--color-gold)" />, classes: 5, desc: 'Maximum progress and intensive learning.', discount: 0.10 },
 ];
 
 const DURATIONS = [
-  { minutes: 30, rate: 4 },
-  { minutes: 40, rate: 5.33 },
-  { minutes: 45, rate: 6 },
-  { minutes: 60, rate: 8 },
-  { minutes: 90, rate: 12 },
-  { minutes: 120, rate: 16 },
+  { minutes: 30, rate: 5 },
+  { minutes: 40, rate: 6.67 },
+  { minutes: 45, rate: 7.5 },
+  { minutes: 60, rate: 10 },
+  { minutes: 90, rate: 15 },
+  { minutes: 120, rate: 20 },
 ];
 
 export default function Pricing() {
@@ -56,7 +57,7 @@ export default function Pricing() {
           <div className="pricing-step">
             <div className="pricing-step-header">
               <span className="pricing-step-num">1</span>
-              <h2>⏰ Choose Your Schedule</h2>
+              <h2>Choose Your Schedule</h2>
             </div>
             <div className="pricing-plans-grid">
               {PLANS.map(p => (
@@ -78,7 +79,7 @@ export default function Pricing() {
           <div className="pricing-step">
             <div className="pricing-step-header">
               <span className="pricing-step-num">2</span>
-              <h2>🕐 Choose Class Duration</h2>
+              <h2>Choose Class Duration</h2>
             </div>
             <div className="pricing-durations-grid">
               {DURATIONS.map(d => (
@@ -128,7 +129,7 @@ export default function Pricing() {
                   </div>
                 </div>
                 <div className="summary-actions">
-                  <Button href={`${WHATSAPP_BASE}?text=${encodeURIComponent(`Hello! I would like to enroll in Fosselat Academy. Plan: ${PLANS.find(p => p.id === selectedPlan)?.name}, Duration: ${selectedDuration} min`)}`} variant="primary" size="lg">
+                  <Button href={`${WHATSAPP_BASE}?text=${encodeURIComponent(`Assalam alikom warahmatuallah wabarakatu, I would like to enroll in Fosselat Academy. Plan: ${PLANS.find(p => p.id === selectedPlan)?.name}, Duration: ${selectedDuration} min`)}`} variant="primary" size="lg">
                     Enroll Now
                   </Button>
                   <Button href={WHATSAPP_TRIAL} variant="outline" size="lg">

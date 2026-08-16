@@ -9,8 +9,8 @@ import { Users, BookOpen, Clock, Trophy, FileText, Headphones, Star, Phone, Grad
 import './Home.css';
 
 const WHATSAPP_NUMBER = '966595796177';
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20would%20like%20to%20book%20a%20free%20trial%20lesson.`;
-const WHATSAPP_ENROLL = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20would%20like%20to%20enroll%20in%20Fosselat%20Academy.`;
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please.`;
+const WHATSAPP_ENROLL = `https://wa.me/${WHATSAPP_NUMBER}?text=Assalam%20alikom%20warahmatuallah%20wabarakatu,%20I%20would%20like%20to%20enroll%20in%20Fosselat%20Academy.`;
 
 const PLANS = [
   { id: 'starter', name: 'Starter (2/week)' },
@@ -65,7 +65,7 @@ export default function Home() {
         <div className="container hero-container">
           <div className="hero-content">
             <h1 className="hero-ayah" dir="rtl" lang="ar">
-              كِتَابُ فُصِّلَتْ آيَاتُهُ قُرْآنًا عَرَبِيًّا لِّقَوْمٍ يَعْلَمُونَ
+              كِتَابٌ فُصِّلَتْ آيَاتُهُ قُرْآنًا عَرَبِيًّا لِّقَوْمٍ يَعْلَمُونَ
             </h1>
             <p className="hero-subtitle">
               Inspiring Faith through Qur'an, Arabic, and Islamic Studies
@@ -251,13 +251,17 @@ export default function Home() {
               </div>
             </div>
 
-            <Button 
-              variant="primary" size="lg"
-              style={{ width: '100%', justifyContent: 'center', opacity: (!enrollPlan || !enrollDuration) ? 0.5 : 1, pointerEvents: (!enrollPlan || !enrollDuration) ? 'none' : 'auto' }}
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I would like to enroll in Fosselat Academy. Plan: ${enrollPlan?.name}, Duration: ${enrollDuration} min`)}`}
-            >
-              Enroll via WhatsApp
-            </Button>
+            <div className="modal-actions">
+              <a 
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Assalam alikom warahmatuallah wabarakatu, I would like to enroll in Fosselat Academy. Plan: ${enrollPlan?.name}, Duration: ${enrollDuration} min`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`button button-primary button-lg ${(!enrollPlan || !enrollDuration) ? 'disabled' : ''}`}
+                style={{ width: '100%', textAlign: 'center', display: 'block', textDecoration: 'none' }}
+              >
+                Send Request via WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       )}

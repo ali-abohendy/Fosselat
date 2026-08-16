@@ -52,7 +52,7 @@ export default function CourseDetail() {
 
   useEffect(() => {
     if (course) {
-      document.title = `${course.title} — FOSSCLAT Academy`;
+      document.title = `${course.title} — Fosselat Academy`;
     }
   }, [course]);
 

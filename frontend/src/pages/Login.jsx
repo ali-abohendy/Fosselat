@@ -148,10 +148,7 @@ export default function Login() {
                 </Button>
               </form>
 
-              <p className="auth-bottom-text">
-                Don't have an account?{' '}
-                <Link to="/register">Sign Up</Link>
-              </p>
+
             </div>
           </div>
         </div>

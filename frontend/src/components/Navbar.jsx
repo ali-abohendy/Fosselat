@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Phone, Mail, Facebook, Instagram, Tiktok } from './Icons';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -58,6 +59,17 @@ export default function Navbar() {
         </button>
 
         <div className={`navbar-menu ${isOpen ? 'open' : ''}`}>
+          <div className="navbar-mobile-logo">
+            <Link to="/" className="navbar-logo" onClick={closeMenu}>
+              <div className="navbar-logo-icon">
+                <img src="/logo.png" alt="Fosselat Academy" />
+              </div>
+              <div className="navbar-logo-text">
+                <span className="navbar-logo-name">Fosselat</span>
+                <span className="navbar-logo-tagline">Islamic Qur'an School</span>
+              </div>
+            </Link>
+          </div>
           <ul className="navbar-links">
             <li><NavLink to="/" onClick={closeMenu} end>Home</NavLink></li>
             <li><NavLink to="/curriculum" onClick={closeMenu}>Curriculum</NavLink></li>
@@ -66,6 +78,41 @@ export default function Navbar() {
             <li><NavLink to="/about" onClick={closeMenu}>About Us</NavLink></li>
             <li><NavLink to="/contact" onClick={closeMenu}>Contact</NavLink></li>
           </ul>
+
+          <div className="navbar-mobile-footer">
+            {!user && (
+              <a 
+                href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="navbar-mobile-cta"
+                onClick={closeMenu}
+              >
+                Book a Free Trial
+              </a>
+            )}
+            <div className="navbar-mobile-contact">
+              <a href="https://wa.me/966595796177" target="_blank" rel="noopener noreferrer">
+                <Phone size={16} />
+                +966 59 579 6177
+              </a>
+              <a href="mailto:info@fosselatacademy.com">
+                <Mail size={16} />
+                info@fosselatacademy.com
+              </a>
+            </div>
+            <div className="navbar-mobile-socials">
+              <a href="https://www.facebook.com/profile.php?id=61590983983531" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <Facebook size={22} />
+              </a>
+              <a href="https://www.instagram.com/fosselatacademy2001/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <Instagram size={22} />
+              </a>
+              <a href="https://www.tiktok.com/@user4744086184577?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <Tiktok size={22} />
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Right: Auth (always visible, outside menu) */}

@@ -1,5 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { HomeIcon, LogOutIcon } from './Icons';
 import './DashboardLayout.css';
 
 export default function DashboardLayout({ role, menuItems }) {
@@ -43,11 +44,11 @@ export default function DashboardLayout({ role, menuItems }) {
 
         <div className="sidebar-footer">
           <NavLink to="/" className="sidebar-link sidebar-home-link">
-            <span className="sidebar-icon">🏠</span>
+            <span className="sidebar-icon" style={{ display: 'flex' }}><HomeIcon size={18} /></span>
             <span>Back to Home</span>
           </NavLink>
           <button className="sidebar-link sidebar-logout" onClick={handleLogout}>
-            <span className="sidebar-icon">🚪</span>
+            <span className="sidebar-icon" style={{ display: 'flex' }}><LogOutIcon size={18} /></span>
             <span>Logout</span>
           </button>
         </div>

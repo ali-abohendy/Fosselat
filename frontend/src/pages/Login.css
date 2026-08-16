@@ -317,8 +317,12 @@
 }
 
 @media (max-width: 992px) {
+  .auth-page {
+    min-height: auto;
+  }
   .auth-grid {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .auth-decoration {
@@ -326,21 +330,21 @@
   }
 
   .auth-form-wrapper {
-    padding: var(--spacing-3xl) var(--spacing-xl);
+    padding: 30px var(--spacing-xl) 40px;
+    align-items: flex-start;
   }
 }
 
 @media (max-width: 640px) {
   .auth-form-card { max-width: 100%; border-radius: 0; border-left: none; border-right: none; box-shadow: none; }
-  .auth-form-wrapper { padding: 16px 0; }
+  .auth-form-wrapper { padding: 30px 0; align-items: flex-start; }
   .auth-options { flex-direction: column; align-items: flex-start; gap: var(--spacing-sm); }
 }
 
 @media (max-width: 480px) {
   .auth-form-wrapper {
-    padding: var(--spacing-2xl) 0;
+    padding: 20px 0;
   }
-
   .auth-form-card {
     padding: var(--spacing-xl);
   }
@@ -349,7 +353,7 @@
 .auth-decor-logo {
   width: 300px;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center top;
   opacity: 1;
   margin-bottom: 0px;

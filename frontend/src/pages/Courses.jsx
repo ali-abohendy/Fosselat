@@ -7,7 +7,7 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    document.title = 'Our Courses — FOSSCLAT Academy';
+    document.title = 'Our Courses — Fosselat Academy';
 
     async function fetchCourses() {
       try {

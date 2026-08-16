@@ -14,6 +14,7 @@ export default function AdminTeacherPayments() {
   const [form, setForm] = useState(emptyForm);
   const [alert, setAlert] = useState(null);
   const [editingId, setEditingId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Month options (last 12 months)
   const getMonths = () => {
@@ -174,12 +175,37 @@ export default function AdminTeacherPayments() {
       </div>
 
       <div className="dash-table-container">
-        <div className="dash-table-header"><h3>Payroll Records ({payments.length})</h3></div>
+        <div className="dash-table-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3>Payroll Records ({payments.length})</h3>
+          <input
+            type="text"
+            placeholder="Search by teacher name..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            style={{
+              padding: '8px 14px',
+              background: 'rgba(200,167,99,0.06)',
+              border: '1px solid rgba(200,167,99,0.2)',
+              borderRadius: '8px',
+              color: 'var(--color-cream)',
+              fontSize: '13px',
+              minWidth: '220px',
+              outline: 'none',
+              fontFamily: 'var(--font-family)',
+            }}
+          />
+        </div>
         <div style={{overflowX:'auto'}}>
           <table className="dash-table">
             <thead><tr><th>Teacher</th><th>Month</th><th>Hours</th><th>Gross (L.E)</th><th>Bonuses (L.E)</th><th>Deductions (L.E)</th><th>Net (L.E)</th><th>Net ($)</th><th>Actions</th></tr></thead>
             <tbody>
-              {payments.map(p => (
+              {payments
+                .filter(p => {
+                  if (!searchQuery.trim()) return true;
+                  const q = searchQuery.toLowerCase();
+                  return (p.teacher_name || p.teacher_id || '').toLowerCase().includes(q);
+                })
+                .map(p => (
                 <tr key={p._id}>
                   <td>{p.teacher_name || p.teacher_id}</td>
                   <td>{p.month}</td>
@@ -192,7 +218,7 @@ export default function AdminTeacherPayments() {
                   <td><button className="dash-filter-btn" onClick={() => handleEdit(p)}>Edit</button></td>
                 </tr>
               ))}
-              {!payments.length && <tr><td colSpan="8" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No payroll records</td></tr>}
+              {!payments.length && <tr><td colSpan="9" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No payroll records</td></tr>}
             </tbody>
           </table>
         </div>

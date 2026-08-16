@@ -6,8 +6,8 @@ const getHeaders = () => ({
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,
 });
 
-const HOURLY_RATE = 8;       // Standard $8/hr
-const ELITE_RATE = 7.2;      // Elite plan $7.2/hr (10% off)
+const HOURLY_RATE = 10;       // Standard $10/hr
+const ELITE_RATE = 9;      // Elite plan $9/hr (10% off)
 
 const emptyForm = { family_id: '', month: '', total_due: '', amount_paid: '', remaining: '', status: 'unpaid', members: '' };
 
@@ -18,6 +18,7 @@ export default function AdminStudentPayments() {
   const [alert, setAlert] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [memberStats, setMemberStats] = useState([]); // per-student session info
+  const [searchQuery, setSearchQuery] = useState('');
 
   const getMonths = () => {
     const months = [];
@@ -85,7 +86,7 @@ export default function AdminStudentPayments() {
         }, 0);
         const totalHours = totalMins / 60;
 
-        // Hourly rate: $8 standard, $7.2 for elite
+        // Hourly rate: $10 standard, $9 for elite
         const rate = m.plan === 'elite' ? ELITE_RATE : HOURLY_RATE;
         const due = totalHours * rate;
         totalDue += due;
@@ -255,14 +256,42 @@ export default function AdminStudentPayments() {
       </div>
 
       <div className="dash-table-container">
-        <div className="dash-table-header"><h3>Payment Records ({payments.length})</h3></div>
+        <div className="dash-table-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h3>Payment Records ({payments.length})</h3>
+          <input
+            type="text"
+            placeholder="Search by ID or name..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            style={{
+              padding: '8px 14px',
+              background: 'rgba(200,167,99,0.06)',
+              border: '1px solid rgba(200,167,99,0.2)',
+              borderRadius: '8px',
+              color: 'var(--color-cream)',
+              fontSize: '13px',
+              minWidth: '220px',
+              outline: 'none',
+              fontFamily: 'var(--font-family)',
+            }}
+          />
+        </div>
         <div style={{overflowX:'auto'}}>
           <table className="dash-table">
             <thead>
               <tr><th>Family ID</th><th>Members</th><th>Month</th><th>Total Due</th><th>Paid</th><th>Remaining</th><th>Status</th><th>Actions</th></tr>
             </thead>
             <tbody>
-              {payments.map(p => (
+              {payments
+                .filter(p => {
+                  if (!searchQuery.trim()) return true;
+                  const q = searchQuery.toLowerCase();
+                  return (
+                    (p.family_id || '').toLowerCase().includes(q) ||
+                    (p.members || '').toLowerCase().includes(q)
+                  );
+                })
+                .map(p => (
                 <tr key={p._id}>
                   <td style={{color:'var(--color-gold)',fontWeight:600}}>{p.family_id || '—'}</td>
                   <td>{p.members || '—'}</td>

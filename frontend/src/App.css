@@ -69,3 +69,11 @@
   box-shadow: var(--shadow-gold-lg);
   background: var(--color-gold-light);
 }
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    right: auto;
+    left: 20px;
+    bottom: 20px;
+  }
+}

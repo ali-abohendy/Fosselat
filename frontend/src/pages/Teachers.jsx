@@ -7,7 +7,7 @@ export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
 
   useEffect(() => {
-    document.title = 'Our Teachers — FOSSCLAT Academy';
+    document.title = 'Our Teachers — Fosselat Academy';
 
     async function fetchTeachers() {
       try {
