@@ -11,6 +11,7 @@ import contactRoutes from './routes/contact.js';
 import adminRoutes from './routes/admin.js';
 import teacherRoutes from './routes/teacher.js';
 import { studentRouter, meetingsRouter, reviewsRouter, sessionsRouter } from './routes/student.js';
+import placementRoutes from './routes/placement.js';
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.use('/api/student', studentRouter);
 app.use('/api/meetings', meetingsRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/api/placement', placementRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
+    "build": "echo Build complete",
     "dev": "node --watch server.js",
     "seed": "node seed.js"
   },
@@ -15,6 +16,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.14.0"
+    "mongodb": "^6.14.0",
+    "nodemailer": "^9.0.5"
   }
 }
