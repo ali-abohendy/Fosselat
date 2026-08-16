@@ -4,6 +4,8 @@
 >
 > *Inspiring Faith through Qur'an, Arabic, and Islamic Studies*
 
+🌍 **Live Website:** [https://fosselatacademy.com/](https://fosselatacademy.com/)
+
 A full-stack web application for an online Islamic Qur'an academy — featuring student enrollment, teacher management, session scheduling, attendance tracking, payment recording, placement tests, and a role-based dashboard system for admins, teachers, and students.
 
 ---
@@ -14,10 +16,10 @@ A full-stack web application for an online Islamic Qur'an academy — featuring 
 |-------|-----------|
 | Frontend | React 18 + Vite |
 | Styling | Vanilla CSS (Cairo + Amiri fonts) |
-| Backend | Python Flask |
+| Backend | Node.js + Express |
 | Database | MongoDB |
-| Auth | JWT (Flask-JWT-Extended) |
-| Deployment | Vercel (frontend) + Railway (backend) |
+| Auth | JWT |
+| Deployment | Hostinger (Shared Hosting) + PM2 |
 
 ## 🎨 Design System
 
@@ -55,13 +57,13 @@ Frontend runs at [http://localhost:5173](http://localhost:5173)
 ### 3. Backend
 ```bash
 cd backend
-pip install -r requirements.txt
+npm install
 
 # Copy and configure environment variables
 cp .env.example .env        # Edit with your MongoDB URI and JWT secret
 
-# Start the Flask server
-python run.py
+# Start the Node.js server
+npm run dev
 ```
 Backend API runs at [http://localhost:5000](http://localhost:5000)
 
@@ -133,16 +135,16 @@ Fosselat/
 │   ├── vercel.json                  # Vercel deployment config
 │   └── vite.config.js
 │
-├── backend/                         # Flask REST API
-│   ├── app/
-│   │   ├── routes/
-│   │   │   ├── auth.py              # Login, register, JWT
-│   │   │   ├── admin.py             # Admin-only endpoints
-│   │   │   ├── teacher_dash.py      # Teacher endpoints
-│   │   │   └── student_dash.py      # Student endpoints
-│   │   ├── __init__.py              # Flask app factory
-│   │   └── extensions.py           # MongoDB, JWT setup
-│   └── run.py                       # Entry point
+├── backend/                         # Express REST API
+│   ├── routes/                      # API endpoint definitions
+│   │   ├── auth.js                  # Login, register
+│   │   ├── admin.js                 # Admin-only endpoints
+│   │   ├── teacher_dash.js          # Teacher endpoints
+│   │   └── student_dash.js          # Student endpoints
+│   ├── middleware/                  # JWT auth and role checks
+│   ├── db.js                        # MongoDB connection
+│   ├── package.json                 # Node dependencies
+│   └── server.js                    # Entry point
 │
 └── README.md
 ```
@@ -248,26 +250,32 @@ Fosselat/
 
 ## 🌐 Deployment
 
-### Frontend → Vercel
-1. Push `frontend/` to a GitHub repository
-2. Import on [vercel.com](https://vercel.com)
-3. Set environment variable: `VITE_API_URL=https://your-backend.up.railway.app/api`
-4. Deploy — auto-redeploys on every `git push`
+The project is designed to be deployed on **Hostinger Shared Hosting** (or any cPanel-based host).
 
-### Backend → Railway
-1. Push `backend/` to a GitHub repository
-2. Import on [railway.app](https://railway.app)
-3. Set environment variables:
-   - `MONGO_URI` — your MongoDB Atlas connection string
-   - `JWT_SECRET_KEY` — a long random secret
-   - `FLASK_ENV=production`
-4. Railway auto-detects Python and deploys
+### 1. Build the Frontend
+```bash
+cd frontend
+npm install
+npm run build
+```
+This generates a `dist/` folder containing the compiled React SPA. Upload the contents of `dist/` directly into your `public_html/` directory on Hostinger.
 
-### Domain → Namecheap + Vercel
-1. Buy `fosselat.com` on [namecheap.com](https://namecheap.com)
-2. In Vercel: Project → Domains → Add `fosselat.com`
-3. Copy DNS records from Vercel to Namecheap DNS settings
-4. SSL certificate is issued automatically by Vercel
+### 2. Deploy the Backend
+1. Create a folder named `backend` (or similar) outside of `public_html` (for security).
+2. Upload the contents of your local `backend/` folder (excluding `node_modules`).
+3. Via SSH or the Hostinger terminal, run `npm install`.
+4. Ensure your `.env` file is properly configured with your production `MONGO_URI`.
+
+### 3. Start the Backend API
+On Hostinger, you can start the backend using a process manager like PM2 (or node if PM2 isn't available):
+```bash
+pm2 start server.js --name "fosselat-api"
+```
+Or you can use Hostinger's built-in **Node.js App** tool in hPanel.
+
+### 4. Configure Domain & Routing
+- Set up an `.htaccess` file in `public_html/` to handle React Router (redirecting all non-file requests to `index.html`).
+- Set up a reverse proxy (if required) or configure your frontend's `VITE_API_URL` to point to the backend's address/port (e.g., `https://api.fosselatacademy.com`).
 
 ---
 
