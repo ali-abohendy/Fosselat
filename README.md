@@ -279,14 +279,5 @@ Or you can use Hostinger's built-in **Node.js App** tool in hPanel.
 
 ---
 
-## 📝 Notes
-
-- The `Pricing` page and navbar link are **automatically hidden** for users logged in as teachers
-- Meeting links (Zoom / Google Meet) are set per teacher by the admin — without them the Join buttons won't appear
-- Session conflict checking in the admin schedule is intentionally disabled by design
-- Blog posts are stored as static data in `src/data/blogPosts.jsx`
-
----
-
 © 2026 Fosselat Academy. All rights reserved.
 "# trigger rebuild" 
