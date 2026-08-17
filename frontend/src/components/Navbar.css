@@ -45,8 +45,8 @@
 }
 
 .navbar-logo-icon {
-  width: 55px;
-  height: 55px;
+  width: 65px;
+  height: 65px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,7 +68,7 @@
 }
 
 .navbar-logo-name {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: var(--color-gold);
   letter-spacing: 2px;
@@ -76,7 +76,7 @@
 }
 
 .navbar-logo-tagline {
-  font-size: 0.45rem;
+  font-size: 0.55rem;
   color: var(--color-text-muted);
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -277,6 +277,7 @@
   .navbar-inner {
     gap: var(--spacing-sm);
     justify-content: flex-start;
+    padding: 0 16px;
   }
 
   .navbar-logo {

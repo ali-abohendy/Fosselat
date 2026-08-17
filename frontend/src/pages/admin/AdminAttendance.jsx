@@ -22,6 +22,7 @@ export default function AdminAttendance() {
   const [sessions, setSessions] = useState([]);
   const [filterBy, setFilterBy] = useState('all');
   const [filterValue, setFilterValue] = useState('');
+  const [search, setSearch] = useState('');
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
 
@@ -59,6 +60,19 @@ export default function AdminAttendance() {
 
   const months = getMonths();
 
+  const filteredSessions = sessions.filter(s => {
+    const q = search.toLowerCase();
+    const matchSearch = (
+      (s.student_name && s.student_name.toLowerCase().includes(q)) ||
+      (s.student_family_name && s.student_family_name.toLowerCase().includes(q)) ||
+      (s.student_family_id && s.student_family_id.toLowerCase().includes(q)) ||
+      (s.student_id && s.student_id.toLowerCase().includes(q)) ||
+      (s.teacher_name && s.teacher_name.toLowerCase().includes(q)) ||
+      (s.teacher_id && s.teacher_id.toLowerCase().includes(q))
+    );
+    return matchSearch;
+  });
+
   return (
     <>
       <div className="dash-page-header">
@@ -72,36 +86,24 @@ export default function AdminAttendance() {
         </div>
 
         {/* Filter Bar */}
-        <div style={{
-          display: 'flex', flexWrap: 'wrap', gap: '10px',
-          padding: '12px 16px',
-          borderBottom: '1px solid rgba(200,167,99,0.08)',
-          alignItems: 'center',
-        }}>
-          <button className={`dash-filter-btn ${filterBy === 'all' ? 'active' : ''}`} onClick={resetFilter}>
-            All
-          </button>
-          <select className="dash-filter-btn"
+        <div className="dash-controls" style={{ padding: '16px', display: 'flex', gap: '12px', flexWrap: 'wrap', borderBottom: '1px solid rgba(200,167,99,0.08)' }}>
+          <input
+            type="text"
+            placeholder="Search by student or teacher name..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{ flex: '1 1 auto', minWidth: '250px', maxWidth: '400px', padding: '8px 14px', background: 'rgba(200,167,99,0.06)', border: '1px solid rgba(200,167,99,0.2)', borderRadius: '8px', color: 'var(--color-cream)', fontSize: '13px', outline: 'none' }}
+          />
+          <select
             value={filterBy === 'month' ? filterValue : ''}
             onChange={e => e.target.value ? handleFilter('month', e.target.value) : resetFilter()}
-            style={{ minWidth: '160px' }}>
-            <option value="">Month</option>
-            {months.map(m => <option key={m.value} value={m.value}>{m.label}</option>)}
-          </select>
-          <select className="dash-filter-btn"
-            value={filterBy === 'teacher' ? filterValue : ''}
-            onChange={e => e.target.value ? handleFilter('teacher', e.target.value) : resetFilter()}>
-            <option value="">Teacher</option>
-            {teachers.map(t => <option key={t._id} value={t._id}>{t.full_name}</option>)}
-          </select>
-          <select className="dash-filter-btn"
-            value={filterBy === 'student' ? filterValue : ''}
-            onChange={e => e.target.value ? handleFilter('student', e.target.value) : resetFilter()}>
-            <option value="">Student</option>
-            {students.map(s => <option key={s._id} value={s._id}>[{s.student_id}] {s.full_name}</option>)}
+            style={{ padding: '8px 14px', background: 'rgba(200,167,99,0.06)', border: '1px solid rgba(200,167,99,0.2)', borderRadius: '8px', color: 'var(--color-cream)', fontSize: '13px', minWidth: '150px', flex: '1 1 auto', maxWidth: '200px', outline: 'none' }}
+          >
+            <option value="" style={{ color: '#000' }}>All Months</option>
+            {months.map(m => <option key={m.value} value={m.value} style={{ color: '#000' }}>{m.label}</option>)}
           </select>
           {filterBy !== 'all' && (
-            <span style={{ fontSize: '12px', color: 'var(--color-gold)', cursor: 'pointer' }} onClick={resetFilter}>
+            <span style={{ fontSize: '13px', color: 'var(--color-gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', marginLeft: 'auto' }} onClick={resetFilter}>
               ✕ Clear filter
             </span>
           )}
@@ -116,7 +118,7 @@ export default function AdminAttendance() {
               </tr>
             </thead>
             <tbody>
-              {sessions.map(s => (
+              {filteredSessions.map(s => (
                 <tr key={s._id}>
                   <td style={{color:'var(--color-gold)',fontWeight:600}}>{s.student_family_id || '—'}</td>
                   <td>{s.student_name}</td><td>{s.student_family_name}</td>
@@ -136,7 +138,7 @@ export default function AdminAttendance() {
                   </td>
                 </tr>
               ))}
-              {!sessions.length && <tr><td colSpan="10" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No attendance records</td></tr>}
+              {!filteredSessions.length && <tr><td colSpan="10" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No attendance records</td></tr>}
             </tbody>
           </table>
         </div>

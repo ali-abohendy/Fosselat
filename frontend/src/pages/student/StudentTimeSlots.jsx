@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
+import { Trash, ArrowRight, Plus } from '../../components/Icons';
 import API from '../../config';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
@@ -81,26 +82,70 @@ export default function StudentTimeSlots() {
       </div>
       {alert && <div className={`dash-alert dash-alert-${alert.type}`}>{alert.msg}</div>}
 
-      {DAYS.map(day => (
-        <div className="dash-form-container" key={day} style={{ marginBottom: '16px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <h3 style={{ margin: 0, borderBottom: 'none', paddingBottom: 0 }}>{day}</h3>
-            <button className="dash-filter-btn" onClick={() => addSlot(day)}>+ Add Slot</button>
-          </div>
-          {slots[day].length === 0 && <p style={{ color: 'var(--color-text-muted)', fontSize: '14px' }}>No slots — click + Add Slot</p>}
-          {slots[day].map((slot, idx) => (
-            <div key={idx} style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '8px' }}>
-              <input type="time" value={slot.start_time} onChange={e => updateSlot(day, idx, 'start_time', e.target.value)} />
-              <span style={{ color: 'var(--color-text-muted)' }}>to</span>
-              <input type="time" value={slot.end_time} onChange={e => updateSlot(day, idx, 'end_time', e.target.value)} />
-              <button className="dash-filter-btn" onClick={() => removeSlot(day, idx)} style={{ color: '#E74C3C', borderColor: '#E74C3C' }}>Remove</button>
-            </div>
-          ))}
-        </div>
-      ))}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '16px' }}>
+        {DAYS.map(day => {
+          const hasSlots = slots[day].length > 0;
+          return (
+            <div className={`day-slots-container ${hasSlots ? 'active' : ''}`} key={day}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <h3 style={{ margin: 0, borderBottom: 'none', paddingBottom: 0, fontSize: '18px', color: hasSlots ? 'var(--color-gold)' : 'var(--color-text-muted)' }}>
+                    {day}
+                  </h3>
+                  {!hasSlots && <span style={{ color: 'var(--color-text-muted)', fontSize: '14px', opacity: 0.6 }}>Unavailable</span>}
+                </div>
+                
+                <button 
+                  onClick={() => addSlot(day)}
+                  style={{ background: 'transparent', border: '1px solid rgba(200,167,99,0.3)', color: 'var(--color-gold)', borderRadius: '20px', padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '13px', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(200,167,99,0.1)'; e.currentTarget.style.borderColor = 'var(--color-gold)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(200,167,99,0.3)'; }}
+                >
+                  <Plus size={14} /> Add Slot
+                </button>
+              </div>
 
-      <div style={{ marginTop: '16px' }}>
-        <Button variant="primary" onClick={handleSave}>Save All Slots</Button>
+              {hasSlots && (
+                <div style={{ marginTop: '20px' }}>
+                  {slots[day].map((slot, idx) => (
+                    <div className="slot-row" key={idx}>
+                      <input 
+                        type="time" 
+                        className="time-slot-pill"
+                        value={slot.start_time} 
+                        onChange={e => updateSlot(day, idx, 'start_time', e.target.value)} 
+                      />
+                      
+                      <ArrowRight size={16} color="var(--color-text-muted)" style={{ flexShrink: 0 }} />
+                      
+                      <input 
+                        type="time" 
+                        className="time-slot-pill"
+                        value={slot.end_time} 
+                        onChange={e => updateSlot(day, idx, 'end_time', e.target.value)} 
+                      />
+                      
+                      <button 
+                        className="trash-btn"
+                        onClick={() => removeSlot(day, idx)} 
+                        style={{ background: 'transparent', border: 'none', color: 'rgba(255,50,50,0.5)', cursor: 'pointer', padding: '8px', display: 'flex', alignItems: 'center', transition: 'color 0.2s', marginLeft: 'auto' }}
+                        title="Remove Slot"
+                        onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,50,50,1)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,50,50,0.5)'}
+                      >
+                        <Trash size={18} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ marginTop: '24px', marginBottom: '40px', display: 'flex', justifyContent: 'flex-start' }}>
+        <Button variant="primary" size="sm" onClick={handleSave}>Save All Slots</Button>
       </div>
     </>
   );

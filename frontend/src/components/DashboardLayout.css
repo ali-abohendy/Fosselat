@@ -226,6 +226,8 @@
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all var(--transition-fast);
+  width: auto;
+  max-width: max-content;
 }
 
 .dash-filter-btn:hover,
@@ -233,6 +235,22 @@
   border-color: var(--color-gold);
   color: var(--color-gold);
   background: rgba(200, 167, 99, 0.1);
+}
+
+.dash-filter-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(200, 167, 99, 0.08);
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.dash-filter-scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
 .dash-table {

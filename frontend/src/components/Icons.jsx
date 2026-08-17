@@ -310,3 +310,11 @@ export const Trash = (props) => (
     <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
   </Icon>
 );
+
+export const Plus = (props) => (
+  <Icon {...props}>
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <line x1="5" y1="12" x2="19" y2="12" />
+  </Icon>
+);
+

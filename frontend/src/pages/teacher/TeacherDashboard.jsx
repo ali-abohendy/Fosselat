@@ -55,6 +55,8 @@ export default function TeacherDashboard() {
     return !hasRecorded;
   });
 
+  const netPayroll = Math.round((stats.payroll || 0) + (stats.bonuses || 0) - (stats.deductions || 0));
+
   return (
     <>
       <div className="dash-page-header">
@@ -178,8 +180,8 @@ export default function TeacherDashboard() {
         </div>
         <div className="dash-stat-card" style={{ borderColor: 'rgba(200, 167, 99, 0.4)' }}>
           <div className="stat-icon"><Wallet size={28} color="var(--color-gold)" /></div>
-          <div className="stat-value" style={{ color: 'var(--color-gold)' }}>{stats.payroll} L.E</div>
-          <div className="stat-label">Current Payroll</div>
+          <div className="stat-value" style={{ color: 'var(--color-gold)' }}>{netPayroll} L.E</div>
+          <div className="stat-label">Net Payroll</div>
         </div>
         <div className="dash-stat-card">
           <div className="stat-icon"><Star size={28} color="#2F7A5E" /></div>
