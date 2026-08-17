@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './PlacementTest.css';
 
 const STORAGE_KEY = "fosselat_placement_v2";
@@ -740,7 +741,12 @@ export default function PlacementTest() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userInfo: { name: userInfo.name, age: userInfo.age, email: userInfo.email },
+          userInfo: { 
+            name: userInfo.name, 
+            age: userInfo.age, 
+            email: userInfo.email,
+            student_id: user?.id || undefined
+          },
           results: {
             trackLabel: resultData.trackLabel,
             programLabel: resultData.programLabel,
@@ -769,6 +775,20 @@ export default function PlacementTest() {
   }
 
 
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      setUserInfo({ name: user.full_name || '', email: user.email || '', age: user.age ? String(user.age) : '' });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (screen === 'results' && resultData && userInfo.email && !emailSent && !sendingEmail && !emailError) {
+      sendToAcademy();
+    }
+  }, [screen, resultData, userInfo.email, emailSent, sendingEmail, emailError]);
+
   // ─── Render Screens ───
   const renderWelcome = () => (
     <div className="pt-screen">
@@ -784,72 +804,121 @@ export default function PlacementTest() {
             </div>
           </div>
         )}
-        <button className="pt-btn pt-btn-primary pt-btn-lg" onClick={() => setScreen('userinfo')}>
+        <button className="pt-btn pt-btn-primary pt-btn-lg" onClick={() => {
+          if (user && user.age) {
+            handleAudienceSelect(parseInt(user.age) >= 15, true);
+          } else {
+            setScreen('userinfo');
+          }
+        }}>
           Begin Assessment
         </button>
       </div>
     </div>
   );
 
-  const renderUserInfo = () => (
-    <div className="pt-screen">
-      <div className="pt-card" style={{ maxWidth: 480 }}>
-        <p className="pt-step-label">Before we begin</p>
-        <h2 className="pt-card-title">Tell us about yourself</h2>
-        <div className="pt-userinfo-form">
-          <div className="pt-form-group">
-            <label>Full Name <span style={{ color: 'var(--color-gold)' }}>*</span></label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              value={userInfo.name}
-              onChange={e => setUserInfo({ ...userInfo, name: e.target.value })}
-              className={userInfoErrors.name ? 'pt-input-error' : ''}
-              required
-            />
-            {userInfoErrors.name && <span className="pt-error-text">{userInfoErrors.name}</span>}
+  const handleAudienceSelect = (isAdult, skipAgeOverride = false) => {
+    if (!skipAgeOverride) {
+      setUserInfo({ ...userInfo, age: isAdult ? '25' : '10' });
+    }
+    setPendingAudience(isAdult ? 'adults' : 'kids');
+    if (!track) {
+      setScreen('track');
+    } else if (!program) {
+      setScreen('program');
+    } else {
+      setScreen('testintro');
+    }
+  };
+
+  const renderUserInfo = () => {
+    if (user) {
+      return (
+        <div className="pt-screen">
+          <div className="pt-card" style={{ maxWidth: 480 }}>
+            <p className="pt-step-label">Before we begin</p>
+            <h2 className="pt-card-title">Who is taking this test?</h2>
+            <div className="pt-userinfo-form" style={{ marginTop: '24px' }}>
+              <button 
+                className="pt-btn pt-btn-ghost pt-btn-lg" 
+                style={{ width: '100%', marginBottom: '12px', justifyContent: 'flex-start', padding: '16px' }}
+                onClick={() => handleAudienceSelect(true)}
+              >
+                <strong>Myself (Adult, 16+)</strong>
+              </button>
+              <button 
+                className="pt-btn pt-btn-ghost pt-btn-lg" 
+                style={{ width: '100%', justifyContent: 'flex-start', padding: '16px' }}
+                onClick={() => handleAudienceSelect(false)}
+              >
+                <strong>My Child (Under 16)</strong>
+              </button>
+            </div>
           </div>
-          <div className="pt-form-group">
-            <label>Age <span style={{ color: 'var(--color-gold)' }}>*</span></label>
-            <input
-              type="number"
-              placeholder="Enter your age"
-              value={userInfo.age}
-              onChange={e => setUserInfo({ ...userInfo, age: e.target.value })}
-              className={userInfoErrors.age ? 'pt-input-error' : ''}
-              min="3" max="100"
-              required
-            />
-            {userInfoErrors.age && <span className="pt-error-text">{userInfoErrors.age}</span>}
+        </div>
+      );
+    }
+
+    return (
+      <div className="pt-screen">
+        <div className="pt-card" style={{ maxWidth: 480 }}>
+          <p className="pt-step-label">Before we begin</p>
+          <h2 className="pt-card-title">Tell us about yourself</h2>
+          <div className="pt-userinfo-form">
+            <div className="pt-form-group">
+              <label>Full Name <span style={{ color: 'var(--color-gold)' }}>*</span></label>
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                value={userInfo.name}
+                onChange={e => setUserInfo({ ...userInfo, name: e.target.value })}
+                className={userInfoErrors.name ? 'pt-input-error' : ''}
+                required
+              />
+              {userInfoErrors.name && <span className="pt-error-text">{userInfoErrors.name}</span>}
+            </div>
+            <div className="pt-form-group">
+              <label>Age <span style={{ color: 'var(--color-gold)' }}>*</span></label>
+              <input
+                type="number"
+                placeholder="Enter your age"
+                value={userInfo.age}
+                onChange={e => setUserInfo({ ...userInfo, age: e.target.value })}
+                className={userInfoErrors.age ? 'pt-input-error' : ''}
+                min="3" max="100"
+                required
+              />
+              {userInfoErrors.age && <span className="pt-error-text">{userInfoErrors.age}</span>}
+            </div>
+            <div className="pt-form-group">
+              <label>Email <span style={{ color: 'var(--color-gold)' }}>*</span></label>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={userInfo.email}
+                onChange={e => setUserInfo({ ...userInfo, email: e.target.value })}
+                className={userInfoErrors.email ? 'pt-input-error' : ''}
+                required
+              />
+              {userInfoErrors.email && <span className="pt-error-text">{userInfoErrors.email}</span>}
+            </div>
+            <button
+              className="pt-btn pt-btn-primary pt-btn-lg"
+              onClick={handleUserInfoSubmit}
+              style={{ marginTop: '16px', width: '100%' }}
+            >
+              Continue
+            </button>
           </div>
-          <div className="pt-form-group">
-            <label>Email <span style={{ color: 'var(--color-gold)' }}>*</span></label>
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              value={userInfo.email}
-              onChange={e => setUserInfo({ ...userInfo, email: e.target.value })}
-              className={userInfoErrors.email ? 'pt-input-error' : ''}
-              required
-            />
-            {userInfoErrors.email && <span className="pt-error-text">{userInfoErrors.email}</span>}
-          </div>
-          <button
-            className="pt-btn pt-btn-primary pt-btn-lg"
-            onClick={handleUserInfoSubmit}
-            style={{ marginTop: '16px', width: '100%' }}
-          >
-            Continue
-          </button>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderTrack = () => (
     <div className="pt-screen">
       <div style={{ width: '100%', marginBottom: '20px' }}>
-        <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => setScreen('userinfo')}>← Back</button>
+        <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => (user && user.age) ? setScreen('welcome') : setScreen('userinfo')}>← Back</button>
       </div>
       <div className="pt-step-head">
         <div className="pt-eyebrow">Step 1</div>
@@ -900,7 +969,7 @@ export default function PlacementTest() {
     const maxQ = 1 + qpl * Math.min(levels.length, 4);
     const hasProgramParam = searchParams.get('program');
     const handleBack = () => {
-      if (hasProgramParam) setScreen('userinfo');
+      if (hasProgramParam) (user && user.age) ? setScreen('welcome') : setScreen('userinfo');
       else setScreen('program');
     };
     return (
@@ -992,11 +1061,11 @@ export default function PlacementTest() {
             {q.options.map((opt, idx) => (
               <button
                 key={idx}
-                className={`pt-q-option${selected === idx ? ' selected' : ''}`}
+                className={`pt-q-option${selected === idx ? ' is-picked' : ''}`}
                 onClick={() => setSelected(idx)}
               >
                 <span className="pt-q-option-letter">{String.fromCharCode(65 + idx)}</span>
-                <span className={q.optionsArabic ? 'pt-option-arabic-text' : ''}>{opt}</span>
+                <span className={q.optionsArabic ? 'pt-opt-arabic' : ''}>{opt}</span>
               </button>
             ))}
           </div>
@@ -1039,13 +1108,8 @@ export default function PlacementTest() {
             <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" />
             <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" transform="rotate(45 50 50)" />
           </svg>
-          <p className="pt-rh-eyebrow">Recommended Starting Level</p>
-          <p className="pt-rh-level-tag">Level {resultData.recommendedLevelId} of {resultData.totalLevels}</p>
-          <h2 className="pt-rh-level">{resultData.recommendedLevel?.name || `Level ${resultData.recommendedLevelId}`}</h2>
-          <p className="pt-rh-program">{resultData.trackLabel} — {resultData.programLabel}</p>
-          {resultData.recommendedLevel?.desc && (
-            <p className="pt-rh-level-desc">"{resultData.recommendedLevel.desc}"</p>
-          )}
+          <h2 className="pt-rh-level">{resultData.trackLabel}</h2>
+          <p className="pt-rh-program">{resultData.programLabel}</p>
         </div>
 
         {/* Level score bars */}
@@ -1084,16 +1148,6 @@ export default function PlacementTest() {
               )) : <li>No specific gaps stood out — nicely balanced.</li>}
             </ul>
           </div>
-          <div className="pt-results-card">
-            <h3>Estimated Duration</h3>
-            <div className="stat-big">{resultData.duration.label}</div>
-            <div className="stat-sub">{resultData.duration.note}</div>
-          </div>
-          <div className="pt-results-card">
-            <h3>Recommended Pace</h3>
-            <div className="stat-big">{resultData.duration.lessonsPerWeek}</div>
-            <div className="stat-sub">Suggested weekly lessons to progress steadily</div>
-          </div>
         </div>
 
         {/* Summary */}
@@ -1103,20 +1157,18 @@ export default function PlacementTest() {
         </div>
 
         <div className="pt-results-actions">
-          {!emailSent ? (
-            <button
-              className="pt-btn pt-btn-primary pt-btn-lg"
-              onClick={sendToAcademy}
-              disabled={sendingEmail}
-            >
-              {sendingEmail ? 'Sending...' : '📩 Send to Academy'}
-            </button>
-          ) : (
-            <div className="pt-email-success">
-              <span>✅</span> Results sent to <strong>{userInfo.email}</strong> and to the Academy!
+          {sendingEmail ? (
+            <div className="pt-email-success" style={{ color: 'var(--color-cream)' }}>
+              <div className="pt-loading-spinner" style={{ width: '16px', height: '16px', display: 'inline-block', marginRight: '8px', verticalAlign: 'middle' }} />
+              Saving and sending your results...
             </div>
-          )}
-          {emailError && <p className="pt-error-text" style={{ marginTop: '8px' }}>{emailError}</p>}
+          ) : emailSent ? (
+            <div className="pt-email-success">
+              <span>✅</span> Results sent to <strong>{userInfo.email}</strong> and saved!
+            </div>
+          ) : emailError ? (
+            <p className="pt-error-text" style={{ marginTop: '8px' }}>{emailError}</p>
+          ) : null}
           <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
             <button className="pt-btn pt-btn-primary" onClick={() => { clearProgress(); setSession(null); setResultData(null); setEmailSent(false); setScreen('track'); }}>
               Explore Another Program

@@ -4,7 +4,7 @@ import { Leaf, BookOpen, Star, Trophy, Clock } from '../components/Icons';
 import './Pricing.css';
 
 const WHATSAPP_BASE = 'https://wa.me/966595796177';
-const WHATSAPP_TRIAL = 'https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please.';
+const WHATSAPP_TRIAL = 'https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20Free%20trial%20lesson,%20please.';
 
 const PLANS = [
   { id: 'starter', name: 'Starter', icon: <Leaf size={32} color="#4ade80" />, classes: 2, desc: 'Perfect for steady progress.' },

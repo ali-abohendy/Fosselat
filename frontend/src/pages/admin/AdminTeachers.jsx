@@ -165,7 +165,7 @@ export default function AdminTeachers() {
             <thead>
               <tr>
                 <th>Name</th><th>Email</th><th>Password</th><th>Status</th><th>Rate/hr</th>
-                <th>Payment Status</th><th>Zoom Link</th><th>Google Meet Link</th><th>Actions</th>
+                <th>Zoom Link</th><th>Google Meet Link</th><th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -185,8 +185,7 @@ export default function AdminTeachers() {
                   <td style={{fontSize:'12px'}}>{t.email || '—'}</td>
                   <td style={{fontSize:'12px'}}>{t.generated_password || t.plain_password || '—'}</td>
                   <td><span className={`status-badge status-${t.status}`}>{t.status}</span></td>
-                  <td>${t.hourly_rate || 0}</td>
-                  <td>—</td>
+                  <td>{t.hourly_rate || 0} L.E</td>
                   <td style={{fontSize:'12px'}}>{t.zoom_link ? <a href={t.zoom_link} target="_blank" rel="noreferrer">Zoom</a> : '—'}</td>
                   <td style={{fontSize:'12px'}}>{t.google_meet_link ? <a href={t.google_meet_link} target="_blank" rel="noreferrer">Meet</a> : '—'}</td>
                   <td><button className="dash-filter-btn" onClick={() => handleEdit(t)}>Edit</button></td>

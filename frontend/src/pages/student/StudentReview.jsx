@@ -19,7 +19,15 @@ export default function StudentReview() {
     document.title = 'Review Session — Fosselat';
     fetch(`${API}/sessions/${sessionId}`, { headers: getHeaders() })
       .then(r => r.json())
-      .then(d => { if (d.success) setSession(d.data); })
+      .then(d => { 
+        if (d.success) {
+          setSession(d.data); 
+          if (d.data.review) {
+            setRating(d.data.review.rating || 0);
+            setComment(d.data.review.comment || '');
+          }
+        } 
+      })
       .catch(() => {});
   }, [sessionId]);
 

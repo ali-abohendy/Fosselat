@@ -7,17 +7,17 @@ const getHeaders = () => ({
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,
 });
 
-export default function TeacherCalendar() {
+export default function StudentCalendar() {
   const [scheduled, setScheduled] = useState([]);
   const [pastSessions, setPastSessions] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
   useEffect(() => {
-    document.title = 'Calendar — Teacher';
+    document.title = 'Calendar — Student';
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // 1-indexed
+    const month = currentDate.getMonth() + 1; // 1-indexed for backend
 
-    fetch(`${API}/teacher/calendar?year=${year}&month=${month}`, { headers: getHeaders() })
+    fetch(`${API}/student/calendar?year=${year}&month=${month}`, { headers: getHeaders() })
       .then(r => r.json())
       .then(d => { 
         if (d.success) {
@@ -31,14 +31,14 @@ export default function TeacherCalendar() {
   return (
     <>
       <div className="dash-page-header">
-        <h2>My Teaching Calendar</h2>
-        <p>Your weekly scheduled sessions assigned by admin</p>
+        <h2>My Calendar</h2>
+        <p>Your upcoming classes and links to join</p>
       </div>
 
       <MonthlyCalendar 
         scheduled={scheduled} 
         pastSessions={pastSessions}
-        type="teacher" 
+        type="student" 
         currentDate={currentDate}
         setCurrentDate={setCurrentDate}
       />

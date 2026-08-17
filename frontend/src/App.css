@@ -37,7 +37,7 @@
 /* Scroll to top */
 .scroll-to-top {
   position: fixed;
-  bottom: 30px;
+  bottom: 100px;
   right: 30px;
   width: 45px;
   height: 45px;
@@ -72,8 +72,8 @@
 
 @media (max-width: 768px) {
   .scroll-to-top {
-    right: auto;
-    left: 20px;
-    bottom: 20px;
+    right: 20px;
+    left: auto;
+    bottom: 85px;
   }
 }

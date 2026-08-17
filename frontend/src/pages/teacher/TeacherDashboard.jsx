@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Video, Calendar, ClipboardList, Clock, DollarSign } from '../../components/Icons';
+import { Video, Calendar, ClipboardList, Clock, Wallet, Star, XCircle } from '../../components/Icons';
 import { useAuth } from '../../context/AuthContext';
 import Button from '../../components/Button';
 import API from '../../config';
@@ -11,9 +11,19 @@ const getHeaders = () => ({
 const DAYS_MAP = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export default function TeacherDashboard() {
-  const [period, setPeriod] = useState('month');
-  const [stats, setStats] = useState({ lessons: 0, time_hours: 0, time_minutes: 0, rate_hour: 0 });
+  const getMonths = () => {
+    const months = [];
+    const d = new Date();
+    for (let i = 0; i < 12; i++) {
+      months.push(new Date(d.getFullYear(), d.getMonth() - i, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }));
+    }
+    return months;
+  };
+  const monthOptions = getMonths();
+  const [period, setPeriod] = useState(monthOptions[0]);
+  const [stats, setStats] = useState({ lessons: 0, time_hours: 0, time_minutes: 0, rate_hour: 0, payroll: 0, bonuses: 0, deductions: 0 });
   const [scheduled, setScheduled] = useState([]);
+  const [pastSessions, setPastSessions] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -27,12 +37,23 @@ export default function TeacherDashboard() {
   useEffect(() => {
     fetch(`${API}/teacher/calendar`, { headers: getHeaders() })
       .then(r => r.json())
-      .then(d => { if (d.success) setScheduled(d.data || []); })
+      .then(d => { 
+        if (d.success) {
+          setScheduled(d.data?.scheduled || []); 
+          setPastSessions(d.data?.past_sessions || []);
+        } 
+      })
       .catch(() => {});
   }, []);
 
   const today = DAYS_MAP[new Date().getDay()];
-  const todaySessions = scheduled.filter(s => s.day === today && s.active);
+  const todayStr = new Date().toISOString().split('T')[0];
+  
+  const todaySessions = scheduled.filter(s => {
+    if (s.day !== today || !s.active) return false;
+    const hasRecorded = pastSessions.some(ps => ps.student_id === s.student_id && ps.date === todayStr);
+    return !hasRecorded;
+  });
 
   return (
     <>
@@ -130,11 +151,13 @@ export default function TeacherDashboard() {
 
       {/* Stats */}
       <div className="dash-table-filters" style={{ marginBottom: '24px' }}>
-        {['week', 'month', 'year'].map(p => (
-          <button key={p} className={`dash-filter-btn ${period === p ? 'active' : ''}`} onClick={() => setPeriod(p)}>
-            {p.charAt(0).toUpperCase() + p.slice(1)}
-          </button>
-        ))}
+        <select
+          value={period}
+          onChange={(e) => setPeriod(e.target.value)}
+          style={{ width: '100%', maxWidth: '200px', padding: '8px 12px', background: 'transparent', border: '1px solid rgba(200,167,99,0.3)', color: 'var(--color-cream)', borderRadius: '6px' }}
+        >
+          {monthOptions.map(m => <option key={m} value={m} style={{ color: '#000' }}>{m}</option>)}
+        </select>
       </div>
 
       <div className="dash-stats-grid">
@@ -149,9 +172,24 @@ export default function TeacherDashboard() {
           <div className="stat-label">Teaching Time</div>
         </div>
         <div className="dash-stat-card">
-          <div className="stat-icon"><DollarSign size={28} /></div>
-          <div className="stat-value">${stats.rate_hour}</div>
+          <div className="stat-icon"><Wallet size={28} /></div>
+          <div className="stat-value">{stats.rate_hour} L.E</div>
           <div className="stat-label">Rate / Hour</div>
+        </div>
+        <div className="dash-stat-card" style={{ borderColor: 'rgba(200, 167, 99, 0.4)' }}>
+          <div className="stat-icon"><Wallet size={28} color="var(--color-gold)" /></div>
+          <div className="stat-value" style={{ color: 'var(--color-gold)' }}>{stats.payroll} L.E</div>
+          <div className="stat-label">Current Payroll</div>
+        </div>
+        <div className="dash-stat-card">
+          <div className="stat-icon"><Star size={28} color="#2F7A5E" /></div>
+          <div className="stat-value" style={{ color: '#2F7A5E' }}>{stats.bonuses} L.E</div>
+          <div className="stat-label">Bonuses</div>
+        </div>
+        <div className="dash-stat-card">
+          <div className="stat-icon"><XCircle size={28} color="#B0453B" /></div>
+          <div className="stat-value" style={{ color: '#B0453B' }}>{stats.deductions} L.E</div>
+          <div className="stat-label">Deductions</div>
         </div>
       </div>
     </>

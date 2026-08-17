@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { useAuth } from '../context/AuthContext';
+import { Eye, EyeOff } from '../components/Icons';
 import './Login.css';
 
 export default function Login() {
@@ -126,7 +127,7 @@ export default function Login() {
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label={showPassword ? 'Hide password' : 'Show password'}
                     >
-                      {showPassword ? '🙈' : '👁️'}
+                      {showPassword ? <EyeOff size={20} color="var(--color-gold)" /> : <Eye size={20} color="var(--color-gold)" />}
                     </button>
                   </div>
                 </div>

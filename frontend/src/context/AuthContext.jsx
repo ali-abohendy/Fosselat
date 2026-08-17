@@ -38,8 +38,8 @@ export function AuthProvider({ children }) {
     return { success: false, message: data?.message || 'Login failed' };
   };
 
-  const register = async (full_name, email, password) => {
-    const data = await authAPI.register({ full_name, email, password });
+  const register = async (full_name, email, password, age) => {
+    const data = await authAPI.register({ full_name, email, password, age });
     if (data && data.success) {
       localStorage.setItem('fossclat_token', data.data.token);
       setUser(data.data.user);

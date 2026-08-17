@@ -18,6 +18,7 @@ export default function AdminSchedule() {
   const [alert, setAlert] = useState(null);
   const [filterTeacher, setFilterTeacher] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeDay, setActiveDay] = useState('Monday');
 
   const fetchData = () => {
     fetch(`${API}/admin/schedule`, { headers: getHeaders() })
@@ -35,7 +36,9 @@ export default function AdminSchedule() {
     if (form.student_id) {
       const student = students.find(s => s._id === form.student_id);
       if (student && student.class_duration) {
-        setForm(prev => ({ ...prev, duration: student.class_duration }));
+        let dur = String(student.class_duration).trim();
+        if (!dur.includes('min')) dur = `${dur} min`;
+        setForm(prev => ({ ...prev, duration: dur }));
       }
     }
   }, [form.student_id, students]);
@@ -101,27 +104,73 @@ export default function AdminSchedule() {
               {teachers.map(t => <option key={t._id} value={t._id}>{t.full_name}</option>)}
             </select>
           </div>
-          <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {DAYS.map(day => (
-              groupedTeacherSlots[day].length > 0 && (
-                <div key={day} style={{ background: 'rgba(200,167,99,0.04)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(200,167,99,0.1)' }}>
-                  <h4 style={{ color: 'var(--color-gold)', marginBottom: '8px', fontSize: '14px' }}>{day}</h4>
-                  {groupedTeacherSlots[day].map((slot, i) => (
+          <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            
+            {/* Tabs for Days */}
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', borderBottom: '1px solid rgba(200,167,99,0.15)', paddingBottom: '16px' }}>
+              {DAYS.map(day => {
+                const count = groupedTeacherSlots[day]?.length || 0;
+                return (
+                  <button
+                    key={day}
+                    onClick={() => setActiveDay(day)}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: '20px',
+                      background: activeDay === day ? 'var(--color-gold)' : 'rgba(200,167,99,0.05)',
+                      color: activeDay === day ? 'var(--color-bg)' : 'var(--color-cream)',
+                      border: activeDay === day ? 'none' : '1px solid rgba(200,167,99,0.2)',
+                      fontSize: '13px',
+                      fontWeight: activeDay === day ? 'bold' : '500',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      opacity: count === 0 && activeDay !== day ? 0.5 : 1
+                    }}
+                  >
+                    {day} {count > 0 && `(${count})`}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Day Slots Grid */}
+            <div style={{ background: 'rgba(200,167,99,0.03)', borderRadius: '12px', padding: '20px', border: '1px solid rgba(200,167,99,0.1)', minHeight: '180px' }}>
+              <h4 style={{ color: 'var(--color-gold)', marginBottom: '20px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                {activeDay} Slots
+              </h4>
+              
+              {groupedTeacherSlots[activeDay]?.length > 0 ? (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '12px' }}>
+                  {groupedTeacherSlots[activeDay].map((slot, i) => (
                     <button key={i} onClick={() => handleSlotClick(slot)}
                       style={{
                         display: 'block', width: '100%', textAlign: 'left',
                         background: 'rgba(200,167,99,0.08)', border: '1px solid rgba(200,167,99,0.15)',
-                        borderRadius: '6px', padding: '8px 10px', marginBottom: '6px', cursor: 'pointer',
-                        color: 'var(--color-cream)', fontSize: '13px', fontFamily: 'var(--font-family)',
+                        borderRadius: '10px', padding: '14px', cursor: 'pointer',
+                        color: 'var(--color-cream)', fontFamily: 'var(--font-family)',
+                        transition: 'all 0.2s ease-out'
                       }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(200,167,99,0.15)'; e.currentTarget.style.borderColor = 'rgba(200,167,99,0.4)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(200,167,99,0.08)'; e.currentTarget.style.borderColor = 'rgba(200,167,99,0.15)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
                     >
-                      <strong>{slot.start_time}</strong> – {slot.end_time}
-                      <br /><span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{slot.teacher_name}</span>
+                      <div style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '6px', color: 'var(--color-gold)' }}>
+                        {slot.start_time} <span style={{ color: 'var(--color-text-muted)', fontSize: '12px', fontWeight: 'normal', margin: '0 4px' }}>to</span> {slot.end_time}
+                      </div>
+                      <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        {slot.teacher_name}
+                      </div>
                     </button>
                   ))}
                 </div>
-              )
-            ))}
+              ) : (
+                <div style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--color-text-muted)', fontSize: '14px', background: 'rgba(0,0,0,0.1)', borderRadius: '8px' }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" style={{marginBottom: '10px'}}><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                  <br />No available slots for {activeDay}.
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -208,7 +257,7 @@ export default function AdminSchedule() {
         </div>
         <div style={{overflowX:'auto'}}>
           <table className="dash-table">
-            <thead><tr><th>Student ID</th><th>Student</th><th>Teacher</th><th>Day</th><th>Time</th><th>Duration</th><th>Room</th></tr></thead>
+            <thead><tr><th>Student ID</th><th>Student</th><th>Teacher</th><th>Day</th><th>Time</th><th>Duration</th></tr></thead>
             <tbody>
               {scheduled
                 .filter(s => {
@@ -226,10 +275,9 @@ export default function AdminSchedule() {
                   <td>{s.student_name}</td><td>{s.teacher_name}</td>
                   <td>{s.day}</td><td>{s.start_time} – {s.end_time}</td>
                   <td>{s.duration}</td>
-                  <td style={{fontSize:'11px',color:'var(--color-text-muted)'}}>{s.meeting_room_id}</td>
                 </tr>
               ))}
-              {!scheduled.length && <tr><td colSpan="7" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No sessions scheduled</td></tr>}
+              {!scheduled.length && <tr><td colSpan="6" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No sessions scheduled</td></tr>}
             </tbody>
           </table>
         </div>

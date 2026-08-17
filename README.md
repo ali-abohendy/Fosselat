@@ -155,9 +155,19 @@ Fosselat/
 
 | Role | Access |
 |------|--------|
-| **Admin** | Full access — manage students, teachers, schedule, attendance, payments |
+| **Admin** | Full access — manage students, teachers, schedule, attendance, payments, test routing |
 | **Teacher** | Dashboard, calendar, record sessions, time slots |
-| **Student** | Dashboard, session history, time slots, reviews |
+| **Student** | Dashboard, session history, time slots, reviews, **Placement Tests Progress & History** |
+
+---
+
+## ✨ Recent Features & Improvements
+
+- **Student Tests Dashboard Redesign:** A modern "Progress Dashboard" displaying top-level statistics (tests taken, average score), current progress bars per program, and a chronological test history log with expandable details.
+- **Smart Placement Testing:** Placement tests automatically bypass the "Who is this for?" screen based on the student's registered age, sending direct email results.
+- **Dynamic Test Recommendations:** Students receive personalized test recommendations in their dashboard 30 days after enrollment, based on their registered programs.
+- **Searchable ID Selection:** Administrators can now easily search and select Student/Teacher IDs via a custom dropdown component that filters typing on-the-fly.
+- **Mobile Responsive Dashboards:** Bottom navigation bars, grids, and history tables are fully responsive and optimized for mobile and iPad screens.
 
 ---
 

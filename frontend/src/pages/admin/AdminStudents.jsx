@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
+import SearchableSelect from '../../components/SearchableSelect';
+import MultiCreatableSelect from '../../components/MultiCreatableSelect';
 import API from '../../config';
+
 const getHeaders = () => ({
   'Content-Type': 'application/json',
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,
@@ -32,14 +35,14 @@ const DURATIONS = [
 
 const emptyForm = {
   full_name: '', family_name: '', teacher_id: '',
-  hourly_rate: '', status: 'active', start_date: '', phone: '',
-  programs: [], plan: '', class_duration: '',
+  hourly_rate: '', status: 'active', start_date: '', phone: '', age: '',
+  programs: [], plan: '', class_duration: '', subject: [],
 };
 
 export default function AdminStudents() {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const [payments, setPayments] = useState([]);
+
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
   const [alert, setAlert] = useState(null);
@@ -57,12 +60,7 @@ export default function AdminStudents() {
       .then(r => r.json()).then(d => { if (d.success) setTeachers(d.data); }).catch(() => {});
   };
 
-  const fetchPayments = () => {
-    fetch(`${API}/admin/payments/students`, { headers: getHeaders() })
-      .then(r => r.json()).then(d => { if (d.success) setPayments(d.data); }).catch(() => {});
-  };
-
-  useEffect(() => { document.title = 'Students — Admin'; fetchStudents(); fetchTeachers(); fetchPayments(); }, []);
+  useEffect(() => { document.title = 'Students — Admin'; fetchStudents(); fetchTeachers(); }, []);
 
 
   // Auto-calculate rate when plan/duration change
@@ -140,9 +138,10 @@ export default function AdminStudents() {
       full_name: s.full_name || '', family_name: s.family_name || '',
       teacher_id: s.teacher_id || '',
       hourly_rate: s.hourly_rate || '', status: s.status || 'active',
-      start_date: s.start_date?.split('T')[0] || '', phone: s.phone || '',
+      start_date: s.start_date?.split('T')[0] || '', phone: s.phone || '', age: s.age || '',
       programs: progArr, plan: s.plan || '',
       class_duration: s.class_duration || '',
+      subject: s.subject || [],
     });
   };
 
@@ -186,15 +185,37 @@ export default function AdminStudents() {
             </div>
             <div className="dash-form-group">
               <label>Phone Number <span style={{color:'var(--color-gold)'}}>*</span></label>
-              <input value={form.phone} onChange={e => setForm({...form, phone: e.target.value})}
+              <input type="tel" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} 
                 placeholder="+201234567890" required />
             </div>
             <div className="dash-form-group">
-              <label>Assign Teacher <span style={{color:'var(--color-gold)'}}>*</span></label>
-              <select value={form.teacher_id} onChange={e => setForm({...form, teacher_id: e.target.value})} required>
-                <option value="">Select Teacher</option>
-                {teachers.map(t => <option key={t._id} value={t._id}>{t.full_name} {t.family_name || ''}</option>)}
-              </select>
+              <label>Age</label>
+              <input type="number" value={form.age} onChange={e => setForm({...form, age: e.target.value})} 
+                placeholder="e.g. 12" />
+            </div>
+            <div className="dash-form-group">
+              <SearchableSelect
+                label="Assign Teacher"
+                options={teachers.map(t => ({ value: t._id, label: `${t.full_name} ${t.family_name || ''}`.trim() }))}
+                value={form.teacher_id}
+                onChange={val => setForm({...form, teacher_id: val})}
+                placeholder="Search or select Teacher"
+                required
+              />
+            </div>
+            
+            <div className="dash-form-group">
+              <MultiCreatableSelect
+                label="Subjects"
+                options={[
+                  { value: 'Quran', label: 'Quran' },
+                  { value: 'Arabic', label: 'Arabic' },
+                  { value: 'Islamic Studies', label: 'Islamic Studies' }
+                ]}
+                value={form.subject}
+                onChange={(val) => setForm({ ...form, subject: val })}
+                placeholder="Type or select subjects..."
+              />
             </div>
 
             {/* Programs — Checkbox */}
@@ -292,7 +313,7 @@ export default function AdminStudents() {
             <thead>
               <tr>
                 <th>ID</th><th>Name</th><th>Family</th><th>Email</th><th>Password</th>
-                <th>Teacher</th><th>Programs</th>
+                <th>Age</th><th>Teacher</th><th>Programs</th>
                 <th>Rate/mo</th><th>Status</th><th>Phone</th><th>Actions</th>
               </tr>
             </thead>
@@ -311,19 +332,13 @@ export default function AdminStudents() {
                 <tr key={s._id}>
                   <td style={{color:'var(--color-gold)',fontWeight:600}}>{s.student_id || '—'}</td>
                   <td>{s.full_name}</td><td>{s.family_name}</td>
-                  <td style={{fontSize:'12px'}}>{s.email || '—'}</td>
-                  <td style={{fontSize:'12px'}}>{s.generated_password || s.plain_password || '—'}</td>
+                  <td style={{fontSize:'12px'}}>{s.email || '-'}</td>
+                  <td style={{fontSize:'12px'}}>{s.generated_password || s.plain_password || '-'}</td>
+                  <td>{s.age || '-'}</td>
                   <td>{s.teacher_name}</td>
                   <td>{s.program || '—'}</td>
                   <td>${s.hourly_rate || 0}</td>
-                  <td>
-                    {(() => {
-                      const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-                      const famPayment = payments.find(p => p.family_id === s.student_id && p.month === currentMonth);
-                      const paymentStatus = famPayment ? famPayment.status : 'unpaid';
-                      return <span className={`status-badge status-${paymentStatus}`}>{paymentStatus}</span>;
-                    })()}
-                  </td>
+
                   <td><span className={`status-badge status-${s.status}`}>{s.status}</span></td>
                   <td>{s.phone}</td>
                   <td><button className="dash-filter-btn" onClick={() => handleEdit(s)}>Edit</button></td>

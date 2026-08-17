@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { createTransport } from 'nodemailer';
+import { getDB } from '../db.js';
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.post('/send-results', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Missing data' });
     }
 
-    const { name, age, email } = userInfo;
+    const { name, age, email, student_id } = userInfo;
     if (!email) {
       return res.status(400).json({ success: false, message: 'Email is required' });
     }
@@ -148,10 +149,31 @@ router.post('/send-results', async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    return res.json({ success: true });
-  } catch (err) {
-    console.error('Email send error:', err);
-    return res.status(500).json({ success: false, message: 'Failed to send email' });
+    // Save to DB if student is logged in
+    if (student_id) {
+      try {
+        const db = getDB();
+        await db.collection('placement_tests').insertOne({
+          student_id,
+          name,
+          email,
+          age,
+          track: trackLabel,
+          program: programLabel,
+          recommended_level: recommendedLevel,
+          score,
+          level_scores: levelScores,
+          created_at: new Date()
+        });
+      } catch (dbErr) {
+        console.error('Failed to save placement test to DB:', dbErr);
+      }
+    }
+
+    return res.json({ success: true, message: 'Results sent' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 

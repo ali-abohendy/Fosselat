@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
+import SearchableSelect from '../../components/SearchableSelect';
 import API from '../../config';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
@@ -19,6 +20,7 @@ export default function AdminStudentPayments() {
   const [editingId, setEditingId] = useState(null);
   const [memberStats, setMemberStats] = useState([]); // per-student session info
   const [searchQuery, setSearchQuery] = useState('');
+  const [filterMonth, setFilterMonth] = useState('');
 
   const getMonths = () => {
     const months = [];
@@ -78,7 +80,7 @@ export default function AdminStudentPayments() {
 
       for (const m of members) {
         const sessions = await fetchSessionsForStudent(m._id, prefix);
-        const presentSessions = sessions.filter(s => s.status === 'present');
+        const presentSessions = sessions.filter(s => s.status === 'present' || s.status === 'absent');
 
         // Total minutes this student actually attended
         const totalMins = presentSessions.reduce((acc, s) => {
@@ -154,6 +156,16 @@ export default function AdminStudentPayments() {
       remaining: p.remaining || '', status: p.status || 'unpaid' });
   };
 
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to clear this payment record?')) return;
+    try {
+      const r = await fetch(`${API}/admin/payments/students/${id}`, { method: 'DELETE', headers: getHeaders() });
+      const d = await r.json();
+      if (d.success) fetchPayments();
+      else setAlert({ type: 'error', msg: d.message || 'Error clearing payment' });
+    } catch { setAlert({ type: 'error', msg: 'Server error' }); }
+  };
+
   return (
     <>
       <div className="dash-page-header">
@@ -168,13 +180,14 @@ export default function AdminStudentPayments() {
           <div className="dash-form-grid">
 
             <div className="dash-form-group">
-              <label>Family ID</label>
-              <input list="family-ids" value={form.family_id}
-                onChange={e => handleFamilyChange(e.target.value)}
-                placeholder="Search or enter Family ID" required />
-              <datalist id="family-ids">
-                {familyIds.map(fid => <option key={fid} value={fid} />)}
-              </datalist>
+              <SearchableSelect
+                label="Family ID"
+                options={familyIds.map(id => ({ value: id, label: id }))}
+                value={form.family_id}
+                onChange={val => handleFamilyChange(val)}
+                placeholder="Search or select Family ID"
+                required
+              />
             </div>
 
             <div className="dash-form-group">
@@ -187,7 +200,7 @@ export default function AdminStudentPayments() {
 
             <div className="dash-form-group">
               <label>Amount Paid ($)</label>
-              <input type="number" step="0.01" value={form.amount_paid}
+              <input type="number" step="0.01" min="0" value={form.amount_paid}
                 onChange={e => handlePaidChange(e.target.value)} required />
             </div>
 
@@ -208,10 +221,10 @@ export default function AdminStudentPayments() {
 
             {/* Per-student breakdown table */}
             {memberStats.length > 0 && (
-              <div className="dash-form-group" style={{gridColumn:'1 / -1'}}>
+              <div className="dash-form-group" style={{gridColumn:'1 / -1', maxWidth: '100%'}}>
                 <label>Family Members — Session Breakdown</label>
-                <div style={{overflowX:'auto'}}>
-                  <table className="dash-table" style={{fontSize:'13px'}}>
+                <div style={{overflowX:'auto', width:'100%', maxWidth:'100%'}}>
+                  <table className="dash-table" style={{fontSize:'13px', width:'100%'}}>
                     <thead>
                       <tr>
                         <th>Name</th>
@@ -249,32 +262,45 @@ export default function AdminStudentPayments() {
 
             <div className="dash-form-actions" style={{gridColumn:'1 / -1'}}>
               <Button type="submit" variant="primary">{editingId ? 'Update Payment' : 'Record Payment'}</Button>
-              {editingId && <Button variant="outline" onClick={() => { setEditingId(null); setForm(emptyForm); setMemberStats([]); }}>Cancel</Button>}
+              {editingId && <Button type="button" variant="outline" onClick={() => { setEditingId(null); setForm(emptyForm); setMemberStats([]); }}>Cancel</Button>}
+              {!editingId && <Button type="button" variant="outline" onClick={() => { setForm(emptyForm); setMemberStats([]); }}>Clear</Button>}
             </div>
           </div>
         </form>
       </div>
 
       <div className="dash-table-container">
-        <div className="dash-table-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="dash-table-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <h3>Payment Records ({payments.length})</h3>
-          <input
-            type="text"
-            placeholder="Search by ID or name..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            style={{
-              padding: '8px 14px',
-              background: 'rgba(200,167,99,0.06)',
-              border: '1px solid rgba(200,167,99,0.2)',
-              borderRadius: '8px',
-              color: 'var(--color-cream)',
-              fontSize: '13px',
-              minWidth: '220px',
-              outline: 'none',
-              fontFamily: 'var(--font-family)',
-            }}
-          />
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <input
+              type="text"
+              placeholder="Search by ID or name..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              style={{
+                padding: '8px 14px',
+                background: 'rgba(200,167,99,0.06)',
+                border: '1px solid rgba(200,167,99,0.2)',
+                borderRadius: '8px',
+                color: 'var(--color-cream)',
+                fontSize: '13px',
+                minWidth: '220px',
+                width: 'auto',
+                flex: '1 1 auto',
+                outline: 'none',
+                fontFamily: 'var(--font-family)',
+              }}
+            />
+            <select
+              value={filterMonth}
+              onChange={(e) => setFilterMonth(e.target.value)}
+              style={{ padding: '8px 12px', background: 'transparent', border: '1px solid rgba(200,167,99,0.3)', color: 'var(--color-cream)', borderRadius: '6px', minWidth: '150px', width: 'auto', flex: '1 1 auto' }}
+            >
+              <option value="" style={{ color: '#000' }}>All Months</option>
+              {monthOptions.map(m => <option key={m} value={m} style={{ color: '#000' }}>{m}</option>)}
+            </select>
+          </div>
         </div>
         <div style={{overflowX:'auto'}}>
           <table className="dash-table">
@@ -284,6 +310,7 @@ export default function AdminStudentPayments() {
             <tbody>
               {payments
                 .filter(p => {
+                  if (filterMonth && p.month !== filterMonth) return false;
                   if (!searchQuery.trim()) return true;
                   const q = searchQuery.toLowerCase();
                   return (
@@ -300,7 +327,10 @@ export default function AdminStudentPayments() {
                   <td>${p.amount_paid}</td>
                   <td>${p.remaining}</td>
                   <td><span className={`status-badge status-${p.status}`}>{p.status}</span></td>
-                  <td><button className="dash-filter-btn" onClick={() => handleEdit(p)}>Edit</button></td>
+                  <td style={{ display: 'flex', gap: '8px' }}>
+                    <button className="dash-filter-btn" onClick={() => handleEdit(p)}>Edit</button>
+                    <button className="dash-filter-btn" style={{ borderColor: 'rgba(255, 69, 58, 0.3)', color: '#ff453a' }} onClick={() => handleDelete(p._id)}>Clear</button>
+                  </td>
                 </tr>
               ))}
               {!payments.length && <tr><td colSpan="8" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No payments recorded</td></tr>}

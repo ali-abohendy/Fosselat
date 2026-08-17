@@ -73,16 +73,19 @@ export default function Navbar() {
           <ul className="navbar-links">
             <li><NavLink to="/" onClick={closeMenu} end>Home</NavLink></li>
             <li><NavLink to="/curriculum" onClick={closeMenu}>Curriculum</NavLink></li>
-            <li><NavLink to="/placement-tests" onClick={closeMenu}>Placement Tests</NavLink></li>
+            {(!user || user.role === 'student') && (
+              <li><NavLink to="/placement-tests" onClick={closeMenu}>{user ? 'Tests' : 'Placement Tests'}</NavLink></li>
+            )}
             {user?.role !== 'teacher' && <li><NavLink to="/pricing" onClick={closeMenu}>Pricing</NavLink></li>}
             <li><NavLink to="/about" onClick={closeMenu}>About Us</NavLink></li>
             <li><NavLink to="/contact" onClick={closeMenu}>Contact</NavLink></li>
+            {user && <li><NavLink to={getDashboardLink()} onClick={closeMenu}>Dashboard</NavLink></li>}
           </ul>
 
           <div className="navbar-mobile-footer">
             {!user && (
               <a 
-                href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20free%20time%20trial,%20please." 
+                href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20Free%20trial%20lesson,%20please." 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="navbar-mobile-cta"

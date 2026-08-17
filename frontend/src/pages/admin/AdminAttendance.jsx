@@ -112,7 +112,7 @@ export default function AdminAttendance() {
             <thead>
               <tr>
                 <th>Student ID</th><th>Student</th><th>Family</th><th>Subject</th><th>Teacher</th>
-                <th>Duration</th><th>Status</th><th>Date</th><th>Notes</th>
+                <th>Duration</th><th>Status</th><th>Date</th><th>Teacher Notes</th><th>Student Review</th>
               </tr>
             </thead>
             <tbody>
@@ -124,9 +124,19 @@ export default function AdminAttendance() {
                   <td>{s.duration}</td>
                   <td><span className={`status-badge status-${s.status}`}>{s.status}</span></td>
                   <td>{s.date?.split('T')[0]}</td><td>{s.notes || '—'}</td>
+                  <td>
+                    {s.student_review ? (
+                      <div style={{ fontSize: '13px' }}>
+                        <span style={{ color: 'var(--color-gold)' }}>{'★'.repeat(s.student_review.rating)}</span>
+                        {s.student_review.comment && <div style={{ color: 'var(--color-text-muted)', marginTop: '4px' }}>{s.student_review.comment}</div>}
+                      </div>
+                    ) : (
+                      <span style={{ color: 'var(--color-text-muted)' }}>—</span>
+                    )}
+                  </td>
                 </tr>
               ))}
-              {!sessions.length && <tr><td colSpan="9" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No attendance records</td></tr>}
+              {!sessions.length && <tr><td colSpan="10" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No attendance records</td></tr>}
             </tbody>
           </table>
         </div>

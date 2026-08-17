@@ -13,6 +13,7 @@ export default function Register() {
     email: '',
     password: '',
     confirmPassword: '',
+    age: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -48,7 +49,7 @@ export default function Register() {
 
     setLoading(true);
     try {
-      const result = await register(formData.full_name, formData.email, formData.password);
+      const result = await register(formData.full_name, formData.email, formData.password, formData.age);
       if (result.success) {
         navigate('/');
       } else {

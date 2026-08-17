@@ -1,5 +1,5 @@
 /* ========================================
-   FOSSCLAT ACADEMY — Global Design System
+   FOSSCLAT ACADEMY â€” Global Design System
    ======================================== */
 
 /* Google Font: Cairo */
@@ -229,6 +229,17 @@ select {
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
+input[type="date"],
+input[type="time"] {
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-height: 48px;
+  line-height: 1.2;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -410,3 +421,57 @@ ul, ol {
     white-space: nowrap;
   }
 }
+
+.test-history-row {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  gap: 16px;
+}
+.test-history-row:hover {
+  background: rgba(200,167,99,0.05);
+}
+.test-history-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+.test-history-date {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 120px;
+}
+.test-history-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 640px) {
+  .test-history-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .test-history-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+  .test-history-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .test-history-date {
+    min-width: auto;
+  }
+}
+

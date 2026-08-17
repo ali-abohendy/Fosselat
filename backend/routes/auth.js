@@ -17,6 +17,9 @@ function serializeUser(user) {
     role: user.role || 'student',
     phone: user.phone || '',
     status: user.status || 'active',
+    age: user.age || null,
+    program: user.program || '',
+    start_date: user.start_date || null,
     created_at: user.created_at ? new Date(user.created_at).toISOString() : null,
   };
 }
@@ -24,7 +27,7 @@ function serializeUser(user) {
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
-    const { full_name, email, password, role } = req.body || {};
+    const { full_name, email, password, role, age } = req.body || {};
     if (!full_name || !email || !password) {
       return res.status(400).json({ success: false, message: 'Missing required fields: full_name, email, password' });
     }
@@ -44,6 +47,7 @@ router.post('/register', async (req, res) => {
       password: hashedPassword,
       role: role || 'student',
       status: 'active',
+      age: age ? parseInt(age, 10) : null,
       created_at: new Date(),
     };
 
@@ -61,6 +65,7 @@ router.post('/register', async (req, res) => {
           full_name: full_name.trim(),
           email: cleanEmail,
           role: role || 'student',
+          age: age ? parseInt(age, 10) : null,
         },
       },
     });

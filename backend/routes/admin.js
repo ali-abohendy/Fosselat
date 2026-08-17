@@ -59,9 +59,17 @@ router.get('/dashboard', async (req, res) => {
     let matchSp = {};
     let matchTp = {};
 
-    if (period === 'this_month') {
-      const prefix = now.toISOString().slice(0, 7); // YYYY-MM
-      matchSession = { date: new RegExp(`^${prefix}`) };
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const periodParts = period.split(' ');
+    if (periodParts.length === 2 && monthNames.includes(periodParts[0])) {
+      const mIndex = monthNames.indexOf(periodParts[0]);
+      const y = parseInt(periodParts[1]);
+      if (!isNaN(y)) {
+        const prefix = `${y}-${String(mIndex + 1).padStart(2, '0')}`;
+        matchSession = { date: new RegExp(`^${prefix}`) };
+        matchSp = { month: period };
+        matchTp = { month: period };
+      }
     }
 
     const active_students = await db.collection('users').countDocuments({ role: 'student', status: 'active' });
@@ -83,20 +91,24 @@ router.get('/dashboard', async (req, res) => {
     // Student payments aggregation
     const spPipeline = [];
     if (Object.keys(matchSp).length > 0) spPipeline.push({ $match: matchSp });
-    spPipeline.push({ $group: { _id: null, due: { $sum: '$total_due' }, paid: { $sum: '$amount_paid' } } });
+    spPipeline.push({ $group: { _id: null, due: { $sum: '$total_due' }, paid: { $sum: '$amount_paid' }, remaining: { $sum: '$remaining' } } });
 
     const spResult = await db.collection('student_payments').aggregate(spPipeline).toArray();
     const total_due = spResult.length > 0 ? (spResult[0].due || 0) : 0;
     const total_paid = spResult.length > 0 ? (spResult[0].paid || 0) : 0;
+    const remaining = spResult.length > 0 ? (spResult[0].remaining || 0) : 0;
 
     // Teacher payments aggregation
     const tpPipeline = [];
     if (Object.keys(matchTp).length > 0) tpPipeline.push({ $match: matchTp });
-    tpPipeline.push({ $group: { _id: null, total: { $sum: '$net_salary' } } });
+    tpPipeline.push({ $group: { _id: null, total: { $sum: '$total_salary' }, net_dollar: { $sum: '$net_salary' } } });
 
     const tpResult = await db.collection('teacher_payments').aggregate(tpPipeline).toArray();
     const total_payroll_le = tpResult.length > 0 ? (tpResult[0].total || 0) : 0;
-    const total_payroll = total_payroll_le / 50;
+    // The dashboard expects total_payroll to be in dollars, and net_salary in teacher_payments is L.E.
+    // So we divide by 50 here. Wait, actually we can just sum net_salary and divide by 50.
+    const net_salary_sum = tpResult.length > 0 ? (tpResult[0].net_dollar || 0) : 0;
+    const total_payroll = Number((net_salary_sum / 50).toFixed(2));
 
     return res.json({
       success: true,
@@ -113,8 +125,8 @@ router.get('/dashboard', async (req, res) => {
         balance: total_paid - total_payroll,
         total_payroll,
         total_payroll_le,
-        revenue: total_paid - total_payroll,
-        remaining: total_due - total_paid,
+        revenue: Number((total_paid + remaining - total_payroll).toFixed(2)),
+        remaining,
       },
     });
   } catch (err) {
@@ -141,7 +153,7 @@ router.get('/students', async (req, res) => {
 
 router.post('/students', async (req, res) => {
   try {
-    const { full_name, family_name, teacher_id, teacher_name, program, plan, class_duration, hourly_rate, status, phone, start_date } = req.body || {};
+    const { full_name, family_name, teacher_id, teacher_name, program, plan, class_duration, hourly_rate, status, phone, start_date, age } = req.body || {};
     if (!full_name || !family_name) {
       return res.status(400).json({ success: false, message: 'Name and family name are required' });
     }
@@ -164,8 +176,8 @@ router.post('/students', async (req, res) => {
       plan: plan || '',
       class_duration: class_duration || '',
       hourly_rate: parseFloat(hourly_rate || 0),
-      status: status || 'active',
       phone: phone || '',
+      age: age || null,
       start_date: start_date || '',
       role: 'student',
       created_at: new Date(),
@@ -196,6 +208,8 @@ router.put('/students/:sid', async (req, res) => {
     delete updateData.role;
     delete updateData.email;
     delete updateData.student_id;
+
+    if (updateData.age === '') updateData.age = null;
 
     if (updateData.hourly_rate !== undefined) {
       updateData.hourly_rate = parseFloat(updateData.hourly_rate || 0);
@@ -296,11 +310,21 @@ router.get('/attendance', async (req, res) => {
     if (month) query.date = new RegExp(`^${month}`);
 
     const sessions = await db.collection('sessions').find(query).sort({ last_updated: -1 }).toArray();
+    
+    // Fetch all reviews for these sessions
+    const sessionIds = sessions.map(s => s._id.toString());
+    const reviews = await db.collection('reviews').find({ session_id: { $in: sessionIds } }).toArray();
+    const reviewMap = {};
+    reviews.forEach(r => {
+      reviewMap[r.session_id] = r;
+    });
+
     const data = sessions.map((s) => ({
       ...s,
       _id: s._id.toString(),
       teacher_id: s.teacher_id ? s.teacher_id.toString() : '',
       student_id: s.student_id ? s.student_id.toString() : '',
+      student_review: reviewMap[s._id.toString()] || null,
     }));
 
     return res.json({ success: true, data });
@@ -394,6 +418,11 @@ router.post('/payments/students', async (req, res) => {
     const { family_id, members, month, total_due, amount_paid, remaining, status } = req.body || {};
     const db = getDB();
 
+    const existing = await db.collection('student_payments').findOne({ family_id, month });
+    if (existing) {
+      return res.status(400).json({ success: false, message: 'Payment record for this family and month already exists' });
+    }
+
     await db.collection('student_payments').insertOne({
       family_id: family_id || '',
       members: members || '',
@@ -429,6 +458,16 @@ router.put('/payments/students/:pid', async (req, res) => {
   }
 });
 
+router.delete('/payments/students/:pid', async (req, res) => {
+  try {
+    const db = getDB();
+    await db.collection('student_payments').deleteOne({ _id: new ObjectId(req.params.pid) });
+    return res.json({ success: true, message: 'Payment record deleted' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 // Payments: Teachers
 router.get('/payments/teachers', async (req, res) => {
   try {
@@ -451,6 +490,11 @@ router.post('/payments/teachers', async (req, res) => {
   try {
     const { teacher_id, teacher_name, month, time_hours, total_salary, bonuses, deductions, net_salary } = req.body || {};
     const db = getDB();
+
+    const existing = await db.collection('teacher_payments').findOne({ teacher_id, month });
+    if (existing) {
+      return res.status(400).json({ success: false, message: 'Payroll record for this teacher and month already exists' });
+    }
 
     await db.collection('teacher_payments').insertOne({
       teacher_id: teacher_id || '',
@@ -483,6 +527,16 @@ router.put('/payments/teachers/:pid', async (req, res) => {
 
     await db.collection('teacher_payments').updateOne({ _id: new ObjectId(req.params.pid) }, { $set: updateData });
     return res.json({ success: true, message: 'Payroll updated' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+router.delete('/payments/teachers/:pid', async (req, res) => {
+  try {
+    const db = getDB();
+    await db.collection('teacher_payments').deleteOne({ _id: new ObjectId(req.params.pid) });
+    return res.json({ success: true, message: 'Payroll record deleted' });
   } catch (err) {
     return res.status(500).json({ success: false, message: 'Server error' });
   }
