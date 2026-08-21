@@ -757,6 +757,14 @@ export default function PlacementTest() {
 
 
   const { user } = useAuth();
+  const [currentUserId, setCurrentUserId] = useState(user?.id || null);
+
+  useEffect(() => {
+    if (user?.id !== currentUserId) {
+      resetAll();
+      setCurrentUserId(user?.id || null);
+    }
+  }, [user?.id, currentUserId]);
 
   useEffect(() => {
     if (user) {
