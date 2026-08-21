@@ -466,7 +466,7 @@ export default function PlacementTest() {
         setProgram(p);
       }
     }
-    setScreen('userinfo');
+    setScreen('testintro');
   }, [data, searchParams, resumeData]);
 
   // ─── LocalStorage ───
@@ -797,7 +797,7 @@ export default function PlacementTest() {
           if (user && user.age) {
             handleAudienceSelect(parseInt(user.age) >= 15, true);
           } else {
-            setScreen('userinfo');
+            setScreen('track');
           }
         }}>
           Begin Assessment
@@ -825,7 +825,7 @@ export default function PlacementTest() {
   const renderTrack = () => (
     <div className="pt-screen">
       <div style={{ width: '100%', marginBottom: '20px' }}>
-        <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => (user && user.age) ? setScreen('welcome') : setScreen('userinfo')}>← Back</button>
+        <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => setScreen('welcome')}>← Back</button>
       </div>
       <div className="pt-step-head">
         <div className="pt-eyebrow">Step 1</div>
@@ -848,7 +848,7 @@ export default function PlacementTest() {
     return (
       <div className="pt-screen">
         <div style={{ width: '100%', marginBottom: '20px' }}>
-          <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => trackParam ? setScreen('userinfo') : setScreen('track')}>← Back</button>
+          <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => setScreen('track')}>← Back</button>
         </div>
         <div className="pt-step-head">
           <div className="pt-eyebrow">Step 2</div>

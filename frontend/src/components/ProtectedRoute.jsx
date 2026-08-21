@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import NotFound from '../pages/NotFound';
 
 export default function ProtectedRoute({ children, allowedRoles }) {
   const { user, loading } = useAuth();
@@ -17,12 +18,7 @@ export default function ProtectedRoute({ children, allowedRoles }) {
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    // Redirect to their own dashboard
-    switch (user.role) {
-      case 'admin': return <Navigate to="/admin/dashboard" replace />;
-      case 'teacher': return <Navigate to="/teacher/dashboard" replace />;
-      default: return <Navigate to="/student/dashboard" replace />;
-    }
+    return <NotFound />;
   }
 
   return children;
