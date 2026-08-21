@@ -1060,14 +1060,30 @@ export default function PlacementTest() {
 
     return (
       <div className="pt-screen">
-        <div className="pt-results-hero" style={{ '--card-accent': accent }}>
-          <svg className="rh-motif" viewBox="0 0 100 100" aria-hidden="true">
-            <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" />
-            <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" transform="rotate(45 50 50)" />
-          </svg>
-          <h2 className="pt-rh-level">{resultData.trackLabel}</h2>
-          <p className="pt-rh-program">{resultData.programLabel}</p>
-        </div>
+        {!user ? (
+          <div className="pt-results-hero pt-rh-card-highlight" style={{ '--card-accent': accent }}>
+            <svg className="rh-motif" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" />
+              <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" transform="rotate(45 50 50)" />
+            </svg>
+            <p className="pt-rh-eyebrow">Recommended Starting Level</p>
+            <p className="pt-rh-level-tag">Level {resultData.recommendedLevelId} of {resultData.totalLevels}</p>
+            <h2 className="pt-rh-level">{resultData.recommendedLevel?.name || `Level ${resultData.recommendedLevelId}`}</h2>
+            <p className="pt-rh-program">{resultData.trackLabel} — {resultData.programLabel}</p>
+            {resultData.recommendedLevel?.desc && (
+              <p className="pt-rh-level-desc">"{resultData.recommendedLevel.desc}"</p>
+            )}
+          </div>
+        ) : (
+          <div className="pt-results-hero" style={{ '--card-accent': accent }}>
+            <svg className="rh-motif" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" />
+              <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" transform="rotate(45 50 50)" />
+            </svg>
+            <h2 className="pt-rh-level">Assessment Complete</h2>
+            <p className="pt-rh-program">{resultData.trackLabel} — {resultData.programLabel}</p>
+          </div>
+        )}
 
         {/* Level score bars */}
         {resultData.levelScores.length > 0 && (
@@ -1106,6 +1122,21 @@ export default function PlacementTest() {
             </ul>
           </div>
         </div>
+
+        {!user && resultData.duration && (
+          <div className="pt-results-grid" style={{ marginTop: '20px' }}>
+            <div className="pt-results-card">
+              <h3>Estimated Duration</h3>
+              <div className="stat-big">{resultData.duration.label}</div>
+              <div className="stat-sub">{resultData.duration.note}</div>
+            </div>
+            <div className="pt-results-card">
+              <h3>Recommended Pace</h3>
+              <div className="stat-big">{resultData.duration.lessonsPerWeek}</div>
+              <div className="stat-sub">Suggested weekly lessons to progress steadily</div>
+            </div>
+          </div>
+        )}
 
         {/* Summary */}
         <div className="pt-results-summary">

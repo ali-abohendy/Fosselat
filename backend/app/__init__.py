@@ -47,6 +47,7 @@ def create_app(config_class=Config):
     from app.routes.admin import admin_bp
     from app.routes.teacher_dash import teacher_bp2
     from app.routes.student_dash import student_bp, meetings_bp, reviews_bp, sessions_bp
+    from app.routes.placement import placement_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(courses_bp)
@@ -59,6 +60,7 @@ def create_app(config_class=Config):
     app.register_blueprint(meetings_bp)
     app.register_blueprint(reviews_bp)
     app.register_blueprint(sessions_bp)
+    app.register_blueprint(placement_bp)
 
     # ---------- Health-check ----------
     @app.route('/api/health')
