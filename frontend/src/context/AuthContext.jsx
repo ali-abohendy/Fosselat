@@ -52,6 +52,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('fossclat_token');
     localStorage.removeItem('fosselat_placement_v2');
     setUser(null);
+    window.location.href = '/login';
   };
 
   return (
