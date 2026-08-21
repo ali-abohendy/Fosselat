@@ -50,6 +50,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     localStorage.removeItem('fossclat_token');
+    localStorage.removeItem('fosselat_placement_v2');
     setUser(null);
   };
 

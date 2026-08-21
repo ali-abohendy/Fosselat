@@ -1,0 +1,589 @@
+<USER_REQUEST>
+I guess you are a totally booasted AI, as For the message of the placement tests, and the new files of the placement tests, You failed to write and make the correct questions, as my client told me that the questions are totally totally wrong, which means you did not read the files and the message correctly to understand what should the questions be, and what the questions should look like. Also another thing, after clicking on begin test, the user should first make a choice and then appears to him to click begin test again, I guess you removed it,I like that but you removed it the wrong way, as this do not take the user to the questions, it stuck the user in a page until he refreshes which is wrong, I want when the user click begin test, he will asked to make a choice so that the rest of the questions will be based on that choice, I want after the user make this choice to take him to the questions immediately. Here are the long message again from my client describing what the questions he would like to be in the placement tests:
+
+Eid Bayoumy:
+Final Question Bank Corrections
+
+The Placement Test blueprint, structure, adaptive logic, scoring system, upgrading/downgrading system, and overall design are now working well.
+
+I need another focused revision of the Question Banks only.
+
+Do NOT redesign the Placement Test.
+
+Do NOT change the blueprint.
+
+Do NOT change the upgrading/downgrading system.
+
+Do NOT change the 10-question structure or the 60% threshold.
+
+Do NOT change the general UI/design.
+
+Only make the necessary corrections to the questions and answer choices described below.
+
+Also, after making these exact corrections, perform a brief review for the same type of problem elsewhere in the question banks, especially:
+
+- Answer choices that reveal the answer through the question itself
+- Duplicate questions
+- Questions with more than one correct answer
+- Quranic excerpts that are unnecessarily truncated
+- Pronunciation questions that cannot logically be pronounced as presented
+- Questions that are not appropriate for their assigned curriculum level
+
+---
+
+1. READING AND TAJWEED — LEVEL 1
+
+A. "Which letter is at the beginning of the word...?"
+
+There are questions such as:
+
+«Which letter is at the beginning of the word ...?»
+
+Currently, the answer choices are the Arabic letter shapes.
+
+This creates a problem because the Arabic word displayed in the question can directly reveal the answer visually.
+
+Change this.
+
+The answer choices must be the English names of the Arabic letters, NOT the Arabic letter shapes.
+
+For example, instead of:
+
+- ب
+- ت
+- ث
+- ن
+
+use:
+
+- Baa
+- Taa
+- Thaa
+- Noon
+
+The exact transliteration/naming convention should remain consistent throughout the question bank.
+
+The student should identify the letter name, not simply visually match the Arabic shape appearing in the word.
+
+Apply this principle to all equivalent questions in Reading and Tajweed Level 1.
+
+---
+
+2. READING AND TAJWEED — LEVEL 1
+
+B. "How is this word read?" — Amal Question
+
+There is a question:
+
+«How is this word read?»
+
+The answer choices currently include:
+
+- A-M-A-L
+- A-M-A-L with an apostrophe
+- other choices
+
+The two versions of A-M-A-L are too similar and create an unnecessary clue/variation.
+
+Change this.
+
+Remove the incorrect A-M-A-L variation.
+
+Replace it with a completely different, plausible but incorrect pronunciation.
+
+Do NOT create another distractor that differs from the correct answer only by punctuation or apostrophe.
+
+---
+
+3. READING AND TAJWEED — LEVEL 4
+
+A. Duplicate Questions About Mushaf Signs
+
+There are questions such as:
+
+«The sign لا above a word in the Mushaf...»
+
+and another question about:
+
+«The sign ميم above a word in the Mushaf...»
+
+These questions are repeated.
+
+Remove the duplicates.
+
+Review the entire Level 4 question bank for other duplicate or essentially identical questions.
+
+If two questions assess exactly the same content unnecessarily, keep the stronger question and remove or replace the duplicate.
+
+---
+
+4. READING AND TAJWEED — LEVEL 4
+
+B. Madd Munfasil — Hafs Question
+
+There is a question:
+
+«In the recitation of Hafs, Madd Munfasil is read for...»
+
+The current answer choices include:
+
+«4 or 5»
+
+Change this option to:
+
+«2, 4, or 5»
+
+The answer choices should correctly reflect the intended answer in the context of the question.
+
+---
+
+5. READING AND TAJWEED — LEVEL 4
+
+C. Deepest Part of the Throat
+
+There is a question:
+
+«Which letter is from the deepest part of the throat?»
+
+The current options include both:
+
+- Hamzah
+- Haa
+
+This creates two correct answers.
+
+Fix the question.
+
+Keep only one correct answer.
+
+Remove one of the two correct options and replace it with a different letter that is not from the same articulation point.
+
+The final question must have:
+
+«Exactly ONE correct answer.»
+
+Also review the rest of the question bank for similar cases where two or more answer choices are technically correct.
+
+---
+
+6. MEMORIZATION AND REVISION — BLANK QUESTIONS
+
+There is an important clarification regarding the Quranic missing-word / blank questions.
+
+The problem is NOT the location of the blank.
+
+Eid Bayoumy:
+The blank itself can be placed in the middle of the Quranic passage, and that is completely fine.
+
+The actual problem is:
+
+Some questions take a Quranic passage and remove important words from the beginning or the end of the passage, in addition to creating the intended blank.
+
+This makes the Quranic excerpt:
+
+- Incomplete
+- Contextually disconnected
+- Semantically weaker
+- More difficult to recognize
+- Sometimes unnatural or misleading
+
+This is what must be corrected.
+
+---
+
+7. CORRECT PRINCIPLE FOR BLANK QUESTIONS
+
+For every Quranic blank question:
+
+First:
+
+Select a sufficiently complete and meaningful Quranic excerpt.
+
+Then:
+
+Create the blank inside that excerpt.
+
+Do NOT arbitrarily remove important words from the beginning or end just to make the question shorter.
+
+The blank is the only intentional omission.
+
+The surrounding Quranic context should remain sufficiently intact.
+
+In simple terms:
+
+«Preserve the Quranic context first. Then create the blank.»
+
+---
+
+8. MEMORIZATION AND REVISION — LEVEL 1
+
+There is a question based on:
+
+«آمنوا وعملوا الصالحات وتواصوا __ وتواصوا بالصبر»
+
+The problem is that important words from the beginning of the passage have been removed.
+
+Add:
+
+«إلا الذين»
+
+The question should become:
+
+«إلا الذين آمنوا وعملوا الصالحات وتواصوا __ وتواصوا بالصبر»
+
+The blank itself is fine.
+
+The issue was the missing context at the beginning.
+
+---
+
+9. MEMORIZATION AND REVISION — LEVEL 2
+
+A. "على الأرائك لا يرون فيها شمسا"
+
+Add:
+
+«متكئين»
+
+The question should become:
+
+«متكئين فيها على الأرائك لا يرون فيها شمسا ولا زمهريرا»
+
+The purpose is to preserve the appropriate Quranic context.
+
+---
+
+B. "الذين ضل سعيهم..."
+
+The current excerpt is incomplete.
+
+Use:
+
+«الذين ضل سعيهم في الحياة الدنيا وهم يحسبون أنهم يحسنون صنعا»
+
+The important point is to preserve the meaningful Quranic context instead of displaying a truncated excerpt.
+
+---
+
+C. "من لم يزده ماله وولده إلا خسارة"
+
+Add:
+
+«واتبعوا»
+
+The question should become:
+
+«واتبعوا من لم يزده ماله وولده إلا خسارة»
+
+---
+
+D. "خلقه قال من يحيي العظام وهي رميم"
+
+The current excerpt begins too late.
+
+Change it to:
+
+«وضرب لنا مثلا ونسي خلقه قال من يحيي العظام وهي رميم»
+
+The beginning of the Quranic context should not be unnecessarily removed.
+
+---
+
+10. MEMORIZATION AND REVISION — LEVEL 3
+
+A. Duplicate Question
+
+There is a repeated question involving:
+
+«يعرف المجرمون بسيماهم»
+
+Remove the duplicate.
+
+Review the rest of Level 3 for other repeated questions.
+
+---
+
+B. "خالدين فيها أبدا قد أحسن الله له..."
+
+Add:
+
+«رزقا»
+
+The question should become:
+
+«خالدين فيها أبدا قد أحسن الله له رزقا»
+
+---
+
+C. "عنه سيئاته ويدخله جنات..."
+
+The current question is missing:
+
+«الأنهار»
+
+Change it to:
+
+«ومن يؤمن بالله ويعمل صالحا يكفر عنه سيئاته ويدخله جنات تجري من تحتها الأنهار»
+
+Again, the purpose is to preserve the meaningful Quranic context.
+
+---
+
+11. MEMORIZATION AND REVISION — LEVEL 4
+
+A. "من ورائه جهنم ويسقى من ماء..."
+
+Add:
+
+«صديد»
+
+The question should become:
+
+«من ورائه جهنم ويسقى من ماء صديد»
+
+---
+
+B. "ما يتقون إن الله بكل شيء عليم"
+
+The current excerpt begins too late and removes important context.
+
+Change it to:
+
+«وما كان الله ليضل قوما بعد إذ هداهم حتى يبين لهم ما يتقون إن الله بكل شيء عليم»
+
+Do not remove the important words from the beginning merely to make the question shorter.
+
+---
+
+12. GENERAL RULE FOR ALL MEMORIZATION AND REVISION BLANK QUESTIONS
+
+Review all blank-based questions in the Memorization and Revision Question Bank, not only the examples listed above.
+
+For every question, check:
+
+Beginning of the excerpt
+
+Are important contextual words missing before the displayed text?
+
+End of the excerpt
+
+Are important contextual words missing after the displayed text?
+
+Blank
+
+Is the blank itself the intentional missing portion?
+
+Context
+
+Does the remaining Quranic passage still form a meaningful and recognizable excerpt?
+
+Naturalness
+
+Does the question sound like a coherent Quranic passage rather than an artificially truncated sentence?
+
+If important words were removed from the beginning or end:
+
+«Restore them.»
+
+Do not simply move the blank.
+
+Very important distinction:
+
+Eid Bayoumy:
+The problem is not:
+
+«"The blank is in the wrong place."»
+
+The problem is:
+
+«"The Quranic excerpt has been unnecessarily truncated before or after the blank."»
+
+Therefore, preserve sufficient context around the blank.
+
+---
+
+13. ARABIC FOUNDATION — LEVEL 1
+
+There is a question such as:
+
+«Which letter adds at the end of مدرسة?»
+
+Currently, the answer choices are Arabic letter shapes.
+
+This allows the student to potentially identify the answer visually from the word itself.
+
+Change the answer choices to English letter names.
+
+Do NOT use the Arabic letter shapes as the answer choices when the Arabic word itself is displayed.
+
+For example, use appropriate English letter names/transliterations rather than:
+
+«ة / ه / ت / etc.»
+
+The student should demonstrate knowledge of the letter identity/name, rather than simply visually matching the letter shape in the word.
+
+Apply the same principle to equivalent questions in Arabic Foundation Level 1.
+
+---
+
+14. ARABIC FOUNDATION — LEVEL 2
+
+There is a question format:
+
+«How is this read?»
+
+where the displayed Arabic content is something like:
+
+«سْ»
+
+This is not logically pronounceable as an isolated consonant with Sukoon.
+
+A letter with Sukoon needs an appropriate preceding vowel-bearing context.
+
+Correct the question.
+
+Instead of presenting:
+
+«سْ»
+
+by itself, provide an appropriate preceding vowel-bearing letter.
+
+For example:
+
+«أَسْ»
+
+Then ask:
+
+«How is this read?»
+
+The answer choices should be the English pronunciation/transliteration of the resulting sound or syllable.
+
+The student should select the correct pronunciation.
+
+---
+
+15. GENERAL RULE FOR PRONUNCIATION QUESTIONS
+
+Do not create pronunciation questions where:
+
+- A consonant with Sukoon is presented completely in isolation
+- The student is asked to pronounce an inherently incomplete phonetic sequence
+- The answer choices do not represent the actual pronunciation of the displayed Arabic
+
+The Arabic form shown in the question must be linguistically and phonetically valid.
+
+---
+
+16. REVIEW FOR THE SAME PROBLEMS ELSEWHERE
+
+After implementing all of the corrections above, perform a targeted audit of the entire relevant Question Banks.
+
+Look for the same categories of problems:
+
+A. Answer leakage
+
+For example, Arabic words shown in the question while the answer choices are the exact Arabic letter shapes contained in that word.
+
+Where appropriate, use English letter names instead.
+
+B. Duplicate questions
+
+Remove unnecessary duplicates.
+
+C. Multiple correct answers
+
+Every objective question must have exactly one defensible correct answer.
+
+D. Weak distractors
+
+Do not use distractors that differ from the correct answer only by:
+
+- Apostrophes
+- Punctuation
+- Formatting
+- Trivial spelling differences
+
+unless that distinction is itself the intended competency.
+
+E. Quranic context truncation
+
+For Memorization and Revision, make sure important words have not been removed from the beginning or end of the displayed Quranic excerpt.
+
+Again:
+
+«The blank is not the problem. Context truncation is the problem.»
+
+F. Invalid pronunciation questions
+
+Make sure every pronunciation question presents a logically pronounceable Arabic form.
+
+---
+
+17. DO NOT CHANGE THE BLUEPRINT OR PLACEMENT LOGIC
+
+The following are already working correctly and must remain unchanged:
+
+- Placement Test Blueprint
+- Adaptive testing
+- Upgrading
+- Downgrading
+- 10 questions per level
+- 60% passing threshold
+- Level determination
+- Scoring algorithm
+- Overall test flow
+- Program structure
+- Level structure
+
+This task is specifically about improving and correcting the Question Banks.
+
+---
+
+18. DO NOT REDESIGN THE UI
+
+The current Placement Test design is already good.
+
+Do not redesign:
+
+- Layout
+- Colors
+- Navigation
+- Visual identity
+- General interface
+- Test flow
+
+Only make the minimum technical/UI adjustment necessary to properly display a corrected question.
+
+For example, Quranic excerpts should have appropriate spacing and formatting where needed.
+
+---
+
+19. FINAL QUALITY STANDARD
+
+After the corrections, every question should satisfy all of the following:
+
+Eid Bayoumy:
+- It measures the intended curriculum competency.
+- It belongs to the correct level.
+- It has exactly one correct answer.
+- It does not reveal its own answer.
+- Its distractors are meaningful and plausible.
+- It is not unnecessarily duplicated.
+- Quranic excerpts preserve sufficient context.
+- The blank is the intentional missing element.
+- Important Quranic words are not unnecessarily removed from the beginning or end.
+- Pronunciation questions are phonetically valid.
+- Arabic letter questions do not allow simple visual copying from the question.
+- The question is objectively scorable.
+
+The objective is not simply to change the questions.
+
+The objective is to make the Question Bank:
+
+accurate, curriculum-aligned, unambiguous, objective, non-leading, and genuinely capable of measuring the student's actual level.
+
+Please implement the corrections above and then perform a targeted audit of the remaining Question Banks for the same categories of errors.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T15:41:17+03:00.
+</ADDITIONAL_METADATA>
