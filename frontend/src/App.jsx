@@ -21,6 +21,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Enroll from './pages/Enroll';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import { Navigate } from 'react-router-dom';
 
 import Pricing from './pages/Pricing';
 import Curriculum from './pages/Curriculum';
@@ -31,6 +33,7 @@ import BlogPost from './pages/BlogPost';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminStudents from './pages/admin/AdminStudents';
 import AdminTeachers from './pages/admin/AdminTeachers';
+import AdminCalendar from './pages/admin/AdminCalendar';
 import AdminAttendance from './pages/admin/AdminAttendance';
 import AdminSchedule from './pages/admin/AdminSchedule';
 import AdminStudentPayments from './pages/admin/AdminStudentPayments';
@@ -60,6 +63,7 @@ const adminMenu = [
   { path: '/admin/dashboard', label: 'Dashboard', icon: <BarChart size={18} />, end: true },
   { path: '/admin/students', label: 'Students', icon: <GraduationCap size={18} /> },
   { path: '/admin/teachers', label: 'Teachers', icon: <Users size={18} /> },
+  { path: '/admin/calendar', label: 'Calendar', icon: <Calendar size={18} /> },
   { path: '/admin/attendance', label: 'Attendance', icon: <ClipboardList size={18} /> },
   { path: '/admin/schedule', label: 'Schedule', icon: <Calendar size={18} /> },
   { path: '/admin/payments/students', label: 'Student Payments', icon: <DollarSign size={18} /> },
@@ -133,13 +137,16 @@ function AppRoutes() {
               <DashboardLayout role="admin" menuItems={adminMenu} />
             </ProtectedRoute>
           }>
+            <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="students" element={<AdminStudents />} />
             <Route path="teachers" element={<AdminTeachers />} />
+            <Route path="calendar" element={<AdminCalendar />} />
             <Route path="attendance" element={<AdminAttendance />} />
             <Route path="schedule" element={<AdminSchedule />} />
             <Route path="payments/students" element={<AdminStudentPayments />} />
             <Route path="payments/teachers" element={<AdminTeacherPayments />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
 
           {/* Teacher routes */}
@@ -148,11 +155,13 @@ function AppRoutes() {
               <DashboardLayout role="teacher" menuItems={teacherMenu} />
             </ProtectedRoute>
           }>
+            <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<TeacherDashboard />} />
             <Route path="record" element={<TeacherRecordSession />} />
             <Route path="sessions" element={<TeacherSessions />} />
             <Route path="slots" element={<TeacherTimeSlots />} />
             <Route path="calendar" element={<TeacherCalendar />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
 
           {/* Student routes */}
@@ -161,11 +170,13 @@ function AppRoutes() {
               <DashboardLayout role="student" menuItems={studentMenu} />
             </ProtectedRoute>
           }>
+            <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<StudentDashboard />} />
             <Route path="review/:sessionId" element={<StudentReview />} />
             <Route path="calendar" element={<StudentCalendar />} />
             <Route path="attendance" element={<StudentAttendance />} />
             <Route path="placement-tests" element={<StudentPlacementTests />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </>
@@ -191,6 +202,7 @@ function AppRoutes() {
         <Route path="/placement-tests" element={<PlacementTest />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </PublicLayout>
   );

@@ -1,0 +1,4390 @@
+<USER_REQUEST>
+can you continue 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-25T00:35:05+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+1- I think when the admin register the student, he could choose for him multiple subjects and programs, so make the subject and program as checkbox.
+2- for all the things that we fill like the student registering, teacher registering, etc.. the places to fill the data are set to not be required which means if I submit with some places empty, it will submit without any problems, which is wrong.
+3- after registering the data for a student or a teacher, it successfully gives email and password ! I want you to add the email and password to the data that appears in each page.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-25T00:54:34+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you run the site
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-25T13:55:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+That's great, Now I want couple of edits:
+1- if the user press enroll now from the home page, it should make the user chooes the how many classes per week and the duration and submit, so that the message that will be sent to the whatsapp number will contain these details; if the user choose all these from the pricing tab and press enroll, it also will send a message whatsapp with all these details.
+2- The list of students and the teachers that are present at the admin interface, I want an option to search for the ID or the student, or teacher name.
+3- when adding a student to the site through the admin interface, remove the subject and the program, make it only program, this program will be all the headlines under the tracks that are present in the curriculum, for example in the curriculum you will find under the arabic track, Foundation program, and post foundation program, all these programs and similar programs are the ones I want you to make them option to be chosen from in registering new students.
+4- I want you to remove the meeting room jutsy or whatever this is, I want you to add in registering the teacher through admin interface a place for both zoom meeting link and google meeting link of the teacher, so that when assigning a session for both the student and the teacher, they will enter the link of the zoom meeting or google meet link of the teacher, whatever they both agreed on, concerning this change, there will be two buttons for start meeting, one through zoom link and the other through google meet, and add a button for the teacher to be "End Meeting" so that he could submit the report and the student could get to review the teacher after the teacher click on the button start meeting.
+5- All the places from which we choose from a drag box, like choosing the student, teacher when schuduling the meeting, I want it to not only choose, I want to be able to type and based on what I wrote you filter from the drag box. the same format but add that the user could type there not only choose, because it will not be efficient if we have a lot of students to seach just by scrolling. Make it in all the places that have drag box.
+6- A student should also have place to choose his free slots, so that when the admin schudeule a session for the teacher and the student, both should be compitable with it, and the duration of the session should be autimatically set after choosing the student. so the end date should be set automatically after choosing the start date based on the duration. The start date, the end date, the duration should be compitable with the available time slot that was chosen for both the student and the teacher, for example the session can not be schudeuled, if the student is available from 5:00 to 6:00 with 60 min duration, and the teacher is available from 4:30 to 5:30, all these staff and similar stuff should be token care automatically, when schuduling the meeting. Also when the teacher or the student choose their time slots, it should be reasonable, which means he cannot choose that he free from 10:00 am to 9:00 am, so on increaing the first of the availability, the end of availability should be moved to be after the first of availability.
+7- In the curriculum, I think you didn't embedd the adult division, so can you add it?
+8- I want you to add a place for placement tests in the above menu, so the user before enrolling can take these tests, Also these test may be present in the home screen, something like test yourself in these programs, also the tests are different based on the program, so beside being in the home page, it could be put in the curriculum under each program as button "Test your level" or something like that, I will give you later the files of the tests. 
+9- In student Payment, change choosing the student name with id to choosing the id of the family, also after choosing the id of the family, the duration for all the family members should be calculated and set automatically, so that based on these, the total due will be caluclated automatically, and then add a place "Paid" where we will enter the amount that the family paid, so it will calculate the remaining, if the family paid more money than the due, the money should be negative number at the admin interface, and vice versa, remove anything else in this page, after submission, it should show the statues of the student for the current month in the student data for the admin in the page of registering the students, the status will be paid, unpaid, partial (if he didn't pay the total due), credit (if he paid more). make these records editable. 
+10- in the teacher payment page for the admin interface, on choosing the teacher, make the site fill the duration, the gross salary, the net salary automatically, the only thing the admin could chane is the bonuses and deductions, so the net salart will be also updated automatically.
+11- on registering the teacher, Remove the deductions, bonuses, net salary, and gross salary, these are concerning for the payment, only what is needed concening money from the teacher while registering him is the hourly rate. also for the current month in the table containing the data of the teachers, add the status to be paid or unpaid.
+12- In the attendance sheet, remove filter by subject.
+13- In the dashboard of the admin, add filters, like monthly, etc... also updae the balance to be the revnenue of the academy, based on the total due, total paid, teachers payroll, and the remaining for the students.
+14- I don't like all the emojis that are present through out the website, I think they are not professional work, so if there is a way to make it professional with good visual looking, i think it will be better.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-25T19:27:36+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>Item 4 — Zoom/Google Meet: Each teacher will have their own Zoom link and Google Meet link stored in their profile. When a session is scheduled, the student and teacher both see buttons to open either link. Is this correct?
+
+Comment: "yes"
+<USER_REQUEST>
+go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-25T19:30:28+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Look, you will fond the placement test in the folder named placement tests, I want you to examine the placement tests and implement them in the site with the suitable color palette and theme that we are working on
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-26T00:05:02+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+continue what you were working on 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-07-31T15:55:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+🎓 Certified & Ijazah-Certified Teachers
+📚 Age-Based Learning Paths
+📍 Initial Placement Test
+📝 Placement Test After Every Level
+🏆 Certificates After Every Level
+👤 Personal One-on-One Classes
+⏰ Learn at Your Preferred Time
+🎁 Free Trial Before You Enroll
+🔄 Try Another Teacher for Free
+💰 30-Day Money-Back Guarantee
+
+I want to update some things in the home page, these things is the characteristics of the academy, for the charactersitics that has a place in the page or a referencee in the page, make click on this characterstics go there. 
+
+For the blogs, I want to some blogs and make them strong concerning the SEO, and attach hyperlinks in the blogs to go to similar content, here are some of the blogs to be added:
+Quran
+
+How to Memorize the Quran Faster: 10 Proven Tips
+
+
+Common Mistakes When Learning Quran Online
+
+
+How Long Does It Take to Memorize the Quran?
+
+
+What Is Tajweed and Why Is It Important?
+
+Benefits of Learning Quran with a Certified Teacher
+
+
+Online Quran Classes vs. Traditional Classes
+
+
+
+How to Improve Your Quran Recitation
+
+
+
+Arabic Language
+
+How to Learn Arabic from Scratch
+
+
+Modern Standard Arabic vs. Quranic Arabic
+
+
+Is Arabic Difficult to Learn?
+
+
+20 Essential Arabic Words Every Beginner Should Know
+
+
+Best Way to Teach Arabic to Children
+
+
+Tips to Practice Arabic Every Day
+
+
+Islamic Studies
+
+The Six Pillars of Iman Explained
+
+
+The Five Pillars of Islam for Beginners
+
+
+Why Every Muslim Should Learn Basic Aqeedah
+
+
+
+How to Build a Daily Islamic Routine
+
+
+The Importance of Seeking Islamic Knowledge
+
+
+Parents & Kids
+
+
+How to Choose the Best Online Quran Academy for Your Child
+
+
+
+How Parents Can Help Their Children Memorize the Quran
+
+
+Fun Ways to Teach Islam to Kids at Home
+
+
+Benefits of One-on-One Quran Classes for Children
+
+
+Parents & Kids
+
+
+How to Choose the Best Online Quran Academy for Your Child
+
+
+
+How Parents Can Help Their Children Memorize the Quran
+
+
+Fun Ways to Teach Islam to Kids at Home
+
+
+Benefits of One-on-One Quran Classes for Children
+
+These are the headlines for the content of the blogs to be shown, what I want from these that for every one of them, the blog should exceed 1500 word.
+
+About Us
+
+At Fosselat Academy, we are committed to making Quran, Arabic, and Islamic Studies accessible to learners of all ages and backgrounds through engaging, personalized online education.
+
+Our mission is to provide every student with a structured learning journey led by certified and Ijazah-certified teachers who combine authentic Islamic knowledge with effective teaching methods. Whether you're a beginner or an advanced learner, our age-based curriculum and personalized one-on-one classes ensure that every lesson is tailored to your goals and learning pace.
+
+We begin with an initial placement test to determine the right starting level, followed by placement assessments after every level to track your progress. Upon successful completion of each stage, students receive an official certificate of achievement.
+
+To make learning as convenient as possible, you can choose the schedule that fits your lifestyle, enjoy a free trial class before enrolling, and even switch to another teacher for free if needed. Your satisfaction is our priority, which is why we also offer a 30-day money-back guarantee.
+
+At Fosselat Academy, we're not just teaching lessons—we're helping students build a lifelong connection with the Quran, the Arabic language, and authentic Islamic knowledge.
+
+this is the about us, I want you to update it.
+
+for the contact:
+email: fosselatacademy2001@gmail.com
+Instagram: https://www.instagram.com/fosselatacademy2001/
+Facebook: https://www.facebook.com/profile.php?id=61590983983531
+Tiktok: https://www.tiktok.com/@user4744086184577?lang=en
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-01T19:45:05+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+🎓 Certified & Ijazah-Certified Teachers
+📚 Age-Based Learning Paths
+📍 Initial Placement Test
+📝 Placement Test After Every Level
+🏆 Certificates After Every Level
+👤 Personal One-on-One Classes
+⏰ Learn at Your Preferred Time
+🎁 Free Trial Before You Enroll
+🔄 Try Another Teacher for Free
+💰 30-Day Money-Back Guarantee
+
+I want to update some things in the home page, these things is the characteristics of the academy, for the charactersitics that has a place in the page or a referencee in the page, make click on this characterstics go there. 
+
+For the blogs, I want to some blogs and make them strong concerning the SEO, and attach hyperlinks in the blogs to go to similar content, here are some of the blogs to be added:
+Quran
+
+How to Memorize the Quran Faster: 10 Proven Tips
+
+
+Common Mistakes When Learning Quran Online
+
+
+How Long Does It Take to Memorize the Quran?
+
+
+What Is Tajweed and Why Is It Important?
+
+Benefits of Learning Quran with a Certified Teacher
+
+
+Online Quran Classes vs. Traditional Classes
+
+
+
+How to Improve Your Quran Recitation
+
+
+
+Arabic Language
+
+How to Learn Arabic from Scratch
+
+
+Modern Standard Arabic vs. Quranic Arabic
+
+
+Is Arabic Difficult to Learn?
+
+
+20 Essential Arabic Words Every Beginner Should Know
+
+
+Best Way to Teach Arabic to Children
+
+
+Tips to Practice Arabic Every Day
+
+
+Islamic Studies
+
+The Six Pillars of Iman Explained
+
+
+The Five Pillars of Islam for Beginners
+
+
+Why Every Muslim Should Learn Basic Aqeedah
+
+
+
+How to Build a Daily Islamic Routine
+
+
+The Importance of Seeking Islamic Knowledge
+
+
+Parents & Kids
+
+
+How to Choose the Best Online Quran Academy for Your Child
+
+
+
+How Parents Can Help Their Children Memorize the Quran
+
+
+Fun Ways to Teach Islam to Kids at Home
+
+
+Benefits of One-on-One Quran Classes for Children
+
+
+Parents & Kids
+
+
+How to Choose the Best Online Quran Academy for Your Child
+
+
+
+How Parents Can Help Their Children Memorize the Quran
+
+
+Fun Ways to Teach Islam to Kids at Home
+
+
+Benefits of One-on-One Quran Classes for Children
+
+These are the headlines for the content of the blogs to be shown, what I want from these that for every one of them, the blog should exceed 1500 word.
+
+About Us
+
+At Fosselat Academy, we are committed to making Quran, Arabic, and Islamic Studies accessible to learners of all ages and backgrounds through engaging, personalized online education.
+
+Our mission is to provide every student with a structured learning journey led by certified and Ijazah-certified teachers who combine authentic Islamic knowledge with effective teaching methods. Whether you're a beginner or an advanced learner, our age-based curriculum and personalized one-on-one classes ensure that every lesson is tailored to your goals and learning pace.
+
+We begin with an initial placement test to determine the right starting level, followed by placement assessments after every level to track your progress. Upon successful completion of each stage, students receive an official certificate of achievement.
+
+To make learning as convenient as possible, you can choose the schedule that fits your lifestyle, enjoy a free trial class before enrolling, and even switch to another teacher for free if needed. Your satisfaction is our priority, which is why we also offer a 30-day money-back guarantee.
+
+At Fosselat Academy, we're not just teaching lessons—we're helping students build a lifelong connection with the Quran, the Arabic language, and authentic Islamic knowledge.
+
+this is the about us, I want you to update it.
+
+for the contact:
+email: fosselatacademy2001@gmail.com
+Instagram: https://www.instagram.com/fosselatacademy2001/
+Facebook: https://www.facebook.com/profile.php?id=61590983983531
+Tiktok: https://www.tiktok.com/@user4744086184577?lang=en
+
+also, when I told you that the duration should be given automatically when recording payments, I meant the duration of the already token sessions, which means that the duration of the taken session for the students and the teacher
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-01T19:46:29+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+ Look, I have made couple pf changes in the site, while the quota to be back, There are now I guess three comments only:
+1- For the scheudeling through admin interface, I want the old one which only depends on the available time slots of the teacher, The students do not have to regiester their time slots, Just the teachers, and then the admin will assign the sessions based on the available slots of the teacher as the old one, which assign to students after choosing the time slots.
+2- When recording the payments of the students, It still get the duration that the student registered, not the duration that the students actually took sessions, I guess it should be calculated from the time of the sessions that the studetn was present, the same as for the teacher I guess.
+3- For the mobile view, Take a quick look overall, if something was willing to be fixed, fix it, otherwise, my comment is that in the interfaces, the way that the user navigate through different places through their interface, like for the admin to go from registering the student to registering the teacher to schudeules, that way of putting the icon on the top under the navbar is so bad, I think you should think a better way for it.
+
+I also want to add in the footer, Payments: You can pay through paypal, and put logo paypal, and put it in the footer in a proper and suitable way
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-07T23:34:35+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+You now in the student patment record, you calculate the total due and payments based on the sessions taken right, but I want to see the duration of the sessions taken in hours and minutes after choosing the code of the family 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-07T23:46:51+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I also thinkt he spacing in the navbar is not adjusted well
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-07T23:47:47+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I didn't mean the spacing between them, I meant their spacing horizontly along the whole window
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-07T23:49:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Look, I meant there is a big of space in the left to the login button, which made the navbar skewed left i guess
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-07T23:50:45+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+You may continue your work, as there is somthing I noticed, is that The place where the students choose their availability is still there, I guess you have to remove it. 
+For the phone number that all the reports, the enroll, the whatsapp icon, the phone number of the academy is going to be that number: +966595796177
+so update everything based on that number, and also is it possible that the buttons that send messages to whats to send immediatley without the page that asks the user to continue ? or it have to be present 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:34:24+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+the last thing I want you to do is in this interface, can you put login more to the right, as the space on its right is too big
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:38:08+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+nothing changes i guess
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:40:07+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+nothing changes again
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:40:40+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+here is the screenshot
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:41:36+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+but i guess there is still a lot of space right to the login button, which makes me don't feed good about it 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:42:35+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think any changes you made just move the container for the logo, items and login button to move left, which id mucher further from what I want 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:44:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Ok fine the position of the logo and items is perfect, what I want it that You don't have to maintain the distance between the pages and the login button, I just want the login button to move to right more, without changing the poistion of the other items in the navbar 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:46:29+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you move it more 70px to the right
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:47:45+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+now without moving the place of the login button, I want the pages to be exactly in the center between the logo and the login
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:48:54+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+The login button is now not visible, as well as the spacing between the pages is toooooo big 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-08T18:50:28+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+The last changes I want is that on clicking on take the test from the home page, it should take you to the test from the selected track already, not the whole page of placement tests, so it chooses what test in which track based on the take test from which track you clicked, also in the curriculum, there is a try your level I guess, it should take the user to the specififed test directly, what i mean if in the curriculum, I choose adult, then some program in quran track, then I pressed try your level, it should take me directly to the page with asks me to begin this certain test in that program.
+another thing, I tried schueduling a session to see, if I can join from student or teacher interfaces, but I didn't found either of the buttons join through google meet, or join through zoom in the student interface, I don't know if it is the same in teacher interface, but please see this and solve it. Another thing, I wanna you make sure that all the fields in registering any any thing on the site through any any interface should be required, which means I can not submit without filling all the places given 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-09T03:21:26+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+In that place, and the same for the data for teachers, there is no search for a specific student, id, or anything, so can you add searching by id or name here and place holding the teachers data
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-09T17:37:40+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+The folder of the project is changed, wanna me give you the path to the new position to complete our work ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-15T14:34:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+D:\GitHub\Repos\Foselat
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-15T14:35:17+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Now, look, we already uploaded the site on hostinger as a web host and domain, I wanted to make some changes:
+1- You will find inside the folder of placement tests the new way of test, the scoring, and questions, all these staff, I want to implement them inside the site as the old placement tests, but now I want to add that the user will be required to add his name, his age, and his mail (don't make the user continue until he writes a valid email) before begining the test, also my client gave me the following comments:
+
+FINAL TARGETED MODIFICATION REQUEST
+I need you to make ONLY the modifications specified below to the current working version of the Placement Test.
+IMPORTANT: DO NOT redesign or rewrite the entire application.
+The current adaptive scoring system and placement logic are already approved.
+Do NOT change:
+The current scoring system.
+The 60% mastery threshold.
+The current adaptive/branching logic.
+The placement algorithm.
+The scoring logic of any other program.
+The question banks of other programs.
+The structure of other programs.
+Only make the specific changes listed below, plus fix the previously identified UI/data-binding bug.
+
+1. FIX THE CURRENT UI BUG FIRST
+On the initial "Ready when you are" screen, the following values are currently displaying incorrectly:
+QUESTIONS: 1[object Object]-NaN
+EST. TIME: NaN–NaN min
+This is a JavaScript/data-binding bug.
+Find and fix the root cause.
+Do NOT hide the values.
+Do NOT hard-code fake values.
+Trace the data flow through:
+questions.json
+scoring.js
+script.js
+ui.js
+Determine why an Object is being rendered as [object Object] and why the calculation produces NaN.
+After fixing it, verify that:
+Question count displays correctly.
+Estimated time displays correctly.
+No NaN appears anywhere.
+No [object Object] appears anywhere.
+No undefined or null appears anywhere.
+Check the entire UI for similar data-binding problems.
+
+2. MAKE ARABIC AND QURAN TEXT MUCH LARGER AND CLEARER
+The Arabic letters, Arabic words, and Quranic text currently need to be much easier for students to see.
+Increase the font size and visual clarity of:
+Arabic letters
+Arabic words
+Quranic verses/passages
+Arabic answer choices when applicable
+The goal is especially important for:
+Quran Reading & Tajweed
+and
+Quran Memorization & Revision.
+The Arabic/Quran text should be:
+Large
+Clear
+Highly readable
+Well spaced
+Comfortable on mobile
+Comfortable on desktop
+Do NOT make the English UI unnecessarily large.
+The priority is the Arabic/Quran content that the student is actually reading and answering.
+Make sure the increased font size does not break the layout or cause horizontal scrolling on mobile.
+
+3. CHANGE "SAVE, PRINT RESULT"
+Replace the current:
+"Save, Print Result"
+button/action with:
+"Send to Academy"
+The purpose of this button is to allow the student to submit their completed Placement Test result to Fosselat Academy.
+For now, preserve the existing result data and functionality as much as possible.
+Do NOT redesign the entire results system.
+Only replace the current action with the requested Send to Academy functionality.
+If the current project already has a submission mechanism, connect the button to that mechanism.
+If there is no actual submission endpoint yet, create the button/UI structure cleanly without inventing a fake submission service.
+
+4. SPECIAL MODIFICATION — QURAN MEMORIZATION & REVISION
+This is the ONLY program whose question design should be substantially changed right now.
+Program:
+Quran → Memorization & Revision
+Keep the existing:
+Adaptive structure
+Self-report logic
+Level progression
+60% mastery threshold
+Level scoring
+Placement logic
+DO NOT change the scoring algorithm.
+We are changing the QUESTION DESIGN and QUESTION DISTRIBUTION ONLY.
+
+5. NEW QUESTION STYLE FOR MEMORIZATION & REVISION
+The questions should actually test whether the student knows the Quran they claim to have memorized.
+Do NOT primarily test Quran trivia.
+Use simple, direct Quran-content-based questions.
+For example:
+TYPE 1 — COMPLETE THE MISSING WORD
+Display a Quranic verse with one word removed.
+Example structure:
+وَالضُّحَى  وَاللَّيْلِ إِذَا ____
+Then provide several options.
+The student selects the correct missing word.
+The actual verse/content must be accurate.
+
+TYPE 2 — WHAT COMES NEXT?
+Display a Quranic verse or short passage.
+Ask:
+"Which verse comes next?"
+Provide several options.
+The student selects the correct continuation.
+This directly tests familiarity with the memorized sequence.
+
+TYPE 3 — OTHER SIMPLE RECOGNITION-BASED QUESTIONS
+You may create other similarly simple objective question types only if they genuinely test memorization.
+The questions must remain:
+Simple
+Clear
+Automatically scorable
+Appropriate for the student's age
+Directly related to Quran memorization
+Do NOT introduce:
+Audio recording
+Voice analysis
+Teacher evaluation
+Manual scoring
+Long written answers
+Difficult academic tasks
+
+6. VERY IMPORTANT — DISTRIBUTE QUESTIONS ACROSS THE ENTIRE LEVEL
+This is a major requirement.
+Questions must NOT concentrate on one small portion of the Quran.
+For example:
+If Level 1 covers Juz' Amma, do NOT create most of the questions from the final few Surahs.
+The questions must be distributed across the entire Quranic range represented by that level.
+For example, if Level 1 covers Juz' Amma, the question pool should contain meaningful coverage from different parts of Juz' Amma:
+Early part
+Middle part
+Later part
+and across multiple Surahs.
+The exact distribution should be based on the actual curriculum content of that level.
+
+7. APPLY THE SAME PRINCIPLE TO ALL MEMORIZATION LEVELS
+For:
+Level 1
+Juz' Amma
+Questions should be distributed across the entire relevant portion.
+Level 2
+Juz' Tabarak + selected Surahs
+Questions should be distributed across Juz' Tabarak AND the selected Surahs according to their curriculum weighting.
+Level 3
+Half Quran
+Questions must be distributed across the entire half covered by the level.
+Do NOT focus on only a few Surahs.
+Level 4
+Complete Quran
+Questions must have broad distribution across the Quran.
+Do NOT allow the test to be dominated by a small number of Surahs.
+
+8. CONTROLLED CONTENT DISTRIBUTION
+Do NOT simply randomly select Surahs.
+Build the question pool so that the system can deliberately sample across the entire content range.
+For example, if a level contains 10 Surahs, do not allow 80% of the test to come from only 2 Surahs.
+The question selection should provide reasonable coverage of the full memorization range.
+The goal is:
+Measure the student's overall memorization level, not their familiarity with a small subset of Surahs.
+
+9. IMPORTANT — DO NOT CHANGE THE NUMBER OR SCORING SYSTEM UNNECESSARILY
+I am NOT asking you to redesign the scoring system.
+Keep the current:
+60% mastery threshold
+and current adaptive placement architecture.
+The changes here are primarily:
+Question type + question content + content distribution.
+Do NOT modify the scoring logic unless a technical change is absolutely required for the new question format to function correctly.
+
+10. DO NOT CHANGE OTHER PROGRAMS
+This instruction is extremely important.
+For all other programs:
+DO NOT change their questions.
+DO NOT change their scoring.
+DO NOT change their adaptive logic.
+DO NOT rewrite their question banks.
+DO NOT redesign their assessment structure.
+The only global changes are:
+Fix the [object Object] / NaN UI bug.
+Increase Arabic/Quran text readability.
+Replace "Save, Print Result" with "Send to Academy."
+The substantive question redesign applies ONLY to:
+Quran → Memorization & Revision.
+
+11. PRESERVE EVERYTHING ELSE
+Do not remove working functionality.
+Do not change the visual identity unnecessarily.
+Do not change the curriculum levels.
+Do not change program names.
+Do not change the existing adaptive placement architecture.
+Do not change the 60% threshold.
+Do not change the scoring system.
+Do not change other programs.
+Make the smallest safe code changes necessary to implement the requested modifications.
+
+12. FINAL TESTING
+After making the changes, test:
+UI
+No [object Object]
+No NaN
+No undefined
+Correct question count
+Correct estimated time
+Large readable Arabic
+No mobile overflow
+"Send to Academy" displays correctly
+Memorization & Revision
+Test every level.
+Verify that:
+Questions are actually Quran-content based.
+Missing-word questions are accurate.
+"What comes next?" questions are accurate.
+Correct answers are actually correct.
+Distractors are plausible.
+Questions are distributed across the entire level.
+One small group of Surahs does not dominate the assessment.
+The existing scoring system still works exactly as before.
+The 60% threshold remains unchanged.
+Adaptive progression remains unchanged.
+OTHER PROGRAMS
+Verify that their:
+Questions
+Scoring
+Adaptive logic
+Levels
+remain unchanged.
+
+FINAL INSTRUCTION
+Do NOT use this request as an opportunity to rebuild the Placement Test.
+This is a targeted modification to an already working system.
+Make ONLY the requested changes.
+The final result should preserve the existing architecture while providing:
+**Better UI readability
+Correct metadata display
+"Send to Academy" action
+A substantially improved Quran Memorization & Revision question bank
+Proper Quran-wide content distribution**
+while keeping the existing scoring and placement logic unchanged.
+
+The last thing, is that after the test is finished, I want the site to send the data of the test, the score, the recomended level, the data of the user, all these staff, every thing concerning the test in organized form and good email looking containing the color palette as well as the academy logo, to the user on the mail that he entered at the begining of the test, the sender email will be info@fosselatacademy.com.
+these changes concerning the placement tests.
+
+2- In the login page, there is a sign up, there shouldn't be a sign up at all, so remove this option and remove the page of sign up.
+3- You will find in the folder the new updated curriculum, which is Fosselat_academy_curriculum_framework.pdf I want to update the curriculum to this, so inspect it and update all things, also I guess in the dist folder that is uploaded to hostinger it contains the old curriculum, so should I move it their, change the name, whatever is should be done I don't know, so do what is necessary.
+4- You will find in the attached photo that the logo academy is not visible, I don't know why, and also this is not the only problem, When I search on google for Fosselat, academy, quran, anything or keyword that is present in the site, it does not appear in the search, this is what I found when I researched, but I didn't understand quite good:
+أيوه، ده طبيعي جدًا لو الموقع جديد. كونه بيفتح لما تكتب الرابط مباشرة لا يعني إنه اتفهرس في Google أو بقى ظاهر في نتائج البحث.
+
+بالنسبة لأكاديمية فُصِّلَت، محتاجين نعمل SEO + Google Indexing للموقع.
+
+أهم الخطوات بالترتيب:
+
+1. Google Search Console
+
+نضيف الدومين للموقع.
+
+نعمل Verification.
+
+نضيف الـ Sitemap.
+
+نطلب Indexing للصفحة الرئيسية.
+
+
+
+2. نتأكد إن Google مسموح له يفهرس الموقع
+
+مفيش noindex.
+
+ملف robots.txt مش مانع Google.
+
+الصفحات المهمة قابلة للوصول.
+
+
+
+3. Sitemap لازم يكون عندكم Sitemap، خصوصًا للصفحات الأساسية مثل:
+
+Home
+
+Quran Program
+
+Arabic Program
+
+Islamic Studies
+
+About Us
+
+Contact Us
+
+
+
+4. SEO داخل الموقع كل صفحة يكون لها:
+
+Title واضح.
+
+Meta description.
+
+H1 مناسب.
+
+كلمات بحث حقيقية مثل: Online Quran Classes Quran Classes for Kids Online Arabic Classes Islamic Studies for Kids Quran Academy for Muslims in USA & Canada
+
+
+
+5. Google Business Profile لو مناسب لطبيعة الأكاديمية، بالإضافة إلى إنشاء وربط حسابات السوشيال والموقع.
+
+
+6. روابط خارجية للموقع وجود رابط الموقع في Facebook / Instagram / TikTok وغيرها يساعد Google على اكتشافه وفهمه، لكن مش مجرد إضافة الرابط هتخليه يظهر فورًا.
+
+
+
+المهم جدًا
+
+لو أنت تقصد إنك تكتب مثلًا:
+
+> Fosselat Academy
+
+
+
+في Google ولا يظهر الموقع، ده قابل للحل غالبًا بسرعة نسبيًا.
+
+أما لو تقصد:
+
+> online Quran classes
+Quran classes for kids
+online Arabic classes
+
+
+
+فده موضوع مختلف؛ الموقع يحتاج SEO وبناء authority، وممكن يحتاج وقتًا قبل ما ينافس على الكلمات دي.
+
+لو تبعتلي رابط الموقع نفسه، أقدر أفحصه وأقولك تحديدًا: هل المشكلة في الـindexing، الـSEO، الـsitemap، الـrobots، ولا الموقع لسه جديد ومحتاج وقت، وأديك قائمة التعديلات المطلوبة واحدة واحدة.
+
+can you make these changes ?
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-15T14:57:44+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>I cannot read PDF files directly. I'll need you to confirm: does the new curriculum PDF change any track names, program names, or level structures? Or is it just a formatting/content update while keeping the same structure?
+
+Comment: "formatting and content update, as well as the pdf to be downloaded from the site"
+
+Selection:
+>4. Deployment: After making all changes, should I rebuild dist/ for you to upload to Hostinger? Or do you deploy via Git?
+
+Comment: "dist to upload through hostinger"
+
+Selection:
+>1. SMTP Credentials: To send emails from info@fosselatacademy.com, I need the SMTP server details and password. Can you get these from Hostinger's email settings?
+
+Comment: "smtp.hostinger.com
+port: 465
+TLS/SSL
+Password: Fosselat@20012001"
+
+Selection:
+>2. Curriculum PDF Content: Does the new curriculum PDF change the track/program structure (names, number of levels), or is it the same structure with updated descriptions?
+
+Comment: "the same structre, just the inside may be changed, may be not, what is important is downloading the curriculum that must be changed"
+
+Selection:
+>3. Domain URL: Is the live domain fosselatacademy.com or www.fosselatacademy.com? I need this for sitemap and canonical URLs.
+
+Comment: "fosselatacademy.com"
+<USER_REQUEST>
+I added all the needed comments 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-15T15:14:18+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+continue your work 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-15T22:56:06+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think for the backend, I changed it from python, so you can inspect the new way now, as for the backend that was implemented in python, it wouldn't to be uploaded, so I changed the backend to the other files in the backend folder you can inspect them, and make your edits based on that
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-15T23:03:49+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+continue what you were working on, and I want another little edit, the allignment of the about us page looks bad, so I want the allignemnet of the text to be justified
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:11:54+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+for the backend, what is the npm install you say to run, or i ran it locally or what you mean 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:17:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+what here
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:22:04+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I can't leave anything empty or remove
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:22:57+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+1
+
+added 99 packages, and audited 100 packages in 1s
+
+2
+
+
+3
+
+17 packages are looking for funding
+
+4
+
+run `npm fund` for details
+
+5
+
+
+6
+
+found 0 vulnerabilities
+
+7
+
+npm error Missing script: "build"
+
+8
+
+npm error
+
+9
+
+npm error To see a list of scripts, run:
+
+10
+
+npm error npm run
+
+11
+
+npm error A complete log of this run can be found in: /home/u233910077/.npm/_logs/2026-08-16T09_23_34_338Z-debug-0.log
+
+12
+
+ERROR: Failed to build the application
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:23:47+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+you continued?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:24:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+added 99 packages, and audited 100 packages in 846ms
+
+17 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> fossclat-backend-node@1.0.0 build
+> echo 'No build step needed'
+
+No build step needed
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:25:31+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+it toldme that the buildfailed
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:25:49+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:27:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+the logo is still not visible, do you know why
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:30:38+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+the placement test page needs to be adjusted, as it is not centered, and this needs some padding  
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:32:49+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+in the mobile view, the arrow that goes up when scrolling down, it becomes on top of the whats icon, I want to fix it in the mobile view by making it on the other side maybe. Also the email in the contact us page to be 
+info@fosselatacademy.com, and add in the footer: for support contact: support@fosselatacademy.com
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T12:37:49+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Look, I want you to inspect all the site folder again and inspect the chat to understand what we are doing first, before I give you what I want to be edited
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:06:34+03:00.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Claude Opus 4.6 (Thinking) to Gemini 3.1 Pro (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
+
+============
+
+<USER_REQUEST>
+Look, there are couple of edits I wanna undergo:
+1- The placement test after choosing start test, the dialouge box appears as the photo attached, it is not adjusted correctly, as it looks compacted, not organized bad looking, I want the rectangles contining the answers to be equally sized, equally spaced, and has a good space after the question. Make its shape a good-looking box. 
+2- The price thorughout the whole sitein all the compnenets was set to be 8 $ per hour, I want it to be 10 $ per hour, through all the pages, all the components, all the interfaces that it appears there to be 8$ except for the thing while calculating the 10 percent discount, so that it to be changed from 7.33$ to 9 $.
+3- The placemenent tests when begining it from the page from the menu, it asks the user to enter their email, name and age, but when I click on the start test from home page, or test your level from the curriculum, it did not ask the user about the email, name, or age, which is totally wrong, whenever anything of these buttons go, it must ask about the user information first, also in the placement test, before going into the questions, if I choose something like kids or adults, and going to the next choice, I can not go back, the same for program, so I want the option to be able to go back.
+4- The placement test content and questions should be changed and adjusted based on the following big message:
+"
+FINAL TARGETED MODIFICATION REQUEST
+I need you to make ONLY the modifications specified below to the current working version of the Placement Test.
+IMPORTANT: DO NOT redesign or rewrite the entire application.
+The current adaptive scoring system and placement logic are already approved.
+Do NOT change:
+The current scoring system.
+The 60% mastery threshold.
+The current adaptive/branching logic.
+The placement algorithm.
+The scoring logic of any other program.
+The question banks of other programs.
+The structure of other programs.
+Only make the specific changes listed below, plus fix the previously identified UI/data-binding bug.
+
+1. FIX THE CURRENT UI BUG FIRST
+On the initial "Ready when you are" screen, the following values are currently displaying incorrectly:
+QUESTIONS: 1[object Object]-NaN
+EST. TIME: NaN–NaN min
+This is a JavaScript/data-binding bug.
+Find and fix the root cause.
+Do NOT hide the values.
+Do NOT hard-code fake values.
+Trace the data flow through:
+questions.json
+scoring.js
+script.js
+ui.js
+Determine why an Object is being rendered as [object Object] and why the calculation produces NaN.
+After fixing it, verify that:
+Question count displays correctly.
+Estimated time displays correctly.
+No NaN appears anywhere.
+No [object Object] appears anywhere.
+No undefined or null appears anywhere.
+Check the entire UI for similar data-binding problems.
+
+2. MAKE ARABIC AND QURAN TEXT MUCH LARGER AND CLEARER
+The Arabic letters, Arabic words, and Quranic text currently need to be much easier for students to see.
+Increase the font size and visual clarity of:
+Arabic letters
+Arabic words
+Quranic verses/passages
+Arabic answer choices when applicable
+The goal is especially important for:
+Quran Reading & Tajweed
+and
+Quran Memorization & Revision.
+The Arabic/Quran text should be:
+Large
+Clear
+Highly readable
+Well spaced
+Comfortable on mobile
+Comfortable on desktop
+Do NOT make the English UI unnecessarily large.
+The priority is the Arabic/Quran content that the student is actually reading and answering.
+Make sure the increased font size does not break the layout or cause horizontal scrolling on mobile.
+
+3. CHANGE "SAVE, PRINT RESULT"
+Replace the current:
+"Save, Print Result"
+button/action with:
+"Send to Academy"
+The purpose of this button is to allow the student to submit their completed Placement Test result to Fosselat Academy.
+For now, preserve the existing result data and functionality as much as possible.
+Do NOT redesign the entire results system.
+Only replace the current action with the requested Send to Academy functionality.
+If the current project already has a submission mechanism, connect the button to that mechanism.
+If there is no actual submission endpoint yet, create the button/UI structure cleanly without inventing a fake submission service.
+
+4. SPECIAL MODIFICATION — QURAN MEMORIZATION & REVISION
+This is the ONLY program whose question design should be substantially changed right now.
+Program:
+Quran → Memorization & Revision
+Keep the existing:
+Adaptive structure
+Self-report logic
+Level progression
+60% mastery threshold
+Level scoring
+Placement logic
+DO NOT change the scoring algorithm.
+We are changing the QUESTION DESIGN and QUESTION DISTRIBUTION ONLY.
+
+5. NEW QUESTION STYLE FOR MEMORIZATION & REVISION
+The questions should actually test whether the student knows the Quran they claim to have memorized.
+Do NOT primarily test Quran trivia.
+Use simple, direct Quran-content-based questions.
+For example:
+TYPE 1 — COMPLETE THE MISSING WORD
+Display a Quranic verse with one word removed.
+Example structure:
+وَالضُّحَى  وَاللَّيْلِ إِذَا ____
+Then provide several options.
+The student selects the correct missing word.
+The actual verse/content must be accurate.
+
+TYPE 2 — WHAT COMES NEXT?
+Display a Quranic verse or short passage.
+Ask:
+"Which verse comes next?"
+Provide several options.
+The student selects the correct continuation.
+This directly tests familiarity with the memorized sequence.
+
+TYPE 3 — OTHER SIMPLE RECOGNITION-BASED QUESTIONS
+You may create other similarly simple objective question types only if they genuinely test memorization.
+The questions must remain:
+Simple
+Clear
+Automatically scorable
+Appropriate for the student's age
+Directly related to Quran memorization
+Do NOT introduce:
+Audio recording
+Voice analysis
+Teacher evaluation
+Manual scoring
+Long written answers
+Difficult academic tasks
+
+6. VERY IMPORTANT — DISTRIBUTE QUESTIONS ACROSS THE ENTIRE LEVEL
+This is a major requirement.
+Questions must NOT concentrate on one small portion of the Quran.
+For example:
+If Level 1 covers Juz' Amma, do NOT create most of the questions from the final few Surahs.
+The questions must be distributed across the entire Quranic range represented by that level.
+For example, if Level 1 covers Juz' Amma, the question pool should contain meaningful coverage from different parts of Juz' Amma:
+Early part
+Middle part
+Later part
+and across multiple Surahs.
+The exact distribution should be based on the actual curriculum content of that level.
+
+7. APPLY THE SAME PRINCIPLE TO ALL MEMORIZATION LEVELS
+For:
+Level 1
+Juz' Amma
+Questions should be distributed across the entire relevant portion.
+Level 2
+Juz' Tabarak + selected Surahs
+Questions should be distributed across Juz' Tabarak AND the selected Surahs according to their curriculum weighting.
+Level 3
+Half Quran
+Questions must be distributed across the entire half covered by the level.
+Do NOT focus on only a few Surahs.
+Level 4
+Complete Quran
+Questions must have broad distribution across the Quran.
+Do NOT allow the test to be dominated by a small number of Surahs.
+
+8. CONTROLLED CONTENT DISTRIBUTION
+Do NOT simply randomly select Surahs.
+Build the question pool so that the system can deliberately sample across the entire content range.
+For example, if a level contains 10 Surahs, do not allow 80% of the test to come from only 2 Surahs.
+The question selection should provide reasonable coverage of the full memorization range.
+The goal is:
+Measure the student's overall memorization level, not their familiarity with a small subset of Surahs.
+
+9. IMPORTANT — DO NOT CHANGE THE NUMBER OR SCORING SYSTEM UNNECESSARILY
+I am NOT asking you to redesign the scoring system.
+Keep the current:
+60% mastery threshold
+and current adaptive placement architecture.
+The changes here are primarily:
+Question type + question content + content distribution.
+Do NOT modify the scoring logic unless a technical change is absolutely required for the new question format to function correctly.
+
+10. DO NOT CHANGE OTHER PROGRAMS
+This instruction is extremely important.
+For all other programs:
+DO NOT change their questions.
+DO NOT change their scoring.
+DO NOT change their adaptive logic.
+DO NOT rewrite their question banks.
+DO NOT redesign their assessment structure.
+The only global changes are:
+Fix the [object Object] / NaN UI bug.
+Increase Arabic/Quran text readability.
+Replace "Save, Print Result" with "Send to Academy."
+The substantive question redesign applies ONLY to:
+Quran → Memorization & Revision.
+
+11. PRESERVE EVERYTHING ELSE
+Do not remove working functionality.
+Do not change the visual identity unnecessarily.
+Do not change the curriculum levels.
+Do not change program names.
+Do not change the existing adaptive placement architecture.
+Do not change the 60% threshold.
+Do not change the scoring system.
+Do not change other programs.
+Make the smallest safe code changes necessary to implement the requested modifications.
+
+12. FINAL TESTING
+After making the changes, test:
+UI
+No [object Object]
+No NaN
+No undefined
+Correct question count
+Correct estimated time
+Large readable Arabic
+No mobile overflow
+"Send to Academy" displays correctly
+Memorization & Revision
+Test every level.
+Verify that:
+Questions are actually Quran-content based.
+
+Missing-word questions are accurate.
+"What comes next?" questions are accurate.
+Correct answers are actually correct.
+Distractors are plausible.
+Questions are distributed across the entire level.
+One small group of Surahs does not dominate the assessment.
+The existing scoring system still works exactly as before.
+The 60% threshold remains unchanged.
+Adaptive progression remains unchanged.
+OTHER PROGRAMS
+Verify that their:
+Questions
+Scoring
+Adaptive logic
+Levels
+remain unchanged.
+
+FINAL INSTRUCTION
+Do NOT use this request as an opportunity to rebuild the Placement Test.
+This is a targeted modification to an already working system.
+Make ONLY the requested changes.
+The final result should preserve the existing architecture while providing:
+**Better UI readability
+Correct metadata display
+"Send to Academy" action
+A substantially improved Quran Memorization & Revision question bank
+Proper Quran-wide content distribution**
+while keeping the existing scoring and placement logic unchanged.
+"
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:16:51+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I have been thinking that instead of asking the user in the placement test for taking the test of adult or user if is it possible that the site automatically determined this from the age that the user entered
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:34:22+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+D:\GitHub\Repos\Foselat\frontend>npm run build                                                                                                                                                                                                  > frontend@0.0.0 build                                                                                                  > vite build                                                                                                                                                                                                                                    vite v8.1.4 building client environment for production...                                                               ✓ 91 modules transformed.                                                                                               ✗ Build failed in 165ms                                                                                                 error during build:                                                                                                     Build failed with 1 error:                                                                                                                                                                                                                      [builtin:vite-transform] Unexpected token. Did you mean `{'}'}` or `&rbrace;`?                                               ╭─[ src/pages/PlacementTest.jsx:898:3 ]                                                                                 │                                                                                                                   898 │   };                                                                                                                  │   │                                                                                                                   │   ╰─                                                                                                             ─────╯                                                                                                                                                                                                                                              at aggregateBindingErrorsIntoJsError (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:48:18)                                                                                                      at unwrapBindingResult (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:18:128)                                                                                                                   at #build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/rolldown-build-CtPvmZgJ.mjs:3276:34)                                                                                                                      at async buildEnvironment (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33011:66)                                                                                                                        at async Object.build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33433:19)    at async Object.buildApp (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33430:153)                                                                                                                        at async CAC.<anonymous> (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/cli.js:776:3) {        errors: [Getter/Setter]                                                                                               }                                                                                                                                                                                                                                               D:\GitHub\Repos\Foselat\frontend>   
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:36:14+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+look at the logo at the header and the footer they are completely wrong
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:37:52+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I want the text "Fosselat Islamic Quran way" that was present at the header beside the logo and alligned correctly with the logo to be there again with the same way of writing and styling in both the header and the footer
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:43:02+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+They are not alligned correctly with the logo and it seems to appear so small in the mobile interface, I didn't even know why you edited it from the begining, I didn't ask you to make any change on them 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:45:38+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I swear to god that the text and the logo were assigned correctly 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:49:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+That's really nice, I think last thing I want is that if you could reduce the space between them like if you put negative margin left to the text or something like that
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T19:52:20+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think in the questions of some tests, there is a voice which reads some letters or some sentences, I don't want any of these voices, can you remove all the voices in the tests ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:22:34+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Another thing, are the cookies in this site important ? do I have to add cookies?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:25:23+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think there are something in top left and top right of the tests, One is the logo academy and name, and the other is how many do you completed of the questions, can you remove the logo and name, and put how many you complete of the questions under the box of the questions ? make approbiate spacing between it and the footer
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:28:10+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Can we remove that emojis ? if you have and idea to represent the packages you can suggest it, but I don't like the empojis, also there are emojis in choosing kid or adult in the currciulum, remove it too 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:31:41+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I wan a bit of margin top here above the curriculum structure
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:36:56+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+remove that clok emoji or icon or whatever this is 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:38:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+"كتاب" here I guess the last of it should be "تنوين" not only "ضمة"
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:40:50+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+not only there, allt eh places that contain the ayah are the same
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:41:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+For any google user when he search for something that has any connection to like an article in the site, or any thing that is related to the site, is it possible that if any google user search the site appears to him ? should it be updated in the sitemap or what 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:43:59+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I already launched the site, and there is robots.txt and sitemap.xml present in the dist folder 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:44:45+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+it didn't change 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:46:34+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I refreshed and still as it is 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:48:29+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+where does this send message send the message to ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:51:20+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+info
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:54:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+smtp.hostinger.com
+465
+Fosselat@20012001
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T20:58:48+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+This text in header and footer, I think it should be Islamic Qur'an school, as well as can you make the font smaller for only "Islamic Qur'an School" ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T21:00:21+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+wait wait wait, In the backend, we are not using python anymore, we are using js 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T21:03:14+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think in these places for the payments and schedule, there must be search by name for the teacher and by name or id for the students like in the page of the students and teachers 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T21:09:57+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I didn't like these emojis here or at any of the admin, teacher, or student interfaces,  I liked the icons that you put in the prcing, can you make some similar in these three interfaces ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T21:34:57+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you now review that the backend using js is correct and running correctly ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T21:38:11+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+what about schudeling a session through admin, does it appear at the teacher and the student?
+another thing in the frontend, when we remove the upside bar which contains logo and name as well as the number of questions answered, the card now overlapped with the navbar, can you solve this problem 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T21:43:14+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the position of back is a bit too close ? can we improve its position
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T21:55:20+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+look this appears when I opened from the mobile, it still overlapped with the navbar in mobile
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:02:10+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think in the login page, I don't like that much space upside and down side the login box in the mobile view
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:05:21+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+now it is too much space downside it 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:07:57+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Nooo, I didn't want that, I wanted you to remove it as what you did with the space in the upside 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:10:01+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Do you think, we can put the academy logo as well as the text "Fosselat Islamic Qur'an school" in this space here in the mobile ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:13:00+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+that's really good, 
+in the space under the pages, what you recommend we put
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:16:21+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:16:45+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I guess there are a bit stuck to the bottom too much, as well as the number is not that 
++966595796177
+here is the number
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:19:17+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Nicee!!! but I still we could make use more of some spaces
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:23:01+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the old spacing was much better, can we return back the old spacing, and think of another thing we could add 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:25:36+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+They are sooo stuck below and don't appear completely
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:27:48+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Can all the book a free trial buttons, on clicking, they send the following message to whatsapp:
+
+"Assalam alikom warahmatuallah wabarakatu. I want to book a free time trial, please."
+
+and for all the enroll button, change "Hello" to "Assalam alikom warahmatuallah wabarakatu,"
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T22:59:07+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+what did you update in the WhatsAppButton?
+and what is this?????? I just wanted these things in the mobile when clicking on the three lines.
+and also can you change the youtube to tiktok icon 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T23:02:06+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+The icons in that menu on mobile do not go to the page of the academy on these social media acounts, it should go their weither insta or facebook or tiktok, like the one present in the contact us, also
+for the WhatsAppButton, It should say: "Assalam alikom warahmatuallah wabarakatu. I would like to know more about Fosselat Academy."
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T23:05:41+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+https://fosselatacademy.com/
+
+can you add in the readme file, that the site is available at that link, or where should it be put in the github repo 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T23:19:12+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Also in the readme, it said that the deployment was through vercel and railway, can you update it to match the correct description of the project? update readme to adapt to the correct project
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-16T23:20:30+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+There are a couple of things that needed to be adjusted, these images are from the mobile view, but when making the changes and adjustments, make sure that you make these adjustments in both mobile, desktop and ipad view:
+1- You will see that the layout of the date is not adjusted, there is something wrong in it as dd/mm/yyyy is overlapped or something like that, so this layout needed to be adjusted, so make sure that it is adjusted in all pages that contain date in all mobile, ipad, and desktop view.
+2- when selecting the subject, it should be selected from a list right, but I wanted all things that can be chosen from a list could be also written so that the choice became on what you write, what i mean to be something like choosing the Id, I could write the Id then choose it, you can see how it is implemented, and implement the subject like it, moreover, check for all the places that require choosing from a list and make them the same logic. That was my client comment: "ل subject عايزين نعرف نكتب في الخانة ده 
+أو يظهر قائمة منسدلة quran 
+Arabic
+Islamic studies" and also, he could choose more than one subject in that place, like he could choose quran as well as arabic, etc...
+3- I guess I wanted before to remove the button start meeting in the plaece of the schudule, I don't know if it is still present in the desktop view or not, but I want to remove it totally. I want the buttons zoom, and google meet, to be "Join via zoom" and "Join via Google meet", and they became with golden background, and the text similar to the what is in start meeting. Breifly, I want to remove the start meeting button, and make the style of the "join via zoom" and "join via Google meet" to be the same style of the start meeting, and for sure adjust their positions in both mobile, ipad, and desktop views. I saw the desktop view, it contains what I want exactly, the button style, only the two buttons, as well as there are icons of both zoom and google meet, I want exactly like this in the mobile and ipad views. Also if you have a better icon for zoom and google meet, you can put it in all views. If not keep the icons as they are. There are also a screen shot from the student interface, make the place of "Today's session" in all views like what you will do to the teacher. 
+4- When the teacher write the notes about the session, I want it to appear to both the admin and the student, not the admin only, and when the student review the session, I want it to appear to both the teacher and admin. I think there is no place by which the teacher can see the reviews, so add that the teacher can see the recorded sessions that he recorded, and when the student reviewed, it appears to him their, and add their that the teacher could search for a student or ID, as well as the teacher could edit, in case he recorded something wrong. Also remove the option "trial" when recording the session. 
+5- I think for the student portal, we want to organize it more, Like in the dashboard, make it contains:
+- the place of today's session as it is.
+- cards like that is present in admin, and teacher, could be filtered by month, year, etc.. containing number of taken sessions (will be filtered according to the choice of month, year, etc..), and number of remaining session for the current month. 
+add other pages, one for the calendar, so that the scheudule is organized their instead of it being put in the dashboard, make it like the teacher calendar, and organize it in all views mobile, ipad, and desktop for both teacher and student; another page for the students attendance and he could search their by the date, and add another page for placement tests, if you want to take a placement test, and record all the placement tests he has taken showing score and how he has been improved from enrolling in the academy, as well as after a couple of sessions, this page will recomend him a placement test based on the program he is enrolled in, I trust you in making the UI and how you will organize this page. 
+6- In searching google for the academy, you will see that the logo appeared, yay!!! but I also the logo to apear beside the link instead of that earth icon.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:07:05+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>For the placement tests history in the student portal, do you want to retroactively save past tests (which is currently impossible since they were only emailed), or is it acceptable that only future tests taken while logged in will be recorded?
+
+Comment: "yes it is acceptable "
+<USER_REQUEST>
+I added the comment go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:13:26+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I have a question, did you remove the start button from the calendar in both student and teacher ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:31:04+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+for the free trial message that is sent to whatsapp, make it "Free trial lesson" instead of "free time trial"
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:33:20+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Look, I don't want the logo to appear at that place, I want the logo only to appear instead of the icon on the left of the academy link
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:37:27+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+do I need to do something in the google search console ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:38:35+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+You sure you made the changes? 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:43:30+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you build the changes? as After the upload the dist folder, nothing changes in the site
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:44:18+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+????????????
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:46:37+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+why this appears on opening the site from google
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:47:24+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I cancelled by wrong continue
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:49:25+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+this still what appears in the local host of preiveiw, look at the icon of the tab and the dark screen 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T16:51:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+nice it seems to be appeared, but why the logo on the tab is not the academy logo 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:12:42+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+now the current changes should show the academy logo instead of the globe icon beside the url right?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:14:51+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+there is no filter by month, year for the session taken, as well as there is no counter for the remaining session in the months, and you can change the name of the placement tests to be test only without placement. 
+the screenshot from the teacher portal, the currency should not be dollar, it should be L.E (EGP) 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:20:01+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I don't think the student review appears to the admin
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:21:50+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+could the calendar in both teacher and student be something like that but its style to be suitable with the site? I think it would be better, as well as adjust it to all the views mobile, ipad and desktop
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:24:17+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+another thing can you put the todays' sessions above the stats?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:28:23+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+go ahead with the implementation plan
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:29:42+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+First, I don't think the styling of the calendar is suitable with the theme and color palette of the site, so change its styling, and moreover, you rember the card in the old calendar, I want the same card in the place of the of the day that contains the session, and make the calendar smoth with the site, has a good looking in its place. also in this page in the student interface, I don't want it to be placement tests too, I want its name in the student interface to be tests not placement tests. For the remainning sessions, in the dashboard, calculate it monthly, based on the starting data of enrolling the student in the site, for example if the student is enrolled in 15/8/2026, so calculate the remaining sessions of the student for every month starting from day 15 until the next day 15, and also in the calendar, for the sessions that were in the past, for example if there was a session on 14/8/2026, and today is 17/8/2026, change the color of this session on the calendar based on the student status,whether he was absnet or present, and write his status there. for the login, in writing the password, there is a weird emoji of eye and monkey, I want to change this into a good, and professional icon as well instead of emojis.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:52:52+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>Calendar UI Change: Displaying full cards (with teacher names, times, and Zoom buttons) directly inside a 7-column monthly grid will make the calendar cells very tall on desktop. On mobile, a 7-column grid cannot fit full cards horizontally.
+My Solution: On desktop, the 7-column grid will have taller cells to fit the cards natively. On mobile and iPad, the calendar will switch to a vertical "Agenda/List" view grouped by date, so the full cards remain readable and accessible without horizontal squishing. Does this approach work for you?
+
+Comment: "yes"
+<USER_REQUEST>
+go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T17:54:34+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+look, when the student is logged, the placement test I want it to be named as test not placement test, and do not ask the student about name, age, or email. on choosing it, what i mean by a test not placement test, is when the student is logged in, the name of any placement test in the site to be changed to tests, and when the student go to the test, fo not ask him for name, email, or age, make him choose the programs, and go to the test, now after the student finish the test, record the test in his tests page, and also send the result to info@fosselatacademy.com. also you can in the dashboard page of the student, I told you that after a couple of sessions, recommend to the student to take a test based on the programs he is enrolled in, make that recommendation appears in the dashboard page monthly. And the final change I want is that, whenever admin, teacher, or student is logged in, can you add dashboard to the menus of the navbar, but it only appears whenver any one logged in
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:09:46+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+another thing, here the student has a session on 17/8, so the teacher can only record the session once, and the duration of the session can not be changed, it is auto determined from the duration that the student was registered by with. Also the teacher must not be able to record a session before its time, so I think in recording the session in teacher interface, he don't have to record the end date, just after choosing the student, and the date, it will the page will auto detect the session on that date, with the assigned duration, and the teacher chooses, if he was present or absent, and write his notes, also in the admin interface while schudeuling a session, after the admin chooses the student, the duration must appears automatically and the end time must be determined automatically, based on what start time the admin chooses, and what is the duration. 
+I caught a problem after logging in into the teacher portal, so can you fix it
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:17:34+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Look, I should have already recorded ahmed's session, but nothing changed in the calendar of ahmed or even the teacher that ahmed attended the session, it is also still present in the dashboard page for both the student and the teacher, it shouldn't be that, it should be the session is recorded that in the attendance, so it shouldn't appear in the dashboard in any of the student or the teacher, as well as, it should be marked in the calendar with whether the student attended or absent. Also in the teacher dash board, the rate is written is L.E prefect, but I also want the icon not to be a dollar icon
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:28:31+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+no update in the backend?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:31:16+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think it is totally bad that way, I meant you see the card of ahmed on 17/8/2026, that should be replace after the session is recorded with the one that overlapped with the date 18/8/2026, and it should have a good looking and organized well 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:34:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+you can also add that the student could edit his review on the session
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:35:33+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+there is a small bug in schudeling the session, by which after choosing the student, I do not know if it chooses the duration based on the registered duration that the student was registered with or not, but it should do so, with the capability of admin to edit it, but the bug here is that the end date at first is not calculated correctly unless I change the duration and return it back, like here, you will see that teh end is 9:40, while the duration is 30 min, but after I changed 30 min to 40 and then back to 30, it became 9:30, so can you fix this? also in this page in the second screenshot, can you remove the column room, it is unnecessary
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:40:32+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+it is not organized well, as well as what are all thses numbers? I just want Teacher, start time, subject, and duration, and I don't want it to overlapp, as well as I fell like I don't like the way Status: present is that good looking, can we make it looks better ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:46:35+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+ops in the admin interface, where the teachers are registered, the currency that the teacher is registered with is still dolar here
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:52:17+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+there is one last thing, in the calendar, I think for the present of absent status, you put the time that the teacher recorded the attendance, I don't want this, I want it to be the start time of the session
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T18:56:16+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+look, the time 18:24 and 18:49 is the time the teacher recorded the attendance of the session, not the actual time of the session, I want it to be the actual start time of the session 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T19:00:30+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+this in student interface is still saying take a new placement test, while it should be test now, as well as clicking on it goes to an empty screen
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T19:06:10+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+there is also a weird thing, on choosing a choice in the tests, inside the test itself, it doesn't appear that I choose any of the answers 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T19:07:47+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think now in the student interface that recommendation of level shouldn't be there, I think it should be, so remove recommended starting level, as well as estimated duration as well as recommended pace
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T19:10:03+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+another problem appeared, after completing the test, and I go to tests page, this appears, I guess this is because there is no real mail named like ahmed.hasan@fosselat.com to send the results, too, or I don't know the problem 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T19:13:57+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+another thing in payment recordings, is that when the teacher recorded a student as absent, and I go to the payment to record the teahcer and the student payments, the session should be recorded with the assigned duration in both the teacher payroll and student payments, what I mean is when I recorded teh absent session, and I went to the payroll in the admin interface, I found that the session that was recorded as absent was not considered in the duration of the teacher, while it should considered, the same in the student payment, when I choose the id of the student that was recorded as absent, I found that the session taken for him was recorded as 0, but that absence session should be recorded
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T19:17:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+For the first screenshot, I don't like the way that a button is small and the other is big, 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T20:25:36+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+1- For the first screenshot, I don't like the way that a button is small and the other is big, so can you adjust that ? as well as we could change choosing the date into filter by month, that whould have been better. 
+2- For all the dashboards, remove the filter week, month, year; make it only by month, and the filter will be by choosing the month, for the admin dashboard, leave it as it is, just make the default filter to be this month, not all time. 
+3- Another thing I noticed, is that the data of the students and the teachers, in the place of registering new students and teachers, contains the status of payment, which is wrong, it shouldn't be placed in that place, the status should appear in the place of Students Payments, as well as the teacher Payroll.
+4- another thing in payment recordings, is that when the teacher recorded a student as absent, and I go to the payment to record the teahcer and the student payments, the session should be recorded with the assigned duration in both the teacher payroll and student payments, what I mean is when I recorded teh absent session, and I went to the payroll in the admin interface, I found that the session that was recorded as absent was not considered in the duration of the teacher, while it should considered, the same in the student payment, when I choose the id of the student that was recorded as absent, I found that the session taken for him was recorded as 0, but that absence session should be recorded.
+5- When the sessions are recorded, as shown in the second screenshot, the Due amount does not change, which is it should automatically be changing, based on every recorded session, what I mean here:
+whenever a teacher recorded a session, the session is updated in here and number of sessions increase, the due also should increase, and it should increase logically, by which, when the session is recorded, it was recorded for example for a student who takes a 40 min session, which worth around 6.67 dollar for example, so the due should increase that amount. another example if a session was recorded for a student who was registered in the package of 5 classes per week, and a session of 40 min session was recorded, the total due should increase with the 10% discount that comes with the 5 classes per week. So the increase in the due with each session recorded should be relative, and the due must increase with each session recorded, as I told you before that the absent sessions are also counted as taken sessions.
+6- The paid in the dashboard should be the total amount recorded from the students payments that were paid by all the students.
+7- I think in this dashboard you should put all the money staff together, like make them the last five cards in the dashborad here, and put the revenue the last card.
+8- Payroll should be the amount that the teachers should take, and it is calculated from all the teacher payroll that were recorded in the teacher payroll, but there is something werid in the screenshot, which is the teacher is dealt with him in L.E, so in the teacher payroll, as attached in the third screenshot, you will find that the net is in dollar, that's great!!!! but in the dashboard, the payroll was found to be the actual amount of L.E the teacher deserves, and also in dollar which is wrong, the payroll in the dashboard should be the sum of all net dollars (net $) in the teacher payroll, not the sum of net Egyptian pounds (net L.E).
+9- The remaining should be the summation of all the remainings of all payment records of the students, and make sure to keep the sign, like if we have remaining of -5 plus remaining of 3, so the overall remaining will be -2.
+10- The revenue should be calculated as the following: Total paid + remaining - payroll.
+11- In the student payments, you should make sure of two things, the first is that on recording a payment for an id for a month, we must not record another payment for the same month for that id, what i mean for each id, we could record the payment for a month only once, and the second thing is that the total paid must not be negative number on entering the value for the paid. this also applying the teacher payroll, as we can not record a payroll for a teacher for a month more than once, and we can not put negative number for the bonusess and the deductions.
+12- let's say that I recorded a payment for a student at the begining of the month, by which there is no sessions taken, and consequently, there is no due, there for you will find that the status of the student will be credits. and all these things must also appears in the admin dashboard, What I want is when the students for that recorded payment took sessions, the due now should increase, so I want the due in that payment record to increase automatically too without the need to edit that, so the remaining in that record will also be updated as well as all these staff will be updated in the dashboard of the admin
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T21:08:33+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I guess I also need to add filter by month in both the student payments and the teacher payroll
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T21:11:54+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>For the dashboards, do you want the Month Dropdown to only show the past 12 months, or all historical months? (I plan to use the past 12 months by default to keep the UI clean).
+
+Comment: "past 12"
+
+Selection:
+>When a session is recorded, it will update the payment record for the month of the session date. Is that correct?
+
+Comment: "I did not understand what you tell, but what i meant is thata after the payment is recorded, let's say for example he paid 13$ and took 0 sessions, so the remaining is -13$ and it appears also in that way in the admin dashboard, but this dashboard containing all the records. so after the student take for example a session with 60 min duration, I want the record to automatically increase the due to 10$, so the remainig will be automatically too -3$, and all these things are also updated automatically in the admin dashboard, with also leaving the admin the option to edit the payment if he wants also."
+<USER_REQUEST>
+go ahead, and can I give you the permission from the beginning to edit what every you want and run any command you want in this folder ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T21:18:47+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you add clear button to the payment records for students and teachers ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T21:49:03+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I didn't mean to add clear button to clear filter, remove that button, I want clear to clear the record itself 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T21:54:54+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+The logo still did not appear
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T21:59:06+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I guess it will be better if these two became beside each other not above ? and don't forget to adjust it in the mobile and ipad view, Also I feel like we could organize the arragnements of cads in the dashboard of the admin, make it 
+students, teachers, (remove inactive teachers), time, Total sessions, Present, absent, and then the money staff as they are 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:05:21+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I feel like this way of choosing the teacher availabilit needs to be better, and more organized and be better good looking, can you improve it ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:09:06+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+is not thera a better way to be much better looking, organized and quite good, and adjust it to all mobile and ipad as well 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:11:32+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+D:\GitHub\Repos\Foselat\frontend>npm run build                                                                                                                                                                                                  > frontend@0.0.0 build                                                                                                  > vite build                                                                                                                                                                                                                                    vite v8.1.4 building client environment for production...                                                               ✓ 98 modules transformed.                                                                                               ✗ Build failed in 107ms                                                                                                 error during build:                                                                                                     Build failed with 1 error:                                                                                                                                                                                                                      [builtin:vite-transform] Unexpected token. Did you mean `{'}'}` or `&rbrace;`?                                               ╭─[ src/pages/admin/AdminSchedule.jsx:286:1 ]                                                                           │                                                                                                                   286 │ }                                                                                                                     │ │                                                                                                                     │ ╰─                                                                                                               ─────╯                                                                                                                                                                                                                                              at aggregateBindingErrorsIntoJsError (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:48:18)                                                                                                      at unwrapBindingResult (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:18:128)                                                                                                                   at #build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/rolldown-build-CtPvmZgJ.mjs:3276:34)                                                                                                                      at async buildEnvironment (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33011:66)                                                                                                                        at async Object.build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33433:19)    at async Object.buildApp (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33430:153)                                                                                                                        at async CAC.<anonymous> (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/cli.js:776:3) {        errors: [Getter/Setter]                                                                                               }                                                                                                                                                                                                                                               D:\GitHub\Repos\Foselat\frontend>      
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:13:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think this needed to be edited in the mobile view
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:21:31+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think we need to add here filter by month also
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:24:21+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+The dashboard of the teacher to contain more cards, around three cards, one for his payroll, one for bonuses, and one for deductions. 
+For the payroll, I guess this should be updated each time a session is recorded, and for the deductions and bonuses, this will be updated when the admin added the deductions and bonuses in the teacher payroll. 
+Another thing for the placement tests, I don't want the button send to Academy, I want the site to automatically send the results to the mails immediately after the test is finished, and the same for test in student interface, after he finished the test, send the results to the email info@fosselatacadmy.com containing the data of the stuednt, and update this in the tests page at the student interface as you know 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:38:53+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I want to add some more changes, while registering the student in the site, we should add a place to add the age of the student, by which when the student open the tests page, it will redirect to choosing the test based on the registered age. I also want to remove the tests page from the admin and teacher interafaec from the navbar.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:51:32+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:53:01+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I guess for the tests, we tell that the student will get a recommendation to take a test after a month based on the programs registered while registering the student, like if he was registered in two programs, recommend to him the tests in these two programs, and make these recommendations take the student directly to start the test of the recommended program.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T22:58:08+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I still did like the position of the button edit review here, can you make it a better looking
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:00:47+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Also, The student can't review a session he was recorded their to be absent
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:01:36+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:03:43+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+For choosing Id in the payment or any where, I know we can get by typing the id, but is there a drag list that contains all the ids and is filtered by typing ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:19:35+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I didn't think you added entering the age while registering the student, and based on that, the take test button in the tests page at the student still open that is in the screenshot, did you take care from this while appearing the recommendation on the dashboard ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:25:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think it is not good to assign one for every test, We can make it like hierarchy ? Quran under it the three programs for example, under every programs all the tests that were taken within this program.
+and also add the student the option to clear the test from the tests page if he want.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:34:39+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+go ajead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:37:02+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+D:\GitHub\Repos\Foselat\frontend>npm run build
+
+> frontend@0.0.0 build
+> vite build
+
+vite v8.1.4 building client environment for production...
+✓ 100 modules transformed.
+✗ Build failed in 492ms
+error during build:
+Build failed with 1 error:
+
+[MISSING_EXPORT] "Trash" is not exported by "src/components/Icons.jsx".
+   ╭─[ src/pages/student/StudentPlacementTests.jsx:3:10 ]
+   │
+ 3 │ import { Trash } from "../../components/Icons";
+   │          ──┬──
+   │            ╰──── Missing export
+───╯
+
+    at aggregateBindingErrorsIntoJsError (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:48:18)
+    at unwrapBindingResult (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:18:128)
+    at #build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/rolldown-build-CtPvmZgJ.mjs:3276:34)
+    at async buildEnvironment (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33011:66)
+    at async Object.build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33433:19)
+    at async Object.buildApp (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33430:153)
+    at async CAC.<anonymous> (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/cli.js:776:3) {
+  errors: [Getter/Setter]
+}
+
+D:\GitHub\Repos\Foselat\frontend>
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:41:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can I ask a question, what is all this space for ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:46:38+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Now I feel like only showing the score of the tests is not that good looking, and I doubt that way of viewing the hierarchy, is not there a better way ? also is there something we could add like stats? completed how many of the tests? these staff ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:50:17+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>How does this "Dashboard-style" layout (Stats -> Current Progress -> History Log) sound compared to the strict hierarchical grouping? This approach is very common in modern learning platforms like Duolingo or Coursera.
+
+Comment: "go ahead"
+<USER_REQUEST>
+go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-17T23:51:16+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+here is in the mobile view,can you fix it ? and also for the ipad view, adjust all all things on the site for all the three views please
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T00:19:34+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+If you look at the bottom, you will find that the text is not centered with the icons, so can you adjust it ? and check for this for all interfaces 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T00:44:33+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+cancelled by wrong sorry
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T00:44:59+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you push to git hub the only edited files? and update the readme 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T00:46:40+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+another problem appeared,
+concerning this, is there a better way to and more good looking and more soft to set the available time slots ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T00:54:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>How does this "Soft Pill & Icon" aesthetic sound to you? It will look much closer to modern scheduling apps like Calendly or Apple Calendar.
+
+Comment: "go ahead"
+<USER_REQUEST>
+don't forget to adjust it to be suitable to the mobile and ipad view
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T00:56:18+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the allignement of the text in the articels needs to be justified, as it is not justifiied in the mobile view, I don't know what is its state in the desktop view 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:00:27+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think there is a lot of space on the left of the logo here at the circled with green, is it possible that the logo and the logo text to move to the left ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:02:08+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Is there a better way to represent this page ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:03:56+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+for this, I think there is a much better way to represent it, as it is not that good-looking, as it is not soft in choosing the time slots may be,
+the second screenshot which is the attendance page is what I was telling you I want a better way to represent this page 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:07:12+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the button below is too big, and I think it would be better if it is in the center 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:10:41+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I don't know, I fell like i still do not like that much stretching for every day, as well as in the mobile view, the save all slots button needs some margin bottom.
+For the attendance page, I feel like if there is another much better way to represent the filters to be good for mobile, ipad, and desktop views 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:16:08+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+add that for the teacher payroll that appears in the teacher dashboard, I want it to be the net payroll after the bonuses and deductions, as well as if it is for example 506, so make it 506, do not make it 500 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:18:04+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+go ahead
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:19:26+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+now, I don't like that much space at all 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:23:52+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+now the space on the right, how would this be filled 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:26:42+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+what about we make the attendance filters in the admin page like this
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T01:29:17+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+continue
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:08:43+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Continue
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:10:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+continue and do not forget to adjust it to the mobile view
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:27:12+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I don't think that this is what I meant by make it exactly the same, I want exactly the same, as well as here I can't type the student name as well as the id to filter from the list.  
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:37:25+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I don't think that this is what I meant by make it exactly the same, I want exactly the same, as well as here I can't type the student name as well as the id to filter from the list.  as well as can the logo and the logo text became bigger in that view ?
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:38:26+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Also I think for the filters, what applys to the student name and id, should apply to the teacher 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:39:03+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+push to github 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:43:13+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the logo and logo text should move left more 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T02:45:56+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Here in the tests for the student, in the overview, in something like memorization and revison, it gave in the overview that he completed 20%, but if we examined the test, in that specific test for example, you will find that there are couple of tests in that test based on the first choice, and for something like memorization and revision, the completeness of a test and the higher score should be given for higher chocies than lower choices, like for example it is so good that if the user takes the quiz after choosing Juz 30 Amma, and get 100% there, but that does not mean that in the overview, he acheived 100% in the program Memorization and revision, he only scored I guess 1/5 or whatever the number of choices for a quiz like that, so the other programs and subjects first choices should be taken in consideration, so can you make something like that ?
+the other thing, I want a page for today's calendar in the admin interface, by which the admin will go to this place, and see all the sessions for today, and he could see the sessions tommorrow and yesterday and any day in the future and any day in the past. I want the styling to be smooth and soft like the calendar in the student and teaher interface, and also make sure that the recorded sessions to be assigned there as present or absent like exactly what is present in the teacher and student, but do no forget that I want this to be for only one day not the whole month, and I guess you can make the cards of the sessions and recorded sessions to be like a floating cards while scrolling, or something cool like that. As well as do not forget to adjust this in the mobile and ipad views 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T20:30:41+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+Comments on artifact URI: file:///c%3A/Users/Ali%20Abo%20Hendy/.gemini/antigravity/brain/cc9e60c5-6ba2-40d0-a65d-3e50b5297992/implementation_plan.md
+
+Selection:
+>New Page (frontend/src/pages/admin/AdminCalendar.jsx):
+  
+  Implement a sleek, smooth day-view interface.
+  Add simple "Previous Day" and "Next Day" navigation buttons, defaulting to "Today".
+  Display all sessions for the selected day across all teachers.
+  Floating Cards: Style the session items as elegant "floating cards" within a scrollable vertical list.
+  Attendance Actions: If a session is recorded/completed, include quick-action buttons directly on the card to mark it as "Present" or "Absent" (mirroring the teacher/student view behavior).
+  Ensure the layout is fully responsive for mobile phones and iPads.
+
+Comment: "put that page before the attendance page in the admin interface"
+<USER_REQUEST>
+I wnat the styling of the calendar in the admin to be the same as the teacher and the student, do not forget that 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T20:36:55+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+First for the tests, You will find that nothing changed, the same overview and nothing changed
+For the calendar, I don't really know why there are two buttons for present and absent, and I don't like that the for the single sessions in one day it fills the screen, and it do not show the sessions that are schuduled for the upcoming days, it only shows the sessions that were recorded as well as there are unnecassary buttons, you need to make it much better and functional 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T20:51:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Why do you analyze the navbar ???????? as well as admin attendance ???
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T21:03:59+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+it is still not abviou
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T21:05:07+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+You made it for the whole month, I want it for each day not the whole month 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T21:13:02+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+For the teacher and the student calendar, I want it the same as it was before, I want the change for every day to be only for the admin interface, I want the styling similar to the calendar but to be for every day not the month, as well as the cards for the sessions make them floating cards and smoth with the site
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T21:15:09+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I want you to add the option to the admin that he can delete a record for attendance, like if the teacher recorded a wrong record or something 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T21:48:12+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Now, I guess that is completely wrong, as the student didn't score 100% in these quizes, the overview should be correctly calculated on what is the actual score of the student in these quizes
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T21:53:16+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+in the calendar of the admin, can you add a button "view review" for the recorded session as present or absent, and after clicking on it, it appears a small window, with good looking and suitable styling with the site theme
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T21:56:44+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+The student review does not appear when clicking on view review
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:03:45+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+These are some edits in the curiculum, can you read them and update the pdf file? as well as update them in the curriculum section in the site ?:
+ريد تعديل ملف Curriculum Framework الحالي، مع الالتزام الصارم بالتعليمات التالية.
+Important — General Instructions
+التعديلات التالية تخص Division: Kids و Division: Adults.
+حافظ على نفس التنسيق والتصميم والـ layout الموجود حاليًا في الملف.
+حافظ على نفس أسلوب الكتابة والصياغة والعناوين والجداول.
+لا تعيد تصميم الملف ولا تغيّر ترتيب البرامج أو المستويات.
+لا تعدّل أي محتوى آخر غير التعديلات المحددة أدناه.
+كل شيء لم أذكر تعديله يجب أن يظل كما هو تمامًا.
+لا تضف أي تعديلات أو تحسينات من عندك.
+
+1. Reading & Tajweed Program
+A. Kids Division
+في الـ Kids Division، برنامج Reading & Tajweed مكوّن من 4 Levels.
+أريد تعديل Learning Outcomes فقط في المستويين التاليين:
+Level 2 – Learning Outcomes
+اجعل الـ Learning Outcomes تشمل:
+Madd / Natural Madd (المدود الطبيعية)
+Alif, Waw, and Ya as Madd Letters (الألف والواو والياء كحروف مد)
+Tanween (التنوين)
+Sukoon (السكون)
+Shaddah (الشدة)
+Level 3 – Learning Outcomes
+اجعل الـ Learning Outcomes تشمل:
+Rules of Noon Sakinah and Tanween
+Rules of Noon and Meem with Shaddah
+Rules of Meem Sakinah
+Rules of Madd
+لا تغيّر أي شيء آخر في Kids Reading & Tajweed Program.
+
+B. Adults Division
+في الـ Adults Division، برنامج Reading & Tajweed مكوّن من 3 Levels فقط، وليس 4.
+أريد تطبيق نفس التعديلات والمحتوى التعليمي المذكور أعلاه على Adults Reading & Tajweed، ولكن مع مراعاة أن البرنامج يحتوي على 3 Levels بدلًا من 4.
+لذلك لا تنسخ توزيع المستويات الخاص بالأطفال حرفيًا.
+أعد توزيع المهارات المذكورة في Kids Division على 3 Levels الخاصة بالـ Adults بطريقة منطقية ومتسقة مع الهيكل الموجود حاليًا للـ Adult program، بحيث تظهر المهارات في المستوى المناسب دون إنشاء Level رابع أو تغيير عدد المستويات.
+مهم: لا تغيّر أي Learning Outcomes أخرى في Adult Reading & Tajweed إلا بالقدر اللازم لتطبيق هذه التعديلات.
+
+2. Memorization & Revision Program
+هذه التعديلات تخص Kids Division:
+Prerequisites
+أريد تعديل الـ Prerequisites بحيث لا يكون شرطًا أن يكون الطالب قادرًا على القراءة لكي يبدأ هذا البرنامج.
+يمكن للطفل أن يبدأ Memorization & Revision Program حتى لو كان لا يزال في مرحلة تعلم القراءة.
+بمعنى أن:
+Reading ability is not a mandatory prerequisite for joining the Memorization & Revision Program.
+Expected Duration
+أريد أن تكون الـ Expected Duration أكثر مرونة وأطول من المدد الحالية المحددة بـ 3 أو 5 سنوات.
+لأن البرنامج موجه للأطفال، فلا ينبغي أن تكون المدة محددة بفترة قصيرة وثابتة.
+اجعل المدة مرنة وقابلة للامتداد لعدة سنوات حسب:
+عمر الطفل
+قدرته
+عدد الحصص
+سرعة الحفظ
+سرعة المراجعة
+تقدّم الطفل
+Starting from a Higher Level
+أريد أيضًا توضيح أنه إذا أراد ولي الأمر أن يبدأ الطفل من Level أعلى في Memorization & Revision Program، فهذا مسموح حسب رغبة ولي الأمر ومستوى الطفل.
+لا يشترط أن يبدأ كل طفل من Level 1 إذا كان ولي الأمر يفضل البدء من مستوى أعلى.
+لا تغيّر أي شيء آخر في هذا البرنامج.
+
+3. Arabic Foundation Program
+A. Kids Division
+في الـ Kids Division، برنامج Arabic Foundation مكوّن من 4 Levels.
+في Level 3 – Learning Outcomes تحديدًا، أريد وضع المهارات التالية في بداية الـ Learning Outcomes:
+Madd
+Alif, Waw, and Ya as Madd Letters
+Sukoon
+Tanween
+Shaddah
+ثم اترك باقي الـ Learning Outcomes الموجودة حاليًا كما هي، دون حذف أو تعديل غير ضروري.
+Important distinction
+يوجد بعض التشابه بين Reading & Tajweed و Arabic Foundation، وهذا مقصود.
+لكن البرنامجين ليسا متطابقين:
+Reading & Tajweed يتضمن مهارات القراءة بالإضافة إلى Tajweed وأحكام التلاوة.
+Arabic Foundation هو برنامج تأسيس في اللغة العربية والقراءة، وليس برنامج تجويد.
+لذلك لا تقم بتوحيد البرنامجين أو نسخ Learning Outcomes من أحدهما إلى الآخر.
+
+B. Adults Division
+في الـ Adults Division، برنامج Arabic Foundation مكوّن من 3 Levels فقط، وليس 4.
+أريد تطبيق نفس التعديلات التعليمية المذكورة أعلاه الخاصة بـ Kids Arabic Foundation، ولكن مع مراعاة اختلاف عدد المستويات.
+أي أن المهارات التالية:
+Madd
+Alif, Waw, and Ya as Madd Letters
+Sukoon
+Tanween
+Shaddah
+يجب أن تتم إضافتها/إعادة توزيعها في Adult Arabic Foundation بما يتناسب منطقيًا مع الـ 3 Levels الموجودة حاليًا، وليس بنسخ توزيع الأطفال ذي الـ4 Levels.
+وبالأخص، لا تنشئ Level رابع ولا تغيّر عدد مستويات الـ Adults.
+وفي نفس الوقت، حافظ على الفرق بين Arabic Foundation و Reading & Tajweed كما هو موضح أعلاه؛ فالـ Arabic Foundation يركز على تأسيس اللغة العربية والقراءة وليس التجويد.
+
+Final & Very Important Instruction
+أريد أن تكون هذه التعديلات محددة جدًا ولا أريد أي تغييرات إضافية.
+قبل إنهاء الملف، تأكد من الآتي:
+Kids Reading & Tajweed = 4 Levels كما هو، مع تطبيق التعديلات المطلوبة.
+Adults Reading & Tajweed = 3 Levels كما هو، مع توزيع نفس المهارات بما يناسب 3 مستويات.
+Kids Arabic Foundation = 4 Levels كما هو، مع التعديلات المطلوبة في Level 3.
+Adults Arabic Foundation = 3 Levels كما هو، مع توزيع نفس المهارات بما يناسب 3 مستويات.
+Kids Memorization & Revision: تعديل Prerequisites + Expected Duration + إمكانية البدء من Level أعلى.
+لا يتم تغيير عدد المستويات في أي برنامج.
+لا يتم تغيير أي برنامج أو Learning Outcome أو Prerequisite أو Expected Duration آخر إلا إذا كان مذكورًا صراحة في هذه التعليمات أو كان ضروريًا فقط لإعادة توزيع المهارات بين 3 و4 مستويات.
+حافظ على نفس الـ formatting والـ layout والتصميم والصياغة الموجودة في الملف.
+لا تقم بأي تحسينات أو تعديلات من عندك.
+بعد التعديل، راجع الملف كاملًا للتأكد أن التغييرات اقتصرت فقط على المطلوب أعلاه.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:12:47+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you update the pdf ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:15:06+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think you need to add edit option in the schudeled sessions, as well as delete for the schudeuled sessions in the schudule page in the admin interface 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:28:35+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+don't add delete in the calendar for the admin, add it in the schudele page where the admin assign the sessions only, add there clear and edit 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:31:36+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+fix
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:35:04+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+nice icons !!! can you change every edit and clear buttons into these icons ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:38:47+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+You changed it in all interfaces ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:40:41+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think it should be centered may be 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:42:13+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can we male the container for this choice to be transparent
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-18T22:56:07+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Hi there, you will find a new added folder to the project folder, it is named "NEW CURR. AND PLACEMENT", in that folder you will find major and major changes in the placement tests and the curriculum, almost all of the curriculum and placement tests have been changed, I want you to carefully inspect them, read them, and carefully carefully read them, then I want you along with these files, to read the following big message that contains more and more changes, to update the curriculum, as well as the placement tests. I changed the pdf that was present in the dist and public folders to the new curriculum with its new name: "Fosselat_Academy_Curriculum_Framework", so update the files also based on that. 
+The big message that contains major and majot changes: 
+Final Question Bank Corrections
+
+The Placement Test blueprint, structure, adaptive logic, scoring system, upgrading/downgrading system, and overall design are now working well.
+
+I need another focused revision of the Question Banks only.
+
+Do NOT redesign the Placement Test.
+
+Do NOT change the blueprint.
+
+Do NOT change the upgrading/downgrading system.
+
+Do NOT change the 10-question structure or the 60% threshold.
+
+Do NOT change the general UI/design.
+
+Only make the necessary corrections to the questions and answer choices described below.
+
+Also, after making these exact corrections, perform a brief review for the same type of problem elsewhere in the question banks, especially:
+
+- Answer choices that reveal the answer through the question itself
+- Duplicate questions
+- Questions with more than one correct answer
+- Quranic excerpts that are unnecessarily truncated
+- Pronunciation questions that cannot logically be pronounced as presented
+- Questions that are not appropriate for their assigned curriculum level
+
+---
+
+1. READING AND TAJWEED — LEVEL 1
+
+A. "Which letter is at the beginning of the word...?"
+
+There are questions such as:
+
+«Which letter is at the beginning of the word ...?»
+
+Currently, the answer choices are the Arabic letter shapes.
+
+This creates a problem because the Arabic word displayed in the question can directly reveal the answer visually.
+
+Change this.
+
+The answer choices must be the English names of the Arabic letters, NOT the Arabic letter shapes.
+
+For example, instead of:
+
+- ب
+- ت
+- ث
+- ن
+
+use:
+
+- Baa
+- Taa
+- Thaa
+- Noon
+
+The exact transliteration/naming convention should remain consistent throughout the question bank.
+
+The student should identify the letter name, not simply visually match the Arabic shape appearing in the word.
+
+Apply this principle to all equivalent questions in Reading and Tajweed Level 1.
+
+---
+
+2. READING AND TAJWEED — LEVEL 1
+
+B. "How is this word read?" — Amal Question
+
+There is a question:
+
+«How is this word read?»
+
+The answer choices currently include:
+
+- A-M-A-L
+- A-M-A-L with an apostrophe
+- other choices
+
+The two versions of A-M-A-L are too similar and create an unnecessary clue/variation.
+
+Change this.
+
+Remove the incorrect A-M-A-L variation.
+
+Replace it with a completely different, plausible but incorrect pronunciation.
+
+Do NOT create another distractor that differs from the correct answer only by punctuation or apostrophe.
+
+---
+
+3. READING AND TAJWEED — LEVEL 4
+
+A. Duplicate Questions About Mushaf Signs
+
+There are questions such as:
+
+«The sign لا above a word in the Mushaf...»
+
+and another question about:
+
+«The sign ميم above a word in the Mushaf...»
+
+These questions are repeated.
+
+Remove the duplicates.
+
+Review the entire Level 4 question bank for other duplicate or essentially identical questions.
+
+If two questions assess exactly the same content unnecessarily, keep the stronger question and remove or replace the duplicate.
+
+---
+
+4. READING AND TAJWEED — LEVEL 4
+
+B. Madd Munfasil — Hafs Question
+
+There is a question:
+
+«In the recitation of Hafs, Madd Munfasil is read for...»
+
+The current answer choices include:
+
+«4 or 5»
+
+Change this option to:
+
+«2, 4, or 5»
+
+The answer choices should correctly reflect the intended answer in the context of the question.
+
+---
+
+5. READING AND TAJWEED — LEVEL 4
+
+C. Deepest Part of the Throat
+
+There is a question:
+
+«Which letter is from the deepest part of the throat?»
+
+The current options include both:
+
+- Hamzah
+- Haa
+
+This creates two correct answers.
+
+Fix the question.
+
+Keep only one correct answer.
+
+Remove one of the two correct options and replace it with a different letter that is not from the same articulation point.
+
+The final question must have:
+
+«Exactly ONE correct answer.»
+
+Also review the rest of the question bank for similar cases where two or more answer choices are technically correct.
+
+---
+
+6. MEMORIZATION AND REVISION — BLANK QUESTIONS
+
+There is an important clarification regarding the Quranic missing-word / blank questions.
+
+The problem is NOT the location of the blank.
+
+
+The blank itself can be placed in the middle of the Quranic passage, and that is completely fine.
+
+The actual problem is:
+
+Some questions take a Quranic passage and remove important words from the beginning or the end of the passage, in addition to creating the intended blank.
+
+This makes the Quranic excerpt:
+
+- Incomplete
+- Contextually disconnected
+- Semantically weaker
+- More difficult to recognize
+- Sometimes unnatural or misleading
+
+This is what must be corrected.
+
+---
+
+7. CORRECT PRINCIPLE FOR BLANK QUESTIONS
+
+For every Quranic blank question:
+
+First:
+
+Select a sufficiently complete and meaningful Quranic excerpt.
+
+Then:
+
+Create the blank inside that excerpt.
+
+Do NOT arbitrarily remove important words from the beginning or end just to make the question shorter.
+
+The blank is the only intentional omission.
+
+The surrounding Quranic context should remain sufficiently intact.
+
+In simple terms:
+
+«Preserve the Quranic context first. Then create the blank.»
+
+---
+
+8. MEMORIZATION AND REVISION — LEVEL 1
+
+There is a question based on:
+
+«آمنوا وعملوا الصالحات وتواصوا __ وتواصوا بالصبر»
+
+The problem is that important words from the beginning of the passage have been removed.
+
+Add:
+
+«إلا الذين»
+
+The question should become:
+
+«إلا الذين آمنوا وعملوا الصالحات وتواصوا __ وتواصوا بالصبر»
+
+The blank itself is fine.
+
+The issue was the missing context at the beginning.
+
+---
+
+9. MEMORIZATION AND REVISION — LEVEL 2
+
+A. "على الأرائك لا يرون فيها شمسا"
+
+Add:
+
+«متكئين»
+
+The question should become:
+
+«متكئين فيها على الأرائك لا يرون فيها شمسا ولا زمهريرا»
+
+The purpose is to preserve the appropriate Quranic context.
+
+---
+
+B. "الذين ضل سعيهم..."
+
+The current excerpt is incomplete.
+
+Use:
+
+«الذين ضل سعيهم في الحياة الدنيا وهم يحسبون أنهم يحسنون صنعا»
+
+The important point is to preserve the meaningful Quranic context instead of displaying a truncated excerpt.
+
+---
+
+C. "من لم يزده ماله وولده إلا خسارة"
+
+Add:
+
+«واتبعوا»
+
+The question should become:
+
+«واتبعوا من لم يزده ماله وولده إلا خسارة»
+
+---
+
+D. "خلقه قال من يحيي العظام وهي رميم"
+
+The current excerpt begins too late.
+
+Change it to:
+
+«وضرب لنا مثلا ونسي خلقه قال من يحيي العظام وهي رميم»
+
+The beginning of the Quranic context should not be unnecessarily removed.
+
+---
+
+10. MEMORIZATION AND REVISION — LEVEL 3
+
+A. Duplicate Question
+
+There is a repeated question involving:
+
+«يعرف المجرمون بسيماهم»
+
+Remove the duplicate.
+
+Review the rest of Level 3 for other repeated questions.
+
+---
+
+B. "خالدين فيها أبدا قد أحسن الله له..."
+
+Add:
+
+«رزقا»
+
+The question should become:
+
+«خالدين فيها أبدا قد أحسن الله له رزقا»
+
+---
+
+C. "عنه سيئاته ويدخله جنات..."
+
+The current question is missing:
+
+«الأنهار»
+
+Change it to:
+
+«ومن يؤمن بالله ويعمل صالحا يكفر عنه سيئاته ويدخله جنات تجري من تحتها الأنهار»
+
+Again, the purpose is to preserve the meaningful Quranic context.
+
+---
+
+11. MEMORIZATION AND REVISION — LEVEL 4
+
+A. "من ورائه جهنم ويسقى من ماء..."
+
+Add:
+
+«صديد»
+
+The question should become:
+
+«من ورائه جهنم ويسقى من ماء صديد»
+
+---
+
+B. "ما يتقون إن الله بكل شيء عليم"
+
+The current excerpt begins too late and removes important context.
+
+Change it to:
+
+«وما كان الله ليضل قوما بعد إذ هداهم حتى يبين لهم ما يتقون إن الله بكل شيء عليم»
+
+Do not remove the important words from the beginning merely to make the question shorter.
+
+---
+
+12. GENERAL RULE FOR ALL MEMORIZATION AND REVISION BLANK QUESTIONS
+
+Review all blank-based questions in the Memorization and Revision Question Bank, not only the examples listed above.
+
+For every question, check:
+
+Beginning of the excerpt
+
+Are important contextual words missing before the displayed text?
+
+End of the excerpt
+
+Are important contextual words missing after the displayed text?
+
+Blank
+
+Is the blank itself the intentional missing portion?
+
+Context
+
+Does the remaining Quranic passage still form a meaningful and recognizable excerpt?
+
+Naturalness
+
+Does the question sound like a coherent Quranic passage rather than an artificially truncated sentence?
+
+If important words were removed from the beginning or end:
+
+«Restore them.»
+
+Do not simply move the blank.
+
+Very important distinction:
+
+
+The problem is not:
+
+«"The blank is in the wrong place."»
+
+The problem is:
+
+«"The Quranic excerpt has been unnecessarily truncated before or after the blank."»
+
+Therefore, preserve sufficient context around the blank.
+
+---
+
+13. ARABIC FOUNDATION — LEVEL 1
+
+There is a question such as:
+
+«Which letter adds at the end of مدرسة?»
+
+Currently, the answer choices are Arabic letter shapes.
+
+This allows the student to potentially identify the answer visually from the word itself.
+
+Change the answer choices to English letter names.
+
+Do NOT use the Arabic letter shapes as the answer choices when the Arabic word itself is displayed.
+
+For example, use appropriate English letter names/transliterations rather than:
+
+«ة / ه / ت / etc.»
+
+The student should demonstrate knowledge of the letter identity/name, rather than simply visually matching the letter shape in the word.
+
+Apply the same principle to equivalent questions in Arabic Foundation Level 1.
+
+---
+
+14. ARABIC FOUNDATION — LEVEL 2
+
+There is a question format:
+
+«How is this read?»
+
+where the displayed Arabic content is something like:
+
+«سْ»
+
+This is not logically pronounceable as an isolated consonant with Sukoon.
+
+A letter with Sukoon needs an appropriate preceding vowel-bearing context.
+
+Correct the question.
+
+Instead of presenting:
+
+«سْ»
+
+by itself, provide an appropriate preceding vowel-bearing letter.
+
+For example:
+
+«أَسْ»
+
+Then ask:
+
+«How is this read?»
+
+The answer choices should be the English pronunciation/transliteration of the resulting sound or syllable.
+
+The student should select the correct pronunciation.
+
+---
+
+15. GENERAL RULE FOR PRONUNCIATION QUESTIONS
+
+Do not create pronunciation questions where:
+
+- A consonant with Sukoon is presented completely in isolation
+- The student is asked to pronounce an inherently incomplete phonetic sequence
+- The answer choices do not represent the actual pronunciation of the displayed Arabic
+
+The Arabic form shown in the question must be linguistically and phonetically valid.
+
+---
+
+16. REVIEW FOR THE SAME PROBLEMS ELSEWHERE
+
+After implementing all of the corrections above, perform a targeted audit of the entire relevant Question Banks.
+
+Look for the same categories of problems:
+
+A. Answer leakage
+
+For example, Arabic words shown in the question while the answer choices are the exact Arabic letter shapes contained in that word.
+
+Where appropriate, use English letter names instead.
+
+B. Duplicate questions
+
+Remove unnecessary duplicates.
+
+C. Multiple correct answers
+
+Every objective question must have exactly one defensible correct answer.
+
+D. Weak distractors
+
+Do not use distractors that differ from the correct answer only by:
+
+- Apostrophes
+- Punctuation
+- Formatting
+- Trivial spelling differences
+
+unless that distinction is itself the intended competency.
+
+E. Quranic context truncation
+
+For Memorization and Revision, make sure important words have not been removed from the beginning or end of the displayed Quranic excerpt.
+
+Again:
+
+«The blank is not the problem. Context truncation is the problem.»
+
+F. Invalid pronunciation questions
+
+Make sure every pronunciation question presents a logically pronounceable Arabic form.
+
+---
+
+17. DO NOT CHANGE THE BLUEPRINT OR PLACEMENT LOGIC
+
+The following are already working correctly and must remain unchanged:
+
+- Placement Test Blueprint
+- Adaptive testing
+- Upgrading
+- Downgrading
+- 10 questions per level
+- 60% passing threshold
+- Level determination
+- Scoring algorithm
+- Overall test flow
+- Program structure
+- Level structure
+
+This task is specifically about improving and correcting the Question Banks.
+
+---
+
+18. DO NOT REDESIGN THE UI
+
+The current Placement Test design is already good.
+
+Do not redesign:
+
+- Layout
+- Colors
+- Navigation
+- Visual identity
+- General interface
+- Test flow
+
+Only make the minimum technical/UI adjustment necessary to properly display a corrected question.
+
+For example, Quranic excerpts should have appropriate spacing and formatting where needed.
+
+---
+
+19. FINAL QUALITY STANDARD
+
+After the corrections, every question should satisfy all of the following:
+
+
+- It measures the intended curriculum competency.
+- It belongs to the correct level.
+- It has exactly one correct answer.
+- It does not reveal its own answer.
+- Its distractors are meaningful and plausible.
+- It is not unnecessarily duplicated.
+- Quranic excerpts preserve sufficient context.
+- The blank is the intentional missing element.
+- Important Quranic words are not unnecessarily removed from the beginning or end.
+- Pronunciation questions are phonetically valid.
+- Arabic letter questions do not allow simple visual copying from the question.
+- The question is objectively scorable.
+
+The objective is not simply to change the questions.
+
+The objective is to make the Question Bank:
+
+accurate, curriculum-aligned, unambiguous, objective, non-leading, and genuinely capable of measuring the student's actual level.
+
+Please implement the corrections above and then perform a targeted audit of the remaining Question Banks for the same categories of errors.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-20T22:21:23+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I saw you edited in the scratch.py, but this is not a file in the backend using node js right ?
+also you sure you updated the curriculum also and what is present in the curriculum page on the site with the new curriculum?
+as well as you sure all the new questions and placement tests are fullfilled?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-20T22:43:15+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I want you again to inspect the curriculum and the placement test as well as the long message that I sent, inspect them so carefully, and then about the overview for the tests in the student interface, I think the calculation of the overview needs to be adjusted no? so you can review it and adjust it and all the page based on the questions and the choices of the new placment tests.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-20T22:59:48+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+D:\GitHub\Repos\Foselat\frontend>npm run build                                                                                                                                                                                                  > frontend@0.0.0 build                                                                                                  > vite build                                                                                                                                                                                                                                    vite v8.1.4 building client environment for production...                                                               ✓ 1881 modules transformed.                                                                                             ✗ Build failed in 1.29s                                                                                                 error during build:                                                                                                     Build failed with 1 error:                                                                                                                                                                                                                      [UNRESOLVED_IMPORT] Could not resolve '../../config' in src/pages/PlacementTest.jsx                                        ╭─[ src/pages/PlacementTest.jsx:5:17 ]                                                                                  │                                                                                                                     5 │ import API from "../../config";                                                                                       │                 ───────┬──────                                                                                        │                        ╰──────── Module not found.                                                                    │                                                                                                                       │ Help: 'src/pages/PlacementTest.jsx' is imported by the following path:                                                │         - src/pages/PlacementTest.jsx                                                                                 │         - src/App.jsx                                                                                                 │         - src/main.jsx                                                                                                │         - index.html                                                                                               ───╯                                                                                                                                                                                                                                                at aggregateBindingErrorsIntoJsError (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:48:18)                                                                                                      at unwrapBindingResult (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/error-BHRSI0R7.mjs:18:128)                                                                                                                   at #build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/rolldown/dist/shared/rolldown-build-CtPvmZgJ.mjs:3276:34)                                                                                                                      at async buildEnvironment (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33011:66)                                                                                                                        at async Object.build (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33433:19)    at async Object.buildApp (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/chunks/node.js:33430:153)                                                                                                                        at async CAC.<anonymous> (file:///D:/GitHub/Repos/Foselat/frontend/node_modules/vite/dist/node/cli.js:776:3) {        errors: [Getter/Setter]                                                                                               }                                                                                                                                                                                                                                               D:\GitHub\Repos\Foselat\frontend>                                                                                                                          
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T03:19:42+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think I still needs The user to enter the name and email as well as age optionally, and the results should be sent to the academy and to the email that the user enters 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T03:31:30+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the curriculum page is totally crashed and bad, you must adjust it correctly to look so good, as well as the test your level in the home page are not going to the place that they should go to, as well as I don't know the try your level buttons in the curriculum are still there or not, but they must be there, and they must go the specific program in the placement tests, I want the curriculum page to be soooooo goood looking as well as soooo good design, as well as the content of the curriculum is no longer appeared in the site, as well as its looking and organization is bad, it needs so much work.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T03:43:58+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the color of the curriculum background here is different from the other pages,
+as well as I guess the programs and the levels do not contain any details now at all, while it should contain, 
+as well as its looking is bad, I want the same styling as the old curriculum as this styling is so so bad. 
+as well as the test your level in the programs do not take the user to the specific test of the program the user chooses, I guess You should review how all these staff are coded. 
+Look Step by step:
+1- I want the old styling of the curriculum, by which the details of each level for each program are displayed, you can, and you can filter them, you can expand and shrink them, do not take my prompt exactly, I am just trying to get you the point that I need and I want the same old styling with some optimization from you, and adjust the details inside with the new curriculum, that's why I told you to read the curriculum carefully. If you remembered the old styling, apply it and even improve it. 
+2- The buttons in the home page for the tracks, like take test under the quran track, that should navigate the user to choose the program after the quran track in the placement test, the same for other tracks. The test your level button that should be presented in the curriculum page should take the user to the page where there is the button begin test to begin the test for this specific program. 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T04:01:14+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+You also still put the bar that tells you how many questions you answered and the logo under the navbar, as well as you put the logo on the left, the logo should be removed as well as the bar that tells you how many questions you answered should be under the container of the questions, also you may make the page worse by removing them so the page will go up and get under the navbar, so you should take care that the page start after the navbar, and adjust both the placement test page as well as the curriculum page to suit the mobile as well as the ipad view.
+
+another thing is a problem I am tired of, is that the logo still do not appear instead of the globe icon beside the url of the site, so should I give the photo to an image creator and give him a prompt, or what should I do 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T04:06:42+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I feel like the bar is not centered 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T04:22:34+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I feel like that you should remove the word "official", as well as the icons are not alligned with the tracks. I guess there is a better way to represent that transperant golden box that contains a description to the track, I guess a good-looking and soft way will be better.
+You did really a great work bringin back the old curriculum style !!! but Still the details for the levels are not on the site, so I guess you need to inspect the curriculum, and add the details for the levels and the programs to the site
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T04:34:51+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+another catch, In the student interface, it should have recomended to the student a test in the programs that the student is enrolled and registered in every month in the dashboard, and that button for the test should take the student to the test in the specific program directly, also when the student go to the tests tab, whether through that button or through the navbar above or throught the take test button in the tests page in the student interface, and proceeding with the choices, the site should not ask the student about his name, age, or email, and after he finished the test, the recomendations that appear in the placement tests should not appear to him, that test in the student interface should only tells the student strength points, and what he should improve in, not recommendation level, and how many classes, and that staff, and when the student finished a test, the results of the test are sent automatically to the academy mail info@fosselatacademy.com, as well as the test will be added to the student to the test pages.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T04:54:25+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Also the back button that was present in the tests and placement tests to help the user back on a choice is removed, so can you bring it back 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T04:55:32+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+this needs to be adjusted in the mobile view
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T04:58:10+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you put that same shape between the button download full curriculum, and what is above it in the curriculum page, as I feel the space is too big, so we can make use of it that way. and adjust it in the mobile and ipad views
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T06:07:42+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think in the contact us page in the admin, teacher, and student interfaces, the mail that this page should send the message to is the support, not the info here but that's only while being logged in to the site as whether the student, teacher, so the mail that should present there is support@fosselatacademy.com, and its password is: Fosselat@20012001, smtp.hostinger.com, 465, I think also the page in the navbar should be named support not contact, but I repeat again, that is only when the user is logged in as whatever he is. Also I guess this page should be excluded from the admin interface, as for an admin, there is no need for that page, so remove that page from the admin interface, and for the student and teacher interfaces, make it support page, and make the student and teacher send their messages to the support mail. Also when logged in, bring the dashboard page to the begining of the menu, and also when logged in, change Home name into "Back to site ->" and make the arrow soft and suitable with the navbar.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T06:15:54+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+That's amazing, but that should appear monthly, like every month since the moment the student is registered in the academy, and I guess, can we make the home page's name return to Home when the current page is not the dashboard? what I mean is that when the logged in user is in the dashboard page, make its name back to site, but when the user is at any one of the attached pages, and the home page additionally, make its name Home, The last thing, I did think that you forget to implement the button back in the placement tests and tests in chosing the choices before the test, like previously there was a good looking button was "back <-" or something like that on the top left while choosing the track and program and these staff, I want it back to be implemented, as well as in the attached third screenshot, that back in the bottom is not good, I guess if you make it a button with the style of skip button and on the other side of the skip button within the container of the questions, that would be much better.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T06:34:10+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+can you fix the text in the button ?
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T06:36:12+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think the icon is not alligned correctly with the text in all the curriculum icons like that
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T06:38:40+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I think I Found a small problem in the nav bar when I rotate screen on mobile view
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T06:42:06+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I guess you are a totally booasted 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T15:34:59+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I guess you are a totally booasted AI, as For the message of the placement tests, and the new files of the placement tests, You failed to write and make the correct questions, as my client told me that the questions are totally totally wrong, which means you did not read the files and the message correctly to understand what should the questions be, and what the questions should look like. Also another thing, after clicking on begin test, the user should first make a choice and then appears to him to click begin test again, I guess you removed it,I like that but you removed it the wrong way, as this do not take the user to the questions, it stuck the user in a page until he refreshes which is wrong, I want when the user click begin test, he will asked to make a choice so that the rest of the questions will be based on that choice, I want after the user make this choice to take him to the questions immediately. Here are the long message again from my client describing what the questions he would like to be in the placement tests:
+
+Eid Bayoumy:
+Final Question Bank Corrections
+
+The Placement Test blueprint, structure, adaptive logic, scoring system, upgrading/downgrading system, and overall design are now working well.
+
+I need another focused revision of the Question Banks only.
+
+Do NOT redesign the Placement Test.
+
+Do NOT change the blueprint.
+
+Do NOT change the upgrading/downgrading system.
+
+Do NOT change the 10-question structure or the 60% threshold.
+
+Do NOT change the general UI/design.
+
+Only make the necessary corrections to the questions and answer choices described below.
+
+Also, after making these exact corrections, perform a brief review for the same type of problem elsewhere in the question banks, especially:
+
+- Answer choices that reveal the answer through the question itself
+- Duplicate questions
+- Questions with more than one correct answer
+- Quranic excerpts that are unnecessarily truncated
+- Pronunciation questions that cannot logically be pronounced as presented
+- Questions that are not appropriate for their assigned curriculum level
+
+---
+
+1. READING AND TAJWEED — LEVEL 1
+
+A. "Which letter is at the beginning of the word...?"
+
+There are questions such as:
+
+«Which letter is at the beginning of the word ...?»
+
+Currently, the answer choices are the Arabic letter shapes.
+
+This creates a problem because the Arabic word displayed in the question can directly reveal the answer visually.
+
+Change this.
+
+The answer choices must be the English names of the Arabic letters, NOT the Arabic letter shapes.
+
+For example, instead of:
+
+- ب
+- ت
+- ث
+- ن
+
+use:
+
+- Baa
+- Taa
+- Thaa
+- Noon
+
+The exact transliteration/naming convention should remain consistent throughout the question bank.
+
+The student should identify the letter name, not simply visually match the Arabic shape appearing in the word.
+
+Apply this principle to all equivalent questions in Reading and Tajweed Level 1.
+
+---
+
+2. READING AND TAJWEED — LEVEL 1
+
+B. "How is this word read?" — Amal Question
+
+There is a question:
+
+«How is this word read?»
+
+The answer choices currently include:
+
+- A-M-A-L
+- A-M-A-L with an apostrophe
+- other choices
+
+The two versions of A-M-A-L are too similar and create an unnecessary clue/variation.
+
+Change this.
+
+Remove the incorrect A-M-A-L variation.
+
+Replace it with a completely different, plausible but incorrect pronunciation.
+
+Do NOT create another distractor that differs from the correct answer only by punctuation or apostrophe.
+
+---
+
+3. READING AND TAJWEED — LEVEL 4
+
+A. Duplicate Questions About Mushaf Signs
+
+There are questions such as:
+
+«The sign لا above a word in the Mushaf...»
+
+and another question about:
+
+«The sign ميم above a word in the Mushaf...»
+
+These questions are repeated.
+
+Remove the duplicates.
+
+Review the entire Level 4 question bank for other duplicate or essentially identical questions.
+
+If two questions assess exactly the same content unnecessarily, keep the stronger question and remove or replace the duplicate.
+
+---
+
+4. READING AND TAJWEED — LEVEL 4
+
+B. Madd Munfasil — Hafs Question
+
+There is a question:
+
+«In the recitation of Hafs, Madd Munfasil is read for...»
+
+The current answer choices include:
+
+«4 or 5»
+
+Change this option to:
+
+«2, 4, or 5»
+
+The answer choices should correctly reflect the intended answer in the context of the question.
+
+---
+
+5. READING AND TAJWEED — LEVEL 4
+
+C. Deepest Part of the Throat
+
+There is a question:
+
+«Which letter is from the deepest part of the throat?»
+
+The current options include both:
+
+- Hamzah
+- Haa
+
+This creates two correct answers.
+
+Fix the question.
+
+Keep only one correct answer.
+
+Remove one of the two correct options and replace it with a different letter that is not from the same articulation point.
+
+The final question must have:
+
+«Exactly ONE correct answer.»
+
+Also review the rest of the question bank for similar cases where two or more answer choices are technically correct.
+
+---
+
+6. MEMORIZATION AND REVISION — BLANK QUESTIONS
+
+There is an important clarification regarding the Quranic missing-word / blank questions.
+
+The problem is NOT the location of the blank.
+
+Eid Bayoumy:
+The blank itself can be placed in the middle of the Quranic passage, and that is completely fine.
+
+The actual problem is:
+
+Some questions take a Quranic passage and remove important words from the beginning or the end of the passage, in addition to creating the intended blank.
+
+This makes the Quranic excerpt:
+
+- Incomplete
+- Contextually disconnected
+- Semantically weaker
+- More difficult to recognize
+- Sometimes unnatural or misleading
+
+This is what must be corrected.
+
+---
+
+7. CORRECT PRINCIPLE FOR BLANK QUESTIONS
+
+For every Quranic blank question:
+
+First:
+
+Select a sufficiently complete and meaningful Quranic excerpt.
+
+Then:
+
+Create the blank inside that excerpt.
+
+Do NOT arbitrarily remove important words from the beginning or end just to make the question shorter.
+
+The blank is the only intentional omission.
+
+The surrounding Quranic context should remain sufficiently intact.
+
+In simple terms:
+
+«Preserve the Quranic context first. Then create the blank.»
+
+---
+
+8. MEMORIZATION AND REVISION — LEVEL 1
+
+There is a question based on:
+
+«آمنوا وعملوا الصالحات وتواصوا __ وتواصوا بالصبر»
+
+The problem is that important words from the beginning of the passage have been removed.
+
+Add:
+
+«إلا الذين»
+
+The question should become:
+
+«إلا الذين آمنوا وعملوا الصالحات وتواصوا __ وتواصوا بالصبر»
+
+The blank itself is fine.
+
+The issue was the missing context at the beginning.
+
+---
+
+9. MEMORIZATION AND REVISION — LEVEL 2
+
+A. "على الأرائك لا يرون فيها شمسا"
+
+Add:
+
+«متكئين»
+
+The question should become:
+
+«متكئين فيها على الأرائك لا يرون فيها شمسا ولا زمهريرا»
+
+The purpose is to preserve the appropriate Quranic context.
+
+---
+
+B. "الذين ضل سعيهم..."
+
+The current excerpt is incomplete.
+
+Use:
+
+«الذين ضل سعيهم في الحياة الدنيا وهم يحسبون أنهم يحسنون صنعا»
+
+The important point is to preserve the meaningful Quranic context instead of displaying a truncated excerpt.
+
+---
+
+C. "من لم يزده ماله وولده إلا خسارة"
+
+Add:
+
+«واتبعوا»
+
+The question should become:
+
+«واتبعوا من لم يزده ماله وولده إلا خسارة»
+
+---
+
+D. "خلقه قال من يحيي العظام وهي رميم"
+
+The current excerpt begins too late.
+
+Change it to:
+
+«وضرب لنا مثلا ونسي خلقه قال من يحيي العظام وهي رميم»
+
+The beginning of the Quranic context should not be unnecessarily removed.
+
+---
+
+10. MEMORIZATION AND REVISION — LEVEL 3
+
+A. Duplicate Question
+
+There is a repeated question involving:
+
+«يعرف المجرمون بسيماهم»
+
+Remove the duplicate.
+
+Review the rest of Level 3 for other repeated questions.
+
+---
+
+B. "خالدين فيها أبدا قد أحسن الله له..."
+
+Add:
+
+«رزقا»
+
+The question should become:
+
+«خالدين فيها أبدا قد أحسن الله له رزقا»
+
+---
+
+C. "عنه سيئاته ويدخله جنات..."
+
+The current question is missing:
+
+«الأنهار»
+
+Change it to:
+
+«ومن يؤمن بالله ويعمل صالحا يكفر عنه سيئاته ويدخله جنات تجري من تحتها الأنهار»
+
+Again, the purpose is to preserve the meaningful Quranic context.
+
+---
+
+11. MEMORIZATION AND REVISION — LEVEL 4
+
+A. "من ورائه جهنم ويسقى من ماء..."
+
+Add:
+
+«صديد»
+
+The question should become:
+
+«من ورائه جهنم ويسقى من ماء صديد»
+
+---
+
+B. "ما يتقون إن الله بكل شيء عليم"
+
+The current excerpt begins too late and removes important context.
+
+Change it to:
+
+«وما كان الله ليضل قوما بعد إذ هداهم حتى يبين لهم ما يتقون إن الله بكل شيء عليم»
+
+Do not remove the important words from the beginning merely to make the question shorter.
+
+---
+
+12. GENERAL RULE FOR ALL MEMORIZATION AND REVISION BLANK QUESTIONS
+
+Review all blank-based questions in the Memorization and Revision Question Bank, not only the examples listed above.
+
+For every question, check:
+
+Beginning of the excerpt
+
+Are important contextual words missing before the displayed text?
+
+End of the excerpt
+
+Are important contextual words missing after the displayed text?
+
+Blank
+
+Is the blank itself the intentional missing portion?
+
+Context
+
+Does the remaining Quranic passage still form a meaningful and recognizable excerpt?
+
+Naturalness
+
+Does the question sound like a coherent Quranic passage rather than an artificially truncated sentence?
+
+If important words were removed from the beginning or end:
+
+«Restore them.»
+
+Do not simply move the blank.
+
+Very important distinction:
+
+Eid Bayoumy:
+The problem is not:
+
+«"The blank is in the wrong place."»
+
+The problem is:
+
+«"The Quranic excerpt has been unnecessarily truncated before or after the blank."»
+
+Therefore, preserve sufficient context around the blank.
+
+---
+
+13. ARABIC FOUNDATION — LEVEL 1
+
+There is a question such as:
+
+«Which letter adds at the end of مدرسة?»
+
+Currently, the answer choices are Arabic letter shapes.
+
+This allows the student to potentially identify the answer visually from the word itself.
+
+Change the answer choices to English letter names.
+
+Do NOT use the Arabic letter shapes as the answer choices when the Arabic word itself is displayed.
+
+For example, use appropriate English letter names/transliterations rather than:
+
+«ة / ه / ت / etc.»
+
+The student should demonstrate knowledge of the letter identity/name, rather than simply visually matching the letter shape in the word.
+
+Apply the same principle to equivalent questions in Arabic Foundation Level 1.
+
+---
+
+14. ARABIC FOUNDATION — LEVEL 2
+
+There is a question format:
+
+«How is this read?»
+
+where the displayed Arabic content is something like:
+
+«سْ»
+
+This is not logically pronounceable as an isolated consonant with Sukoon.
+
+A letter with Sukoon needs an appropriate preceding vowel-bearing context.
+
+Correct the question.
+
+Instead of presenting:
+
+«سْ»
+
+by itself, provide an appropriate preceding vowel-bearing letter.
+
+For example:
+
+«أَسْ»
+
+Then ask:
+
+«How is this read?»
+
+The answer choices should be the English pronunciation/transliteration of the resulting sound or syllable.
+
+The student should select the correct pronunciation.
+
+---
+
+15. GENERAL RULE FOR PRONUNCIATION QUESTIONS
+
+Do not create pronunciation questions where:
+
+- A consonant with Sukoon is presented completely in isolation
+- The student is asked to pronounce an inherently incomplete phonetic sequence
+- The answer choices do not represent the actual pronunciation of the displayed Arabic
+
+The Arabic form shown in the question must be linguistically and phonetically valid.
+
+---
+
+16. REVIEW FOR THE SAME PROBLEMS ELSEWHERE
+
+After implementing all of the corrections above, perform a targeted audit of the entire relevant Question Banks.
+
+Look for the same categories of problems:
+
+A. Answer leakage
+
+For example, Arabic words shown in the question while the answer choices are the exact Arabic letter shapes contained in that word.
+
+Where appropriate, use English letter names instead.
+
+B. Duplicate questions
+
+Remove unnecessary duplicates.
+
+C. Multiple correct answers
+
+Every objective question must have exactly one defensible correct answer.
+
+D. Weak distractors
+
+Do not use distractors that differ from the correct answer only by:
+
+- Apostrophes
+- Punctuation
+- Formatting
+- Trivial spelling differences
+
+unless that distinction is itself the intended competency.
+
+E. Quranic context truncation
+
+For Memorization and Revision, make sure important words have not been removed from the beginning or end of the displayed Quranic excerpt.
+
+Again:
+
+«The blank is not the problem. Context truncation is the problem.»
+
+F. Invalid pronunciation questions
+
+Make sure every pronunciation question presents a logically pronounceable Arabic form.
+
+---
+
+17. DO NOT CHANGE THE BLUEPRINT OR PLACEMENT LOGIC
+
+The following are already working correctly and must remain unchanged:
+
+- Placement Test Blueprint
+- Adaptive testing
+- Upgrading
+- Downgrading
+- 10 questions per level
+- 60% passing threshold
+- Level determination
+- Scoring algorithm
+- Overall test flow
+- Program structure
+- Level structure
+
+This task is specifically about improving and correcting the Question Banks.
+
+---
+
+18. DO NOT REDESIGN THE UI
+
+The current Placement Test design is already good.
+
+Do not redesign:
+
+- Layout
+- Colors
+- Navigation
+- Visual identity
+- General interface
+- Test flow
+
+Only make the minimum technical/UI adjustment necessary to properly display a corrected question.
+
+For example, Quranic excerpts should have appropriate spacing and formatting where needed.
+
+---
+
+19. FINAL QUALITY STANDARD
+
+After the corrections, every question should satisfy all of the following:
+
+Eid Bayoumy:
+- It measures the intended curriculum competency.
+- It belongs to the correct level.
+- It has exactly one correct answer.
+- It does not reveal its own answer.
+- Its distractors are meaningful and plausible.
+- It is not unnecessarily duplicated.
+- Quranic excerpts preserve sufficient context.
+- The blank is the intentional missing element.
+- Important Quranic words are not unnecessarily removed from the beginning or end.
+- Pronunciation questions are phonetically valid.
+- Arabic letter questions do not allow simple visual copying from the question.
+- The question is objectively scorable.
+
+The objective is not simply to change the questions.
+
+The objective is to make the Question Bank:
+
+accurate, curriculum-aligned, unambiguous, objective, non-leading, and genuinely capable of measuring the student's actual level.
+
+Please implement the corrections above and then perform a targeted audit of the remaining Question Banks for the same categories of errors.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T15:41:17+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+Now for the "back to site ->", can you think of other  way to represent it 
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T16:19:11+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I feel like its position in the second here is not giving good looking, I have no idea how that could be good looking
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T18:12:03+03:00.
+</ADDITIONAL_METADATA>
+
+============
+
+<USER_REQUEST>
+I still think that the placement tests that you make from the long message is bad, as I guess you don't read them carefully, or you like cropping from the questions, or you like adding your own fingerprint. Bro, can you just wake up and read the message carefully, and apply it exactly as what is wanted
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-21T18:47:38+03:00.
+</ADDITIONAL_METADATA>
+
+============
+

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Edit2 } from 'lucide-react';
 import Button from '../../components/Button';
 import API from '../../config';
 const getHeaders = () => ({
@@ -165,7 +166,7 @@ export default function AdminTeachers() {
             <thead>
               <tr>
                 <th>Name</th><th>Email</th><th>Password</th><th>Status</th><th>Rate/hr</th>
-                <th>Zoom Link</th><th>Google Meet Link</th><th>Actions</th>
+                <th>Zoom Link</th><th>Google Meet Link</th><th style={{textAlign: 'center'}}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -188,7 +189,13 @@ export default function AdminTeachers() {
                   <td>{t.hourly_rate || 0} L.E</td>
                   <td style={{fontSize:'12px'}}>{t.zoom_link ? <a href={t.zoom_link} target="_blank" rel="noreferrer">Zoom</a> : '—'}</td>
                   <td style={{fontSize:'12px'}}>{t.google_meet_link ? <a href={t.google_meet_link} target="_blank" rel="noreferrer">Meet</a> : '—'}</td>
-                  <td><button className="dash-filter-btn" onClick={() => handleEdit(t)}>Edit</button></td>
+                  <td style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                      <button onClick={() => handleEdit(t)} style={{ background: 'transparent', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(200,167,99,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Edit">
+                        <Edit2 size={16} />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
               {!teachers.length && <tr><td colSpan="10" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No teachers yet</td></tr>}

@@ -1,0 +1,56 @@
+ID: RT_L1_005 - PROMPT: Which letter makes the 'sh' sound? - ARABIC:  - OPTIONS: ['ش', 'س', 'ص', 'ث']
+ID: RT_L1_006 - PROMPT: Which letter makes the soft 'th' sound, as in the English word 'thin'? - ARABIC:  - OPTIONS: ['ذ', 'ظ', 'ز', 'ث']
+ID: RT_L1_012 - PROMPT: Which letter is at the beginning of this word? - ARABIC: ثَمَر - OPTIONS: ['ن', 'ث', 'ت', 'ب']
+ID: RT_L1_013 - PROMPT: Which letter is at the beginning of this word? - ARABIC: صَبَاح - OPTIONS: ['ص', 'س', 'ض', 'ز']
+ID: RT_L1_018 - PROMPT: Which letter makes the 'th' sound in the English word 'this'? - ARABIC:  - OPTIONS: ['ث', 'ز', 'ض', 'ذ']
+ID: RT_L3_072 - PROMPT: Which word in this verse is read with Qalqalah? - ARABIC: أَوْ إِطْعَٰمٞ فِي يَوْمٖ ذِي مَسْغَبَةٖ
+ID: RT_L3_085 - PROMPT: In which word is the noon read as a meem sound (Iqlab)? - ARABIC: فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُۥ كَانَ تَوَّابَۢا
+ID: RT_L3_102 - PROMPT: In which word is the noon read as a meem sound (Iqlab)? - ARABIC: وَإِذْ قَالَ رَبُّكَ لِلْمَلَـٰٓئِكَةِ إِنِّي خَٰلِقُۢ بَشَرٗا مِّن صَلْصَٰلٖ مِّنْ حَمَإٖ مَّسْنُونٖ
+ID: RT_L3_114 - PROMPT: Which word in this verse is read with Qalqalah? - ARABIC: قَالَ لَمْ أَكُن لِّأَسْجُدَ لِبَشَرٍ خَلَقْتَهُۥ مِن صَلْصَٰلٖ مِّنْ حَمَإٖ مَّسْنُونٖ
+ID: RT_L3_117 - PROMPT: Which word in this verse is read with Qalqalah? - ARABIC: لَقَالُوٓاْ إِنَّمَا سُكِّرَتْ أَبْصَٰرُنَا بَلْ نَحْنُ قَوْمٞ مَّسْحُورُونَ
+ID: RT_L4_147 - PROMPT: In the recitation of Hafs 'an 'Asim, Madd Munfasil is normally read for: - OPTIONS: ['exactly 6 counts', 'just 1 count', '4 or 5 counts', 'exactly 2 counts']
+ID: RT_L4_152 - PROMPT: Which letter has the quality of Istitalah? - ARABIC:  - OPTIONS: ['ق', 'ض', 'ص', 'ط']
+ID: RT_L4_154 - PROMPT: Which letter is produced from the deepest part of the throat? - ARABIC:  - OPTIONS: ['ع', 'غ', 'ه', 'ء']
+ID: RT_L4_156 - PROMPT: Which letters are read with Hams (a whispered flow of breath)? - ARABIC:  - OPTIONS: ['ص ض ط ظ ق غ خ ر ل م', 'ف ح ث ه ش خ ص س ك ت', 'ب ج د ط ق ء ذ ز ظ غ', 'ن م و ي ل ر ع ح غ خ']
+ID: RT_L4_163 - PROMPT: The sign لا written above a word in the mushaf means:
+ID: MEM_L1_014 - PROMPT: Which surah is this from? - ARABIC: لَقَدْ خَلَقْنَا الْإِنسَٰنَ فِيٓ أَحْسَنِ تَقْوِيمٖ ثُمَّ رَدَدْنَٰهُ أَسْفَلَ سَٰفِلِينَ
+ID: MEM_L1_039 - PROMPT: Choose the exact word that completes this passage: - ARABIC: وَلَا يَحُضُّ عَلَىٰ  ______  الْمِسْكِينِ
+ID: MEM_L2_049 - PROMPT: Which surah is this from? - ARABIC: نَّحْنُ خَلَقْنَٰهُمْ وَشَدَدْنَآ أَسْرَهُمْ وَإِذَا شِئْنَا بَدَّلْنَآ أَمْثَٰلَهُمْ تَبْدِيلًا
+ID: MEM_L2_063 - PROMPT: From which surah is this passage taken? - ARABIC: وَالصُّبْحِ إِذَآ أَسْفَرَ إِنَّهَا لَإِحْدَى الْكُبَرِ نَذِيرٗا لِّلْبَشَرِ
+ID: MEM_L2_068 - PROMPT: From which surah is this passage taken? - ARABIC: وَأَنَّا مِنَّا الْمُسْلِمُونَ وَمِنَّا الْقَٰسِطُونَ فَمَنْ أَسْلَمَ فَأُوْلَـٰٓئِكَ تَحَرَّوْاْ رَشَدٗا وَأَمَّا الْقَٰسِطُونَ فَكَانُواْ لِجَهَنَّمَ حَطَبٗا
+ID: MEM_L2_070 - PROMPT: From which surah is this passage taken? - ARABIC: يُوفُونَ بِالنَّذْرِ وَيَخَافُونَ يَوْمٗا كَانَ شَرُّهُۥ مُسْتَطِيرٗا وَيُطْعِمُونَ الطَّعَامَ عَلَىٰ حُبِّهِۦ مِسْكِينٗا وَيَتِيمٗا وَأَسِيرًا
+ID: MEM_L2_072 - PROMPT: From which surah is this passage taken? - ARABIC: قَالَ أَلَمْ أَقُلْ إِنَّكَ لَن تَسْتَطِيعَ مَعِيَ صَبْرٗا قَالَ لَا تُؤَاخِذْنِي بِمَا نَسِيتُ وَلَا تُرْهِقْنِي مِنْ أَمْرِي عُسْرٗا
+ID: MEM_L3_098 - PROMPT: From which surah is this passage taken? - ARABIC: فَبِأَيِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ تَبَٰرَكَ اسْمُ رَبِّكَ ذِي الْجَلَٰلِ وَالْإِكْرَامِ
+ID: MEM_L3_101 - PROMPT: From which surah is this passage taken? - ARABIC: وَءَاتِ ذَا الْقُرْبَىٰ حَقَّهُۥ وَالْمِسْكِينَ وَابْنَ السَّبِيلِ وَلَا تُبَذِّرْ تَبْذِيرًا إِنَّ الْمُبَذِّرِينَ كَانُوٓاْ إِخْوَٰنَ الشَّيَٰطِينِ وَكَانَ الشَّيْطَٰنُ لِرَبِّهِۦ كَفُورٗا
+ID: MEM_L3_105 - PROMPT: From which surah is this passage taken? - ARABIC: الَّذِيٓ أَحْسَنَ كُلَّ شَيْءٍ خَلَقَهُۥ وَبَدَأَ خَلْقَ الْإِنسَٰنِ مِن طِينٖ ثُمَّ جَعَلَ نَسْلَهُۥ مِن سُلَٰلَةٖ مِّن مَّآءٖ مَّهِينٖ
+ID: MEM_L3_110 - PROMPT: Choose the exact word that completes this passage: - ARABIC: بَٰعِدْ بَيْنَ أَسْفَارِنَا وَظَلَمُوٓاْ  ______  فَجَعَلْنَٰهُمْ أَحَادِيثَ
+ID: MEM_L3_112 - PROMPT: Choose the exact word that completes this passage: - ARABIC: مُتَّكِـِٔينَ عَلَىٰ فُرُشِ  ______  مِنْ إِسْتَبْرَقٖ
+ID: MEM_L4_124 - PROMPT: Which surah is this from? - ARABIC: وَإِن كَانَ ذُو عُسْرَةٖ فَنَظِرَةٌ إِلَىٰ مَيْسَرَةٖ وَأَن تَصَدَّقُواْ خَيْرٞ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ
+ID: MEM_L4_129 - PROMPT: From which surah is this passage taken? - ARABIC: وَاسْتَغْفِرِ اللَّهَ إِنَّ اللَّهَ كَانَ غَفُورٗا رَّحِيمٗا وَلَا تُجَٰدِلْ عَنِ الَّذِينَ يَخْتَانُونَ أَنفُسَهُمْ إِنَّ اللَّهَ لَا يُحِبُّ مَن كَانَ خَوَّانًا أَثِيمٗا
+ID: MEM_L4_134 - PROMPT: Choose the exact word that completes this passage: - ARABIC: عَنْ هَٰذَا وَاسْتَغْفِرِي لِذَنۢبِكِ  ______  كُنتِ مِنَ
+ID: IJZ_L1_002 - PROMPT: In the recitation of Hafs 'an 'Asim, Madd Munfasil is normally read for: - OPTIONS: ['exactly 2 counts', 'exactly 6 counts', 'just 1 count', '4 or 5 counts']
+ID: IJZ_L1_007 - PROMPT: Which letter has the quality of Istitalah? - ARABIC:  - OPTIONS: ['ط', 'ق', 'ض', 'ص']
+ID: IJZ_L1_009 - PROMPT: Which letter is produced from the deepest part of the throat? - ARABIC:  - OPTIONS: ['ء', 'ع', 'غ', 'ه']
+ID: IJZ_L1_011 - PROMPT: Which letters are read with Hams (a whispered flow of breath)? - ARABIC:  - OPTIONS: ['ن م و ي ل ر ع ح غ خ', 'ص ض ط ظ ق غ خ ر ل م', 'ف ح ث ه ش خ ص س ك ت', 'ب ج د ط ق ء ذ ز ظ غ']
+ID: IJZ_L1_021 - PROMPT: In which word is the noon read as a meem sound (Iqlab)? - ARABIC: وَإِذْ قَالَ رَبُّكَ لِلْمَلَـٰٓئِكَةِ إِنِّي خَٰلِقُۢ بَشَرٗا مِّن صَلْصَٰلٖ مِّنْ حَمَإٖ مَّسْنُونٖ
+ID: IJZ_L1_034 - PROMPT: Which word in this verse is read with Qalqalah? - ARABIC: قَالَ لَمْ أَكُن لِّأَسْجُدَ لِبَشَرٍ خَلَقْتَهُۥ مِن صَلْصَٰلٖ مِّنْ حَمَإٖ مَّسْنُونٖ
+ID: IJZ_L1_037 - PROMPT: Which word in this verse is read with Qalqalah? - ARABIC: لَقَالُوٓاْ إِنَّمَا سُكِّرَتْ أَبْصَٰرُنَا بَلْ نَحْنُ قَوْمٞ مَّسْحُورُونَ
+ID: AF_L1_006 - PROMPT: Which letter makes the 'l' sound? - ARABIC:  - OPTIONS: ['ن', 'ر', 'م', 'ل']
+ID: AF_L1_007 - PROMPT: Which letter makes the 'w' sound? - ARABIC:  - OPTIONS: ['ه', 'ف', 'و', 'ي']
+ID: AF_L1_008 - PROMPT: Which letter makes the 'y' sound? - ARABIC:  - OPTIONS: ['ب', 'ي', 'و', 'ن']
+ID: AF_L1_009 - PROMPT: Which letter makes the 'k' sound as in 'kite'? - ARABIC:  - OPTIONS: ['ك', 'ق', 'ج', 'خ']
+ID: AF_L1_013 - PROMPT: Which letter is at the end of this word? - ARABIC: مَدِينَة - OPTIONS: ['ة', 'ه', 'ت', 'ث']
+ID: AF_L1_016 - PROMPT: Which letter comes directly after ت? - ARABIC:  - OPTIONS: ['خ', 'ث', 'ج', 'ب']
+ID: AF_L1_017 - PROMPT: Which letter comes directly before ج? - ARABIC:  - OPTIONS: ['ث', 'ح', 'ت', 'خ']
+ID: AF_L1_024 - PROMPT: Which letter makes a sound English does not have, made deep in the throat? - ARABIC:  - OPTIONS: ['س', 'ع', 'ب', 'ت']
+ID: PF_L1_009 - PROMPT: What does this word mean? - ARABIC: مُسْتَشْفَى
+ID: PF_L1_011 - PROMPT: What does this word mean? - ARABIC: أُسْبُوع
+ID: PF_L3_058 - PROMPT: Read the paragraph. Where does Ahmad go in the morning? - ARABIC: فِي الصَّبَاحِ، يَذْهَبُ أَحْمَدُ إِلَى الْمَدْرَسَةِ. هُوَ يُحِبُّ الْقِرَاءَةَ، وَيَقْرَأُ كِتَابًا جَدِيدًا كُلَّ أُسْبُوعٍ.
+ID: PF_L3_059 - PROMPT: Read the paragraph. How often does Ahmad read a new book? - ARABIC: فِي الصَّبَاحِ، يَذْهَبُ أَحْمَدُ إِلَى الْمَدْرَسَةِ. هُوَ يُحِبُّ الْقِرَاءَةَ، وَيَقْرَأُ كِتَابًا جَدِيدًا كُلَّ أُسْبُوعٍ.
+ID: PF_L3_060 - PROMPT: Read the paragraph. Where does Fatimah work? - ARABIC: تَعْمَلُ فَاطِمَةُ فِي مُسْتَشْفَى قَرِيبٍ مِنْ بَيْتِهَا. تَبْدَأُ عَمَلَهَا فِي السَّاعَةِ الثَّامِنَةِ وَتَعُودُ فِي الْمَسَاءِ.
+ID: PF_L3_061 - PROMPT: Read the paragraph. When does Fatimah start work? - ARABIC: تَعْمَلُ فَاطِمَةُ فِي مُسْتَشْفَى قَرِيبٍ مِنْ بَيْتِهَا. تَبْدَأُ عَمَلَهَا فِي السَّاعَةِ الثَّامِنَةِ وَتَعُودُ فِي الْمَسَاءِ.
+ID: PF_L4_077 - PROMPT: Read the paragraph. What does it say about the hospital? - ARABIC: تَعْمَلُ فَاطِمَةُ فِي مُسْتَشْفَى قَرِيبٍ مِنْ بَيْتِهَا. تَبْدَأُ عَمَلَهَا فِي السَّاعَةِ الثَّامِنَةِ وَتَعُودُ فِي الْمَسَاءِ.
+ID: PF_L4_078 - PROMPT: In this sentence, what does 'لِذَلِكَ' show? - ARABIC: الْجَوُّ بَارِدٌ، لِذَلِكَ لَبِسْتُ مِعْطَفِي.
+ID: PF_L5_087 - PROMPT: Read the paragraph. Why did Khalid go to the library? - ARABIC: زَارَ خَالِدٌ الْمَكْتَبَةَ الْعَامَّةَ لِيَسْتَعِيرَ كِتَابًا عَنْ تَارِيخِ الْأَنْدَلُسِ، لَكِنَّهُ لَمْ يَجِدْهُ، فَقَرَّرَ أَنْ يَشْتَرِيَهُ مِنَ الْمَكْتَبَةِ الْمُجَاوِرَةِ.
+ID: PF_L5_088 - PROMPT: Read the paragraph. What did Khalid decide in the end? - ARABIC: زَارَ خَالِدٌ الْمَكْتَبَةَ الْعَامَّةَ لِيَسْتَعِيرَ كِتَابًا عَنْ تَارِيخِ الْأَنْدَلُسِ، لَكِنَّهُ لَمْ يَجِدْهُ، فَقَرَّرَ أَنْ يَشْتَرِيَهُ مِنَ الْمَكْتَبَةِ الْمُجَاوِرَةِ.
+ID: PF_L5_096 - PROMPT: What does this sentence mean? - ARABIC: إِنْ تَدْرُسْ تَنْجَحْ.

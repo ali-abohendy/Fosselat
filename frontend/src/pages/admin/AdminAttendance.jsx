@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Trash2 } from 'lucide-react';
 import API from '../../config';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
@@ -60,6 +61,25 @@ export default function AdminAttendance() {
 
   const months = getMonths();
 
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this attendance record? This will revert it back to an unrecorded scheduled session if it was recurring.')) return;
+    
+    try {
+      const r = await fetch(`${API}/admin/attendance/${id}`, {
+        method: 'DELETE',
+        headers: getHeaders()
+      });
+      const d = await r.json();
+      if (d.success) {
+        setSessions(prev => prev.filter(s => s._id !== id));
+      } else {
+        alert(d.message || 'Failed to delete record');
+      }
+    } catch (err) {
+      alert('Server error while deleting');
+    }
+  };
+
   const filteredSessions = sessions.filter(s => {
     const q = search.toLowerCase();
     const matchSearch = (
@@ -115,6 +135,7 @@ export default function AdminAttendance() {
               <tr>
                 <th>Student ID</th><th>Student</th><th>Family</th><th>Subject</th><th>Teacher</th>
                 <th>Duration</th><th>Status</th><th>Date</th><th>Teacher Notes</th><th>Student Review</th>
+                <th style={{textAlign: 'center'}}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -136,9 +157,16 @@ export default function AdminAttendance() {
                       <span style={{ color: 'var(--color-text-muted)' }}>—</span>
                     )}
                   </td>
+                  <td style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                      <button onClick={() => handleDelete(s._id)} style={{ background: 'transparent', border: 'none', color: '#f87171', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(248,113,113,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Delete">
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
-              {!filteredSessions.length && <tr><td colSpan="10" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No attendance records</td></tr>}
+              {!filteredSessions.length && <tr><td colSpan="11" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No attendance records</td></tr>}
             </tbody>
           </table>
         </div>

@@ -18,7 +18,7 @@ router.post('/send-results', async (req, res) => {
 
     const {
       trackLabel, programLabel, audienceLabel,
-      recommendedLevel, recommendedLevelId, totalLevels,
+      recommendedLevel, recommendedLevelId, highestMasteredId, totalLevels,
       score, levelScores, strengths, weaknesses,
       duration, summary, nextStep
     } = results;
@@ -161,6 +161,8 @@ router.post('/send-results', async (req, res) => {
           track: trackLabel,
           program: programLabel,
           recommended_level: recommendedLevel,
+          highest_mastered_id: highestMasteredId,
+          total_levels: totalLevels,
           score,
           level_scores: levelScores,
           created_at: new Date()

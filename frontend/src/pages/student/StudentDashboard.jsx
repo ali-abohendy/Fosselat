@@ -93,11 +93,13 @@ export default function StudentDashboard() {
       </div>
 
       {(() => {
-        if (!user || !user.start_date || !user.program) return null;
-        const startDate = new Date(user.start_date);
-        const now = new Date();
-        const daysSinceStart = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-        if (daysSinceStart < 30) return null;
+        if (!user || !user.program) return null;
+
+        const joinedDate = user.created_at ? new Date(user.created_at) : new Date();
+        const daysSinceJoined = Math.floor((new Date() - joinedDate) / (1000 * 60 * 60 * 24));
+        const isAssessmentTime = daysSinceJoined >= 30 && daysSinceJoined % 30 <= 7;
+        
+        if (!isAssessmentTime) return null;
 
         const programs = user.program.split(',').map(p => p.trim());
         const recommendations = programs.map(p => {
@@ -110,10 +112,10 @@ export default function StudentDashboard() {
         return (
           <div style={{ background: 'rgba(200,167,99,0.1)', border: '1px solid rgba(200,167,99,0.3)', borderRadius: '8px', padding: '20px', marginBottom: '24px' }}>
             <h3 style={{ color: 'var(--color-gold)', margin: '0 0 8px', fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <BookOpen size={20} /> Monthly Progress Check
+              <BookOpen size={20} /> Monthly Progress Assessment
             </h3>
             <p style={{ margin: '0 0 16px', fontSize: '14px', color: 'var(--color-cream)' }}>
-              You've been studying with us for over a month! We recommend taking these placement tests to track your progress:
+              We recommend taking a quick test to track your monthly progress and strengths in your enrolled programs:
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
               {recommendations.map(r => (
@@ -129,16 +131,6 @@ export default function StudentDashboard() {
           </div>
         );
       })()}
-
-      {period === 'month' && sessionsTaken >= 8 && (
-        <div style={{ background: 'rgba(200,167,99,0.1)', border: '1px solid var(--color-gold)', borderRadius: '8px', padding: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <h3 style={{ color: 'var(--color-gold)', margin: '0 0 4px', fontSize: '16px' }}>Monthly Progress Check</h3>
-            <p style={{ margin: 0, fontSize: '14px', color: 'var(--color-cream)' }}>You have completed {sessionsTaken} sessions this cycle. We recommend taking a quick test to track your progress!</p>
-          </div>
-          <Button variant="primary" onClick={() => navigate('/placement-tests')}>Take a Test</Button>
-        </div>
-      )}
 
       {/* Today's Sessions */}
       <h3 style={{ color: 'var(--color-gold)', marginBottom: '16px', fontSize: '18px' }}>Today's Classes</h3>

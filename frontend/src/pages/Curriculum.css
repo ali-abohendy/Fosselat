@@ -1,8 +1,8 @@
 /* ========================================
-   Curriculum Page — Premium Styles
+   Curriculum Page ΓÇö Premium Styles
    ======================================== */
 
-/* ── Mission ── */
+/* ΓöÇΓöÇ Mission ΓöÇΓöÇ */
 .cur-mission-section { padding-bottom: 0; }
 
 .cur-mission {
@@ -54,7 +54,7 @@
   color: var(--color-text-muted);
 }
 
-/* ── Structure Overview ── */
+/* ΓöÇΓöÇ Structure Overview ΓöÇΓöÇ */
 .cur-structure-grid {
   display: flex;
   align-items: center;
@@ -111,7 +111,7 @@
   font-weight: 700;
 }
 
-/* ── Track Tabs ── */
+/* ΓöÇΓöÇ Track Tabs ΓöÇΓöÇ */
 .cur-tracks-section {
   padding-top: var(--spacing-xl);
 }
@@ -135,6 +135,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cur-track-tab:hover {
@@ -149,7 +155,7 @@
   font-weight: 700;
 }
 
-/* ── Roadmap ── */
+/* ΓöÇΓöÇ Roadmap ΓöÇΓöÇ */
 .cur-roadmap {
   background: rgba(200, 167, 99, 0.04);
   border: 1px solid rgba(200, 167, 99, 0.12);
@@ -185,7 +191,7 @@
   font-weight: 700;
 }
 
-/* ── Program Accordion ── */
+/* ΓöÇΓöÇ Program Accordion ΓöÇΓöÇ */
 .cur-program {
   border: 1px solid rgba(200, 167, 99, 0.1);
   border-radius: var(--radius-lg);
@@ -276,7 +282,7 @@
   padding: 6px 14px;
 }
 
-/* ── Level Tabs ── */
+/* ΓöÇΓöÇ Level Tabs ΓöÇΓöÇ */
 .cur-level-tabs {
   display: flex;
   gap: 6px;
@@ -311,7 +317,7 @@
   border-color: rgba(200, 167, 99, 0.2);
 }
 
-/* ── Level Detail ── */
+/* ΓöÇΓöÇ Level Detail ΓöÇΓöÇ */
 .cur-level-detail {
   background: rgba(200, 167, 99, 0.03);
   border: 1px solid rgba(200, 167, 99, 0.08);
@@ -383,7 +389,7 @@
   line-height: 1.6;
 }
 
-/* ── Skills Tags ── */
+/* ΓöÇΓöÇ Skills Tags ΓöÇΓöÇ */
 .cur-skills-tags {
   display: flex;
   flex-wrap: wrap;
@@ -401,7 +407,7 @@
   padding: 4px 12px;
 }
 
-/* ── Specialized Grid ── */
+/* ΓöÇΓöÇ Specialized Grid ΓöÇΓöÇ */
 .cur-specialized-title {
   color: var(--color-cream);
   font-size: var(--font-size-lg);
@@ -451,7 +457,7 @@
   font-weight: 600;
 }
 
-/* ── Certification ── */
+/* ΓöÇΓöÇ Certification ΓöÇΓöÇ */
 .cur-cert-section {
   background: rgba(200, 167, 99, 0.02);
 }
@@ -494,7 +500,7 @@
   line-height: 1.5;
 }
 
-/* ── Glossary ── */
+/* ΓöÇΓöÇ Glossary ΓöÇΓöÇ */
 .cur-glossary {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -523,7 +529,7 @@
   margin: 0;
 }
 
-/* ── Download Button ── */
+/* ΓöÇΓöÇ Download Button ΓöÇΓöÇ */
 .cur-download-btn {
   display: inline-block;
   padding: 14px 36px;
@@ -543,7 +549,7 @@
   box-shadow: 0 6px 24px rgba(200, 167, 99, 0.35);
 }
 
-/* ── Responsive ── */
+/* ΓöÇΓöÇ Responsive ΓöÇΓöÇ */
 @media (max-width: 1024px) {
   .cur-specialized-grid { grid-template-columns: 1fr 1fr; }
   .cur-cert-grid { grid-template-columns: 1fr 1fr; }
@@ -571,4 +577,57 @@
 @media (max-width: 480px) {
   .cur-track-tab { padding: 10px 18px; font-size: 13px; }
   .cur-level-tab { padding: 6px 12px; font-size: 12px; }
+}
+
+/* 💠 Diamond Divider 💠 */
+.cur-diamond-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 60px 0;
+}
+
+.cur-diamond-divider span {
+  display: block;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+}
+
+.cur-diamond-divider .d-small {
+  width: 10px;
+  height: 10px;
+  opacity: 0.3;
+}
+
+.cur-diamond-divider .d-medium {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+
+.cur-diamond-divider .d-large {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .cur-diamond-divider {
+    margin: 40px 0;
+    gap: 12px;
+  }
+  .cur-diamond-divider .d-small { width: 8px; height: 8px; }
+  .cur-diamond-divider .d-medium { width: 12px; height: 12px; }
+  .cur-diamond-divider .d-large { width: 18px; height: 18px; }
+}
+
+@media (max-width: 480px) {
+  .cur-diamond-divider {
+    margin: 30px 0;
+    gap: 10px;
+  }
+  .cur-diamond-divider .d-small { width: 6px; height: 6px; }
+  .cur-diamond-divider .d-medium { width: 10px; height: 10px; }
+  .cur-diamond-divider .d-large { width: 14px; height: 14px; }
 }

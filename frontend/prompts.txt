@@ -1,0 +1,940 @@
+quran|reading-tajweed|0: What is the name of this letter?
+quran|reading-tajweed|0: What is the name of this letter?
+quran|reading-tajweed|0: What is the name of this letter?
+quran|reading-tajweed|0: What is the name of this letter?
+quran|reading-tajweed|0: Which letter makes the 'sh' sound?
+quran|reading-tajweed|0: Which letter makes the soft 'th' sound, as in the English word 'thin'?
+quran|reading-tajweed|0: How is this word read?
+quran|reading-tajweed|0: How is this word read?
+quran|reading-tajweed|0: Which word is read 'qalam' (a pen)?
+quran|reading-tajweed|0: Which of these words contains the letter ع?
+quran|reading-tajweed|0: Which of these words contains the letter ح?
+quran|reading-tajweed|0: Which letter is at the beginning of this word?
+quran|reading-tajweed|0: Which letter is at the beginning of this word?
+quran|reading-tajweed|0: How is this read?
+quran|reading-tajweed|0: How is this read?
+quran|reading-tajweed|0: How is this read?
+quran|reading-tajweed|0: Which word is read 'kutub' (books)?
+quran|reading-tajweed|0: Which letter makes the 'th' sound in the English word 'this'?
+quran|reading-tajweed|0: How is this word read?
+quran|reading-tajweed|0: Which of these is the letter 'Baa'?
+quran|reading-tajweed|0: Which of these is the letter 'Qaaf'?
+quran|reading-tajweed|0: Which of these is the letter 'Daad'?
+quran|reading-tajweed|0: Which of these shows the letter ع as it is written at the START of a word?
+quran|reading-tajweed|0: How is this read?
+quran|reading-tajweed|0: How is this read?
+quran|reading-tajweed|1: Which word is read 'kitaab', with a long 'aa'?
+quran|reading-tajweed|1: Which word is read 'salaam'?
+quran|reading-tajweed|1: Which of these words contains a long vowel?
+quran|reading-tajweed|1: Which word ends with the sound '-un'?
+quran|reading-tajweed|1: Which word ends with the sound '-an'?
+quran|reading-tajweed|1: Two dammas together ( ٌ ) at the end of a word are read as:
+quran|reading-tajweed|1: In which word is the vowel held longer?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word contains a connected Madd (Madd Muttasil)?
+quran|reading-tajweed|1: Which word is read 'yaqoolu'?
+quran|reading-tajweed|1: Which word ends with the sound '-in'?
+quran|reading-tajweed|1: Which of these words contains a natural madd (2 counts)?
+quran|reading-tajweed|1: Which word is read 'kabeer' (big)?
+quran|reading-tajweed|1: Which word is read 'ta'aam' (food)?
+quran|reading-tajweed|1: Which word is read 'noor' (light)?
+quran|reading-tajweed|1: Which word is read 'jadeed' (new)?
+quran|reading-tajweed|1: How is this word read?
+quran|reading-tajweed|1: Which word contains the long 'ee' sound (ya madd)?
+quran|reading-tajweed|1: A natural madd — like the 'aa' in قَالَ — is held for:
+quran|reading-tajweed|1: Which of these words carries tanwin?
+quran|reading-tajweed|1: The small round circle placed above a letter in the mushaf (the round zero) tells you the letter is:
+quran|reading-tajweed|2: A shaddah ( ّ ) over a letter tells you to:
+quran|reading-tajweed|2: Which word is read 'madda', with a doubled 'd'?
+quran|reading-tajweed|2: Which of these words contains a sukoon?
+quran|reading-tajweed|2: Which of these words contains a shaddah?
+quran|reading-tajweed|2: The noon in this phrase is followed by a throat letter. How is it read?
+quran|reading-tajweed|2: How is the noon read in this phrase?
+quran|reading-tajweed|2: How is the noon read in this phrase?
+quran|reading-tajweed|2: How is the noon read in this phrase?
+quran|reading-tajweed|2: Which group of letters gives a light bounce when it carries a sukoon?
+quran|reading-tajweed|2: Which of these words is read with a Qalqalah bounce?
+quran|reading-tajweed|2: A natural madd, as in this word, is held for:
+quran|reading-tajweed|2: In this word, how is the laam of 'al-' read?
+quran|reading-tajweed|2: In this word, how is the laam of 'al-' read?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: In which word is the noon read as a meem sound (Iqlab)?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: In which word is the noon read as a meem sound (Iqlab)?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: In which word is the noon read as a meem sound (Iqlab)?
+quran|reading-tajweed|2: In which word is the noon read as a meem sound (Iqlab)?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word here has a Qalqalah bounce?
+quran|reading-tajweed|2: Which word here has a Qalqalah bounce?
+quran|reading-tajweed|2: Which word here has a Qalqalah bounce?
+quran|reading-tajweed|2: Which word here has a Qalqalah bounce?
+quran|reading-tajweed|2: Which word here has a Qalqalah bounce?
+quran|reading-tajweed|2: Which word here has a Qalqalah bounce?
+quran|reading-tajweed|2: In this word a madd letter is followed by a hamzah in the same word. This madd is:
+quran|reading-tajweed|2: A madd letter ends one word and a hamzah begins the next. This madd is:
+quran|reading-tajweed|2: In this word the madd letter is followed by a sukoon in the same word. It is held for:
+quran|reading-tajweed|2: A meem with a sukoon followed by another meem is read as:
+quran|reading-tajweed|2: After stopping in the middle of a verse, you should start again:
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: In which word is the noon read as a meem sound (Iqlab)?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: In which word is the noon read as a meem sound (Iqlab)?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: Which word in this verse is read with Qalqalah?
+quran|reading-tajweed|2: In which word is the noon read as a meem sound (Iqlab)?
+quran|reading-tajweed|2: Which word is read 'yushrik', with no vowel after the sheen?
+quran|reading-tajweed|2: Which phrase is read with Ikhfa?
+quran|reading-tajweed|2: Which phrase is read with Izhar?
+quran|reading-tajweed|2: In which word is the laam of 'al-' silent?
+quran|reading-tajweed|2: Which word contains a Madd Lazim?
+quran|reading-tajweed|2: A meem with a sukoon followed by a baa is read as:
+quran|reading-tajweed|2: Which phrase contains Ikhfa Shafawi?
+quran|reading-tajweed|2: When you stop at a word ending in a tanween, the tanween is:
+quran|reading-tajweed|2: Which word is read 'sabr' (patience)?
+quran|reading-tajweed|2: Which word is read 'hajj'?
+quran|reading-tajweed|2: Which word is read 'shams' (sun)?
+quran|reading-tajweed|2: How is this read?
+quran|reading-tajweed|2: How is this read?
+quran|reading-tajweed|2: How is this read?
+quran|reading-tajweed|2: Which word is read 'muslim'?
+quran|reading-tajweed|2: Which word is read 'zuhr' (noon)?
+quran|reading-tajweed|2: Which word is read 'ghayr' (other than)?
+quran|reading-tajweed|2: Which word is read 'ard' (earth)?
+quran|reading-tajweed|2: Which word is read 'al-hamdu'?
+quran|reading-tajweed|2: Which word is read 'istighfaar'?
+quran|reading-tajweed|3: What is the difference between Idgham and Ikhfa?
+quran|reading-tajweed|3: A waqf sign of 'مـ' over a word means:
+quran|reading-tajweed|3: A waqf sign of 'لا' over a word means:
+quran|reading-tajweed|3: Which pair of letters takes Idgham WITHOUT a nasal sound?
+quran|reading-tajweed|3: A waqf sign of 'ج' over a word means:
+quran|reading-tajweed|3: Madd Lazim is held for 6 counts because:
+quran|reading-tajweed|3: In the recitation of Hafs 'an 'Asim, Madd Munfasil is normally read for:
+quran|reading-tajweed|3: Madd 'Aridh lil-Sukoon occurs when:
+quran|reading-tajweed|3: Which of these is read with 6 counts?
+quran|reading-tajweed|3: The opening letters 'الم' are recited as:
+quran|reading-tajweed|3: Which pair of letters is emphatic and often confused, though their makharij differ?
+quran|reading-tajweed|3: Which letter has the quality of Istitalah?
+quran|reading-tajweed|3: Which group are the letters of Isti'la (always read heavy)?
+quran|reading-tajweed|3: Which letter is produced from the deepest part of the throat?
+quran|reading-tajweed|3: The letter ر is described as having Takrir, which means the reciter must:
+quran|reading-tajweed|3: Which letters are read with Hams (a whispered flow of breath)?
+quran|reading-tajweed|3: How many letters take Ikhfa after a noon sakinah?
+quran|reading-tajweed|3: When two identical letters meet, the first with sukoon, this is:
+quran|reading-tajweed|3: In 'قَدْ تَبَيَّنَ' the daal meets a taa. This is an example of:
+quran|reading-tajweed|3: Where does Ghunnah last the longest?
+quran|reading-tajweed|3: Which phrase requires Iqlab?
+quran|reading-tajweed|3: The stop sign مـ written above a word in the mushaf means:
+quran|reading-tajweed|3: A small ســ above the text marks a sakt. What is a sakt?
+quran|reading-tajweed|3: When is the letter ر pronounced light (tarqiq)?
+quran|reading-tajweed|3: The lam of the Divine Name (اللَّه) is pronounced heavy (tafkhim) when:
+quran|reading-tajweed|3: Which of these madd types is the strongest, held the longest?
+quran|reading-tajweed|3: The opening letters الم at the start of a surah are recited by:
+quran|reading-tajweed|3: Which recitation pace is the slow, deliberate one used for teaching and precision?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Both lines below are from the same surah. Which one?
+quran|memorization|0: Both lines below are from the same surah. Which one?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Both lines below are from the same surah. Which one?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Both lines below are from the same surah. Which one?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: Which surah is this from?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|0: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|0: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: From which surah is this passage taken?
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|0: Choose the exact word that completes this passage:
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Both lines below are from the same surah. Which one?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Both lines below are from the same surah. Which one?
+quran|memorization|1: Both lines below are from the same surah. Which one?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Both lines below are from the same surah. Which one?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: Which surah is this from?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|1: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: From which surah is this passage taken?
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|1: Choose the exact word that completes this passage:
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Both lines below are from the same surah. Which one?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Both lines below are from the same surah. Which one?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Both lines below are from the same surah. Which one?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: Which surah is this from?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: From which surah is this passage taken?
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|2: Choose the exact word that completes this passage:
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Both lines below are from the same surah. Which one?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: Both lines below are from the same surah. Which one?
+quran|memorization|3: Which surah is this from?
+quran|memorization|3: From which surah is this passage taken?
+quran|memorization|3: From which surah is this passage taken?
+quran|memorization|3: From which surah is this passage taken?
+quran|memorization|3: Both excerpts below come from the same surah. Which surah is it?
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|memorization|3: Choose the exact word that completes this passage:
+quran|ijazah|0: Madd Lazim is held for 6 counts because:
+quran|ijazah|0: In the recitation of Hafs 'an 'Asim, Madd Munfasil is normally read for:
+quran|ijazah|0: Madd 'Aridh lil-Sukoon occurs when:
+quran|ijazah|0: Which of these is read with 6 counts?
+quran|ijazah|0: The opening letters 'الم' are recited as:
+quran|ijazah|0: Which pair of letters is emphatic and often confused, though their makharij differ?
+quran|ijazah|0: Which letter has the quality of Istitalah?
+quran|ijazah|0: Which group are the letters of Isti'la (always read heavy)?
+quran|ijazah|0: Which letter is produced from the deepest part of the throat?
+quran|ijazah|0: The letter ر is described as having Takrir, which means the reciter must:
+quran|ijazah|0: Which letters are read with Hams (a whispered flow of breath)?
+quran|ijazah|0: How many letters take Ikhfa after a noon sakinah?
+quran|ijazah|0: When two identical letters meet, the first with sukoon, this is:
+quran|ijazah|0: In 'قَدْ تَبَيَّنَ' the daal meets a taa. This is an example of:
+quran|ijazah|0: Where does Ghunnah last the longest?
+quran|ijazah|0: Which phrase requires Iqlab?
+quran|ijazah|0: Which word contains a connected Madd (Madd Muttasil)?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: In which word is the noon read as a meem sound (Iqlab)?
+quran|ijazah|0: Which word contains a connected Madd (Madd Muttasil)?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: In which word is the noon read as a meem sound (Iqlab)?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word contains a connected Madd (Madd Muttasil)?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word in this verse is read with Qalqalah?
+quran|ijazah|0: Which word contains a connected Madd (Madd Muttasil)?
+quran|ijazah|0: In which word is the noon read as a meem sound (Iqlab)?
+quran|ijazah|1: A student reads 'مِنْ بَعْدِ' with a clear noon. Which rule did they miss?
+quran|ijazah|1: A student reads ق exactly like ك. The correction is to:
+quran|ijazah|1: A student stops at a word marked 'لا'. You should tell them:
+quran|ijazah|1: A student reads الضَّالِّينَ with 2 counts. The error is in:
+quran|ijazah|1: A student pronounces ط as a heavy ت but with no Qalqalah at a sukoon. They have:
+quran|ijazah|1: A student reads ذ as ز throughout. The best correction is to:
+quran|ijazah|1: A student adds a vowel to a letter that carries a sukoon. This error is called:
+quran|ijazah|1: An Ijazah with sanad certifies that:
+quran|ijazah|1: The widely used riwayah of Hafs is transmitted from which imam?
+quran|ijazah|1: Warsh is a transmitter of which imam's reading?
+quran|ijazah|1: How many mutawatir readings (qira'at) are usually counted?
+quran|ijazah|1: 'Talaqqi' in Qur'anic transmission means:
+quran|ijazah|1: Before granting an ijazah, the teacher must be satisfied that the student:
+quran|ijazah|1: Sakt (a brief pause without breathing) is applied in Hafs at:
+quran|ijazah|1: 'Tarteel' as commanded in the Qur'an refers to:
+quran|ijazah|1: When a reciter stops on a word ending with a shaddah, the doubling is:
+quran|ijazah|1: Which of these must be avoided when reciting?
+quran|ijazah|1: In this word a madd letter is followed by a hamzah in the same word. This madd is:
+quran|ijazah|1: A madd letter ends one word and a hamzah begins the next. This madd is:
+quran|ijazah|1: In this word the madd letter is followed by a sukoon in the same word. It is held for:
+quran|ijazah|1: A meem with a sukoon followed by another meem is read as:
+quran|ijazah|1: What is the difference between Idgham and Ikhfa?
+quran|ijazah|1: A waqf sign of 'مـ' over a word means:
+quran|ijazah|1: A waqf sign of 'لا' over a word means:
+quran|ijazah|1: After stopping in the middle of a verse, you should start again:
+quran|ijazah|1: Which word contains a Madd Lazim?
+quran|ijazah|1: A meem with a sukoon followed by a baa is read as:
+quran|ijazah|1: Which phrase contains Ikhfa Shafawi?
+quran|ijazah|1: Which pair of letters takes Idgham WITHOUT a nasal sound?
+quran|ijazah|1: A waqf sign of 'ج' over a word means:
+quran|ijazah|1: When you stop at a word ending in a tanween, the tanween is:
+arabic|foundation|0: What is the name of this letter?
+arabic|foundation|0: What is the name of this letter?
+arabic|foundation|0: What is the name of this letter?
+arabic|foundation|0: What is the name of this letter?
+arabic|foundation|0: What is the name of this letter?
+arabic|foundation|0: Which letter makes the 'l' sound?
+arabic|foundation|0: Which letter makes the 'w' sound?
+arabic|foundation|0: Which letter makes the 'y' sound?
+arabic|foundation|0: Which letter makes the 'k' sound as in 'kite'?
+arabic|foundation|0: Which two letters have the same shape and differ only in their dots?
+arabic|foundation|0: Which of these words contains the letter ه?
+arabic|foundation|0: Which of these words contains the letter ك?
+arabic|foundation|0: Which letter is at the end of this word?
+arabic|foundation|0: How many letters are in this word?
+arabic|foundation|0: How many letters are in this word?
+arabic|foundation|0: Which letter comes directly after ت?
+arabic|foundation|0: Which letter comes directly before ج?
+arabic|foundation|0: Which mark gives a short 'u' sound?
+arabic|foundation|0: Which mark gives a short 'i' sound?
+arabic|foundation|0: How is this read?
+arabic|foundation|0: How is this read?
+arabic|foundation|0: How is this read?
+arabic|foundation|0: How is this read?
+arabic|foundation|0: Which letter makes a sound English does not have, made deep in the throat?
+arabic|foundation|0: Which of these letters comes last in the alphabet?
+arabic|foundation|0: Which of these is the letter 'Faa'?
+arabic|foundation|0: Which of these is the letter 'Haa' (the light one, as in 'house')?
+arabic|foundation|0: Which of these shows the letter ب as it is written in the MIDDLE of a word?
+arabic|foundation|0: How is this read?
+arabic|foundation|1: Which word contains a long 'aa'?
+arabic|foundation|1: Which word is read 'noor' with a long 'oo'?
+arabic|foundation|1: In which word does the noon carry no vowel?
+arabic|foundation|1: How is this read?
+arabic|foundation|1: Which word has a long vowel in the MIDDLE?
+arabic|foundation|1: How is this read?
+arabic|foundation|1: How is this read?
+arabic|foundation|1: Which word is read 'bayt' (a house)?
+arabic|foundation|1: Which word is read 'madrasa' (a school)?
+arabic|foundation|1: Which word is read 'jameel' (beautiful)?
+arabic|foundation|1: Which word is read 'muhandis' (an engineer)?
+arabic|foundation|1: Which word contains a long alif (the 'aa' sound)?
+arabic|foundation|1: Which word contains the long 'oo' sound (waw madd)?
+arabic|foundation|1: In the word يَبْدَأ, how is the بْ (with sukoon) read?
+arabic|foundation|1: In which word is the ل of الْـ pronounced clearly (a moon letter)?
+arabic|foundation|1: Which word is read 'maktab' (office / desk)?
+arabic|foundation|1: Which word contains the long 'ee' sound (ya madd)?
+arabic|foundation|1: How is this read?
+arabic|foundation|1: Which word is read 'bint', with a resting ن?
+arabic|foundation|1: In mushaf-style print, the small dagger alif ( ٰ ) over a letter is read as:
+arabic|foundation|1: Which of these is read 'qul' — one closed syllable?
+arabic|foundation|1: How is this read?
+arabic|foundation|2: Which word is read 'sittah' (six), with a doubled 't'?
+arabic|foundation|2: A shaddah ( ّ ) over a letter means the letter is:
+arabic|foundation|2: Which word ends with the sound '-un'?
+arabic|foundation|2: Which word ends with the sound '-an'?
+arabic|foundation|2: Which word is read 'mudarris' (a teacher), with a doubled 'r'?
+arabic|foundation|2: Which word ends with the sound '-in'?
+arabic|foundation|2: Which word is read 'rabbun', with a doubled 'b'?
+arabic|foundation|2: In الشَّمْس, how is the ل of الـ read?
+arabic|foundation|2: Which word is read 'ummun', with a doubled 'm'?
+arabic|foundation|2: How is this read?
+arabic|foundation|2: How does the word كِتَابٌ end when read aloud?
+arabic|foundation|2: Which word is read 'kullun'?
+arabic|foundation|2: How is this read?
+arabic|foundation|2: Which word carries BOTH a shaddah and a tanwin?
+arabic|foundation|2: How is this read?
+arabic|foundation|2: Which word is read 'sharrun'?
+arabic|foundation|2: In السَّلَام, the س is:
+arabic|foundation|2: Which word is read 'marratan', ending with '-an'?
+arabic|foundation|3: Which spelling of the word for 'question' is correct?
+arabic|foundation|3: In قَرَأَ the final hamzah is seated on an alif because:
+arabic|foundation|3: A word may show a small dagger alif in mushaf-style print. In standard spelling the same long sound is written with:
+arabic|foundation|3: Which word ends with alif maqsurah (ى)?
+arabic|foundation|3: You hear the word 'madrasa' (school). Which spelling is correct?
+arabic|foundation|3: Which spelling is correct for 'mu'min' (a believer)?
+arabic|foundation|3: Which spelling is correct for 'samaa' (sky)?
+arabic|foundation|3: Which spelling is correct for 'as'ilah' (questions)?
+arabic|foundation|3: Which word ends with ta marbutah (ة)?
+arabic|foundation|3: In mushaf-style print you may see الصَّلَوٰة. In standard spelling it is written:
+arabic|foundation|3: Which word ends with a plain ه (not ta marbutah)?
+arabic|foundation|3: You hear 'thalaathah' (three). Which spelling is correct?
+arabic|foundation|3: You hear 'dhahaba' (he went). Which spelling is correct?
+arabic|foundation|3: Which is the correct written form of the word 'ala (on / over)?
+arabic|foundation|3: How is this read?
+arabic|foundation|3: How is this read?
+arabic|foundation|3: When وَالْكِتَاب is read in one connected flow, the hamzah of الْـ is:
+arabic|foundation|3: How is this read?
+arabic|advanced|0: What does 'مَرْحَبًا' mean?
+arabic|advanced|0: How do you say 'thank you'?
+arabic|advanced|0: Which number is 'ثَلَاثَة'?
+arabic|advanced|0: Which number is 'سَبْعَة'?
+arabic|advanced|0: Someone asks 'كَيْفَ حَالُكَ؟'. Which reply fits?
+arabic|advanced|0: Which sentence asks 'What is your name?'
+arabic|advanced|0: Someone says 'شُكْرًا'. Which reply fits?
+arabic|advanced|0: What does this word mean?
+arabic|advanced|0: What does this word mean?
+arabic|advanced|0: What does this word mean?
+arabic|advanced|0: What does this word mean?
+arabic|advanced|0: Which word means 'a female teacher'?
+arabic|advanced|0: Which phrase means 'in the morning'?
+arabic|advanced|0: Someone asks 'مَاذَا تَعْمَلُ؟'. Which reply fits?
+arabic|advanced|0: Someone asks 'كَمْ عَدَدُ أَفْرَادِ عَائِلَتِكَ؟'. Which reply fits?
+arabic|advanced|0: Someone asks 'مِنْ أَيْنَ أَنْتَ؟'. Which reply fits?
+arabic|advanced|0: Someone asks 'كَمْ السَّاعَةُ؟'. Which reply fits?
+arabic|advanced|0: You want to ask politely for something. Which phrase do you use?
+arabic|advanced|0: Which greeting fits when you arrive somewhere in the evening?
+arabic|advanced|0: What does this sentence mean?
+arabic|advanced|0: What does this sentence mean?
+arabic|advanced|0: What does this sentence mean?
+arabic|advanced|1: Which word means 'busy'?
+arabic|advanced|1: Which word means 'tomorrow'?
+arabic|advanced|1: Which word means 'difficult'?
+arabic|advanced|1: 'كَتَبَتْ' is the past tense conjugated for:
+arabic|advanced|1: Which form means 'they (masculine) write'?
+arabic|advanced|1: Which form means 'we studied'?
+arabic|advanced|1: Which form means 'I am reading'?
+arabic|advanced|1: Which sentence is in the future?
+arabic|advanced|1: Which sentence is a command?
+arabic|advanced|1: Which word means 'he ate'?
+arabic|advanced|1: A colleague says 'أَعْتَذِرُ عَنِ التَّأْخِيرِ'. What have they done?
+arabic|advanced|1: You want to ask a shopkeeper the price. Which question do you use?
+arabic|advanced|1: What does this sentence mean?
+arabic|advanced|1: You are at the airport and your bag is missing. Which sentence do you say?
+arabic|advanced|1: Someone says: عِنْدِي صُدَاعٌ شَدِيدٌ. What are they suffering from?
+arabic|advanced|1: Which is the correct way to say 25 (for counting)?
+arabic|advanced|1: Which sentence means 'I saw him yesterday'?
+arabic|advanced|1: A doctor tells the patient to drink water. Which form does the doctor use?
+arabic|advanced|1: What does the word الطَّوَاف refer to?
+arabic|advanced|2: Put these words in order: [ الْمَدْرَسَةِ / إِلَى / الطَّالِبُ / ذَهَبَ ]
+arabic|advanced|2: Which sentence uses the definite article correctly?
+arabic|advanced|2: Which sentence is correct?
+arabic|advanced|2: Which word completes 'أَنَا ___ فِي دِمَشْقَ' (I live in Damascus)?
+arabic|advanced|2: Which sentence means 'I read a book every day'?
+arabic|advanced|2: Which sentence correctly negates 'أَذْهَبُ إِلَى السُّوقِ'?
+arabic|advanced|2: What is the plural of كِتَاب?
+arabic|advanced|2: What is the plural of رَجُل?
+arabic|advanced|2: Which adjective agrees with 'مَدْرَسَة'?
+arabic|advanced|2: Which phrase means 'the man's house'?
+arabic|advanced|2: Which word is dual (exactly two)?
+arabic|advanced|2: Which pronoun means 'they' for two people?
+arabic|advanced|2: 'الطَّالِبُ مُجْتَهِدٌ' is which kind of sentence?
+arabic|advanced|2: 'سَوْفَ أُسَافِرُ غَدًا' refers to:
+arabic|advanced|2: Which word makes the sentence negative in the past: '___ يَذْهَبْ إِلَى السُّوقِ'?
+arabic|advanced|2: Which pronoun fits: '___ طَالِبَةٌ فِي الْجَامِعَةِ'?
+arabic|advanced|2: Read the paragraph. Where does Ahmad go in the morning?
+arabic|advanced|2: Read the paragraph. How often does Ahmad read a new book?
+arabic|advanced|2: Read the paragraph. Where does Fatimah work?
+arabic|advanced|2: Read the paragraph. When does Fatimah start work?
+arabic|advanced|2: Read the sentence. Why did the children put on their coats?
+arabic|advanced|2: Read the sentence. Where were the children going?
+arabic|advanced|2: In this sentence, which word is closest in meaning to 'يُحِبُّ'?
+arabic|advanced|2: What does 'لَمْ يَجِدْهُ' mean?
+arabic|advanced|2: What does 'بَعْدَ قَلِيلٍ' mean?
+arabic|advanced|3: 'بَيْتُ الرَّجُلِ' is an example of:
+arabic|advanced|3: In 'قَرَأَ الطَّالِبُ الْكِتَابَ', which word is the object?
+arabic|advanced|3: What does 'مَا زَالَ يَعْمَلُ' mean?
+arabic|advanced|3: 'بِالرَّغْمِ مِنْ' means:
+arabic|advanced|3: Which connector means 'however'?
+arabic|advanced|3: Which connector shows a reason?
+arabic|advanced|3: Which connector shows a result?
+arabic|advanced|3: Which phrase means 'for example'?
+arabic|advanced|3: Which sentence uses the passive voice?
+arabic|advanced|3: Which comparative form means 'bigger'?
+arabic|advanced|3: Read the paragraph. What does it say about the hospital?
+arabic|advanced|3: In this sentence, what does 'لِذَلِكَ' show?
+arabic|advanced|3: 'مِنْ نَاحِيَةٍ أُخْرَى' is used to:
+arabic|advanced|3: In لَنْ أُسَافِرَ غَدًا, why does the verb end with a fatha (أُسَافِرَ)?
+arabic|advanced|3: Which sentence contains a jussive (majzum) verb?
+arabic|advanced|3: Which phrase pairs the number with its counted noun correctly?
+arabic|advanced|3: Read the announcement, then answer: what is it about?
+arabic|advanced|3: Which phrase introduces your own opinion?
+arabic|advanced|3: In جَاءَ الطَّالِبُ, the word الطَّالِبُ is:
+arabic|advanced|4: Read the sentence. What is being described?
+arabic|advanced|4: Read the paragraph. Why did Khalid go to the library?
+arabic|advanced|4: Read the paragraph. What did Khalid decide in the end?
+arabic|advanced|4: Read the paragraph. What is the writer's main point?
+arabic|advanced|4: Read the paragraph. According to the writer, how much time does reading need?
+arabic|advanced|4: Read this sentence without vowel marks. What does it mean?
+arabic|advanced|4: Read this sentence without vowel marks. What does it mean?
+arabic|advanced|4: Which sentence uses the passive voice?
+arabic|advanced|4: Which sentence contains a conditional?
+arabic|advanced|4: Which word is a masdar (verbal noun)?
+arabic|advanced|4: What does this sentence mean?
+arabic|advanced|4: Which sentence is in the passive voice?
+arabic|advanced|4: Which word is an active participle (اسم فاعل)?
+arabic|advanced|4: Which word is a passive participle (اسم مفعول)?
+arabic|advanced|4: The verb اِسْتَخْرَجَ follows the pattern اِسْتَفْعَلَ. What meaning does this pattern usually add?
+arabic|advanced|4: Which sentence has two objects?
+arabic|advanced|4: Which of these nouns never takes tanwin (a diptote)?
+arabic|advanced|4: Read the passage, then answer: why did Omar leave his trade?
+arabic|advanced|5: Which sentence expresses an obligation?
+arabic|advanced|5: In a formal letter, which opening is appropriate?
+arabic|advanced|5: Which sentence is the most formal way to make a request?
+arabic|advanced|5: In 'الْكِتَابُ الَّذِي قَرَأْتُهُ مُفِيدٌ', what does 'الَّذِي' do?
+arabic|advanced|5: Which sentence contains an absolute object (مفعول مطلق)?
+arabic|advanced|5: In جِئْتُ طَلَبًا لِلْعِلْمِ, the word طَلَبًا expresses:
+arabic|advanced|5: Which sentence contains a specification (تمييز)?
+arabic|advanced|5: What does حَضَرَ الطُّلَّابُ إِلَّا خَالِدًا mean?
+arabic|advanced|5: Which sentence uses لا النافية للجنس correctly?
+arabic|advanced|5: Which sentence states its point with the strongest emphasis?
+arabic|advanced|5: In يَسُرُّنِي حُضُورُكَ, the word حُضُورُكَ functions as:
+arabic|advanced|5: Fronting the object — الرِّسَالَةَ كَتَبَ خَالِدٌ instead of كَتَبَ خَالِدٌ الرِّسَالَةَ — mainly adds:
+arabic|advanced|5: What does this proverb mean?
+arabic|advanced|5: What does this saying mean?
+arabic|advanced|5: Which sentence belongs to formal written Arabic rather than casual speech?
+arabic|advanced|5: Ahmad said: «أَنَا مَشْغُولٌ الْيَوْمَ». Which sentence reports his words correctly?
+islamic-studies|comprehensive|0: What does a Muslim say before beginning to eat?
+islamic-studies|comprehensive|0: Fatimah's friend gives her a gift. Which of these is the best thing for her to say?
+islamic-studies|comprehensive|0: What does a Muslim say when he meets another Muslim?
+islamic-studies|comprehensive|0: A Muslim hears that a relative has passed away. What does he say?
+islamic-studies|comprehensive|0: A guest arrives at a Muslim's home at meal time without warning. What does the Prophet's guidance teach?
+islamic-studies|comprehensive|0: A practice with no basis in the Qur'an or the sunnah is performed as worship. It is:
+islamic-studies|comprehensive|0: 'None of you truly believes until he loves for his brother what he loves for himself' teaches:
+islamic-studies|comprehensive|0: 'Whoever believes in Allah and the Last Day should speak good or keep silent' teaches that:
+islamic-studies|comprehensive|0: A companion did something in front of the Prophet and he watched without objecting. This is:
+islamic-studies|comprehensive|0: What is Surah al-Ikhlas mainly about?
+islamic-studies|comprehensive|0: Surah al-Kawthar came at a time of difficulty for the Prophet ﷺ. What does it convey to him?
+islamic-studies|comprehensive|0: What do Surah al-Falaq and Surah an-Nas both teach us to do?
+islamic-studies|comprehensive|0: Surah an-Nas opens by seeking refuge with Allah under three descriptions. Which are they?
+islamic-studies|comprehensive|0: Which is a central theme of Surah al-Fatihah?
+islamic-studies|comprehensive|0: Which surah is recited in every rak'ah of every prayer?
+islamic-studies|comprehensive|0: What does the statement of al-Fatihah, "You alone we worship and You alone we ask for help", establish?
+islamic-studies|comprehensive|0: Surah al-Ikhlas was revealed in answer to something the idolaters had asked the Prophet ﷺ. What had they asked about?
+islamic-studies|comprehensive|0: What does a Muslim say before beginning to eat?
+islamic-studies|comprehensive|0: Which hand is used for eating and drinking?
+islamic-studies|comprehensive|0: A child forgets to say Bismillah and remembers halfway through the meal. What is he taught to do?
+islamic-studies|comprehensive|0: The Prophet ﷺ taught a boy how to eat from a dish shared with others. What did he instruct?
+islamic-studies|comprehensive|0: Which manner of drinking is from the Sunnah?
+islamic-studies|comprehensive|0: The Prophet ﷺ said that Jibril kept counselling him about the neighbour so persistently that he thought the neighbour would be given what?
+islamic-studies|comprehensive|0: A cat comes into the house and drinks from a dish. What did the Prophet ﷺ teach about cats?
+islamic-studies|comprehensive|0: The Prophet ﷺ told of a man who found a thirsty dog and drew water for it. What came of it?
+islamic-studies|comprehensive|0: The Prophet ﷺ said that a buyer and a seller who are truthful and make matters clear receive what?
+islamic-studies|comprehensive|0: In Surah al-Isra', the command to worship none but Allah is joined immediately with which duty?
+islamic-studies|comprehensive|0: The Prophet ﷺ described removing something harmful from the road as what?
+islamic-studies|comprehensive|0: Who created the heavens, the earth, and everything in them?
+islamic-studies|comprehensive|0: Who is Muhammad ﷺ?
+islamic-studies|comprehensive|0: Which surah comes first in the mushaf?
+islamic-studies|comprehensive|0: When do you say بِسْمِ اللَّهِ؟
+islamic-studies|comprehensive|0: What do you say when you sneeze?
+islamic-studies|comprehensive|0: Which surah comes right after Al-Fatihah in the mushaf?
+islamic-studies|comprehensive|1: How many pillars of Islam are there?
+islamic-studies|comprehensive|1: How many pillars of iman (belief) are there?
+islamic-studies|comprehensive|1: Which of these is one of the five daily prayers?
+islamic-studies|comprehensive|1: What is the Qur'an?
+islamic-studies|comprehensive|1: Fasting for a whole month is required of Muslims in which month?
+islamic-studies|comprehensive|1: A boy who is fasting eats a biscuit by mistake, forgetting the fast. What should he do?
+islamic-studies|comprehensive|1: Which statement about the angels is correct?
+islamic-studies|comprehensive|1: What is a hadith?
+islamic-studies|comprehensive|1: Which statement correctly compares the Qur'an and the hadith?
+islamic-studies|comprehensive|1: Sara's family gives part of their savings to poor neighbours each year. Which pillar of Islam is this?
+islamic-studies|comprehensive|1: What do the two angels who are with every person do?
+islamic-studies|comprehensive|1: Which of these is one of the five pillars of Islam?
+islamic-studies|comprehensive|1: Which book was revealed to Prophet Muhammad ﷺ?
+islamic-studies|comprehensive|1: Who was the first prophet?
+islamic-studies|comprehensive|1: How many daily prayers are obligatory?
+islamic-studies|comprehensive|1: Which book was revealed to Prophet Musa?
+islamic-studies|comprehensive|1: From what were the angels created, and how do they act?
+islamic-studies|comprehensive|1: Which book was given to Prophet Dawud?
+islamic-studies|comprehensive|1: What must a Muslim believe about Prophet Isa?
+islamic-studies|comprehensive|1: Which statement about the messengers of Allah is correct?
+islamic-studies|comprehensive|1: What must a Muslim believe about the earlier revealed books?
+islamic-studies|comprehensive|1: Which prophet raised the Ka'bah together with his son Isma'il?
+islamic-studies|comprehensive|1: Angels are best described as:
+islamic-studies|comprehensive|1: Which prophet was given the Injil?
+islamic-studies|comprehensive|1: The word 'Islam' means:
+islamic-studies|comprehensive|1: Which science studies the meanings of the Qur'an?
+islamic-studies|comprehensive|1: The daily fast of Ramadan lasts from which time to which time?
+islamic-studies|comprehensive|1: Which statement matches what Muslims believe about the prophets?
+islamic-studies|comprehensive|1: Zakah is wealth that is given to which people?
+islamic-studies|comprehensive|1: A man is on a long journey in Ramadan and finds fasting very hard. What is he allowed to do?
+islamic-studies|comprehensive|1: A man is asked why he still prays carefully when he is alone at home. Which belief best explains it?
+islamic-studies|comprehensive|1: Which pillar of Islam is performed once in a lifetime by those who are able?
+islamic-studies|comprehensive|1: Someone asks why Muslims never make an image of Allah. Which belief explains this?
+islamic-studies|comprehensive|1: Someone claims that a new prophet has been sent after Muhammad. What is the correct belief?
+islamic-studies|comprehensive|1: Which quality must every prophet of Allah have?
+islamic-studies|comprehensive|1: How many pillars of iman (faith) are there?
+islamic-studies|comprehensive|1: Which of these is one of the six pillars of iman?
+islamic-studies|comprehensive|1: A man believes in Allah, His angels, His books and His messengers, but says the Day of Judgement will never come. He has:
+islamic-studies|comprehensive|1: The pillars of iman are matters of the heart, while the pillars of Islam are mainly:
+islamic-studies|comprehensive|1: Amina asks her teacher what 'tawheed' means. Which answer is correct?
+islamic-studies|comprehensive|1: Muslims believe that Allah's knowledge:
+islamic-studies|comprehensive|1: The words 'la ilaha illa Allah' mean:
+islamic-studies|comprehensive|1: A child asks who made Allah. The correct answer is:
+islamic-studies|comprehensive|1: The angels were created from:
+islamic-studies|comprehensive|1: Which book was given to Prophet Musa?
+islamic-studies|comprehensive|1: What do Muslims believe about the earlier scriptures today?
+islamic-studies|comprehensive|1: Which one of these was a prophet?
+islamic-studies|comprehensive|1: Abu Bakr as-Siddeeq was:
+islamic-studies|comprehensive|1: Muhammad (peace be upon him) is called the Seal of the Prophets. This means:
+islamic-studies|comprehensive|1: A man says: 'I believe in Muhammad but not in Musa.' Islamically he:
+islamic-studies|comprehensive|1: Belief in al-qadar means believing that:
+islamic-studies|comprehensive|1: Sara's team lost the match although she tried her best. What should she believe?
+islamic-studies|comprehensive|1: Belief in the angels means believing that:
+islamic-studies|comprehensive|1: Who knows exactly when the Last Day will come?
+islamic-studies|comprehensive|1: A Muslim says: 'What reached me could never have missed me.' Which pillar of iman is he expressing?
+islamic-studies|comprehensive|1: Which statement about the angels is correct?
+islamic-studies|comprehensive|1: Belief in the angels means accepting that they:
+islamic-studies|comprehensive|1: Muslims must believe that the messengers:
+islamic-studies|comprehensive|1: A man plans carefully, works hard, then says: 'The result is with Allah.' This is:
+islamic-studies|comprehensive|1: A man refuses a dishonest profit. Which answer shows belief in the Last Day?
+islamic-studies|comprehensive|1: Fasting in Ramadan means not eating or drinking:
+islamic-studies|comprehensive|1: Fasting Ramadan is obligatory on every Muslim who is:
+islamic-studies|comprehensive|1: Zakah is:
+islamic-studies|comprehensive|1: Which of these is fard kifayah, an obligation that lapses when enough people do it?
+islamic-studies|comprehensive|1: A man travels a long journey in Ramadan and finds fasting hard. He may:
+islamic-studies|comprehensive|1: A woman does not fast some days of Ramadan because of menstruation. She must:
+islamic-studies|comprehensive|1: A hadith is:
+islamic-studies|comprehensive|1: Zayd wants to know how the Prophet greeted people. Where should he look?
+islamic-studies|comprehensive|1: Which of these is recited in salah as the speech of Allah?
+islamic-studies|comprehensive|1: Which of these is a saying of the Prophet, not a verse of the Qur'an?
+islamic-studies|comprehensive|1: Why do Muslims need the sunnah alongside the Qur'an?
+islamic-studies|comprehensive|1: The sunnah is the Prophet's sayings, his actions, and:
+islamic-studies|comprehensive|1: The companions sat while eating because the Prophet did. Following his actions is:
+islamic-studies|comprehensive|1: When the Prophet's name is mentioned, a Muslim says:
+islamic-studies|comprehensive|1: The hadith 'Actions are judged by intentions' teaches that:
+islamic-studies|comprehensive|1: A hadith records what the Prophet ﷺ said, did, or:
+islamic-studies|comprehensive|1: 'The best of you are those who learn the Qur'an and teach it' shows that:
+islamic-studies|comprehensive|1: Surah al-Fil speaks about which event?
+islamic-studies|comprehensive|1: Surah al-'Asr names what saves a person from loss. Which set does it mention?
+islamic-studies|comprehensive|1: Whom does Surah al-Ma'un describe with censure?
+islamic-studies|comprehensive|1: What is the message of Surah al-Kafirun?
+islamic-studies|comprehensive|1: What is the central lesson that Surah al-Fil sets before its reader?
+islamic-studies|comprehensive|1: Surah al-Kafirun answered a proposal the Quraysh had put to the Prophet ﷺ. What was that proposal?
+islamic-studies|comprehensive|1: What is the reply to as-salamu 'alaykum?
+islamic-studies|comprehensive|1: Someone sneezes and says Alhamdulillah. What does the one who hears him say?
+islamic-studies|comprehensive|1: After being answered with Yarhamuk Allah, what does the one who sneezed then say?
+islamic-studies|comprehensive|1: When a young person meets an older person, who gives the salam first?
+islamic-studies|comprehensive|1: What does a Muslim say when speaking about something he intends to do later?
+islamic-studies|comprehensive|1: What does a Muslim do when coming into his own home?
+islamic-studies|comprehensive|1: How many times does one seek permission at another person's door before withdrawing?
+islamic-studies|comprehensive|1: How does a Muslim enter the masjid?
+islamic-studies|comprehensive|1: What is a person taught to do on entering the masjid before he sits down?
+islamic-studies|comprehensive|1: A man loses an item and calls out for it inside the masjid. What did the Prophet ﷺ teach about this?
+islamic-studies|comprehensive|1: A person has eaten raw garlic and the smell remains on him. What is he instructed to do about the congregation?
+islamic-studies|comprehensive|1: A Muslim comes into a room where people are already sitting. What does the Sunnah of greeting require?
+islamic-studies|comprehensive|1: A person admires something belonging to another. What is he taught to say so that no harm follows from his admiration?
+islamic-studies|comprehensive|1: Hospitality to a guest is a right upon the host for a set period, beyond which it becomes voluntary kindness. How long is that period?
+islamic-studies|comprehensive|1: A guest is brought into the house and the gathering has begun. Where should he seat himself?
+islamic-studies|comprehensive|2: Which angel brought the revelation to the prophets?
+islamic-studies|comprehensive|2: Why did the Prophet and the Muslims leave Makkah for Madinah?
+islamic-studies|comprehensive|2: How did the Prophet treat the people of Quraysh when the Muslims entered Makkah?
+islamic-studies|comprehensive|2: The allies of Quraysh attacked a tribe allied to the Muslims, breaking the treaty. What did the Prophet then do?
+islamic-studies|comprehensive|2: Which of these came first in the life of the Prophet?
+islamic-studies|comprehensive|2: Why is the Hijrah important enough to begin the Islamic calendar?
+islamic-studies|comprehensive|2: In the Prophet's time, who were the Ansar?
+islamic-studies|comprehensive|2: What did the Treaty of Hudaybiyyah allow the Muslims to do?
+islamic-studies|comprehensive|2: Which angel brought the revelation to the prophets?
+islamic-studies|comprehensive|2: What do Muslims believe happens on the Day of Judgement?
+islamic-studies|comprehensive|2: Which of these is a required part of wudu?
+islamic-studies|comprehensive|2: In wudu, the face is washed and then:
+islamic-studies|comprehensive|2: Before praying, a Muslim's clothes and place must be:
+islamic-studies|comprehensive|2: Ahmad's shirt has dried mud on it. May he pray in it?
+islamic-studies|comprehensive|2: A full ghusl becomes obligatory after:
+islamic-studies|comprehensive|2: You are unsure whether you still have wudu before praying. What is safest?
+islamic-studies|comprehensive|2: A man makes wudu, then falls into a deep sleep. Before praying he must:
+islamic-studies|comprehensive|2: Which of these is impure (najis) and must be washed off before prayer?
+islamic-studies|comprehensive|2: Who was the first wife of the Prophet Muhammad ﷺ?
+islamic-studies|comprehensive|2: What was the name of the mother of the Prophet ﷺ?
+islamic-studies|comprehensive|2: After the death of his grandfather, who took the young Prophet ﷺ into his care?
+islamic-studies|comprehensive|2: Among the children of Makkah, who was the first to accept Islam?
+islamic-studies|comprehensive|2: Which daughter of the Prophet ﷺ was married to Ali ibn Abi Talib?
+islamic-studies|comprehensive|2: Who cared for the Prophet ﷺ immediately after his mother died?
+islamic-studies|comprehensive|2: Who travelled with the Prophet ﷺ on the migration to Madinah?
+islamic-studies|comprehensive|2: On the night of the migration, Ali ibn Abi Talib lay down in the bed of the Prophet ﷺ. Why?
+islamic-studies|comprehensive|2: What name was given to the Muslims of Madinah who received the emigrants into their homes?
+islamic-studies|comprehensive|2: In which year after the hijrah did the Battle of Badr take place?
+islamic-studies|comprehensive|2: In which year after the hijrah did the Battle of Uhud take place?
+islamic-studies|comprehensive|2: In which year after the hijrah was the Battle of the Trench fought?
+islamic-studies|comprehensive|2: In which year after the hijrah was Makkah opened to the Muslims?
+islamic-studies|comprehensive|2: The migration of the Muslims from Makkah to Madinah is counted as which year of the Islamic calendar?
+islamic-studies|comprehensive|2: The Battle of the Trench takes its Arabic name, al-Khandaq, from what?
+islamic-studies|comprehensive|2: How did the two armies compare in size at the Battle of Badr?
+islamic-studies|comprehensive|2: In which battle was the Prophet ﷺ himself wounded and one of his teeth broken?
+islamic-studies|comprehensive|2: What defence did the Muslims prepare around Madinah in 5 AH, and who proposed it?
+islamic-studies|comprehensive|2: What did the outcome of Badr establish for the Muslim community?
+islamic-studies|comprehensive|2: The archers left their position on the hill at Uhud, and the course of the battle turned. Which lesson do the sources draw from this?
+islamic-studies|comprehensive|2: What did the Treaty of Hudaybiyyah require the Muslims to do that year?
+islamic-studies|comprehensive|2: What did the document the Prophet ﷺ drew up on reaching Madinah mainly do?
+islamic-studies|comprehensive|2: Which theme runs through the Farewell Sermon?
+islamic-studies|comprehensive|2: In the Farewell Sermon the Prophet ﷺ said that no Arab is above a non-Arab, and no white above a black, except by what?
+islamic-studies|comprehensive|2: Which of these battles happened first?
+islamic-studies|comprehensive|2: Why did the Prophet ﷺ and his companions leave Makkah for Madinah?
+islamic-studies|comprehensive|2: Among the free adult men of Makkah, who was the first to accept Islam?
+islamic-studies|comprehensive|2: Which masjid did the Prophet ﷺ build first after leaving Makkah?
+islamic-studies|comprehensive|2: In which year after the hijrah was the Treaty of Hudaybiyyah concluded?
+islamic-studies|comprehensive|2: Of the following, which event took place LAST?
+islamic-studies|comprehensive|2: Which of these events falls between the Battle of Uhud and the Treaty of Hudaybiyyah?
+islamic-studies|comprehensive|2: Why is the expedition to Tabuk remembered as an especially hard test for the Muslims?
+islamic-studies|comprehensive|2: The Muslims were a large force at the start of Hunayn, yet the opening of the battle went against them. What lesson is drawn from this?
+islamic-studies|comprehensive|2: Why did the Prophet ﷺ send Mus'ab ibn Umayr to Yathrib before the migration?
+islamic-studies|comprehensive|2: Hudaybiyyah looked to many companions like a setback at the time. Why do the sources treat it as a clear opening?
+islamic-studies|comprehensive|2: Under that Madinah covenant, what were the parties bound to do if the city came under attack?
+islamic-studies|comprehensive|2: What did the Prophet ﷺ declare in the Farewell Sermon about the practices of the days of ignorance, such as blood revenge and riba?
+islamic-studies|comprehensive|2: 'Removing something harmful from the road is charity.' Hana sees broken glass on the path. She should:
+islamic-studies|comprehensive|3: What does the word tawheed mean?
+islamic-studies|comprehensive|3: Belief in the Last Day means a Muslim believes that:
+islamic-studies|comprehensive|3: Which of these best shows tawheed in a person's daily life?
+islamic-studies|comprehensive|3: A child is asked who gives people their food and their life. What is the right answer?
+islamic-studies|comprehensive|3: Tawheed ar-rububiyyah is singling out Allah in which matter?
+islamic-studies|comprehensive|3: What does birr al-walidayn refer to?
+islamic-studies|comprehensive|3: Which statement belongs to tawheed al-asma' was-sifat?
+islamic-studies|comprehensive|3: Belief in al-qadar includes believing that:
+islamic-studies|comprehensive|3: Why did the scholars study the lives of the narrators of hadith?
+islamic-studies|comprehensive|3: Ibrahim's mother asks him to help her while he is playing with his friends. What is best?
+islamic-studies|comprehensive|3: Which statement agrees with the belief in al-qadar?
+islamic-studies|comprehensive|3: A parent asks an adult child to take part in something clearly forbidden. What is the correct response?
+islamic-studies|comprehensive|3: How should a Muslim speak to his parents when he does not agree with them?
+islamic-studies|comprehensive|3: Something bad happens to a Muslim. What should he believe about it?
+islamic-studies|comprehensive|3: A child hears a story about the Prophet from a friend. What should he do before believing it?
+islamic-studies|comprehensive|3: Which two of the six books are held to be the most authentic hadith collections?
+islamic-studies|comprehensive|3: Why did the early scholars gather the hadith into written collections?
+islamic-studies|comprehensive|3: A woman meets serious difficulty and turns to Allah alone for help. Which belief is she acting on?
+islamic-studies|comprehensive|3: A man has sinned greatly and asks whether Allah will accept his repentance. What is correct?
+islamic-studies|comprehensive|3: A man accepts that Allah alone created everything, yet he directs acts of worship to others. Which category of tawheed has he broken?
+islamic-studies|comprehensive|3: An adult's father asks him to do something he dislikes, though there is nothing wrong with it. What should he do?
+islamic-studies|comprehensive|3: A trader plans carefully and takes every precaution, yet the deal still fails. Which understanding of qadar is correct?
+islamic-studies|comprehensive|3: Two authentic hadith appear to conflict. What do the scholars do first?
+islamic-studies|comprehensive|3: Which of these is counted among the six well-known hadith books?
+islamic-studies|comprehensive|3: Which of these should be asked for from Allah alone?
+islamic-studies|comprehensive|3: Saying 'Allah alone sends the rain and provides sustenance' affirms:
+islamic-studies|comprehensive|3: Affirming that Allah is As-Samee' (the All-Hearing) without asking how belongs to:
+islamic-studies|comprehensive|3: Which of these is an act of worship that may not be directed to anyone besides Allah?
+islamic-studies|comprehensive|3: A man believes Allah alone creates and sustains, yet he calls on a dead saint for help. What is he missing?
+islamic-studies|comprehensive|3: Which of these breaks wudu?
+islamic-studies|comprehensive|3: Tayammum is performed using:
+islamic-studies|comprehensive|3: Tayammum takes the place of wudu when:
+islamic-studies|comprehensive|3: In tayammum, which parts are wiped?
+islamic-studies|comprehensive|3: A man prays with tayammum and finds water only after finishing. His prayer:
+islamic-studies|comprehensive|3: Which of these certainly invalidates wudu?
+islamic-studies|comprehensive|3: 'Whoever does not thank people has not thanked Allah.' At home this means Sami should:
+islamic-studies|comprehensive|3: Which of these is a famous collection of hadith?
+islamic-studies|comprehensive|3: The hadith collection of Imam Ahmad ibn Hanbal is known as:
+islamic-studies|comprehensive|3: Who first memorised the Prophet's hadith and passed them on?
+islamic-studies|comprehensive|3: Which companion is known for narrating the largest number of hadith?
+islamic-studies|comprehensive|3: Which two collections are known as the Sahihayn?
+islamic-studies|comprehensive|3: Which collection is NOT one of the six books?
+islamic-studies|comprehensive|3: Al-Bukhari and Muslim are ranked as the most authentic collections because their authors:
+islamic-studies|comprehensive|3: Sahih Muslim was compiled by:
+islamic-studies|comprehensive|3: The famous collection of Imam Malik is called:
+islamic-studies|comprehensive|3: Besides the Sahihayn, the six books are the collections of:
+islamic-studies|comprehensive|3: How was the Qur'an sent down to the Prophet ﷺ?
+islamic-studies|comprehensive|3: How does knowing the occasion of revelation help a reader?
+islamic-studies|comprehensive|3: Which subjects do the Makki surahs characteristically emphasise?
+islamic-studies|comprehensive|3: Yusuf hears that a classmate said something bad about him, and another boy offers to tell him exactly who said what. What does Islam teach about this?
+islamic-studies|comprehensive|3: Some children in class are laughing at a boy's accent. What does the Qur'an say about ridiculing people?
+islamic-studies|comprehensive|3: What is it called when you talk about someone's faults behind their back?
+islamic-studies|comprehensive|3: What is it called when you look after something someone lent you?
+islamic-studies|comprehensive|3: What is it called when you always tell the truth?
+islamic-studies|comprehensive|3: What is it called when you thank Allah for what you have?
+islamic-studies|comprehensive|3: What is it called when you want what someone else has and wish they lost it?
+islamic-studies|comprehensive|3: How did the Prophet ﷺ define ghibah?
+islamic-studies|comprehensive|3: Saying about a person something that is simply untrue is called what?
+islamic-studies|comprehensive|3: What is nameemah?
+islamic-studies|comprehensive|3: After a meeting has ended, a colleague repeats to others a true but embarrassing personal fact about an absent employee, with no need behind it. How is this classified?
+islamic-studies|comprehensive|3: Mentioning another person's fault is permitted where there is a recognised need. Which of these is such a case?
+islamic-studies|comprehensive|4: Which prayer is prayed just after the sun sets?
+islamic-studies|comprehensive|4: Aisha wakes up late and the time for Fajr has already finished. What should she do?
+islamic-studies|comprehensive|4: Bilal made wudu, then used the bathroom before he prayed. What must he do?
+islamic-studies|comprehensive|4: Musa's mother calls him while he is praying an obligatory prayer. What should he do?
+islamic-studies|comprehensive|4: Which surah is recited in every rak'ah of the prayer?
+islamic-studies|comprehensive|4: Hana reaches the masjid and finds the congregation already praying. What should she do?
+islamic-studies|comprehensive|4: The qiblah that Muslims face in prayer is towards which place?
+islamic-studies|comprehensive|4: Where was the Prophet when the first revelation came to him?
+islamic-studies|comprehensive|4: How does a recommended (sunnah) act differ from an obligatory act?
+islamic-studies|comprehensive|4: Which of these breaks the fast of a person fasting in Ramadan?
+islamic-studies|comprehensive|4: The first revelation to the Prophet began with a command to do what?
+islamic-studies|comprehensive|4: Which prayer do Muslims pray in congregation every Friday?
+islamic-studies|comprehensive|4: Zakah becomes due on qualifying wealth once every:
+islamic-studies|comprehensive|4: What does the word tafseer refer to?
+islamic-studies|comprehensive|4: What happened at the Ka'bah when the Muslims entered Makkah?
+islamic-studies|comprehensive|4: A man at work has a short break for Dhuhr and has no prayer mat with him. What should he do?
+islamic-studies|comprehensive|4: The adhan is called out to announce what?
+islamic-studies|comprehensive|4: What is a Muslim taught to say before he begins reciting the Qur'an?
+islamic-studies|comprehensive|4: What share of saved wealth is given as zakah once it is due?
+islamic-studies|comprehensive|4: A traveller in an unfamiliar city cannot tell which way the qiblah is. What should he do?
+islamic-studies|comprehensive|4: Who is excused from fasting Ramadan but must make up the missed days afterwards?
+islamic-studies|comprehensive|4: A man usually prays two sunnah rak'ahs before Fajr, but one morning he misses them. What is the ruling?
+islamic-studies|comprehensive|4: Which of these is required for the fast of Ramadan to be valid?
+islamic-studies|comprehensive|4: Yusuf wears a string on his wrist believing the string keeps bad luck away. This is:
+islamic-studies|comprehensive|4: A friend says: 'Touch this stone for luck before the exam.' What should a Muslim do?
+islamic-studies|comprehensive|4: Calling on a righteous dead person to intercede is rejected mainly because:
+islamic-studies|comprehensive|4: Who should a Muslim ask to cure him when he falls ill?
+islamic-studies|comprehensive|4: Which phrase should replace 'what Allah and you willed'?
+islamic-studies|comprehensive|4: How many obligatory prayers are there each day?
+islamic-studies|comprehensive|4: How many rak'ah are there in the fard of Maghrib?
+islamic-studies|comprehensive|4: Sami comes home late and prays 'Isha alone. How many fard rak'ah does he pray?
+islamic-studies|comprehensive|4: The time of the Fajr prayer ends at:
+islamic-studies|comprehensive|4: Which of these invalidates the prayer?
+islamic-studies|comprehensive|4: Layla begins praying and remembers that she has no wudu. She should:
+islamic-studies|comprehensive|4: A man oversleeps and misses 'Asr. He should:
+islamic-studies|comprehensive|4: How many rak'ah are in the obligatory Maghrib prayer?
+islamic-studies|comprehensive|4: Someone speaks to you while you are praying. What should you do?
+islamic-studies|comprehensive|4: A traveller cannot work out the qiblah and nobody can guide him. He should:
+islamic-studies|comprehensive|4: Which of these is a condition to be met before the prayer begins?
+islamic-studies|comprehensive|4: In which city was the Prophet Muhammad ﷺ born?
+islamic-studies|comprehensive|4: The people of Makkah gave the Prophet ﷺ a title before he received revelation, because of the way he dealt with them. What was it?
+islamic-studies|comprehensive|4: Where was the Prophet ﷺ when the first revelation came to him?
+islamic-studies|comprehensive|4: How old was the Prophet ﷺ when the first revelation came to him?
+islamic-studies|comprehensive|4: Who nursed the Prophet ﷺ among the desert tribe when he was an infant?
+islamic-studies|comprehensive|4: In which cave did the Prophet ﷺ and his companion hide during the journey to Madinah?
+islamic-studies|comprehensive|4: What did the Prophet ﷺ do at the Ka'bah on the day Makkah was opened?
+islamic-studies|comprehensive|4: What work did the Prophet ﷺ do for Khadijah before their marriage?
+islamic-studies|comprehensive|4: After the first revelation, Khadijah took the Prophet ﷺ to a relative of hers to hear what had happened. Who was that?
+islamic-studies|comprehensive|4: A saying is passed around as the Prophet's words, but nobody can trace it to him. It should be:
+islamic-studies|comprehensive|4: Following the sunnah in acts of worship means:
+islamic-studies|comprehensive|4: A believer weeps at the death of a relative. How does this stand in relation to sabr?
+islamic-studies|comprehensive|4: The Prophet ﷺ said that the strong person is not the one who overcomes others in wrestling, but the one who does what?
+islamic-studies|comprehensive|4: A boy is pushed by a classmate, who then apologises to him honestly. Which response does Islam call the better one?
+islamic-studies|comprehensive|4: Which best describes sabr?
+islamic-studies|comprehensive|4: A man is cheated out of his money by a business partner. Which statement is correct?
+islamic-studies|comprehensive|4: When the mu'adhdhin says حَيَّ عَلَى الصَّلَاةِ, what do you reply?
+islamic-studies|comprehensive|4: What is the iqamah?
+islamic-studies|comprehensive|4: How many rak'ahs is the Maghrib prayer?
+islamic-studies|comprehensive|4: What is takbirat al-ihram?
+islamic-studies|comprehensive|4: A vow (nadhr) is an act of worship. To whom alone may a vow be made?
+islamic-studies|comprehensive|4: Sacrificing an animal as an act of worship may be offered:
+islamic-studies|comprehensive|5: The Hijrah was the migration of the Muslims from which city to which city?
+islamic-studies|comprehensive|5: What did the Treaty of Hudaybiyyah bring about for the Muslims?
+islamic-studies|comprehensive|5: Doing a good deed so that people will praise you is called:
+islamic-studies|comprehensive|5: Swearing an oath by other than Allah, such as by one's father, is:
+islamic-studies|comprehensive|5: Muslims affirm Allah's attributes without likening them to creation because:
+islamic-studies|comprehensive|5: Can we picture what Allah looks like?
+islamic-studies|comprehensive|5: The names of Allah are:
+islamic-studies|comprehensive|5: A man is wronged by someone else's mistake. Belief in qadar means that he:
+islamic-studies|comprehensive|5: Saying 'if only I had done that, this would not have happened' after a calamity is discouraged because:
+islamic-studies|comprehensive|5: Believing that only Allah gives life and death is part of:
+islamic-studies|comprehensive|5: Which of these is major shirk?
+islamic-studies|comprehensive|5: A Muslim reads a verse mentioning the Hand of Allah. The correct position is:
+islamic-studies|comprehensive|5: After a business loss, which response fits belief in qadar?
+islamic-studies|comprehensive|5: Which angel brought the revelation to the Prophet ﷺ?
+islamic-studies|comprehensive|5: Which companion was the first to call the adhan for the Muslims?
+islamic-studies|comprehensive|5: Why did the Muslims leave Makkah for Madinah?
+islamic-studies|comprehensive|5: Where did a group of early Muslims take refuge from persecution before the migration to Madinah?
+islamic-studies|comprehensive|5: The Prophet ﷺ travelled to Ta'if seeking support for his message. What was the outcome of that journey?
+islamic-studies|comprehensive|5: The Quraysh imposed a boycott on the Banu Hashim for about three years. What did that boycott consist of?
+islamic-studies|comprehensive|5: What changed among the Arabian tribes after Makkah was opened?
+islamic-studies|comprehensive|5: In a hadith qudsi the meaning is from Allah, while the wording is:
+islamic-studies|comprehensive|5: Amina is playing with her friends when her mother calls her to help in the kitchen. What does birr al-walidayn require of her?
+islamic-studies|comprehensive|5: What does sidq mean as a quality of a person's character?
+islamic-studies|comprehensive|5: A boy borrows a classmate's book and loses it. What does amanah require of him?
+islamic-studies|comprehensive|5: A man likes his clothes and his shoes to look good. According to the hadith on arrogance, how is this judged?
+islamic-studies|comprehensive|5: A boy wins a race and his friends praise him for it. Which response fits Islamic manners?
+islamic-studies|comprehensive|5: You borrowed a friend's book and it got torn. What is best?
+islamic-studies|comprehensive|5: Your friend wins the race and you lose. What is the best manner?
+islamic-studies|comprehensive|5: Someone says something unkind to you at school. Which reply shows good character?
+islamic-studies|comprehensive|5: The Qur'an forbids saying even a word of annoyance to a parent. Applied to an adult whose elderly father asks the same question repeatedly, what does this require?
+islamic-studies|comprehensive|5: A parent instructs an adult child to do something clearly unlawful in Islam. What is required of the child?
+islamic-studies|comprehensive|5: A man's mother has not accepted Islam and asks him to visit her often. What does the Sharia say about his conduct towards her?
+islamic-studies|comprehensive|5: How may a person show birr to his parents after they have died?
+islamic-studies|comprehensive|5: An employee is given a company laptop for his work and uses it, without permission, to run a private business. Which quality has he failed in?
+islamic-studies|comprehensive|5: Two people speak privately and one of them discloses something personal. How is that conversation regarded?
+islamic-studies|comprehensive|5: A man promises to attend a meeting, then a more profitable engagement comes up. What do the reported signs of hypocrisy indicate here?
+islamic-studies|comprehensive|5: How did the Prophet ﷺ define kibr, arrogance?
+islamic-studies|comprehensive|5: A manager is praised publicly for work his team carried out. Which response is both truthful and free of arrogance?
+islamic-studies|comprehensive|5: How does the funeral (janazah) prayer differ from the other prayers?
+islamic-studies|comprehensive|5: How many takbirs are made in the janazah prayer?
+islamic-studies|comprehensive|5: In the well-known adhkar after each obligatory prayer, how many times is سُبْحَانَ اللَّهِ said?
+islamic-studies|comprehensive|5: When is the witr prayer performed?
+islamic-studies|comprehensive|5: Wearing an amulet while believing it brings protection is:
+islamic-studies|comprehensive|5: Showing off in acts of worship (riya) is called:

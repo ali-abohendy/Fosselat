@@ -57,18 +57,19 @@ const Placement = (() => {
 
   // Data access
   function levelsOf(program, audience) {
-    return (program.levelsByAudience[audience] || []).slice().sort((a, b) => a.id - b.id);
+    if (!program || !program.levels) return [];
+    return program.levels.slice().sort((a, b) => a.id - b.id);
   }
   function levelIdsOf(program, audience) { return levelsOf(program, audience).map(l => l.id); }
   function levelInfo(program, audience, levelId) {
     return levelsOf(program, audience).find(l => l.id === levelId) || null;
   }
   function bankOf(program, audience, levelId) {
-    const banks = program.levelBanksByAudience[audience] || [];
+    const banks = program.levelBanks || [];
     return banks.find(b => b.level === levelId) || null;
   }
   function questionById(program, audience, qid) {
-    const banks = program.levelBanksByAudience[audience] || [];
+    const banks = program.levelBanks || [];
     for (const b of banks) {
       const q = b.questions.find(x => x.id === qid);
       if (q) return q;
@@ -76,7 +77,7 @@ const Placement = (() => {
     return null;
   }
   function selfReportOf(program, audience) {
-    return program.selfReportByAudience[audience];
+    return program.selfReport;
   }
 
   // Question selection
@@ -523,8 +524,7 @@ export default function PlacementTest() {
   function validateUserInfo() {
     const errors = {};
     if (!userInfo.name.trim()) errors.name = "Please enter your name";
-    if (!userInfo.age.trim()) errors.age = "Please enter your age";
-    else if (isNaN(Number(userInfo.age)) || Number(userInfo.age) < 3 || Number(userInfo.age) > 100) errors.age = "Please enter a valid age (3-100)";
+    if (userInfo.age.trim() && (isNaN(Number(userInfo.age)) || Number(userInfo.age) < 3 || Number(userInfo.age) > 100)) errors.age = "Please enter a valid age (3-100)";
     if (!userInfo.email.trim()) errors.email = "Please enter your email";
     else if (!validateEmail(userInfo.email)) errors.email = "Please enter a valid email address";
     setUserInfoErrors(errors);
@@ -600,7 +600,7 @@ export default function PlacementTest() {
 
   function handleUserInfoSubmit() {
     if (!validateUserInfo()) return;
-    const ageNum = parseInt(userInfo.age, 10);
+    const ageNum = userInfo.age.trim() ? parseInt(userInfo.age, 10) : 25;
     const determinedAudience = ageNum < 16 ? 'kids' : 'adults';
     setPendingAudience(determinedAudience);
 
@@ -878,7 +878,7 @@ export default function PlacementTest() {
               {userInfoErrors.name && <span className="pt-error-text">{userInfoErrors.name}</span>}
             </div>
             <div className="pt-form-group">
-              <label>Age <span style={{ color: 'var(--color-gold)' }}>*</span></label>
+              <label>Age <span style={{ color: 'var(--color-text-muted)', fontSize: '0.85em', fontWeight: 'normal' }}>(Optional)</span></label>
               <input
                 type="number"
                 placeholder="Enter your age"
@@ -886,7 +886,6 @@ export default function PlacementTest() {
                 onChange={e => setUserInfo({ ...userInfo, age: e.target.value })}
                 className={userInfoErrors.age ? 'pt-input-error' : ''}
                 min="3" max="100"
-                required
               />
               {userInfoErrors.age && <span className="pt-error-text">{userInfoErrors.age}</span>}
             </div>

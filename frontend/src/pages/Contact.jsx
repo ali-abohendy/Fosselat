@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import { Mail, Globe } from '../components/Icons';
 import { contactAPI } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import './Contact.css';
 
 // SVG Icons for Socials
@@ -24,17 +25,19 @@ const TikTokIcon = () => (
 );
 
 export default function Contact() {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: user ? user.full_name : '',
+    email: user ? user.email : '',
     message: '',
   });
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
+  const isSupport = !!user;
 
   useEffect(() => {
-    document.title = 'Contact Us — Fosselat Academy';
-  }, []);
+    document.title = isSupport ? 'Support ?" Fosselat Academy' : 'Contact Us ?" Fosselat Academy';
+  }, [isSupport]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -51,7 +54,8 @@ export default function Contact() {
 
     setLoading(true);
     try {
-      const res = await contactAPI.submit(formData);
+      const payload = { ...formData, isSupport };
+      const res = await contactAPI.submit(payload);
       if (res && res.success) {
         setStatus({ type: 'success', message: 'Your message has been sent successfully! We will get back to you soon.' });
         setFormData({ name: '', email: '', message: '' });
@@ -72,8 +76,8 @@ export default function Contact() {
       <section className="contact-hero">
         <div className="contact-hero-overlay" />
         <div className="container contact-hero-content">
-          <h1>Contact Us</h1>
-          <p>We'd love to hear from you</p>
+          <h1>{isSupport ? 'Support' : 'Contact Us'}</h1>
+          <p>{isSupport ? 'How can we help you today?' : "We'd love to hear from you"}</p>
         </div>
       </section>
 
@@ -149,7 +153,9 @@ export default function Contact() {
                 <span className="contact-info-icon"><Mail size={24} /></span>
                 <div>
                   <h4>Email</h4>
-                  <a href="mailto:info@fosselatacademy.com">info@fosselatacademy.com</a>
+                  <a href={`mailto:${isSupport ? 'support' : 'info'}@fosselatacademy.com`}>
+                    {isSupport ? 'support' : 'info'}@fosselatacademy.com
+                  </a>
                 </div>
               </div>
             </div>

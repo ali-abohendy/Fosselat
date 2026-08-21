@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Edit2, Trash2 } from 'lucide-react';
 import Button from '../../components/Button';
 import SearchableSelect from '../../components/SearchableSelect';
 import API from '../../config';
@@ -305,7 +306,7 @@ export default function AdminStudentPayments() {
         <div style={{overflowX:'auto'}}>
           <table className="dash-table">
             <thead>
-              <tr><th>Family ID</th><th>Members</th><th>Month</th><th>Total Due</th><th>Paid</th><th>Remaining</th><th>Status</th><th>Actions</th></tr>
+              <tr><th>Family ID</th><th>Members</th><th>Month</th><th>Total Due</th><th>Paid</th><th>Remaining</th><th>Status</th><th style={{textAlign: 'center'}}>Actions</th></tr>
             </thead>
             <tbody>
               {payments
@@ -327,9 +328,15 @@ export default function AdminStudentPayments() {
                   <td>${p.amount_paid}</td>
                   <td>${p.remaining}</td>
                   <td><span className={`status-badge status-${p.status}`}>{p.status}</span></td>
-                  <td style={{ display: 'flex', gap: '8px' }}>
-                    <button className="dash-filter-btn" onClick={() => handleEdit(p)}>Edit</button>
-                    <button className="dash-filter-btn" style={{ borderColor: 'rgba(255, 69, 58, 0.3)', color: '#ff453a' }} onClick={() => handleDelete(p._id)}>Clear</button>
+                  <td style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                      <button onClick={() => handleEdit(p)} style={{ background: 'transparent', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(200,167,99,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Edit">
+                        <Edit2 size={16} />
+                      </button>
+                      <button onClick={() => handleDelete(p._id)} style={{ background: 'transparent', border: 'none', color: '#f87171', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(248,113,113,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Clear">
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

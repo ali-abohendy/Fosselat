@@ -7,7 +7,7 @@ const router = express.Router();
 // POST /api/contact
 router.post('/', async (req, res) => {
   try {
-    const { name, email, message } = req.body || {};
+    const { name, email, message, isSupport } = req.body || {};
     if (!name || !email || !message) {
       return res.status(400).json({ success: false, message: 'Missing required fields: name, email, message' });
     }
@@ -17,33 +17,42 @@ router.post('/', async (req, res) => {
       name: name.trim(),
       email: email.toLowerCase().trim(),
       message: message.trim(),
+      is_support: !!isSupport,
       submitted_at: new Date(),
     });
 
     // Send email using Nodemailer
-    if (process.env.SMTP_SERVER && process.env.SMTP_USERNAME && process.env.SMTP_PASSWORD) {
-      try {
+    try {
+      const smtpHost = isSupport ? 'smtp.hostinger.com' : process.env.SMTP_SERVER;
+      const smtpPort = isSupport ? 465 : parseInt(process.env.SMTP_PORT) || 465;
+      const smtpUser = isSupport ? 'support@fosselatacademy.com' : process.env.SMTP_USERNAME;
+      const smtpPass = isSupport ? 'Fosselat@20012001' : process.env.SMTP_PASSWORD;
+      const targetEmail = isSupport ? 'support@fosselatacademy.com' : process.env.SMTP_USERNAME;
+      const emailSubject = isSupport 
+        ? `New Support Request from ${name}` 
+        : `New Contact Form Message from ${name}`;
+
+      if (smtpHost && smtpUser && smtpPass) {
         const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_SERVER,
-          port: parseInt(process.env.SMTP_PORT) || 465,
-          secure: true, // true for 465, false for other ports
+          host: smtpHost,
+          port: smtpPort,
+          secure: true,
           auth: {
-            user: process.env.SMTP_USERNAME,
-            pass: process.env.SMTP_PASSWORD,
+            user: smtpUser,
+            pass: smtpPass,
           },
         });
 
         await transporter.sendMail({
-          from: `"Fosselat Academy Contact" <${process.env.SMTP_USERNAME}>`,
-          to: process.env.SMTP_USERNAME, // Send to the info address
+          from: `"Fosselat Academy" <${smtpUser}>`,
+          to: targetEmail,
           replyTo: email,
-          subject: `New Contact Form Message from ${name}`,
-          text: `You have received a new message from the Fosselat Academy Contact Form.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+          subject: emailSubject,
+          text: `You have received a new message.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
         });
-      } catch (emailErr) {
-        console.error('Failed to send email:', emailErr);
-        // We don't fail the request if the email fails, as it's still saved in DB
       }
+    } catch (emailErr) {
+      console.error('Failed to send email:', emailErr);
     }
 
     return res.status(201).json({

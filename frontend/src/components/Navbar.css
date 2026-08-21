@@ -29,10 +29,10 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1600px;
+  max-width: 1800px;
   margin: 0 auto;
   gap: var(--spacing-xl);
-  padding: 0 var(--spacing-xl);
+  padding: 0 4rem;
 }
 
 .navbar-logo {
@@ -259,16 +259,8 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* ---- Tablet ---- */
+/* ---- Mobile & Tablet (Hamburger) ---- */
 @media (max-width: 1024px) {
-  .navbar-links a {
-    font-size: 0.9rem;
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-}
-
-/* ---- Mobile ---- */
-@media (max-width: 768px) {
   .navbar-toggle {
     display: flex;
     order: 3;

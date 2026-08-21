@@ -171,6 +171,38 @@ studentRouter.get('/placement_tests', authMiddleware, async (req, res) => {
   }
 });
 
+// POST /api/student/placement_tests
+studentRouter.post('/placement_tests', authMiddleware, async (req, res) => {
+  try {
+    const db = getDB();
+    const resultData = req.body.results;
+    if (!resultData) return res.status(400).json({ success: false, message: 'Missing results' });
+    
+    // Compute an overall score out of 100 if not provided
+    let finalScore = resultData.score || 0;
+    if (!resultData.score && resultData.levelScores && resultData.levelScores.length > 0) {
+      const sumPct = resultData.levelScores.reduce((acc, ls) => acc + (ls.pct || 0), 0);
+      finalScore = Math.round((sumPct / resultData.levelScores.length) * 100);
+    }
+    
+    await db.collection('placement_tests').insertOne({
+      student_id: req.userId,
+      track: resultData.trackLabel || resultData.track,
+      program: resultData.programLabel || resultData.program,
+      recommended_level: resultData.recommendedLevel || (resultData.level ? resultData.level.name : null),
+      highest_mastered_id: resultData.highestMastered || resultData.highestMasteredId || 0,
+      total_levels: resultData.totalLevels || 4,
+      score: finalScore,
+      level_scores: resultData.levelScores,
+      created_at: new Date()
+    });
+    return res.json({ success: true, message: 'Test saved' });
+  } catch (err) {
+    console.error('Failed to save test:', err);
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 // DELETE /api/student/placement_tests/:id
 studentRouter.delete('/placement_tests/:id', authMiddleware, async (req, res) => {
   try {

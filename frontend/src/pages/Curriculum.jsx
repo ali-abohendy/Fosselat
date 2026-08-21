@@ -1,310 +1,107 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { BookOpen, Globe, Star, FileText, CheckCircle, Calendar, Clock, Trophy, MapPin, ArrowRight } from 'lucide-react';
+import { UNIFIED_CURRICULUM } from './curriculumData';
 import './Curriculum.css';
-import { BookOpen, Headphones, Star, Scroll, Globe, Heart, Scale, Leaf, MapPin, Users, Calendar, Clock, Trophy, ClipboardList, GraduationCap, ArrowRight, CheckCircle, FileText, BarChart } from '../components/Icons';
+import Button from '../components/Button';
 
-/* ───── Data ───── */
-const KIDS_QURAN_READING = {
-  id: 'reading-tajweed',
-  title: 'Reading & Tajweed Program',
-  desc: 'Builds accurate, rule-governed Quranic reading from first letter recognition through fluent, beautified recitation (tarteel).',
-  target: 'Children ages 5–15, primarily non-Arabic speakers, including complete beginners.',
-  levels: 4, duration: '≈ 20 months', hours: '≈ 144 hours', cert: 'Fosselat Certificate of Quranic Reading & Tajweed Proficiency',
-  pathway: [
-    { name: 'Level 1 — Makharij & Letter Foundations', age: '5–8', weeks: '12 weeks', lessons: 24, hours: 24,
-      outcomes: ['Identify and name all 28 Arabic letters in isolated and connected forms', 'Articulate each letter from its correct point of articulation (makhraj)', 'Distinguish between visually and acoustically similar letters', 'Recognize and apply the three short vowels (fatha, damma, kasra)'],
-      skills: ['Letter recognition', 'Correct pronunciation', 'Listening discrimination', 'Pre-reading readiness'],
-      assessment: 'Oral letter-recognition test and teacher-scored pronunciation checklist across three sessions.',
-      graduation: '90%+ articulation accuracy sustained across three consecutive assessments.' },
-    { name: 'Level 2 — Word Building & Basic Tajweed', age: '6–9', weeks: '16 weeks', lessons: 32, hours: 32,
-      outcomes: ['Blend letters and harakat into words with correct pronunciation', 'Apply rules of Noon Sakinah and Tanween (Izhar, Idgham, Iqlab, Ikhfa)', 'Read short surahs while observing 2-count natural madd'],
-      skills: ['Reading fluency (beginner)', 'Word blending', 'Tajweed rule recognition', 'Recitation pacing'],
-      assessment: 'Recitation test on five assigned short surahs plus oral identification of tajweed rules.',
-      graduation: 'Fluent reading of five short surahs with an error rate of 10% or less.' },
-    { name: 'Level 3 — Fluent Reading & Applied Tajweed', age: '8–12', weeks: '20 weeks', lessons: 40, hours: 40,
-      outcomes: ['Recite one full juz applying all major tajweed rules correctly', 'Self-correct common recitation errors without teacher prompting', 'Explain the tajweed rule governing a given word or phrase'],
-      skills: ['Reading fluency', 'Self-correction', 'Tajweed rule application', 'Sustained recitation'],
-      assessment: 'Recorded recitation of two full pages, evaluated against a formal tajweed rubric.',
-      graduation: 'Rubric score of 85%+ across the recorded assessment.' },
-    { name: 'Level 4 — Mastery & Tarteel', age: '10+', weeks: '24 weeks', lessons: 48, hours: 48,
-      outcomes: ['Recite with tarteel (measured, beautified recitation) across multiple juz', 'Identify and correct tajweed errors in a peer\'s recitation', 'Demonstrate command of advanced rules (Qalqalah, Ghunnah, waqf and ibtida signs)'],
-      skills: ['Advanced recitation', 'Peer assessment', 'Rule mastery', 'Recitation confidence'],
-      assessment: 'Final panel evaluation combining live recitation and an oral viva on tajweed theory.',
-      graduation: 'Panel score of 90%+.' },
-  ]
-};
-
-const KIDS_QURAN_HIFZ = {
-  id: 'memorization',
-  title: 'Memorization & Revision (Hifz) Program',
-  desc: 'A staged memorization pathway that builds the Quran into long-term memory through structured new-memorization and systematic revision cycles.',
-  target: 'Children who read the Quran fluently (Reading & Tajweed graduates or equivalent).',
-  levels: 4, duration: '3–5 years', hours: '≈ 380+ hours', cert: 'Certificate of Complete Hifz (Khatm)',
-  pathway: [
-    { name: 'Level 1 — Juz Amma (Juz 30)', age: '6+', weeks: '24 weeks', lessons: 48, hours: 48,
-      outcomes: ['Memorize all 37 surahs of Juz 30 with correct tajweed', 'Recall any surah on demand, in or out of sequence', 'Recite continuously from memory for at least five minutes'],
-      skills: ['Memorization skills', 'Retention strategies', 'Recitation confidence', 'Active listening'],
-      assessment: 'Full-juz recitation exam plus randomized surah-recall test.',
-      graduation: '95%+ accuracy across the complete juz recitation.' },
-    { name: 'Level 2 — Juz 29 & Core Surahs', age: '7+', weeks: '20 weeks', lessons: 40, hours: 40,
-      outcomes: ['Memorize Juz 29 in full', 'Memorize high-value surahs (Yasin, Al-Mulk, Al-Waqiah, Al-Kahf)', 'Maintain Juz 30 at 90%+ accuracy through weekly revision'],
-      skills: ['Memorization skills', 'Revision discipline', 'Long-term retention', 'Time management'],
-      assessment: 'Cumulative recitation exam covering new memorization and revision material.',
-      graduation: '90%+ cumulative accuracy.' },
-    { name: 'Level 3 — Half-Quran Memorization', age: '9+', weeks: '96 weeks', lessons: 192, hours: 192,
-      outcomes: ['Memorize 15 additional juz', 'Design and maintain a personal revision cycle', 'Present recitation to peers and teachers with confidence'],
-      skills: ['Advanced memorization', 'Revision management', 'Peer recitation', 'Disciplined study'],
-      assessment: 'Periodic cumulative assessments every 5 juz plus full half-Quran review.',
-      graduation: '90%+ cumulative accuracy across all memorized juz.' },
-    { name: 'Level 4 — Complete Hifz (Khatm)', age: '11+', weeks: '96 weeks', lessons: 192, hours: 192,
-      outcomes: ['Complete memorization of the entire Quran', 'Maintain fluent recall of any passage on demand', 'Demonstrate consistent tajweed accuracy throughout'],
-      skills: ['Complete memorization', 'Total recall', 'Lifelong retention habits', 'Teaching readiness'],
-      assessment: 'Full Quran recitation review across multiple sessions with an evaluation panel.',
-      graduation: '95%+ accuracy across the complete recitation.' },
-  ]
-};
-
-const KIDS_QURAN_IJAZAH = {
-  id: 'ijazah',
-  title: 'Ijazah Preparation Program',
-  desc: 'Prepares students for formal Ijazah certification under a certified Sheikh/Sheikha, focusing on perfecting recitation to the standard required for an authorized chain of transmission.',
-  target: 'Students who have completed the Hifz Program or who demonstrate equivalent mastery.',
-  levels: 2, duration: '≈ 18 months', hours: '≈ 144 hours', cert: 'Ijazah Certificate with certified Sanad',
-  pathway: [
-    { name: 'Level 1 — Recitation Refinement', age: '12+', weeks: '36 weeks', lessons: 72, hours: 72,
-      outcomes: ['Recite the entire Quran with near-zero tajweed errors', 'Apply the specific qira\'ah (recitation style) being certified', 'Receive and implement detailed corrections from the certifying authority'],
-      skills: ['Precision recitation', 'Qira\'ah compliance', 'Detailed self-correction', 'Scholarly engagement'],
-      assessment: 'Ongoing evaluation by the certifying Sheikh/Sheikha.',
-      graduation: 'Approval by the Sheikh to proceed to the final certification stage.' },
-    { name: 'Level 2 — Final Certification (Sanad)', age: '14+', weeks: '36 weeks', lessons: 72, hours: 72,
-      outcomes: ['Complete a full recitation of the Quran to the certifying authority', 'Receive a documented chain of transmission (sanad) back to the Prophet ﷺ'],
-      skills: ['Complete mastery', 'Chain of transmission', 'Teaching authorization', 'Academic excellence'],
-      assessment: 'Full Quran recitation to the certifying authority.',
-      graduation: 'Successful completion and issuance of Ijazah.' },
-  ]
-};
-
-const KIDS_ARABIC_FOUNDATION = {
-  id: 'foundation',
-  title: 'Arabic Foundation Pathway',
-  desc: 'Takes a non-reading child from zero Arabic literacy to fluent reading of fully vocalized text, inspired by Noorani Qaidah, Noor Al-Bayan, and similar resources.',
-  target: 'Non-Arabic-speaking children with no prior Arabic literacy.',
-  levels: 4, duration: '≈ 12 months', hours: '≈ 96 hours', cert: 'Certificate of Arabic Reading Readiness',
-  pathway: [
-    { name: 'Level F1 — Letter Shapes & Sounds', age: '4–6', weeks: '10 weeks', lessons: 20, hours: 20,
-      outcomes: ['Recognize and name all Arabic letters in isolated form', 'Reproduce the correct sound of each letter', 'Distinguish visually similar letters'],
-      skills: ['Letter recognition', 'Listening skills', 'Fine-motor tracing', 'Pronunciation'],
-      assessment: 'Flashcard recognition test and verbal repetition check.',
-      graduation: '90%+ recognition accuracy.' },
-    { name: 'Level F2 — Connected Letters & Harakat', age: '5–7', weeks: '12 weeks', lessons: 24, hours: 24,
-      outcomes: ['Identify letters in initial, medial, final, and connected forms', 'Read syllables combining letters with fatha, damma, and kasra', 'Sound out simple two-letter combinations'],
-      skills: ['Reading readiness', 'Letter-connection recognition', 'Vowel application'],
-      assessment: 'Guided reading checklist completed with the teacher.',
-      graduation: '85%+ accuracy reading connected-letter sets.' },
-    { name: 'Level F3 — Word Formation & Simple Reading', age: '6–8', weeks: '14 weeks', lessons: 28, hours: 28,
-      outcomes: ['Read simple two-to-four-letter words fluently', 'Apply tanween and sukoon correctly', 'Read short, fully vocalized sentences'],
-      skills: ['Beginner reading fluency', 'Word recognition', 'Sentence tracking'],
-      assessment: 'Oral reading fluency test.',
-      graduation: 'Read a ten-word passage with two or fewer errors.' },
-    { name: 'Level F4 — Fluency & Transition Readiness', age: '7–9', weeks: '12 weeks', lessons: 24, hours: 24,
-      outcomes: ['Read connected, vocalized text fluently and at a natural pace', 'Recognize common sight words without sounding out', 'Demonstrate readiness for structured grammar instruction'],
-      skills: ['Reading fluency', 'Sight-word recognition', 'Reading confidence'],
-      assessment: 'Timed fluency test and teacher evaluation.',
-      graduation: 'Fluent reading of a grade-appropriate vocalized passage.' },
-  ]
-};
-
-const KIDS_ARABIC_POST = {
-  id: 'advanced',
-  title: 'Arabic Post-Foundation Pathway',
-  desc: 'Develops functional Arabic literacy, grammar, and conversational ability for non-native speakers.',
-  target: 'Children who completed the Foundation Pathway or pass a placement test.',
-  levels: 4, duration: '≈ 26 months', hours: '≈ 208 hours', cert: 'Fosselat Certificate in Arabic Language',
-  pathway: [
-    { name: 'Level PF1 — Beginner Communicative Arabic', age: '7–9', weeks: '20 weeks', lessons: 40, hours: 40,
-      outcomes: ['Introduce oneself and family using basic sentence patterns', 'Use everyday vocabulary in short exchanges', 'Read and write simple, fully vocalized sentences'],
-      skills: ['Beginner conversation', 'Vocabulary acquisition', 'Basic writing', 'Listening comprehension'],
-      assessment: 'Oral interview and a short written quiz.',
-      graduation: 'Hold a five-exchange basic conversation and score 80%+ on the written quiz.' },
-    { name: 'Level PF2 — Elementary Arabic', age: '8–11', weeks: '24 weeks', lessons: 48, hours: 48,
-      outcomes: ['Construct simple present-tense sentences', 'Describe a daily routine using learned vocabulary', 'Read short paragraphs and answer comprehension questions'],
-      skills: ['Basic grammar', 'Reading comprehension', 'Descriptive speaking', 'Vocabulary expansion'],
-      assessment: 'Written grammar test, comprehension exercise, and oral description task.',
-      graduation: '75%+ on the combined written and oral assessment.' },
-    { name: 'Level PF3 — Intermediate Arabic', age: '10–13', weeks: '28 weeks', lessons: 56, hours: 56,
-      outcomes: ['Use past, present, and future tenses accurately', 'Write a structured paragraph on a familiar topic', 'Engage in a ten-minute conversation', 'Identify basic sentence roles'],
-      skills: ['Intermediate grammar mastery', 'Paragraph writing', 'Conversational fluency', 'Grammatical analysis'],
-      assessment: 'Written composition, oral conversation assessment, and grammar exam.',
-      graduation: '75%+ across all three assessment components.' },
-    { name: 'Level PF4 — Advanced Arabic & Fluency', age: '12–15', weeks: '32 weeks', lessons: 64, hours: 64,
-      outcomes: ['Read authentic unvocalized texts with comprehension', 'Write multi-paragraph compositions accurately', 'Discuss abstract topics in Arabic', 'Analyze sentence structure using nahw/sarf terminology'],
-      skills: ['Advanced reading', 'Analytical writing', 'Fluent conversation', 'Grammatical analysis'],
-      assessment: 'Comprehensive final exam (reading, writing, speaking, grammar) plus oral defense.',
-      graduation: '80%+ on the comprehensive final exam.' },
-  ]
-};
-
-const KIDS_ISLAMIC = {
-  id: 'comprehensive',
-  title: 'Comprehensive Islamic Studies',
-  desc: 'A broad, age-appropriate survey of core Islamic knowledge — Aqeedah, pillars, basic fiqh, seerah, and Islamic manners — providing a foundation for all specialized Islamic Studies programs.',
-  target: 'Children ages 6–14.',
-  levels: 2, duration: '≈ 10 months', hours: '≈ 80 hours', cert: 'Certificate of Islamic Studies',
-  pathway: [
-    { name: 'Level 1 — Islamic Foundations', age: '6–10', weeks: '20 weeks', lessons: 40, hours: 40,
-      outcomes: ['Explain the five pillars of Islam and six pillars of Iman', 'Describe the Prophet\'s early life and key events', 'Apply basic Islamic manners in daily situations'],
-      skills: ['Islamic understanding', 'Active listening', 'Character reflection', 'Dua memorization'],
-      assessment: 'Oral quiz, behavior-based checklist, and storytelling retell.',
-      graduation: '75%+ across assessments.' },
-    { name: 'Level 2 — Applied Islamic Knowledge', age: '10–14', weeks: '20 weeks', lessons: 40, hours: 40,
-      outcomes: ['Connect Islamic concepts to everyday situations', 'Differentiate between fard, sunnah, and mustahabb acts', 'Construct short written reflections on Islamic teachings'],
-      skills: ['Critical thinking', 'Application', 'Reflective writing', 'Intermediate Islamic knowledge'],
-      assessment: 'Written test and reflective journal review.',
-      graduation: '75%+ combined score.' },
-  ]
-};
-
-const SPECIALIZED_ISLAMIC = [
-  { title: 'Tafsir', icon: <Scroll />, levels: 2, hours: '96h', desc: 'From summarizing short surahs to thematic analysis across the Quran.' },
-  { title: 'Hadith', icon: <BookOpen />, levels: 2, hours: '80h', desc: 'Memorizing authentic narrations and learning basic hadith terminology.' },
-  { title: 'Seerah', icon: <Globe />, levels: 2, hours: '80h', desc: 'Chronological study of the Prophet\'s ﷺ life — stories, timeline, and analysis.' },
-  { title: 'Aqeedah', icon: <Heart />, levels: 2, hours: '80h', desc: 'Core Islamic beliefs, Tawheed categories, and evidence-based reasoning.' },
-  { title: 'Fiqh', icon: <Scale />, levels: 2, hours: '80h', desc: 'Practical rulings on worship, daily life, and transactions.' },
-  { title: 'Manners & Adab', icon: <Leaf />, levels: 2, hours: '80h', desc: 'Islamic manners, character development, and conduct in daily life.' },
-];
-
-const ADULT_QURAN_READING = {
-  title: 'Adult Reading & Tajweed Program',
-  desc: 'Builds accurate, rule-governed Quranic reading from first letter recognition through fluent, beautified recitation (tarteel) for adults.',
-  target: 'Adults, primarily non-Arabic speakers, including complete beginners.',
-  levels: 3, duration: '≈ 12 months', hours: '≈ 96 hours', cert: 'Fosselat Certificate of Adult Quranic Reading & Tajweed Proficiency',
-  pathway: [
-    { name: 'Level 1 — Makharij & Foundations', age: 'Adult', weeks: '12 weeks', lessons: 24, hours: 24,
-      outcomes: ['Identify and name all 28 Arabic letters in isolated and connected forms', 'Articulate each letter from its correct point of articulation (makhraj)', 'Distinguish between visually and acoustically similar letters', 'Recognize and apply the three short vowels'],
-      skills: ['Letter recognition', 'Correct pronunciation', 'Listening discrimination', 'Pre-reading readiness'],
-      assessment: 'Oral letter-recognition test and teacher-scored pronunciation checklist.',
-      graduation: '90%+ articulation accuracy.' },
-    { name: 'Level 2 — Tajweed Rules & Application', age: 'Adult', weeks: '16 weeks', lessons: 32, hours: 32,
-      outcomes: ['Blend letters and harakat into words', 'Apply rules of Noon Sakinah and Tanween', 'Read short surahs applying basic tajweed'],
-      skills: ['Reading fluency (beginner)', 'Word blending', 'Tajweed rule recognition'],
-      assessment: 'Recitation test on assigned short surahs plus oral identification of tajweed rules.',
-      graduation: 'Fluent reading with an error rate of 10% or less.' },
-    { name: 'Level 3 — Mastery & Tarteel', age: 'Adult', weeks: '20 weeks', lessons: 40, hours: 40,
-      outcomes: ['Recite with tarteel (measured, beautified recitation)', 'Self-correct common recitation errors', 'Demonstrate command of advanced rules'],
-      skills: ['Advanced recitation', 'Self-correction', 'Rule mastery', 'Recitation confidence'],
-      assessment: 'Final panel evaluation combining live recitation and an oral viva on tajweed theory.',
-      graduation: 'Panel score of 90%+.' },
-  ]
-};
-
-const ADULT_QURAN_HIFZ = {
-  title: 'Adult Memorization & Revision (Hifz)',
-  desc: 'A structured pathway for adults to memorize the Quran with long-term retention strategies.',
-  target: 'Adults who read the Quran fluently.',
-  levels: 3, duration: '2–4 years', hours: '≈ 240+ hours', cert: 'Certificate of Adult Hifz (Khatm)',
-  pathway: [
-    { name: 'Level 1 — Structured Start (Juz 30 + Core Surahs)', age: 'Adult', weeks: '24 weeks', lessons: 48, hours: 48,
-      outcomes: ['Memorize all of Juz 30', 'Memorize key surahs (Yasin, Al-Mulk, Al-Kahf)', 'Develop a personal revision routine'],
-      skills: ['Memorization skills', 'Retention strategies', 'Recitation confidence'],
-      assessment: 'Full-juz recitation exam plus core surah recall test.',
-      graduation: '95%+ accuracy.' },
-    { name: 'Level 2 — Building Momentum (10 Juz)', age: 'Adult', weeks: '48 weeks', lessons: 96, hours: 96,
-      outcomes: ['Memorize up to 10 juz', 'Maintain earlier memorization through disciplined weekly revision'],
-      skills: ['Advanced memorization', 'Revision discipline', 'Long-term retention'],
-      assessment: 'Cumulative recitation exam covering new memorization and revision material.',
-      graduation: '90%+ cumulative accuracy.' },
-    { name: 'Level 3 — Complete Hifz', age: 'Adult', weeks: '48 weeks', lessons: 96, hours: 96,
-      outcomes: ['Complete memorization of the entire Quran', 'Maintain fluent recall on demand'],
-      skills: ['Complete memorization', 'Total recall', 'Lifelong retention habits'],
-      assessment: 'Full Quran recitation review across multiple sessions.',
-      graduation: '95%+ accuracy across the complete recitation.' },
-  ]
-};
-
-const ADULT_QURAN_IJAZAH = { ...KIDS_QURAN_IJAZAH, title: 'Adult Ijazah Preparation Program', target: 'Adults who have completed Hifz or demonstrate mastery.' };
-const ADULT_ARABIC_FOUNDATION = { ...KIDS_ARABIC_FOUNDATION, title: 'Adult Arabic Foundation', desc: 'Adult-focused Arabic literacy.', target: 'Adults with no prior Arabic literacy.', pathway: KIDS_ARABIC_FOUNDATION.pathway.map(p => ({...p, age: 'Adult'})) };
-const ADULT_ARABIC_POST = { ...KIDS_ARABIC_POST, title: 'Adult Arabic Post-Foundation', desc: 'Develops functional Arabic literacy and conversational ability for adults.', target: 'Adults who completed Foundation or pass a placement test.', pathway: KIDS_ARABIC_POST.pathway.map(p => ({...p, age: 'Adult'})) };
-const ADULT_ISLAMIC = { ...KIDS_ISLAMIC, title: 'Adult Comprehensive Islamic Studies', desc: 'A broad survey of core Islamic knowledge for adults.', target: 'Adults seeking foundational Islamic knowledge.', pathway: KIDS_ISLAMIC.pathway.map(p => ({...p, age: 'Adult'})) };
-
-const GLOSSARY = [
-  { term: 'Tajweed', def: 'The set of rules governing the precise, correct pronunciation of the Quran during recitation.' },
-  { term: 'Makharij', def: 'The precise articulation points in the mouth and throat from which each Arabic letter is produced.' },
-  { term: 'Tarteel', def: 'Slow, measured, beautified Quranic recitation performed with full attention to tajweed.' },
-  { term: 'Hifz', def: 'The memorization of the Quran.' },
-  { term: 'Ijazah', def: 'A formal certification authorizing a student to transmit the Quran, granted through a verified chain (sanad) back to the Prophet ﷺ.' },
-  { term: 'Sanad / Isnad', def: 'The documented chain of transmission connecting a reciter, through their teachers, back to the Prophet ﷺ.' },
-  { term: 'Tafsir', def: 'The scholarly discipline of explaining and interpreting the meanings of the Quran.' },
-  { term: 'Aqeedah', def: 'Islamic creed; the core beliefs a Muslim holds regarding God, the unseen, and revelation.' },
-  { term: 'Fiqh', def: 'Islamic jurisprudence; the practical rulings governing worship and daily conduct.' },
-  { term: 'Seerah', def: 'The biography and life history of Prophet Muhammad ﷺ.' },
-  { term: 'Adab', def: 'Islamic manners, etiquette, and character.' },
-  { term: 'Nahw / Sarf', def: 'Arabic syntax (nahw) and morphology (sarf) — the grammatical sciences of the Arabic language.' },
-];
-
-/* ───── Components ───── */
-function ProgramCard({ program, defaultOpen = false, trackId, division }) {
+function ProgramCard({ program, trackId, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
-  const [activeLevel, setActiveLevel] = useState(0);
-  const level = program.pathway[activeLevel];
+  const [activeLevelIndex, setActiveLevelIndex] = useState(0);
+
+  const level = program.levels[activeLevelIndex];
+  const totalWeeks = program.levels.reduce((acc, l) => acc + (l.weeks || 0), 0);
+  const totalLessons = program.levels.reduce((acc, l) => acc + (l.lessons || 0), 0);
 
   return (
     <div className={`cur-program ${open ? 'open' : ''}`}>
       <button className="cur-program-header" onClick={() => setOpen(!open)}>
         <div>
-          <h3>{program.title}</h3>
+          <h3>{program.label}</h3>
           <p className="cur-program-meta">
-            {program.levels} Levels · {program.duration} · {program.hours}
+            {program.levels.length} Levels &middot; {totalWeeks > 0 ? `~${totalWeeks} weeks` : 'Flexible duration'} &middot; {totalLessons > 0 ? `${totalLessons} lessons` : 'Continuous'}
           </p>
         </div>
-        <span className="cur-toggle">{open ? '−' : '+'}</span>
+        <span className="cur-toggle">{open ? '-' : '+'}</span>
       </button>
+      
       {open && (
         <div className="cur-program-body">
-          <p className="cur-program-desc">{program.desc}</p>
-          <div className="cur-meta-pills">
-            <span><MapPin size={16} /> {program.target}</span>
-            <span><Trophy size={16} /> {program.cert}</span>
-          </div>
-
-          {/* Level tabs */}
-          <div className="cur-level-tabs">
-            {program.pathway.map((lv, i) => (
-              <button key={i} className={`cur-level-tab ${activeLevel === i ? 'active' : ''}`}
-                onClick={() => setActiveLevel(i)}>
-                {lv.name.split('—')[0].trim()}
-              </button>
-            ))}
-          </div>
-
-          {/* Level detail */}
-          <div className="cur-level-detail">
-            <h4>{level.name}</h4>
-            <div className="cur-level-stats">
-              <span><Users size={16} /> Ages {level.age}</span>
-              <span><Calendar size={16} /> {level.weeks}</span>
-              <span><BookOpen size={16} /> {level.lessons} lessons</span>
-              <span><Clock size={16} /> {level.hours} hours</span>
-            </div>
-
-            <div className="cur-level-grid">
-              <div className="cur-level-section">
-                <h5><BookOpen size={18} style={{marginRight: '8px'}} /> Learning Outcomes</h5>
-                <ul>{level.outcomes.map((o, i) => <li key={i}><span className="check-gold"><CheckCircle size={14} /></span> {o}</li>)}</ul>
-              </div>
-              <div className="cur-level-section">
-                <h5><ClipboardList size={18} style={{marginRight: '8px'}} /> Skills Acquired</h5>
-                <div className="cur-skills-tags">
-                  {level.skills.map((s, i) => <span key={i} className="cur-skill-tag">{s}</span>)}
-                </div>
-                <h5 style={{ marginTop: '16px' }}><FileText size={18} style={{marginRight: '8px'}} /> Assessment</h5>
-                <p>{level.assessment}</p>
-                <h5 style={{ marginTop: '16px' }}><GraduationCap size={18} style={{marginRight: '8px'}} /> Graduation</h5>
-                <p>{level.graduation}</p>
-              </div>
-            </div>
-          </div>
+          <p className="cur-program-desc">{program.description}</p>
           
-          <div style={{ padding: '16px 24px', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'center' }}>
-            <a href={`/placement-tests?track=${trackId}&program=${program.id}&audience=${division}`} className="btn btn-outline" style={{width: 'auto'}}>Test Your Level</a>
+          {program.levels.length > 0 && (
+            <>
+              {/* Level tabs */}
+              <div className="cur-level-tabs">
+                {program.levels.map((lv, i) => (
+                  <button key={lv.id} className={`cur-level-tab ${activeLevelIndex === i ? 'active' : ''}`}
+                    onClick={() => setActiveLevelIndex(i)}>
+                    Level {lv.id}
+                  </button>
+                ))}
+              </div>
+
+              {/* Level detail */}
+              {level && (
+                <div className="cur-level-detail">
+                  <h4>{level.name}</h4>
+                  
+                  <div className="cur-level-stats">
+                    {level.weeks > 0 && <span><Calendar size={16} /> {level.weeks} weeks</span>}
+                    {level.lessons > 0 && <span><BookOpen size={16} /> {level.lessons} lessons</span>}
+                  </div>
+
+                  <div className="cur-level-grid" style={{ gridTemplateColumns: '1fr', gap: '16px' }}>
+                    <div className="cur-level-section">
+                      <h5 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><BookOpen size={18} style={{ color: 'var(--color-gold)' }} /> Focus Area</h5>
+                      <p style={{ color: 'var(--color-text-muted)', lineHeight: '1.6' }}>{level.desc}</p>
+                    </div>
+
+                    {level.outcomes && level.outcomes.length > 0 && (
+                      <div className="cur-level-section">
+                        <h5 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><CheckCircle size={18} style={{ color: 'var(--color-gold)' }} /> Learning Outcomes</h5>
+                        <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>
+                          {level.outcomes.map((item, idx) => (
+                            <li key={idx} style={{ marginBottom: '8px' }}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {level.skills && level.skills.length > 0 && (
+                      <div className="cur-level-section">
+                        <h5 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Star size={18} style={{ color: 'var(--color-gold)' }} /> Gained Skills / Competencies</h5>
+                        <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>
+                          {level.skills.map((item, idx) => (
+                            <li key={idx} style={{ marginBottom: '8px' }}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {level.content && level.content.length > 0 && (
+                      <div className="cur-level-section">
+                        <h5 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><FileText size={18} style={{ color: 'var(--color-gold)' }} /> Main Curriculum Content</h5>
+                        <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: 'var(--color-text-muted)', lineHeight: '1.6' }}>
+                          {level.content.map((item, idx) => (
+                            <li key={idx} style={{ marginBottom: '8px' }}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
+          <div style={{ padding: '24px', borderTop: '1px solid rgba(255, 255, 255, 0.05)', display: 'flex', justifyContent: 'center' }}>
+            <Button 
+              to={`/placement-tests?track=${trackId}&program=${program.id}`} 
+              variant="outline"
+              style={{ whiteSpace: 'normal', height: 'auto', padding: '12px 24px', textAlign: 'center', lineHeight: '1.4' }}
+            >
+              Test your level in {program.label}
+            </Button>
           </div>
         </div>
       )}
@@ -312,251 +109,84 @@ function ProgramCard({ program, defaultOpen = false, trackId, division }) {
   );
 }
 
-/* ───── Page ───── */
 export default function Curriculum() {
   const [activeTrack, setActiveTrack] = useState('quran');
-  const [activeDivision, setActiveDivision] = useState('kids');
 
-  useEffect(() => { document.title = 'Curriculum — Fosselat Academy'; }, []);
+  useEffect(() => {
+    document.title = 'Unified Academic Curriculum — Fosselat Academy';
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="page-enter">
+      {/* Hero Section */}
       <section className="page-hero">
         <div className="page-hero-overlay" />
         <div className="container page-hero-content">
           <h1>Our <span className="text-gold">Curriculum</span></h1>
-          <p>Outcomes-Based · Mastery-Driven · Online-Delivery Ready</p>
-        </div>
-      </section>
-
-      {/* Division Toggle */}
-      <section className="section" style={{ paddingBottom: 0, paddingTop: '40px', display: 'flex', justifyContent: 'center' }}>
-        <div className="cur-track-tabs" style={{ margin: 0, padding: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}>
-          <button className={`cur-track-tab ${activeDivision === 'kids' ? 'active' : ''}`} onClick={() => setActiveDivision('kids')}>
-            Kids Division
-          </button>
-          <button className={`cur-track-tab ${activeDivision === 'adults' ? 'active' : ''}`} onClick={() => setActiveDivision('adults')}>
-            Adults Division
-          </button>
-        </div>
-      </section>
-
-      {/* Mission */}
-      <section className="section cur-mission-section">
-        <div className="container">
-          <div className="cur-mission">
-            <div className="cur-mission-text">
-              <h2>Our <span className="text-gold">Mission</span></h2>
-              <p>
-                Fosselat Academy exists to help children and adults — the overwhelming majority of them non-Arabic speakers — 
-                learn to read, understand, and live the Quran, the Arabic language, and the Islamic sciences through structured, 
-                engaging, and mastery-based education, delivered flexibly online.
-              </p>
-              <div className="cur-principles">
-                {[
-                  ['Learner-Centered', 'Built around what the student can do, not merely what content was covered'],
-                  ['Mastery Before Progression', 'Students advance only after meeting defined graduation standards'],
-                  ['Authenticity with Accessibility', 'Orthodox scholarship adapted for non-Arabic speakers'],
-                  ['Continuous Assessment', 'Every level defines its own assessment and graduation requirement'],
-                ].map(([title, desc], i) => (
-                  <div key={i} className="cur-principle">
-                    <span className="cur-principle-icon"><Star size={24} /></span>
-                    <div><strong>{title}</strong><span> — {desc}</span></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Structure Overview */}
-      <section className="section">
-        <div className="container">
-          <div className="section-title">
-            <h2>Curriculum <span className="text-gold">Structure</span></h2>
-            <div className="gold-line" />
-          </div>
-          <div className="cur-structure-grid">
-            <div className="cur-structure-card">
-              <div className="cur-structure-num">1</div>
-              <h4>Student Division</h4>
-              <p>Kids Programs & Adults Programs</p>
-            </div>
-            <div className="cur-structure-arrow"><ArrowRight size={24} /></div>
-            <div className="cur-structure-card">
-              <div className="cur-structure-num">2</div>
-              <h4>Learning Tracks</h4>
-              <p>Quran · Arabic Language · Islamic Studies</p>
-            </div>
-            <div className="cur-structure-arrow"><ArrowRight size={24} /></div>
-            <div className="cur-structure-card">
-              <div className="cur-structure-num">3</div>
-              <h4>Programs & Levels</h4>
-              <p>Sequential levels with defined outcomes & certification</p>
-            </div>
-          </div>
+          <p>Unified Student Division &mdash; Quran, Arabic Language, and Islamic Studies</p>
         </div>
       </section>
 
       {/* Track Tabs */}
-      <section className="section cur-tracks-section">
+      <section className="section cur-tracks-section" style={{ paddingTop: '60px' }}>
         <div className="container">
           <div className="section-title">
-            <h2>Detailed <span className="text-gold">Programs</span></h2>
+            <h2>Explore <span className="text-gold">Learning Tracks</span></h2>
             <div className="gold-line" />
-            <p>Select a track to explore all programs and levels</p>
           </div>
 
           <div className="cur-track-tabs">
-            {[
-              { id: 'quran', label: <span style={{display:'flex', alignItems:'center', gap:'8px'}}><BookOpen size={18} /> Quran Track</span> },
-              { id: 'arabic', label: <span style={{display:'flex', alignItems:'center', gap:'8px'}}><Headphones size={18} /> Arabic Track</span> },
-              { id: 'islamic', label: <span style={{display:'flex', alignItems:'center', gap:'8px'}}><Star size={18} /> Islamic Studies</span> },
-            ].map(t => (
-              <button key={t.id} className={`cur-track-tab ${activeTrack === t.id ? 'active' : ''}`}
-                onClick={() => setActiveTrack(t.id)}>
-                {t.label}
+            {UNIFIED_CURRICULUM.map(t => (
+              <button 
+                key={t.id} 
+                className={`cur-track-tab ${activeTrack === t.id ? 'active' : ''}`}
+                onClick={() => setActiveTrack(t.id)}
+              >
+                {t.id === 'quran' ? <BookOpen size={18} /> : t.id === 'arabic' ? <Globe size={18} /> : <Star size={18} />}
+                {t.label} Track
               </button>
             ))}
           </div>
 
-          {/* Quran Track */}
-          {activeTrack === 'quran' && (
-            <div className="cur-track-content">
-              <div className="cur-roadmap">
-                <span className="cur-roadmap-badge">Progression Roadmap</span>
-                <div className="cur-roadmap-flow">
-                  <span>Reading & Tajweed</span><span className="cur-roadmap-arrow"><ArrowRight size={14} /></span>
-                  <span>Memorization & Hifz</span><span className="cur-roadmap-arrow"><ArrowRight size={14} /></span>
-                  <span>Ijazah Preparation</span>
-                </div>
+          {/* Render active track */}
+          {UNIFIED_CURRICULUM.filter(t => t.id === activeTrack).map(track => (
+            <div key={track.id} className="cur-track-content">
+              
+              <div className="cur-track-header-soft" style={{ textAlign: 'center', marginBottom: '40px', maxWidth: '600px', margin: '0 auto 40px' }}>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', lineHeight: '1.6', fontStyle: 'italic' }}>
+                  {track.tagline}
+                </p>
               </div>
-              {activeDivision === 'kids' ? (
-                <>
-                  <ProgramCard program={KIDS_QURAN_READING} defaultOpen trackId="quran" division="kids" />
-                  <ProgramCard program={KIDS_QURAN_HIFZ} trackId="quran" division="kids" />
-                  <ProgramCard program={KIDS_QURAN_IJAZAH} trackId="quran" division="kids" />
-                </>
-              ) : (
-                <>
-                  <ProgramCard program={ADULT_QURAN_READING} defaultOpen trackId="quran" division="adults" />
-                  <ProgramCard program={ADULT_QURAN_HIFZ} trackId="quran" division="adults" />
-                  <ProgramCard program={ADULT_QURAN_IJAZAH} trackId="quran" division="adults" />
-                </>
-              )}
-            </div>
-          )}
 
-          {/* Arabic Track */}
-          {activeTrack === 'arabic' && (
-            <div className="cur-track-content">
-              <div className="cur-roadmap">
-                <span className="cur-roadmap-badge">Progression Roadmap</span>
-                <div className="cur-roadmap-flow">
-                  <span>Foundation Pathway</span><span className="cur-roadmap-arrow"><ArrowRight size={14} /></span>
-                  <span>Post-Foundation Pathway</span>
-                </div>
-              </div>
-              {activeDivision === 'kids' ? (
-                <>
-                  <ProgramCard program={KIDS_ARABIC_FOUNDATION} defaultOpen trackId="arabic" division="kids" />
-                  <ProgramCard program={KIDS_ARABIC_POST} trackId="arabic" division="kids" />
-                </>
-              ) : (
-                <>
-                  <ProgramCard program={ADULT_ARABIC_FOUNDATION} defaultOpen trackId="arabic" division="adults" />
-                  <ProgramCard program={ADULT_ARABIC_POST} trackId="arabic" division="adults" />
-                </>
-              )}
-            </div>
-          )}
+              {track.programs.map((prog, index) => (
+                <ProgramCard 
+                  key={prog.id} 
+                  program={prog} 
+                  trackId={track.id} 
+                  defaultOpen={index === 0} 
+                />
+              ))}
 
-          {/* Islamic Studies Track */}
-          {activeTrack === 'islamic' && (
-            <div className="cur-track-content">
-              <div className="cur-roadmap">
-                <span className="cur-roadmap-badge">Progression Roadmap</span>
-                <div className="cur-roadmap-flow">
-                  <span>Comprehensive</span><span className="cur-roadmap-arrow"><ArrowRight size={14} /></span>
-                  <span>Specialized Programs</span>
-                </div>
-              </div>
-              {activeDivision === 'kids' ? (
-                <ProgramCard program={KIDS_ISLAMIC} defaultOpen trackId="islamic-studies" division="kids" />
-              ) : (
-                <ProgramCard program={ADULT_ISLAMIC} defaultOpen trackId="islamic-studies" division="adults" />
-              )}
-              <h3 className="cur-specialized-title">Specialized Programs</h3>
-              <div className="cur-specialized-grid">
-                {SPECIALIZED_ISLAMIC.map((s, i) => (
-                  <div key={i} className="cur-specialized-card">
-                    <div className="cur-specialized-icon">{s.icon}</div>
-                    <h4>{s.title}</h4>
-                    <p>{s.desc}</p>
-                    <div className="cur-specialized-meta">{s.levels} Levels · {s.hours}</div>
-                  </div>
-                ))}
-              </div>
             </div>
-          )}
+          ))}
+
         </div>
       </section>
 
-      {/* Certification */}
-      <section className="section cur-cert-section">
-        <div className="container">
-          <div className="section-title">
-            <h2>Assessment & <span className="text-gold">Certification</span></h2>
-            <div className="gold-line" />
-          </div>
-          <div className="cur-cert-grid">
-            <div className="cur-cert-card">
-              <div className="cur-cert-icon"><ClipboardList size={32} /></div>
-              <h4>Level Certificate</h4>
-              <p>Issued on completion of each individual level</p>
-            </div>
-            <div className="cur-cert-card">
-              <div className="cur-cert-icon"><GraduationCap size={32} /></div>
-              <h4>Program Diploma</h4>
-              <p>Issued on completion of the final level of a program</p>
-            </div>
-            <div className="cur-cert-card">
-              <div className="cur-cert-icon"><Scroll size={32} /></div>
-              <h4>Ijazah Certificate</h4>
-              <p>Certified chain of transmission (sanad) from an authorized Sheikh</p>
-            </div>
-            <div className="cur-cert-card">
-              <div className="cur-cert-icon"><BarChart size={32} /></div>
-              <h4>Academic Transcript</h4>
-              <p>Cumulative record of all levels, certificates, and diplomas earned</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Glossary */}
-      <section className="section">
-        <div className="container">
-          <div className="section-title">
-            <h2>Glossary of <span className="text-gold">Key Terms</span></h2>
-            <div className="gold-line" />
-          </div>
-          <div className="cur-glossary">
-            {GLOSSARY.map((g, i) => (
-              <div key={i} className="cur-glossary-item">
-                <dt>{g.term}</dt>
-                <dd>{g.def}</dd>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Diamond Divider */}
+      <div className="cur-diamond-divider" aria-hidden="true">
+        <span className="d-small"></span>
+        <span className="d-medium"></span>
+        <span className="d-large"></span>
+        <span className="d-medium"></span>
+        <span className="d-small"></span>
+      </div>
 
       {/* Download */}
-      <section className="section" style={{ textAlign: 'center', paddingBottom: 'var(--spacing-3xl)' }}>
-        <a href="/curriculum.pdf" download className="cur-download-btn">
-          <FileText size={18} style={{marginRight: '8px'}} /> Download Full Curriculum PDF
+      <section className="section" style={{ textAlign: 'center', paddingBottom: '80px' }}>
+        <a href="/Fosselat_Academy_Curriculum_Framework.pdf" download className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+          <FileText size={18} /> Download Full Curriculum PDF (42 Pages)
         </a>
       </section>
     </div>

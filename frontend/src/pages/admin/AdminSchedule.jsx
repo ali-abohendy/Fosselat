@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
 import SearchableSelect from '../../components/SearchableSelect';
+import { Edit2, Trash2 } from 'lucide-react';
 import API from '../../config';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
@@ -14,11 +15,14 @@ export default function AdminSchedule() {
   const [scheduled, setScheduled] = useState([]);
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
   const [alert, setAlert] = useState(null);
   const [filterTeacher, setFilterTeacher] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeDay, setActiveDay] = useState('Monday');
+  const [conflictWarning, setConflictWarning] = useState('');
+  const [editingSessionId, setEditingSessionId] = useState(null);
 
   const fetchData = () => {
     fetch(`${API}/admin/schedule`, { headers: getHeaders() })
@@ -71,19 +75,71 @@ export default function AdminSchedule() {
     }));
   };
 
-  const conflictWarning = null; // Conflict check disabled by design
-
   const handleSubmit = async (e) => {
-    e.preventDefault(); setAlert(null);
-    if (!form.teacher_id || !form.student_id || !form.day || !form.start_time) {
-      setAlert({ type: 'error', msg: 'Please fill all required fields' }); return;
-    }
+    e.preventDefault();
     try {
-      const r = await fetch(`${API}/admin/schedule`, { method: 'POST', headers: getHeaders(), body: JSON.stringify(form) });
-      const d = await r.json();
-      if (d.success) { setAlert({ type: 'success', msg: 'Session scheduled!' }); fetchData(); setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' }); }
-      else setAlert({ type: 'error', msg: d.message || 'Error' });
-    } catch { setAlert({ type: 'error', msg: 'Server error' }); }
+      if (editingSessionId) {
+        const res = await fetch(`${API}/admin/schedule/${editingSessionId}`, {
+          method: 'PUT',
+          headers: getHeaders(),
+          body: JSON.stringify(form)
+        });
+        const json = await res.json();
+        if (json.success) {
+          fetchData();
+          setEditingSessionId(null);
+          setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
+          setConflictWarning('');
+          setAlert({ type: 'success', msg: 'Session updated!' });
+        }
+      } else {
+        const res = await fetch(`${API}/admin/schedule`, {
+          method: 'POST',
+          headers: getHeaders(),
+          body: JSON.stringify(form)
+        });
+        const json = await res.json();
+        if (json.success) {
+          fetchData();
+          setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
+          setConflictWarning('');
+          setAlert({ type: 'success', msg: 'Session scheduled!' });
+        }
+      }
+    } catch (err) {
+      setAlert({ type: 'error', msg: 'Server error' });
+    }
+  };
+
+  const handleEdit = (session) => {
+    setEditingSessionId(session._id);
+    setForm({
+      teacher_id: session.teacher_id || '',
+      student_id: session.student_id || '',
+      day: session.day || '',
+      start_time: session.start_time || '',
+      end_time: session.end_time || '',
+      duration: session.duration || '60 min'
+    });
+    setConflictWarning('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this scheduled session?')) return;
+    try {
+      const res = await fetch(`${API}/admin/schedule/${id}`, {
+        method: 'DELETE',
+        headers: getHeaders()
+      });
+      const json = await res.json();
+      if (json.success) {
+        setScheduled(scheduled.filter(s => s._id !== id));
+        setAlert({ type: 'success', msg: 'Session deleted' });
+      }
+    } catch (err) {
+      setAlert({ type: 'error', msg: 'Server error' });
+    }
   };
 
   return (
@@ -177,7 +233,7 @@ export default function AdminSchedule() {
 
       {/* Schedule Form */}
       <div className="dash-form-container" style={{ marginTop: '24px' }}>
-        <h3>Assign Student to Slot</h3>
+        <h3>{editingSessionId ? 'Edit Scheduled Session' : 'Assign Student to Slot'}</h3>
         {conflictWarning && (
           <div className="dash-alert dash-alert-warning" style={{marginBottom: '16px', background: 'rgba(255, 193, 7, 0.1)', color: '#ffc107', border: '1px solid #ffc107'}}>
             {conflictWarning}
@@ -226,8 +282,14 @@ export default function AdminSchedule() {
                 {['30 min', '40 min', '45 min', '60 min', '90 min', '120 min'].map(d => <option key={d} value={d}>{d}</option>)}
               </select>
             </div>
-            <div className="dash-form-actions">
-              <Button type="submit" variant="primary">Schedule Session</Button>
+            <div className="dash-form-actions" style={{ display: 'flex', gap: '12px' }}>
+              <Button type="submit" variant="primary">{editingSessionId ? 'Update Session' : 'Schedule Session'}</Button>
+              {editingSessionId && (
+                <Button type="button" variant="outline" onClick={() => {
+                  setEditingSessionId(null);
+                  setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
+                }}>Cancel Edit</Button>
+              )}
             </div>
           </div>
         </form>
@@ -257,7 +319,7 @@ export default function AdminSchedule() {
         </div>
         <div style={{overflowX:'auto'}}>
           <table className="dash-table">
-            <thead><tr><th>Student ID</th><th>Student</th><th>Teacher</th><th>Day</th><th>Time</th><th>Duration</th></tr></thead>
+            <thead><tr><th>Student ID</th><th>Student</th><th>Teacher</th><th>Day</th><th>Time</th><th>Duration</th><th style={{textAlign: 'center'}}>Actions</th></tr></thead>
             <tbody>
               {scheduled
                 .filter(s => {
@@ -275,9 +337,19 @@ export default function AdminSchedule() {
                   <td>{s.student_name}</td><td>{s.teacher_name}</td>
                   <td>{s.day}</td><td>{s.start_time} – {s.end_time}</td>
                   <td>{s.duration}</td>
+                  <td style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                      <button onClick={() => handleEdit(s)} style={{ background: 'transparent', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(200,167,99,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Edit Session">
+                        <Edit2 size={16} />
+                      </button>
+                      <button onClick={() => handleDelete(s._id)} style={{ background: 'transparent', border: 'none', color: '#f87171', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(248,113,113,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Delete Session">
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
-              {!scheduled.length && <tr><td colSpan="6" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No sessions scheduled</td></tr>}
+              {!scheduled.length && <tr><td colSpan="7" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No sessions scheduled</td></tr>}
             </tbody>
           </table>
         </div>

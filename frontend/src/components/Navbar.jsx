@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Phone, Mail, Facebook, Instagram, Tiktok } from './Icons';
+import { Phone, Mail, Facebook, Instagram, Tiktok, ArrowRight, ArrowLeft } from './Icons';
 import './Navbar.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { user, logout } = useAuth();
+  const location = useLocation();
+  const isDashboard = ['/admin', '/teacher', '/student'].some(p => location.pathname.startsWith(p));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +37,7 @@ export default function Navbar() {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-inner container">
+      <div className="navbar-inner">
         {/* Left: Logo */}
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
           <div className="navbar-logo-icon">
@@ -71,15 +73,25 @@ export default function Navbar() {
             </Link>
           </div>
           <ul className="navbar-links">
-            <li><NavLink to="/" onClick={closeMenu} end>Home</NavLink></li>
+            <li>
+              <NavLink to="/" onClick={closeMenu} end>
+                {user && isDashboard ? (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <ArrowLeft size={14} /> Main Site
+                  </span>
+                ) : 'Home'}
+              </NavLink>
+            </li>
+            {user && <li><NavLink to={getDashboardLink()} onClick={closeMenu}>Dashboard</NavLink></li>}
             <li><NavLink to="/curriculum" onClick={closeMenu}>Curriculum</NavLink></li>
             {(!user || user.role === 'student') && (
               <li><NavLink to="/placement-tests" onClick={closeMenu}>{user ? 'Tests' : 'Placement Tests'}</NavLink></li>
             )}
             {user?.role !== 'teacher' && <li><NavLink to="/pricing" onClick={closeMenu}>Pricing</NavLink></li>}
             <li><NavLink to="/about" onClick={closeMenu}>About Us</NavLink></li>
-            <li><NavLink to="/contact" onClick={closeMenu}>Contact</NavLink></li>
-            {user && <li><NavLink to={getDashboardLink()} onClick={closeMenu}>Dashboard</NavLink></li>}
+            {user?.role !== 'admin' && (
+              <li><NavLink to="/contact" onClick={closeMenu}>{user ? 'Support' : 'Contact'}</NavLink></li>
+            )}
           </ul>
 
           <div className="navbar-mobile-footer">

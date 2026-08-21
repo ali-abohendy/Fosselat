@@ -48,6 +48,43 @@ async function generateCredentials(db, fullName, familyName, studentId = null) {
   return { email, password };
 }
 
+// PUT /api/admin/attendance/:id
+router.put('/attendance/:id', async (req, res) => {
+  try {
+    const db = getDB();
+    const { status, subject, notes } = req.body;
+    let updateFields = { last_updated: new Date() };
+    if (status !== undefined) updateFields.status = status;
+    if (subject !== undefined) updateFields.subject = Array.isArray(subject) ? subject.join(', ') : subject;
+    if (notes !== undefined) updateFields.notes = notes;
+
+    const result = await db.collection('sessions').updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: updateFields }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ success: false, message: 'Session not found' });
+    }
+    return res.json({ success: true, message: 'Updated successfully' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// DELETE /api/admin/attendance/:id
+router.delete('/attendance/:id', async (req, res) => {
+  try {
+    const db = getDB();
+    const result = await db.collection('sessions').deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 1) {
+      return res.json({ success: true, message: 'Attendance record deleted' });
+    }
+    return res.status(404).json({ success: false, message: 'Record not found' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 // GET /api/admin/dashboard
 router.get('/dashboard', async (req, res) => {
   try {
@@ -293,6 +330,64 @@ router.put('/teachers/:tid', async (req, res) => {
   }
 });
 
+// Calendar
+router.get('/calendar', async (req, res) => {
+  try {
+    const db = getDB();
+    const { year, month, filter_by, filter_value, teacher_id, student_id } = req.query;
+
+    const query = {};
+    if (filter_by === 'teacher' && filter_value) query.teacher_id = filter_value;
+    else if (filter_by === 'student' && filter_value) query.student_id = filter_value;
+    else if (filter_by === 'subject' && filter_value) query.subject = filter_value;
+    
+    if (teacher_id) query.teacher_id = teacher_id;
+    if (student_id) query.student_id = student_id;
+
+    if (year && month) {
+      const startDate = new Date(year, month - 1, 1).toISOString().split('T')[0];
+      const endDate = new Date(year, month, 1).toISOString().split('T')[0];
+      query.date = { $gte: startDate, $lt: endDate };
+    }
+
+    const scheduled = await db.collection('scheduled_sessions').find({ 
+      ...query, 
+      active: true,
+      date: undefined // scheduled_sessions don't have date, they have days of week, so we remove the date filter
+    }).toArray();
+
+    // Re-apply the actual date filter to the scheduled_sessions query is meaningless, they are recurring.
+    const scheduledQuery = { ...query };
+    delete scheduledQuery.date;
+    const allScheduled = await db.collection('scheduled_sessions').find({ ...scheduledQuery, active: true }).toArray();
+
+    const data = allScheduled.map((s) => ({
+      ...s,
+      _id: s._id.toString()
+    }));
+
+    const past_sessions = await db.collection('sessions').find(query).toArray();
+    
+    // Fetch all reviews for these sessions
+    const sessionIds = past_sessions.map(s => s._id.toString());
+    const reviews = await db.collection('reviews').find({ session_id: { $in: sessionIds } }).toArray();
+    const reviewMap = {};
+    reviews.forEach(r => {
+      reviewMap[r.session_id] = r;
+    });
+
+    const past = past_sessions.map(s => ({
+      ...s, 
+      _id: s._id.toString(),
+      student_review: reviewMap[s._id.toString()] || null
+    }));
+
+    return res.json({ success: true, data: { scheduled: data, past_sessions: past } });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 // Attendance
 router.get('/attendance', async (req, res) => {
   try {
@@ -397,6 +492,64 @@ router.post('/schedule', async (req, res) => {
     sessionDoc._id = result.insertedId.toString();
 
     return res.json({ success: true, data: sessionDoc });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+router.put('/schedule/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { teacher_id, student_id, day, start_time, end_time, duration } = req.body || {};
+    const db = getDB();
+
+    let teacher = null;
+    let student = null;
+
+    if (teacher_id) {
+      try { teacher = await db.collection('users').findOne({ _id: new ObjectId(teacher_id) }); } catch {}
+    }
+    if (student_id) {
+      try { student = await db.collection('users').findOne({ _id: new ObjectId(student_id) }); } catch {}
+    }
+
+    const updateDoc = {
+      teacher_id: teacher_id || '',
+      teacher_name: teacher ? teacher.full_name : '',
+      student_id: student_id || '',
+      student_name: student ? student.full_name : '',
+      student_family_name: student ? (student.family_name || '') : '',
+      student_family_id: student ? (student.student_id || '') : '',
+      subject: (student && student.subject) ? student.subject : '',
+      day: day || '',
+      start_time: start_time || '',
+      end_time: end_time || '',
+      duration: duration || '60 min',
+      updated_at: new Date(),
+    };
+
+    const result = await db.collection('scheduled_sessions').findOneAndUpdate(
+      { _id: new ObjectId(id) },
+      { $set: updateDoc },
+      { returnDocument: 'after' }
+    );
+
+    if (!result) return res.status(404).json({ success: false, message: 'Session not found' });
+    
+    const updated = { ...result, _id: result._id.toString() };
+    return res.json({ success: true, data: updated });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+router.delete('/schedule/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const db = getDB();
+    const result = await db.collection('scheduled_sessions').deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) return res.status(404).json({ success: false, message: 'Session not found' });
+    return res.json({ success: true, message: 'Deleted successfully' });
   } catch (err) {
     return res.status(500).json({ success: false, message: 'Server error' });
   }

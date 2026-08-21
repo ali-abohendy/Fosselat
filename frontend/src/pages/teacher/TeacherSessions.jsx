@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Edit2 } from 'lucide-react';
 import Button from '../../components/Button';
 import API from '../../config';
 const getHeaders = () => ({
@@ -125,7 +126,7 @@ export default function TeacherSessions() {
               <th>Subject</th>
               <th>Status</th>
               <th>Notes / Reviews</th>
-              <th>Actions</th>
+              <th style={{textAlign: 'center'}}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -189,7 +190,11 @@ export default function TeacherSessions() {
                         <Button variant="outline" size="sm" onClick={cancelEdit}>Cancel</Button>
                       </div>
                     ) : (
-                      <Button variant="outline" size="sm" onClick={() => startEdit(s)}>Edit</Button>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                        <button onClick={() => startEdit(s)} style={{ background: 'transparent', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(200,167,99,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Edit">
+                          <Edit2 size={16} />
+                        </button>
+                      </div>
                     )}
                   </td>
                 </tr>

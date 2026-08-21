@@ -44,7 +44,13 @@ export default function StudentPlacementTests() {
 
   // --- STATS CALCULATION ---
   const totalTests = tests.length;
-  const avgScore = totalTests > 0 ? Math.round(tests.reduce((acc, t) => acc + (t.score || 0), 0) / totalTests) : 0;
+  const avgScore = totalTests > 0 ? Math.round(tests.reduce((acc, t) => {
+    if (t.score) return acc + t.score;
+    if (t.level_scores && t.level_scores.length > 0) {
+      return acc + Math.round((t.level_scores.reduce((sum, ls) => sum + (ls.pct || 0), 0) / t.level_scores.length) * 100);
+    }
+    return acc;
+  }, 0) / totalTests) : 0;
   
   // Calculate top program by tracking how many times they tested in each
   const programCounts = tests.reduce((acc, t) => {
@@ -116,17 +122,38 @@ export default function StudentPlacementTests() {
           <div>
             <h3 style={{ color: 'var(--color-gold)', fontSize: '20px', marginBottom: '16px' }}>Current Progress Overview</h3>
             <div style={{ background: 'var(--color-bg-light)', padding: '24px', borderRadius: '12px', border: '1px solid rgba(200,167,99,0.15)', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              {latestProgress.map(t => (
-                <div key={`prog-${t._id}`}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', gap: '16px' }}>
-                    <span style={{ color: 'var(--color-cream)', fontWeight: 600 }}>{t.track} — {t.program}</span>
-                    <span style={{ color: 'var(--color-gold)', fontWeight: 'bold' }}>{t.score}%</span>
+              {latestProgress.map(t => {
+                const completed = t.highest_mastered_id || 0;
+                const total = t.total_levels || 5;
+                
+                let progress = 0;
+                if (t.level_scores && t.level_scores.length > 0) {
+                  // Calculate progress explicitly from v4.1 level_scores
+                  const masteredCount = t.level_scores.filter(ls => ls.mastered).length;
+                  const unmastered = t.level_scores.find(ls => !ls.mastered);
+                  const partial = unmastered ? (unmastered.pct || 0) : 0;
+                  progress = Math.round(((masteredCount / total) * 100) + (partial * (1 / total) * 100));
+                } else {
+                  // Fallback for older tests
+                  const completed = t.highest_mastered_id || 0;
+                  const score = t.score || 0;
+                  progress = Math.round(((completed / total) * 100) + ((score / 100) * (1 / total) * 100));
+                }
+                
+                if (progress > 100) progress = 100;
+
+                return (
+                  <div key={`prog-${t._id}`}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', gap: '16px' }}>
+                      <span style={{ color: 'var(--color-cream)', fontWeight: 600 }}>{t.track} — {t.program}</span>
+                      <span style={{ color: 'var(--color-gold)', fontWeight: 'bold' }}>{progress}%</span>
+                    </div>
+                    <div style={{ height: '8px', background: 'rgba(0,0,0,0.3)', borderRadius: '4px', overflow: 'hidden' }}>
+                      <div style={{ height: '100%', width: `${progress}%`, background: 'var(--color-gold)', borderRadius: '4px', transition: 'width 1s ease-in-out' }}></div>
+                    </div>
                   </div>
-                  <div style={{ height: '8px', background: 'rgba(0,0,0,0.3)', borderRadius: '4px', overflow: 'hidden' }}>
-                    <div style={{ height: '100%', width: `${Math.max(0, Math.min(100, t.score || 0))}%`, background: 'var(--color-gold)', borderRadius: '4px', transition: 'width 1s ease-in-out' }}></div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
@@ -161,9 +188,11 @@ export default function StudentPlacementTests() {
                       </div>
                     </div>
                     
-                    <div className="test-history-actions">
-                      <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--color-cream)' }}>{t.score}%</div>
-                      <button 
+                      <div className="test-history-actions">
+                        <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--color-cream)' }}>
+                          {t.score || (t.level_scores && t.level_scores.length > 0 ? Math.round((t.level_scores.reduce((sum, ls) => sum + (ls.pct || 0), 0) / t.level_scores.length) * 100) : 0)}%
+                        </div>
+                        <button 
                         onClick={(e) => handleDelete(t._id, e)}
                         style={{ background: 'transparent', border: 'none', color: 'rgba(255,50,50,0.6)', cursor: 'pointer', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'color 0.2s' }}
                         title="Delete Test"
