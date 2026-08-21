@@ -19,7 +19,11 @@ def create_app(config_class=Config):
     # ---------- Extensions ----------
     mongo.init_app(app)
     jwt.init_app(app)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/api/*": {"origins": [
+        "http://localhost:5173",
+        "https://fosselatacademy.com",
+        "https://www.fosselatacademy.com"
+    ]}})
 
     # ---------- JWT error handlers ----------
     @jwt.expired_token_loader

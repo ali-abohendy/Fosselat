@@ -42,7 +42,7 @@ def register():
         full_name=data['full_name'].strip(),
         email=data['email'],
         password=data['password'],
-        role=data.get('role', 'student'),
+        role='student', # Force role to student for security
     )
 
     # Generate JWT
