@@ -99,7 +99,17 @@ const Placement = (() => {
     if (!bank) return [];
     const exclude = excludeIds instanceof Set ? excludeIds : new Set(excludeIds || []);
     const pool = bank.questions.filter(q => !exclude.has(q.id));
-    const usable = pool.length ? pool : bank.questions.slice();
+    let usable = pool.length ? pool : bank.questions.slice();
+    
+    // Deduplicate by prompt to prevent semantic duplicates
+    const seenPrompts = new Set();
+    usable = usable.filter(q => {
+      if (!q.prompt) return true;
+      if (seenPrompts.has(q.prompt)) return false;
+      seenPrompts.add(q.prompt);
+      return true;
+    });
+
     const want = Math.min(count || serveCount(audience), usable.length);
 
     const BANDS = ["easy", "medium", "hard"];
