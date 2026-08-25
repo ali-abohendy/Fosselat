@@ -1193,9 +1193,10 @@
 .pt-rh-card-highlight {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--card-accent, var(--color-gold));
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: linear-gradient(135deg, rgba(200, 167, 99, 0.05) 0%, rgba(200, 167, 99, 0.02) 100%);
   box-shadow: 0 10px 40px -10px rgba(200, 167, 99, 0.1);
+  margin-bottom: 2.5rem;
 }
 
 .pt-rh-card-highlight::before {

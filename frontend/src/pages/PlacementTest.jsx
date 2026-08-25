@@ -101,12 +101,13 @@ const Placement = (() => {
     const pool = bank.questions.filter(q => !exclude.has(q.id));
     let usable = pool.length ? pool : bank.questions.slice();
     
-    // Deduplicate by prompt to prevent semantic duplicates
-    const seenPrompts = new Set();
+    // Deduplicate by signature to prevent semantic duplicates
+    const seenSigs = new Set();
     usable = usable.filter(q => {
-      if (!q.prompt) return true;
-      if (seenPrompts.has(q.prompt)) return false;
-      seenPrompts.add(q.prompt);
+      if (!q.prompt || !q.options) return true;
+      const sig = q.prompt + "|" + JSON.stringify([...q.options].sort());
+      if (seenSigs.has(sig)) return false;
+      seenSigs.add(sig);
       return true;
     });
 
