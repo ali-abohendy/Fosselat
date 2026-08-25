@@ -432,7 +432,7 @@ export default function PlacementTest() {
 
   // ─── Data loading ───
   useEffect(() => {
-    fetch('/questions.json')
+    fetch('/questions.json?v=2')
       .then(r => r.json())
       .then(d => {
         Placement.configure(d.meta);
