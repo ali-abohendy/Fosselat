@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Video, Calendar, BookOpen, Clock } from '../../components/Icons';
 import Button from '../../components/Button';
 import { useAuth } from '../../context/AuthContext';
@@ -165,7 +165,7 @@ export default function StudentDashboard() {
         ))
       ) : (
         <div className="dash-alert dash-alert-info" style={{ background: 'rgba(200,167,99,0.06)', border: '1px solid rgba(200,167,99,0.15)', color: 'var(--color-text-muted)', marginBottom: '32px' }}>
-          You have no classes scheduled for today. Check your <a href="/student/calendar" style={{ color: 'var(--color-gold)', textDecoration: 'none' }}>Calendar</a>.
+          You have no classes scheduled for today. Check your <Link to="/student/calendar" style={{ color: 'var(--color-gold)', textDecoration: 'none' }}>Calendar</Link>.
         </div>
       )}
 

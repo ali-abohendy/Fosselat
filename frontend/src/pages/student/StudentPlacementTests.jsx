@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import { Trash, CheckCircle, BarChart, BookOpen, Clock } from '../../components/Icons';
 import API from '../../config';
@@ -10,6 +11,7 @@ const getHeaders = () => ({
 export default function StudentPlacementTests() {
   const [tests, setTests] = useState([]);
   const [expandedId, setExpandedId] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Tests — Student';
@@ -162,7 +164,7 @@ export default function StudentPlacementTests() {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <h3 style={{ color: 'var(--color-gold)', fontSize: '20px', margin: 0 }}>Test History</h3>
-            <Button variant="primary" onClick={() => window.location.href = '/placement-tests'} style={{ padding: '8px 16px', fontSize: '14px' }}>
+            <Button variant="primary" onClick={() => navigate('/placement-tests')} style={{ padding: '8px 16px', fontSize: '14px' }}>
               Take a Test
             </Button>
           </div>
