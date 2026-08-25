@@ -464,9 +464,11 @@ export default function PlacementTest() {
       const p = t.programs.find(pr => pr.id === programParam);
       if (p) {
         setProgram(p);
+        setScreen('testintro');
+        return;
       }
     }
-    setScreen('testintro');
+    setScreen('program');
   }, [data, searchParams, resumeData]);
 
   // ─── LocalStorage ───
@@ -915,7 +917,6 @@ const renderProgram = () => {
               </div>
               <div className="pt-form-group">
                 <label>Age <span style={{ color: 'var(--color-text-muted)', fontSize: '0.85em', fontWeight: 'normal' }}>(Optional)</span></label>
-                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem', margin: '2px 0 8px', lineHeight: 1.3 }}>Age helps us adjust the question format, but doesn't limit the test difficulty.</p>
                 <input
                   type="number"
                   placeholder="Enter your age"
@@ -1013,25 +1014,24 @@ const renderProgram = () => {
     return (
       <div className="pt-screen">
         <div className="pt-card pt-card-question" style={{ maxWidth: 600 }}>
-          <div className="pt-q-meta">
-            <span>{info?.name || ''}</span>
-            {bank?.focus && <span className="pt-q-meta-focus">{bank.focus}</span>}
+          <div className="pt-q-stage">
+            {info?.name || ''}{bank?.focus ? ` · ${bank.focus}` : ''}
           </div>
           <h3 className="pt-q-prompt">{q.prompt}</h3>
           {q.arabic && (
-            <div className="pt-arabic-stimulus">
-              <p className="pt-arabic-text" dir="rtl" lang="ar">{q.arabic}</p>
+            <div className="pt-q-stimulus-wrap">
+              <div className={`pt-q-stimulus ${q.arabic.length > 24 ? '' : 'small'}`} lang="ar" dir="rtl">{q.arabic}</div>
             </div>
           )}
-          <div className={`pt-q-options${q.optionsArabic ? ' pt-options-arabic' : ''}`}>
+          <div className={`pt-q-options${q.optionsArabic ? ' pt-q-options-ar' : ''}`}>
             {q.options.map((opt, idx) => (
               <button
                 key={idx}
                 className={`pt-q-option${selected === idx ? ' is-picked' : ''}`}
                 onClick={() => setSelected(idx)}
               >
-                <span className="pt-q-option-letter">{String.fromCharCode(65 + idx)}</span>
-                <span className={q.optionsArabic ? 'pt-opt-arabic' : ''}>{opt}</span>
+                <span className="opt-mark">{String.fromCharCode(65 + idx)}</span>
+                <span className={q.optionsArabic ? 'opt-ar' : ''}>{opt}</span>
               </button>
             ))}
           </div>
@@ -1150,25 +1150,25 @@ const renderProgram = () => {
         )}
 
         {/* Summary */}
-        <div className="pt-results-summary">
+        <div className="pt-results-summary" style={{ marginTop: '32px' }}>
           <p>{resultData.summary}</p>
-          <p className="pt-results-nextstep">{resultData.nextStep}</p>
+          <p className="pt-results-nextstep" style={{ marginTop: '12px' }}>{resultData.nextStep}</p>
         </div>
 
-        <div className="pt-results-actions">
+        <div className="pt-results-actions" style={{ flexDirection: 'column', alignItems: 'center' }}>
           {sendingEmail ? (
-            <div className="pt-email-success" style={{ color: 'var(--color-cream)' }}>
+            <div className="pt-email-success" style={{ color: 'var(--color-cream)', marginBottom: '16px' }}>
               <div className="pt-loading-spinner" style={{ width: '16px', height: '16px', display: 'inline-block', marginRight: '8px', verticalAlign: 'middle' }} />
               Saving and sending your results...
             </div>
           ) : emailSent ? (
-            <div className="pt-email-success">
+            <div className="pt-email-success" style={{ marginBottom: '16px' }}>
               <span>✅</span> Results sent to <strong>{userInfo.email}</strong> and saved!
             </div>
           ) : emailError ? (
-            <p className="pt-error-text" style={{ marginTop: '8px' }}>{emailError}</p>
+            <p className="pt-error-text" style={{ marginBottom: '16px', fontSize: '1rem' }}>{emailError}</p>
           ) : null}
-          <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
             <button className="pt-btn pt-btn-primary" onClick={() => { clearProgress(); setSession(null); setResultData(null); setEmailSent(false); setScreen('track'); }}>
               Explore Another Program
             </button>
