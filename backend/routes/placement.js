@@ -60,7 +60,7 @@ router.post('/send-results', async (req, res) => {
         <!-- Student Info -->
         <div style="padding:24px;">
           <p style="color:#F0E6D3;font-size:16px;margin:0 0 4px;">Hello <strong>${name}</strong>,</p>
-          <p style="color:rgba(240,230,211,0.6);font-size:14px;margin:0;">Age: ${age} · ${email}</p>
+          <p style="color:rgba(240,230,211,0.6);font-size:14px;margin:0;">${age ? `Age: ${age} &middot; ` : ''}${email}</p>
         </div>
 
         <!-- Recommended Level Card -->
