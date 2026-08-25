@@ -1002,7 +1002,7 @@ const renderProgram = () => {
           <h2 className="pt-display" style={{ fontSize: '1.6rem' }}>{stageInfo.title}</h2>
           <p className="pt-lede">{stageInfo.message}</p>
           {stageInfo.focus && <p className="pt-stage-focus">{stageInfo.focus}</p>}
-          <button className="pt-btn pt-btn-primary pt-btn-lg" onClick={() => { setSelected(null); askQuestion(); }}>
+          <button className="pt-btn pt-btn-primary pt-btn-lg" style={{ marginTop: '24px' }} onClick={() => { setSelected(null); askQuestion(); }}>
             {stageInfo.cta}
           </button>
         </div>
@@ -1103,11 +1103,12 @@ const renderProgram = () => {
             )}
           </div>
         ) : (
-          <div className="pt-results-hero" style={{ '--card-accent': accent }}>
+          <div className="pt-results-hero pt-rh-card-highlight" style={{ '--card-accent': accent }}>
             <svg className="rh-motif" viewBox="0 0 100 100" aria-hidden="true">
               <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" />
               <rect x="14" y="14" width="72" height="72" fill="none" stroke="currentColor" strokeWidth="0.7" transform="rotate(45 50 50)" />
             </svg>
+            <p className="pt-rh-eyebrow">Results Saved</p>
             <h2 className="pt-rh-level">Assessment Complete</h2>
             <p className="pt-rh-program">{resultData.trackLabel} — {resultData.programLabel}</p>
           </div>
@@ -1202,14 +1203,14 @@ const renderProgram = () => {
   if (!data) {
     return (
       <div className="placement-test-container">
-        <main className="pt-main">
-          <div className="pt-screen">
-            <div className="pt-card" style={{ textAlign: 'center', padding: '60px 40px' }}>
-              <div className="pt-loading-spinner" />
-              <p style={{ marginTop: '20px', color: 'var(--color-text-muted)' }}>Loading assessment…</p>
+          <div className="pt-wrap">
+            <div className="pt-main" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+              <div style={{ textAlign: 'center' }}>
+                <div className="pt-loading-spinner" />
+                <p style={{ marginTop: '20px', color: 'var(--color-text-muted)' }}>Loading assessment…</p>
+              </div>
             </div>
           </div>
-        </main>
       </div>
     );
   }

@@ -762,18 +762,21 @@
 }
 
 @media (max-width: 640px) {
-  .pt-q-options { flex-direction: column; }
+  .pt-main { padding: 16px 12px 60px; }
+  .pt-card { padding: 24px 20px; border-radius: 12px; max-width: 100%; width: 100%; }
+  .pt-q-options { flex-direction: column; gap: 12px; }
+  .pt-q-option { padding: 14px 16px; }
   .pt-progress-wrap { display: flex; }
-  .pt-card-hero { padding: 20px 16px; max-width: 100%; }
-  .pt-q-stimulus { padding: 12px; }
-  .pt-card { max-width: 100%; width: 100%; }
+  .pt-card-hero { padding: 24px 20px; max-width: 100%; }
+  .pt-q-stimulus { padding: 16px; font-size: 1.4rem; }
+  .pt-q-prompt { font-size: 1.25rem; margin-bottom: 20px; }
+  .pt-results-grid { grid-template-columns: 1fr; }
+  .pt-results-hero { padding: 24px 20px; }
   .pt-screen { max-width: 100%; }
 }
 
 @media (max-width: 480px) {
   .pt-topbar { padding: 14px 16px; flex-direction: column; align-items: stretch; gap: 10px; }
-  .pt-main { padding: 8px 14px 44px; }
-  .pt-q-stimulus { padding: 16px; }
 }
 
 /* ============================================================
