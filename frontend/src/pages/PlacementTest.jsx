@@ -1026,7 +1026,16 @@ const renderProgram = () => {
             {info?.name || ''}{bank?.focus ? ` · ${bank.focus}` : ''}
           </div>
           <h3 className="pt-q-prompt">{q.prompt}</h3>
-          {q.arabic && (
+          {q.arabicParts ? (
+            <div className="pt-q-stimulus-wrap pt-q-stimulus-parts">
+              {q.arabicParts.map((part, pi) => (
+                <div key={pi} className="pt-q-excerpt">
+                  <div className="pt-q-excerpt-label">Excerpt {pi + 1}</div>
+                  <div className="pt-q-stimulus pt-q-stimulus-part small" lang="ar" dir="rtl">{part}</div>
+                </div>
+              ))}
+            </div>
+          ) : q.arabic && (
             <div className="pt-q-stimulus-wrap">
               <div className={`pt-q-stimulus ${q.arabic.length > 24 ? '' : 'small'}`} lang="ar" dir="rtl">{q.arabic}</div>
             </div>
