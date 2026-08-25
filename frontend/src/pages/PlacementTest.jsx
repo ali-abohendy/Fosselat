@@ -793,7 +793,7 @@ export default function PlacementTest() {
             </div>
           </div>
         )}
-        <button className="pt-btn pt-btn-primary pt-btn-lg" onClick={() => {
+        <button className="pt-btn pt-btn-primary pt-btn-lg" style={{ marginTop: '32px' }} onClick={() => {
           if (user && user.age) {
             handleAudienceSelect(parseInt(user.age) >= 15, true);
           } else {
@@ -915,6 +915,7 @@ const renderProgram = () => {
               </div>
               <div className="pt-form-group">
                 <label>Age <span style={{ color: 'var(--color-text-muted)', fontSize: '0.85em', fontWeight: 'normal' }}>(Optional)</span></label>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem', margin: '2px 0 8px', lineHeight: 1.3 }}>Age helps us adjust the question format, but doesn't limit the test difficulty.</p>
                 <input
                   type="number"
                   placeholder="Enter your age"
@@ -970,11 +971,11 @@ const renderProgram = () => {
         <div className="pt-card" style={{ maxWidth: 540 }}>
           <p className="pt-step-label">{track?.label} · {program?.label}</p>
           <h2 className="pt-card-title" style={{ fontSize: '1.15rem' }}>{sr.prompt}</h2>
-          <div className="pt-program-list">
+          <div className="pt-choice-list">
             {sr.options.map((opt, idx) => (
               <button key={idx} className="pt-choice-row" onClick={() => handleSelfReport(idx)}>
-                <span className="pt-choice-row-label">{opt.label}</span>
-                <span className="pt-choice-row-arrow">→</span>
+                <span className="cr-title">{opt.label}</span>
+                <span className="cr-arrow">→</span>
               </button>
             ))}
           </div>
