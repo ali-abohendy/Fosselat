@@ -1185,12 +1185,14 @@ const renderProgram = () => {
   if (!data) {
     return (
       <div className="placement-test-container">
-        <div className="pt-screen">
-          <div className="pt-card" style={{ textAlign: 'center', padding: '60px 40px' }}>
-            <div className="pt-loading-spinner" />
-            <p style={{ marginTop: '20px', color: 'var(--color-text-muted)' }}>Loading assessment…</p>
+        <main className="pt-main">
+          <div className="pt-screen">
+            <div className="pt-card" style={{ textAlign: 'center', padding: '60px 40px' }}>
+              <div className="pt-loading-spinner" />
+              <p style={{ marginTop: '20px', color: 'var(--color-text-muted)' }}>Loading assessment…</p>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
