@@ -133,7 +133,7 @@ const Placement = (() => {
     const order = slot.order && slot.order.length === q.options.length ? slot.order : q.options.map((_, i) => i);
     return {
       id: q.id, level: q.level, skill: q.skill, difficulty: q.difficulty,
-      prompt: q.prompt, arabic: q.arabic || null,
+      prompt: q.prompt, arabic: q.arabic || null, arabicParts: q.arabicParts || null,
       options: order.map(i => q.options[i]),
       optionsArabic: !!q.optionsArabic, points: q.points || 1,
     };
