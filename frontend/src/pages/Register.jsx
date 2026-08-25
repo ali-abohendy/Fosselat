@@ -62,6 +62,14 @@ export default function Register() {
     }
   };
 
+  if (user) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner" />
+      </div>
+    );
+  }
+
   return (
     <div className="page-enter">
       <section className="auth-page">

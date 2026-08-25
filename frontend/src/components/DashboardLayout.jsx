@@ -9,7 +9,6 @@ export default function DashboardLayout({ role, menuItems }) {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
   };
 
   const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
