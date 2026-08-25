@@ -744,7 +744,7 @@
                   "competency": "Elongation & Word Fluency",
                   "difficulty": "medium",
                   "type": "mcq",
-                  "prompt": "Two dammas together ( ٌ ) at the end of a word are read as:",
+                  "prompt": "Two dammas together ( ـٌ ) at the end of a word are read as:",
                   "options": [
                     "-an",
                     "-in",
@@ -1288,7 +1288,7 @@
                   "competency": "Connected Reading & Core Rules",
                   "difficulty": "medium",
                   "type": "mcq",
-                  "prompt": "Which word contains a sukoon ( ْ )?",
+                  "prompt": "Which word contains a sukoon ( ـْ )?",
                   "options": [
                     "كَتَبَ",
                     "سَمِعَ",
@@ -1309,7 +1309,7 @@
                   "competency": "Connected Reading & Core Rules",
                   "difficulty": "medium",
                   "type": "mcq",
-                  "prompt": "What does the sukoon ( ْ ) tell you to do?",
+                  "prompt": "What does the sukoon ( ـْ ) tell you to do?",
                   "options": [
                     "Stretch the vowel",
                     "Read the letter without a vowel",
@@ -1477,7 +1477,7 @@
                   "competency": "Connected Reading & Core Rules",
                   "difficulty": "medium",
                   "type": "mcq",
-                  "prompt": "Which word contains a shaddah ( ّ )?",
+                  "prompt": "Which word contains a shaddah ( ـّ )?",
                   "options": [
                     "كَتَبَ",
                     "عَلِمَ",
@@ -1498,7 +1498,7 @@
                   "competency": "Connected Reading & Core Rules",
                   "difficulty": "medium",
                   "type": "mcq",
-                  "prompt": "What does a shaddah ( ّ ) indicate?",
+                  "prompt": "What does a shaddah ( ـّ ) indicate?",
                   "options": [
                     "The letter is silent",
                     "The letter is doubled",
@@ -7989,13 +7989,13 @@
                   "type": "mcq",
                   "prompt": "Which mark gives a short 'u' sound?",
                   "options": [
-                    "Fatha ( َ )",
-                    "Kasra ( ِ )",
-                    "Sukoon ( ْ )",
-                    "Damma ( ُ )"
+                    "Fatha ( ـَ )",
+                    "Kasra ( ـِ )",
+                    "Sukoon ( ـْ )",
+                    "Damma ( ـُ )"
                   ],
                   "correct": 3,
-                  "correctAnswer": "Damma ( ُ )",
+                  "correctAnswer": "Damma ( ـُ )",
                   "points": 1
                 },
                 {
@@ -8010,13 +8010,13 @@
                   "type": "mcq",
                   "prompt": "Which mark gives a short 'i' sound?",
                   "options": [
-                    "Damma ( ُ )",
-                    "Sukoon ( ْ )",
-                    "Kasra ( ِ )",
-                    "Fatha ( َ )"
+                    "Damma ( ـُ )",
+                    "Sukoon ( ـْ )",
+                    "Kasra ( ـِ )",
+                    "Fatha ( ـَ )"
                   ],
                   "correct": 2,
-                  "correctAnswer": "Kasra ( ِ )",
+                  "correctAnswer": "Kasra ( ـِ )",
                   "points": 1
                 },
                 {
@@ -8654,7 +8654,7 @@
                   "competency": "Long Vowels & Closed Syllables",
                   "difficulty": "medium",
                   "type": "mcq",
-                  "prompt": "In mushaf-style print, the small dagger alif ( ٰ ) over a letter is read as:",
+                  "prompt": "In mushaf-style print, the small dagger alif ( ـٰ ) over a letter is read as:",
                   "options": [
                     "a silent letter",
                     "a long 'aa'",
@@ -8746,7 +8746,7 @@
                   "competency": "Tanwin, Shaddah & Decoding Autonomy",
                   "difficulty": "medium",
                   "type": "mcq",
-                  "prompt": "A shaddah ( ّ ) over a letter means the letter is:",
+                  "prompt": "A shaddah ( ـّ ) over a letter means the letter is:",
                   "options": [
                     "silent",
                     "read long",

@@ -750,7 +750,7 @@
          "competency": "Control vowel length: madd cases and tanwin in connected reading",
          "difficulty": "medium",
          "type": "mcq",
-         "prompt": "Two dammas together ( ٌ ) at the end of a word are read as:",
+         "prompt": "Two dammas together ( ـٌ ) at the end of a word are read as:",
          "options": [
           "-an",
           "-in",
@@ -1307,7 +1307,7 @@
          "competency": "Apply the notation-driven rules (sukun, shaddah, nun/mim sets, stopping) in real text",
          "difficulty": "easy",
          "type": "mcq",
-         "prompt": "A shaddah ( ّ ) over a letter tells you to:",
+         "prompt": "A shaddah ( ـّ ) over a letter tells you to:",
          "options": [
           "double the letter",
           "skip the letter",
@@ -9124,13 +9124,13 @@
          "type": "mcq",
          "prompt": "Which mark gives a short 'u' sound?",
          "options": [
-          "Fatha ( َ )",
-          "Kasra ( ِ )",
-          "Sukoon ( ْ )",
-          "Damma ( ُ )"
+          "Fatha ( ـَ )",
+          "Kasra ( ـِ )",
+          "Sukoon ( ـْ )",
+          "Damma ( ـُ )"
          ],
          "correct": 3,
-         "correctAnswer": "Damma ( ُ )",
+         "correctAnswer": "Damma ( ـُ )",
          "points": 1
         },
         {
@@ -9145,13 +9145,13 @@
          "type": "mcq",
          "prompt": "Which mark gives a short 'i' sound?",
          "options": [
-          "Damma ( ُ )",
-          "Sukoon ( ْ )",
-          "Kasra ( ِ )",
-          "Fatha ( َ )"
+          "Damma ( ـُ )",
+          "Sukoon ( ـْ )",
+          "Kasra ( ـِ )",
+          "Fatha ( ـَ )"
          ],
          "correct": 2,
-         "correctAnswer": "Kasra ( ِ )",
+         "correctAnswer": "Kasra ( ـِ )",
          "points": 1
         },
         {
@@ -9798,7 +9798,7 @@
          "competency": "Decode long vowels and closed syllables; read connected passages",
          "difficulty": "medium",
          "type": "mcq",
-         "prompt": "In mushaf-style print, the small dagger alif ( ٰ ) over a letter is read as:",
+         "prompt": "In mushaf-style print, the small dagger alif ( ـٰ ) over a letter is read as:",
          "options": [
           "a silent letter",
           "a long 'aa'",
@@ -9891,7 +9891,7 @@
          "competency": "Decode the complete diacritic system independently",
          "difficulty": "easy",
          "type": "mcq",
-         "prompt": "A shaddah ( ّ ) over a letter means the letter is:",
+         "prompt": "A shaddah ( ـّ ) over a letter means the letter is:",
          "options": [
           "silent",
           "read long",
