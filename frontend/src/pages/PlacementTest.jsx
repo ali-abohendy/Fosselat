@@ -889,13 +889,13 @@ const renderProgram = () => {
     return (
       <div className="pt-screen">
         {!hasProgramParam && (
-          <div style={{ width: '100%', maxWidth: 480, marginBottom: '20px' }}>
+          <div style={{ width: '100%', maxWidth: 560, margin: '0 auto 20px' }}>
             <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => setScreen('program')}>← Back</button>
           </div>
         )}
-        <div className="pt-card" style={{ maxWidth: 480 }}>
-          <p className="pt-step-label">{track?.label} · {program?.label}</p>
-          <h2 className="pt-card-title">Ready when you are.</h2>
+        <div className="pt-card pt-card-narrow">
+          <div className="pt-eyebrow">{track?.label} · {program?.label}</div>
+          <h2 className="pt-display-sm" style={{ marginBottom: '16px' }}>Ready when you are.</h2>
           <p className="pt-lede" style={{ fontSize: '0.95rem', marginBottom: '24px' }}>
             A short adaptive test. Each level has its own small set of questions — the system adjusts as you go.
           </p>
@@ -969,9 +969,9 @@ const renderProgram = () => {
     if (!sr) return null;
     return (
       <div className="pt-screen">
-        <div className="pt-card" style={{ maxWidth: 540 }}>
-          <p className="pt-step-label">{track?.label} · {program?.label}</p>
-          <h2 className="pt-card-title" style={{ fontSize: '1.15rem' }}>{sr.prompt}</h2>
+        <div className="pt-card pt-card-narrow">
+          <div className="pt-eyebrow">{track?.label} · {program?.label}</div>
+          <h2 className="pt-display-sm" style={{ marginBottom: '24px' }}>{sr.prompt}</h2>
           <div className="pt-choice-list">
             {sr.options.map((opt, idx) => (
               <button key={idx} className="pt-choice-row" onClick={() => handleSelfReport(idx)}>
@@ -1013,7 +1013,7 @@ const renderProgram = () => {
 
     return (
       <div className="pt-screen">
-        <div className="pt-card pt-card-question" style={{ maxWidth: 600 }}>
+        <div className="pt-card pt-card-question">
           <div className="pt-q-stage">
             {info?.name || ''}{bank?.focus ? ` · ${bank.focus}` : ''}
           </div>
@@ -1054,7 +1054,7 @@ const renderProgram = () => {
           </div>
         </div>
         {progressVisible && (
-          <div className="pt-progress-wrap" style={{ marginTop: '20px' }}>
+          <div className="pt-progress-wrap" style={{ marginTop: '32px' }}>
             <div className="pt-progress-label">{progressLabel}</div>
             <div className="pt-progress-track">
               <div className="pt-progress-fill" style={{ width: `${Math.round(progressPct * 100)}%`, transition: 'width 0.5s ease' }}></div>

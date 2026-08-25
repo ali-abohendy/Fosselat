@@ -40,6 +40,7 @@
   display: flex;
   flex-direction: column;
   font-family: inherit;
+  padding-top: var(--navbar-height, 80px);
 }
 
 .placement-test-container *,
@@ -83,6 +84,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin: 0 auto;
 }
 
 .pt-progress-label {
@@ -90,7 +92,7 @@
   letter-spacing: 0.06em;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  text-align: right;
+  text-align: center;
 }
 
 .pt-progress-track {
@@ -177,9 +179,22 @@
 
 .pt-card-hero {
   padding: clamp(28px, 5vw, 56px);
-  text-align: left;
-  max-width: 640px;
+  text-align: center;
+  max-width: 720px;
   margin: 0 auto;
+}
+
+.pt-card-narrow {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: clamp(26px, 5vw, 44px);
+  text-align: left;
+}
+
+.pt-card-question {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 48px);
 }
 
 .pt-card-hero .pt-display { margin: 6px 0 14px; }
