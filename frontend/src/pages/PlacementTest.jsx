@@ -1061,8 +1061,6 @@ const renderProgram = () => {
           </div>
         )}
       </div>
-        
-      </div>
     );
   };
 
