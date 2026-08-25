@@ -10,36 +10,34 @@ function getNextDateForDay(dayName) {
   return d;
 }
 
-export function localToUTC(day, timeStr) {
-  if (!day || !timeStr) return { utcDay: day, utcTime: timeStr };
+export function applyTimezoneDiff(day, timeStr, diffStr) {
+  if (!day || !timeStr || !diffStr) return { adjustedDay: day, adjustedTime: timeStr };
   
+  const diffHours = parseFloat(diffStr);
+  if (isNaN(diffHours)) return { adjustedDay: day, adjustedTime: timeStr };
+
   const [h, m] = timeStr.split(':').map(Number);
-  const d = getNextDateForDay(day);
-  d.setHours(h, m, 0, 0);
   
-  return {
-    utcDay: DAYS[d.getUTCDay()],
-    utcTime: `${d.getUTCHours().toString().padStart(2, '0')}:${d.getUTCMinutes().toString().padStart(2, '0')}`
-  };
-}
+  const totalMins = h * 60 + m + (diffHours * 60);
+  let adjustedH = Math.floor(totalMins / 60);
+  const adjustedM = ((totalMins % 60) + 60) % 60; // handle negative modulo
+  
+  let dayOffset = 0;
+  while (adjustedH < 0) {
+    adjustedH += 24;
+    dayOffset -= 1;
+  }
+  while (adjustedH >= 24) {
+    adjustedH -= 24;
+    dayOffset += 1;
+  }
 
-export function utcToLocal(utcDay, utcTimeStr) {
-  if (!utcDay || !utcTimeStr) return { localDay: utcDay, localTime: utcTimeStr };
+  const currentDayIdx = DAYS.indexOf(day);
+  let newDayIdx = (currentDayIdx + dayOffset) % 7;
+  if (newDayIdx < 0) newDayIdx += 7;
 
-  const [h, m] = utcTimeStr.split(':').map(Number);
-  
-  const d = new Date();
-  const currentUtcDay = d.getUTCDay();
-  const targetUtcDay = DAYS.indexOf(utcDay);
-  
-  let diff = targetUtcDay - currentUtcDay;
-  if (diff < 0) diff += 7;
-  
-  d.setUTCDate(d.getUTCDate() + diff);
-  d.setUTCHours(h, m, 0, 0);
-  
   return {
-    localDay: DAYS[d.getDay()],
-    localTime: `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
+    adjustedDay: DAYS[newDayIdx],
+    adjustedTime: `${adjustedH.toString().padStart(2, '0')}:${Math.round(adjustedM).toString().padStart(2, '0')}`
   };
 }

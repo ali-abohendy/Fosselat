@@ -3,7 +3,6 @@ import Button from '../../components/Button';
 import SearchableSelect from '../../components/SearchableSelect';
 import { Edit2, Trash2 } from 'lucide-react';
 import API from '../../config';
-import { localToUTC, utcToLocal } from '../../utils/timezones';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,
@@ -17,7 +16,7 @@ export default function AdminSchedule() {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
+  const [form, setForm] = useState({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min', timezone_diff: '' });
   const [alert, setAlert] = useState(null);
   const [filterTeacher, setFilterTeacher] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,21 +27,8 @@ export default function AdminSchedule() {
   const fetchData = () => {
     fetch(`${API}/admin/schedule`, { headers: getHeaders() })
       .then(r => r.json()).then(d => { if (d.success) {
-            const rawSlots = d.data.slots || [];
-            const localSlots = rawSlots.map(s => {
-                const { localDay, localTime: lStart } = utcToLocal(s.day, s.start_time);
-                const { localTime: lEnd } = utcToLocal(s.day, s.end_time);
-                return { ...s, day: localDay, start_time: lStart, end_time: lEnd };
-            });
-            setSlots(localSlots);
-            
-            const rawSched = d.data.scheduled || [];
-            const localSched = rawSched.map(s => {
-                const { localDay, localTime: lStart } = utcToLocal(s.day, s.start_time);
-                const { localTime: lEnd } = utcToLocal(s.day, s.end_time);
-                return { ...s, day: localDay, start_time: lStart, end_time: lEnd };
-            });
-            setScheduled(localSched);
+            setSlots(d.data.slots || []);
+            setScheduled(d.data.scheduled || []);
           }}).catch(() => {});
     fetch(`${API}/admin/students`, { headers: getHeaders() })
       .then(r => r.json()).then(d => { if (d.success) setStudents(d.data); }).catch(() => {});
@@ -99,18 +85,13 @@ export default function AdminSchedule() {
         const res = await fetch(`${API}/admin/schedule/${editingSessionId}`, {
           method: 'PUT',
           headers: getHeaders(),
-          body: JSON.stringify({
-          ...form,
-          day: localToUTC(form.day, form.start_time).utcDay,
-          start_time: localToUTC(form.day, form.start_time).utcTime,
-          end_time: localToUTC(form.day, form.end_time).utcTime,
-        })
+          body: JSON.stringify(form)
         });
         const json = await res.json();
         if (json.success) {
           fetchData();
           setEditingSessionId(null);
-          setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
+          setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min', timezone_diff: '' });
           setConflictWarning('');
           setAlert({ type: 'success', msg: 'Session updated!' });
         }
@@ -118,17 +99,12 @@ export default function AdminSchedule() {
         const res = await fetch(`${API}/admin/schedule`, {
           method: 'POST',
           headers: getHeaders(),
-          body: JSON.stringify({
-          ...form,
-          day: localToUTC(form.day, form.start_time).utcDay,
-          start_time: localToUTC(form.day, form.start_time).utcTime,
-          end_time: localToUTC(form.day, form.end_time).utcTime,
-        })
+          body: JSON.stringify(form)
         });
         const json = await res.json();
         if (json.success) {
           fetchData();
-          setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
+          setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min', timezone_diff: '' });
           setConflictWarning('');
           setAlert({ type: 'success', msg: 'Session scheduled!' });
         }
@@ -146,7 +122,8 @@ export default function AdminSchedule() {
       day: session.day || '',
       start_time: session.start_time || '',
       end_time: session.end_time || '',
-      duration: session.duration || '60 min'
+      duration: session.duration || '60 min',
+      timezone_diff: session.timezone_diff || ''
     });
     setConflictWarning('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -309,12 +286,16 @@ export default function AdminSchedule() {
                 {['30 min', '40 min', '45 min', '60 min', '90 min', '120 min'].map(d => <option key={d} value={d}>{d}</option>)}
               </select>
             </div>
+            <div className="dash-form-group">
+              <label>Time Zone Diff (hours)</label>
+              <input type="number" step="0.5" placeholder="e.g. +10 or -5" value={form.timezone_diff} onChange={e => setForm({...form, timezone_diff: e.target.value})} />
+            </div>
             <div className="dash-form-actions" style={{ display: 'flex', gap: '12px' }}>
               <Button type="submit" variant="primary">{editingSessionId ? 'Update Session' : 'Schedule Session'}</Button>
               {editingSessionId && (
                 <Button type="button" variant="outline" onClick={() => {
                   setEditingSessionId(null);
-                  setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min' });
+                  setForm({ teacher_id: '', student_id: '', day: '', start_time: '', end_time: '', duration: '60 min', timezone_diff: '' });
                 }}>Cancel Edit</Button>
               )}
             </div>

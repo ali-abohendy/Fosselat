@@ -456,7 +456,7 @@ router.get('/schedule', async (req, res) => {
 
 router.post('/schedule', async (req, res) => {
   try {
-    const { teacher_id, student_id, subject, day, start_time, end_time, duration } = req.body || {};
+    const { teacher_id, student_id, subject, day, start_time, end_time, duration, timezone_diff } = req.body || {};
     const db = getDB();
 
     let teacher = null;
@@ -482,6 +482,7 @@ router.post('/schedule', async (req, res) => {
       start_time: start_time || '',
       end_time: end_time || '',
       duration: duration || '60 min',
+      timezone_diff: timezone_diff || '',
       meeting_room_id: roomId,
       recurring: true,
       active: true,
@@ -500,7 +501,7 @@ router.post('/schedule', async (req, res) => {
 router.put('/schedule/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { teacher_id, student_id, day, start_time, end_time, duration } = req.body || {};
+    const { teacher_id, student_id, day, start_time, end_time, duration, timezone_diff } = req.body || {};
     const db = getDB();
 
     let teacher = null;
@@ -525,6 +526,7 @@ router.put('/schedule/:id', async (req, res) => {
       start_time: start_time || '',
       end_time: end_time || '',
       duration: duration || '60 min',
+      timezone_diff: timezone_diff || '',
       updated_at: new Date(),
     };
 

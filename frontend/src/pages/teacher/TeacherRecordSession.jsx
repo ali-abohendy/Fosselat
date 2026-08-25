@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
 import MultiCreatableSelect from '../../components/MultiCreatableSelect';
+import SearchableSelect from '../../components/SearchableSelect';
 import API from '../../config';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
@@ -97,10 +98,13 @@ export default function TeacherRecordSession() {
           <div className="dash-form-grid">
             <div className="dash-form-group">
               <label>Student</label>
-              <select value={form.student_id} onChange={e => handleStudentChange(e.target.value)} required>
-                <option value="">Select Student</option>
-                {students.map(s => <option key={s._id} value={s._id}>{s.full_name} {s.family_name || ''}</option>)}
-              </select>
+              <SearchableSelect
+                options={students.map(s => ({ value: s._id, label: `${s.full_name} ${s.family_name || ''}`.trim() }))}
+                value={form.student_id}
+                onChange={handleStudentChange}
+                placeholder="Select Student"
+                required
+              />
             </div>
             {selectedStudent && (
               <>

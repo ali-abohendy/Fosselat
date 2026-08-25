@@ -2,6 +2,32 @@ import express from 'express';
 import { getDB, ObjectId } from '../db.js';
 import { authMiddleware, teacherMiddleware } from '../middleware/auth.js';
 
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function applyTimezoneDiff(day, timeStr, diffStr) {
+  if (!day || !timeStr || !diffStr) return { adjustedDay: day, adjustedTime: timeStr };
+  const diffHours = parseFloat(diffStr);
+  if (isNaN(diffHours)) return { adjustedDay: day, adjustedTime: timeStr };
+
+  const [h, m] = timeStr.split(':').map(Number);
+  const totalMins = h * 60 + m + (diffHours * 60);
+  let adjustedH = Math.floor(totalMins / 60);
+  const adjustedM = ((totalMins % 60) + 60) % 60;
+  
+  let dayOffset = 0;
+  while (adjustedH < 0) { adjustedH += 24; dayOffset -= 1; }
+  while (adjustedH >= 24) { adjustedH -= 24; dayOffset += 1; }
+
+  const currentDayIdx = DAYS.indexOf(day);
+  let newDayIdx = (currentDayIdx + dayOffset) % 7;
+  if (newDayIdx < 0) newDayIdx += 7;
+
+  return {
+    adjustedDay: DAYS[newDayIdx],
+    adjustedTime: `${adjustedH.toString().padStart(2, '0')}:${Math.round(adjustedM).toString().padStart(2, '0')}`
+  };
+}
+
 const router = express.Router();
 
 router.use(authMiddleware, teacherMiddleware);
@@ -83,10 +109,6 @@ router.get('/students', async (req, res) => {
       },
       { projection: { password: 0 } }
     ).toArray();
-
-    if (!students || students.length === 0) {
-      students = await db.collection('users').find({ role: 'student' }, { projection: { password: 0 } }).toArray();
-    }
 
     const data = students.map((s) => ({ ...s, _id: s._id.toString() }));
     return res.json({ success: true, data });
@@ -317,12 +339,29 @@ router.get('/calendar', async (req, res) => {
 
     const scheduled = await db.collection('scheduled_sessions').find({ teacher_id: req.userId, active: true }).toArray();
 
-    const data = scheduled.map((s) => ({
-      ...s,
-      _id: s._id.toString(),
-      zoom_link: req.user.zoom_link || '',
-      google_meet_link: req.user.google_meet_link || '',
-    }));
+    const data = scheduled.map((s) => {
+      let finalDay = s.day;
+      let finalStart = s.start_time;
+      let finalEnd = s.end_time;
+      
+      if (s.timezone_diff) {
+        const adjustedStart = applyTimezoneDiff(s.day, s.start_time, s.timezone_diff);
+        const adjustedEnd = applyTimezoneDiff(s.day, s.end_time, s.timezone_diff);
+        finalDay = adjustedStart.adjustedDay;
+        finalStart = adjustedStart.adjustedTime;
+        finalEnd = adjustedEnd.adjustedTime;
+      }
+      
+      return {
+        ...s,
+        _id: s._id.toString(),
+        day: finalDay,
+        start_time: finalStart,
+        end_time: finalEnd,
+        zoom_link: req.user.zoom_link || '',
+        google_meet_link: req.user.google_meet_link || '',
+      };
+    });
 
     // Get past sessions for this month
     let query = { teacher_id: req.userId };
