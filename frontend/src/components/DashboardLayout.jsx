@@ -18,6 +18,15 @@ export default function DashboardLayout({ role, menuItems }) {
     <div className="dashboard-layout">
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
+        <div className="sidebar-logo-container">
+          <NavLink to="/" className="sidebar-brand">
+            <img src="/logo.png" alt="Fosselat Academy" />
+            <div className="sidebar-brand-text">
+              <span className="sidebar-brand-name">Fosselat</span>
+              <span className="sidebar-brand-tagline">Islamic Qur'an School</span>
+            </div>
+          </NavLink>
+        </div>
         <div className="sidebar-header">
           <div className="sidebar-avatar">
             {user?.full_name?.charAt(0)?.toUpperCase() || 'U'}

@@ -129,7 +129,6 @@ function AppRoutes() {
   if (isDashboard) {
     return (
       <>
-        <Navbar />
         <Routes>
           {/* Admin routes */}
           <Route path="/admin" element={
