@@ -606,8 +606,8 @@ export default function PlacementTest() {
   function handleTrackSelect(t) {
     setTrack(t);
     setAccent(t.id);
-    if (!program) { setScreen('program'); }
-    else { setScreen('testintro'); }
+    setProgram(null);
+    setScreen('program');
   }
 
   function handleProgramSelect(p) {
@@ -634,8 +634,15 @@ export default function PlacementTest() {
     setSession(updated);
     saveProgress(updated);
     updateProgressUI(updated);
-
-    setScreen('question');
+    
+    setStageInfo({
+      eyebrow: "Let's start here.",
+      title: "Answer a few short questions.",
+      message: "Do well, and we'll move you up automatically.",
+      focus: focusLine(updated, program),
+      cta: "Begin"
+    });
+    setScreen('stage');
   }
 
   function askQuestion() {
@@ -691,7 +698,8 @@ export default function PlacementTest() {
     const pool = outcome.passed ? up : down;
     const pick = pool[Math.floor(Math.random() * pool.length)];
 
-    setScreen('question');
+    setStageInfo({ ...pick, focus, cta: "Continue" });
+    setScreen('stage');
   }
 
   function goBackQuestion() {
@@ -858,7 +866,7 @@ const renderProgram = () => {
     return (
       <div className="pt-screen">
         <div style={{ width: '100%', marginBottom: '20px' }}>
-          <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => setScreen('track')}>← Back</button>
+          <button className="pt-btn pt-btn-ghost pt-back-btn" style={{ padding: '4px 12px', marginLeft: '-12px' }} onClick={() => { setProgram(null); setScreen('track'); }}>← Back</button>
         </div>
         <div className="pt-step-head">
           <div className="pt-eyebrow">Step 2</div>
