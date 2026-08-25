@@ -168,6 +168,8 @@ Fosselat/
 - **Dynamic Test Recommendations:** Students receive personalized test recommendations in their dashboard 30 days after enrollment, based on their registered programs.
 - **Searchable ID Selection:** Administrators can now easily search and select Student/Teacher IDs via a custom dropdown component that filters typing on-the-fly.
 - **Mobile Responsive Dashboards:** Bottom navigation bars, grids, and history tables are fully responsive and optimized for mobile and iPad screens.
+- **Global Time Zone Synchronization:** Integrated a timezone conversion utility that automatically maps UTC stored schedules to the local time of Admins, Teachers, and Students seamlessly, fully adjusting for DST boundaries dynamically.
+- **Advanced Teacher Session Recording:** Replaced auto-detect mechanisms with manual session entry. Added full editing and deleting capabilities directly in the Teacher Session History dashboard to modify every facet of past records safely.
 
 ---
 

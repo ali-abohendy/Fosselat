@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
 import { Trash, ArrowRight, Plus } from '../../components/Icons';
 import API from '../../config';
+import { localToUTC, utcToLocal } from '../../utils/timezones';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,
@@ -65,7 +66,11 @@ export default function TeacherTimeSlots() {
 
   const handleSave = async () => {
     setAlert(null);
-    const allSlots = DAYS.flatMap(day => slots[day].map(s => ({ day, start_time: s.start_time, end_time: s.end_time })));
+    const allSlots = DAYS.flatMap(day => slots[day].map(s => {
+      const { utcDay, utcTime: uStart } = localToUTC(day, s.start_time);
+      const { utcTime: uEnd } = localToUTC(day, s.end_time);
+      return { day: utcDay, start_time: uStart, end_time: uEnd };
+    }));
     try {
       const r = await fetch(`${API}/teacher/slots`, { method: 'PUT', headers: getHeaders(), body: JSON.stringify({ slots: allSlots }) });
       const d = await r.json();

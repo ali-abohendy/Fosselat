@@ -843,7 +843,15 @@ export default function PlacementTest() {
     </div>
   );
 
-  const renderProgram = () => {
+  
+  useEffect(() => {
+    if (screen === 'testintro' && user && program) {
+      const ageAud = (user.age && user.age < 16) ? 'kids' : 'adults';
+      startTest(ageAud);
+    }
+  }, [screen, user, program]);
+
+const renderProgram = () => {
     const trackParam = searchParams.get('track');
     return (
       <div className="pt-screen">
@@ -1026,30 +1034,34 @@ export default function PlacementTest() {
               </button>
             ))}
           </div>
-          <div className="pt-q-actions">
-            {canBack && (
-              <button className="pt-btn pt-btn-ghost" onClick={goBackQuestion}>← Back</button>
-            )}
-            <button className="pt-btn pt-btn-ghost" onClick={() => { submitAnswer(null); setSelected(null); }}>
-              Skip
-            </button>
-            <button
-              className="pt-btn pt-btn-primary"
-              disabled={selected === null}
-              onClick={() => { submitAnswer(selected); setSelected(null); }}
-            >
-              {isLast ? 'Finish' : 'Continue'}
-            </button>
+          <div className="pt-q-actions" style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '20px' }}>
+            <div>
+              {canBack && (
+                <button className="pt-btn pt-btn-ghost" onClick={goBackQuestion}>← Back</button>
+              )}
+            </div>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button className="pt-btn pt-btn-ghost" onClick={() => { submitAnswer(null); setSelected(null); }}>Skip</button>
+              <button
+                className="pt-btn pt-btn-primary"
+                disabled={selected === null}
+                onClick={() => { submitAnswer(selected); setSelected(null); }}
+              >
+                {isLast ? 'Finish' : 'Continue'}
+              </button>
+            </div>
           </div>
         </div>
         {progressVisible && (
-          <div className="pt-progress-bottom">
+          <div className="pt-progress-wrap" style={{ marginTop: '20px' }}>
             <div className="pt-progress-label">{progressLabel}</div>
             <div className="pt-progress-track">
-              <div className="pt-progress-fill" style={{ width: `${Math.round(progressPct * 100)}%`, transition: 'width 0.5s ease' }} />
+              <div className="pt-progress-fill" style={{ width: `${Math.round(progressPct * 100)}%`, transition: 'width 0.5s ease' }}></div>
             </div>
           </div>
         )}
+      </div>
+        
       </div>
     );
   };

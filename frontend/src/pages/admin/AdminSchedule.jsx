@@ -3,6 +3,7 @@ import Button from '../../components/Button';
 import SearchableSelect from '../../components/SearchableSelect';
 import { Edit2, Trash2 } from 'lucide-react';
 import API from '../../config';
+import { localToUTC, utcToLocal } from '../../utils/timezones';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,
@@ -26,7 +27,23 @@ export default function AdminSchedule() {
 
   const fetchData = () => {
     fetch(`${API}/admin/schedule`, { headers: getHeaders() })
-      .then(r => r.json()).then(d => { if (d.success) { setSlots(d.data.slots || []); setScheduled(d.data.scheduled || []); }}).catch(() => {});
+      .then(r => r.json()).then(d => { if (d.success) {
+            const rawSlots = d.data.slots || [];
+            const localSlots = rawSlots.map(s => {
+                const { localDay, localTime: lStart } = utcToLocal(s.day, s.start_time);
+                const { localTime: lEnd } = utcToLocal(s.day, s.end_time);
+                return { ...s, day: localDay, start_time: lStart, end_time: lEnd };
+            });
+            setSlots(localSlots);
+            
+            const rawSched = d.data.scheduled || [];
+            const localSched = rawSched.map(s => {
+                const { localDay, localTime: lStart } = utcToLocal(s.day, s.start_time);
+                const { localTime: lEnd } = utcToLocal(s.day, s.end_time);
+                return { ...s, day: localDay, start_time: lStart, end_time: lEnd };
+            });
+            setScheduled(localSched);
+          }}).catch(() => {});
     fetch(`${API}/admin/students`, { headers: getHeaders() })
       .then(r => r.json()).then(d => { if (d.success) setStudents(d.data); }).catch(() => {});
     fetch(`${API}/admin/teachers`, { headers: getHeaders() })
@@ -82,7 +99,12 @@ export default function AdminSchedule() {
         const res = await fetch(`${API}/admin/schedule/${editingSessionId}`, {
           method: 'PUT',
           headers: getHeaders(),
-          body: JSON.stringify(form)
+          body: JSON.stringify({
+          ...form,
+          day: localToUTC(form.day, form.start_time).utcDay,
+          start_time: localToUTC(form.day, form.start_time).utcTime,
+          end_time: localToUTC(form.day, form.end_time).utcTime,
+        })
         });
         const json = await res.json();
         if (json.success) {
@@ -96,7 +118,12 @@ export default function AdminSchedule() {
         const res = await fetch(`${API}/admin/schedule`, {
           method: 'POST',
           headers: getHeaders(),
-          body: JSON.stringify(form)
+          body: JSON.stringify({
+          ...form,
+          day: localToUTC(form.day, form.start_time).utcDay,
+          start_time: localToUTC(form.day, form.start_time).utcTime,
+          end_time: localToUTC(form.day, form.end_time).utcTime,
+        })
         });
         const json = await res.json();
         if (json.success) {

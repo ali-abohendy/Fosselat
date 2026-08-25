@@ -76,6 +76,18 @@ def record_session():
     dur_str = data.get('duration', '60 min')
     dur_minutes = int(''.join(filter(str.isdigit, dur_str)) or 60)
 
+    target_date = data.get('date', datetime.now(timezone.utc).isoformat())
+    if target_date and data.get('student_id'):
+        # Check if already recorded
+        existing = mongo.db.sessions.find_one({
+            'teacher_id': str(user['_id']),
+            'student_id': data['student_id'],
+            'date': target_date
+        })
+        if existing:
+            return jsonify({"success": False, "message": "A session for this student on this date is already recorded. Please edit the existing session instead."}), 400
+
+
     session = {
         'teacher_id': str(user['_id']),
         'teacher_name': user.get('full_name', ''),
@@ -83,14 +95,14 @@ def record_session():
         'student_name': student.get('full_name', '') if student else '',
         'student_family_name': student.get('family_name', '') if student else '',
         'student_family_id': student.get('student_id', '') if student else '',
-        'subject': student.get('subject', '') if student else '',
+        'subject': student.get('subject', '') if student else data.get('subject', ''),
         'duration': dur_str,
         'duration_minutes': dur_minutes,
         'status': data.get('status', 'present'),
         'date': data.get('date', datetime.now(timezone.utc).isoformat()),
         'notes': data.get('notes', ''),
-        'start_time': datetime.now(timezone.utc).isoformat(),
-        'end_time': '',
+        'start_time': data.get('start_time', ''),
+        'end_time': data.get('end_time', ''),
         'meeting_room_id': '',
         'last_updated': datetime.now(timezone.utc),
         'created_at': datetime.now(timezone.utc),
@@ -98,6 +110,53 @@ def record_session():
     result = mongo.db.sessions.insert_one(session)
     session['_id'] = str(result.inserted_id)
     return jsonify({"success": True, "data": session})
+
+@teacher_bp2.route('/sessions/<session_id>', methods=['PUT'])
+@jwt_required()
+def update_session(session_id):
+    user = require_teacher()
+    if not user:
+        return jsonify({"success": False, "message": "Teacher only"}), 403
+    data = request.get_json(silent=True) or {}
+    
+    # Parse duration
+    dur_str = data.get('duration', '60 min')
+    dur_minutes = int(''.join(filter(str.isdigit, dur_str)) or 60)
+    
+    update_data = {
+        'student_id': data.get('student_id', ''),
+        'subject': data.get('subject', ''),
+        'duration': dur_str,
+        'duration_minutes': dur_minutes,
+        'status': data.get('status', 'present'),
+        'date': data.get('date', ''),
+        'start_time': data.get('start_time', ''),
+        'end_time': data.get('end_time', ''),
+        'notes': data.get('notes', ''),
+        'last_updated': datetime.now(timezone.utc)
+    }
+    
+    if update_data['student_id']:
+        student = mongo.db.users.find_one({'_id': ObjectId(update_data['student_id'])})
+        if student:
+            update_data['student_name'] = student.get('full_name', '')
+            update_data['student_family_name'] = student.get('family_name', '')
+            update_data['student_family_id'] = student.get('student_id', '')
+    
+    mongo.db.sessions.update_one(
+        {'_id': ObjectId(session_id), 'teacher_id': str(user['_id'])},
+        {'$set': update_data}
+    )
+    return jsonify({"success": True, "message": "Session updated"})
+
+@teacher_bp2.route('/sessions/<session_id>', methods=['DELETE'])
+@jwt_required()
+def delete_session(session_id):
+    user = require_teacher()
+    if not user:
+        return jsonify({"success": False, "message": "Teacher only"}), 403
+    mongo.db.sessions.delete_one({'_id': ObjectId(session_id), 'teacher_id': str(user['_id'])})
+    return jsonify({"success": True, "message": "Session deleted"})
 
 
 # Reports

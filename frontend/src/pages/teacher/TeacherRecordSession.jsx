@@ -13,11 +13,11 @@ export default function TeacherRecordSession() {
   const [students, setStudents] = useState([]);
   const [scheduled, setScheduled] = useState([]);
   const [form, setForm] = useState({
-    student_id: '', duration: '60 min', status: 'present', subject: [],
+    student_id: '', duration: '60 min', status: 'present', subject: [], start_time: '', end_time: '',
     date: new Date().toISOString().split('T')[0], notes: '',
   });
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [autoDetectedSession, setAutoDetectedSession] = useState(null);
+  
   const [alert, setAlert] = useState(null);
 
   useEffect(() => {
@@ -33,28 +33,18 @@ export default function TeacherRecordSession() {
       .catch(() => {});
   }, []);
 
-  // When student or date changes, try to auto-detect the session
+
+
   useEffect(() => {
-    if (form.student_id && form.date) {
-      const selectedDate = new Date(form.date);
-      const dayName = DAYS_MAP[selectedDate.getDay()];
-      
-      const foundSession = scheduled.find(s => s.student_id === form.student_id && s.day === dayName && s.active !== false);
-      if (foundSession) {
-        setAutoDetectedSession(foundSession);
-        setForm(prev => ({
-          ...prev,
-          duration: foundSession.duration || '60 min',
-          start_time: foundSession.start_time,
-          end_time: foundSession.end_time,
-          subject: foundSession.subject ? (Array.isArray(foundSession.subject) ? foundSession.subject : [foundSession.subject]) : prev.subject
-        }));
-      } else {
-        setAutoDetectedSession(null);
-        setForm(prev => ({ ...prev, start_time: undefined, end_time: undefined }));
-      }
+    if (form.start_time && form.duration) {
+      const dur = parseInt(form.duration) || 60;
+      const [h, m] = form.start_time.split(':').map(Number);
+      const endMins = h * 60 + m + dur;
+      const endH = Math.floor(endMins / 60) % 24;
+      const endM = endMins % 60;
+      setForm(prev => ({ ...prev, end_time: `${endH.toString().padStart(2, '0')}:${endM.toString().padStart(2, '0')}` }));
     }
-  }, [form.student_id, form.date, scheduled]);
+  }, [form.start_time, form.duration]);
 
   const handleStudentChange = (id) => {
     const s = students.find(x => x._id === id);
@@ -136,19 +126,23 @@ export default function TeacherRecordSession() {
               />
             </div>
 
-            {autoDetectedSession && (
-              <div className="dash-form-group full-width" style={{ background: 'rgba(200,167,99,0.08)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(200,167,99,0.2)' }}>
-                <strong style={{color:'var(--color-gold)'}}>Session Auto-Detected:</strong> {autoDetectedSession.start_time} - {autoDetectedSession.end_time} ({autoDetectedSession.duration})
-              </div>
-            )}
+            
 
+            
+            <div className="dash-form-group">
+              <label>Start Time</label>
+              <input type="time" value={form.start_time || ''} onChange={e => setForm({...form, start_time: e.target.value})} required />
+            </div>
+            <div className="dash-form-group">
+              <label>End Time</label>
+              <input type="time" value={form.end_time || ''} readOnly style={{ opacity: 0.7 }} />
+            </div>
             <div className="dash-form-group">
               <label>Duration</label>
               <select 
                 value={form.duration} 
                 onChange={e => setForm({...form, duration: e.target.value})}
-                disabled={!!autoDetectedSession}
-                style={{ opacity: autoDetectedSession ? 0.7 : 1, cursor: autoDetectedSession ? 'not-allowed' : 'pointer' }}
+                
               >
                 {['30 min', '40 min', '45 min', '60 min', '90 min', '120 min'].map(d => <option key={d} value={d}>{d}</option>)}
               </select>
