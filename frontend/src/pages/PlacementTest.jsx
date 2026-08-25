@@ -955,7 +955,7 @@ const renderProgram = () => {
             <div><dt>Est. Time</dt><dd>{Math.max(2, Math.round(minQ * 0.4))}–{Math.max(4, Math.round(maxQ * 0.5))} min</dd></div>
             <div><dt>Choices</dt><dd>Multiple choice</dd></div>
           </div>
-          <button className="pt-btn pt-btn-primary pt-btn-block" onClick={() => {
+          <button className="pt-btn pt-btn-primary pt-btn-block" style={{ marginTop: '32px' }} onClick={() => {
             if (!user) {
               if (!validateUserInfo()) return;
               const ageNum = userInfo.age.trim() ? parseInt(userInfo.age, 10) : 25;
@@ -1027,7 +1027,7 @@ const renderProgram = () => {
           </div>
           <h3 className="pt-q-prompt">{q.prompt}</h3>
           {q.arabicParts ? (
-            <div className="pt-q-stimulus-wrap pt-q-stimulus-parts">
+            <div className="pt-q-stimulus-wrap pt-q-stimulus-parts" style={{ marginBottom: '24px' }}>
               {q.arabicParts.map((part, pi) => (
                 <div key={pi} className="pt-q-excerpt">
                   <div className="pt-q-excerpt-label">Excerpt {pi + 1}</div>
@@ -1036,7 +1036,7 @@ const renderProgram = () => {
               ))}
             </div>
           ) : q.arabic && (
-            <div className="pt-q-stimulus-wrap">
+            <div className="pt-q-stimulus-wrap" style={{ marginBottom: '24px' }}>
               <div className={`pt-q-stimulus ${q.arabic.length > 24 ? '' : 'small'}`} lang="ar" dir="rtl">{q.arabic}</div>
             </div>
           )}
