@@ -16,6 +16,25 @@ export default function DashboardLayout({ role, menuItems }) {
 
   return (
     <div className="dashboard-layout">
+      {/* Mobile Header (visible only on mobile) */}
+      <div className="mobile-dashboard-header">
+        <NavLink to="/" className="sidebar-brand">
+          <img src="/logo.png" alt="Fosselat Academy" />
+          <div className="sidebar-brand-text">
+            <span className="sidebar-brand-name">Fosselat</span>
+            <span className="sidebar-brand-tagline">Islamic Qur'an School</span>
+          </div>
+        </NavLink>
+        <div className="mobile-header-actions">
+          <NavLink to="/" className="mobile-action-btn" title="Back to Home">
+            <HomeIcon size={20} />
+          </NavLink>
+          <button className="mobile-action-btn" onClick={handleLogout} title="Logout">
+            <LogOutIcon size={20} />
+          </button>
+        </div>
+      </div>
+
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
         <div className="sidebar-logo-container">
