@@ -428,8 +428,29 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--card-accent, var(--color-gold-dim));
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.4;
+}
+
+.pt-q-stage-main {
+  color: var(--card-accent, var(--color-gold-dim));
+}
+
+.pt-q-stage-separator {
+  opacity: 0.4;
+  font-weight: 400;
+  margin: 0 2px;
+}
+
+.pt-q-stage-sub {
+  color: var(--color-text-muted, #8ea6be);
+  opacity: 0.8;
+  font-weight: 500;
 }
 
 .pt-q-prompt {

@@ -1023,7 +1023,13 @@ const renderProgram = () => {
       <div className="pt-screen">
         <div className="pt-card pt-card-question">
           <div className="pt-q-stage">
-            {info?.name || ''}{bank?.focus ? ` · ${bank.focus}` : ''}
+            <span className="pt-q-stage-main">{info?.name || ''}</span>
+            {bank?.focus && (
+              <>
+                <span className="pt-q-stage-separator">·</span>
+                <span className="pt-q-stage-sub">{bank.focus}</span>
+              </>
+            )}
           </div>
           <h3 className="pt-q-prompt">{q.prompt}</h3>
           {q.arabicParts ? (
