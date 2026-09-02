@@ -105,7 +105,7 @@ const Placement = (() => {
     const seenSigs = new Set();
     usable = usable.filter(q => {
       if (!q.prompt || !q.options) return true;
-      const sig = q.prompt + "|" + JSON.stringify([...q.options].sort());
+      const sig = q.prompt + "|" + JSON.stringify([...q.options].sort()) + "|" + (q.arabic || '') + "|" + (q.arabicParts ? JSON.stringify(q.arabicParts) : '');
       if (seenSigs.has(sig)) return false;
       seenSigs.add(sig);
       return true;

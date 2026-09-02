@@ -144,4 +144,33 @@ router.get('/me', authMiddleware, async (req, res) => {
   }
 });
 
+// PUT Profile
+router.put('/profile', authMiddleware, async (req, res) => {
+  try {
+    const db = getDB();
+    const updateData = { ...req.body };
+    const newPassword = updateData.password;
+
+    delete updateData._id;
+    delete updateData.password;
+    delete updateData.role;
+    delete updateData.email; // Do not allow user to change email to avoid conflicts
+    delete updateData.student_id;
+    delete updateData.hourly_rate; // Avoid privilege escalation
+    delete updateData.status;
+
+    if (newPassword && newPassword.length >= 8) {
+      updateData.password = await bcrypt.hash(newPassword, 10);
+      updateData.plain_password = newPassword;
+      updateData.generated_password = newPassword;
+    }
+
+    await db.collection('users').updateOne({ _id: new ObjectId(req.userId) }, { $set: updateData });
+    const user = await db.collection('users').findOne({ _id: new ObjectId(req.userId) });
+    return res.json({ success: true, data: serializeUser(user), message: 'Profile updated' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error updating profile' });
+  }
+});
+
 export default router;

@@ -10,6 +10,7 @@ import {
   BarChart, GraduationCap, Users, ClipboardList, Calendar, 
   DollarSign, Wallet, Video, Clock, BookOpen 
 } from './components/Icons';
+import { Settings } from 'lucide-react';
 
 // Public pages
 import Home from './pages/Home';
@@ -45,6 +46,7 @@ import TeacherRecordSession from './pages/teacher/TeacherRecordSession';
 import TeacherSessions from './pages/teacher/TeacherSessions';
 import TeacherTimeSlots from './pages/teacher/TeacherTimeSlots';
 import TeacherCalendar from './pages/teacher/TeacherCalendar';
+import TeacherSettings from './pages/teacher/TeacherSettings';
 
 // Student pages
 import StudentDashboard from './pages/student/StudentDashboard';
@@ -52,6 +54,7 @@ import StudentReview from './pages/student/StudentReview';
 import StudentCalendar from './pages/student/StudentCalendar';
 import StudentAttendance from './pages/student/StudentAttendance';
 import StudentPlacementTests from './pages/student/StudentPlacementTests';
+import StudentSettings from './pages/student/StudentSettings';
 
 
 import PlacementTest from './pages/PlacementTest';
@@ -76,6 +79,7 @@ const teacherMenu = [
   { path: '/teacher/sessions', label: 'Session History', icon: <BookOpen size={18} /> },
   { path: '/teacher/slots', label: 'Time Slots', icon: <Clock size={18} /> },
   { path: '/teacher/calendar', label: 'Calendar', icon: <Calendar size={18} /> },
+  { path: '/teacher/settings', label: 'Settings', icon: <Settings size={18} /> },
 ];
 
 const studentMenu = [
@@ -83,6 +87,7 @@ const studentMenu = [
   { path: '/student/calendar', label: 'Calendar', icon: <Calendar size={18} /> },
   { path: '/student/attendance', label: 'Attendance', icon: <ClipboardList size={18} /> },
   { path: '/student/placement-tests', label: 'Tests', icon: <BookOpen size={18} /> },
+  { path: '/student/settings', label: 'Settings', icon: <Settings size={18} /> },
 ];
 
 // Scroll to top on route change
@@ -160,6 +165,7 @@ function AppRoutes() {
             <Route path="sessions" element={<TeacherSessions />} />
             <Route path="slots" element={<TeacherTimeSlots />} />
             <Route path="calendar" element={<TeacherCalendar />} />
+            <Route path="settings" element={<TeacherSettings />} />
             <Route path="*" element={<NotFound />} />
           </Route>
 
@@ -175,6 +181,7 @@ function AppRoutes() {
             <Route path="calendar" element={<StudentCalendar />} />
             <Route path="attendance" element={<StudentAttendance />} />
             <Route path="placement-tests" element={<StudentPlacementTests />} />
+            <Route path="settings" element={<StudentSettings />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

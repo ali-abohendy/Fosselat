@@ -240,11 +240,20 @@ router.put('/students/:sid', async (req, res) => {
   try {
     const db = getDB();
     const updateData = { ...req.body };
+    const newPassword = updateData.password;
+    
     delete updateData._id;
     delete updateData.password;
     delete updateData.role;
-    delete updateData.email;
     delete updateData.student_id;
+
+    if (!updateData.email) delete updateData.email;
+    
+    if (newPassword && newPassword.length >= 8) {
+      updateData.password = await bcrypt.hash(newPassword, 10);
+      updateData.plain_password = newPassword;
+      updateData.generated_password = newPassword;
+    }
 
     if (updateData.age === '') updateData.age = null;
 
@@ -314,10 +323,19 @@ router.put('/teachers/:tid', async (req, res) => {
   try {
     const db = getDB();
     const updateData = { ...req.body };
+    const newPassword = updateData.password;
+    
     delete updateData._id;
     delete updateData.password;
     delete updateData.role;
-    delete updateData.email;
+    
+    if (!updateData.email) delete updateData.email;
+    
+    if (newPassword && newPassword.length >= 8) {
+      updateData.password = await bcrypt.hash(newPassword, 10);
+      updateData.plain_password = newPassword;
+      updateData.generated_password = newPassword;
+    }
 
     if (updateData.hourly_rate !== undefined) {
       updateData.hourly_rate = parseFloat(updateData.hourly_rate || 0);
@@ -692,6 +710,34 @@ router.delete('/payments/teachers/:pid', async (req, res) => {
     const db = getDB();
     await db.collection('teacher_payments').deleteOne({ _id: new ObjectId(req.params.pid) });
     return res.json({ success: true, message: 'Payroll record deleted' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// DELETE Student
+router.delete('/students/:sid', async (req, res) => {
+  try {
+    const db = getDB();
+    const sid = req.params.sid;
+    await db.collection('users').deleteOne({ _id: new ObjectId(sid) });
+    await db.collection('time_slots').deleteMany({ student_id: sid });
+    await db.collection('scheduled_sessions').deleteMany({ student_id: sid });
+    return res.json({ success: true, message: 'Student and related schedule deleted' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// DELETE Teacher
+router.delete('/teachers/:tid', async (req, res) => {
+  try {
+    const db = getDB();
+    const tid = req.params.tid;
+    await db.collection('users').deleteOne({ _id: new ObjectId(tid) });
+    await db.collection('time_slots').deleteMany({ teacher_id: tid });
+    await db.collection('scheduled_sessions').deleteMany({ teacher_id: tid });
+    return res.json({ success: true, message: 'Teacher and related schedule deleted' });
   } catch (err) {
     return res.status(500).json({ success: false, message: 'Server error' });
   }

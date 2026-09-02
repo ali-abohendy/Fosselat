@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Edit2 } from 'lucide-react';
+import { Edit2, Trash2 } from 'lucide-react';
 import Button from '../../components/Button';
 import SearchableSelect from '../../components/SearchableSelect';
 import MultiCreatableSelect from '../../components/MultiCreatableSelect';
@@ -35,6 +35,7 @@ const DURATIONS = [
 ];
 
 const emptyForm = {
+  email: '', password: '',
   full_name: '', family_name: '', teacher_id: '',
   hourly_rate: '', status: 'active', start_date: '', phone: '', age: '',
   programs: [], plan: '', class_duration: '', subject: [],
@@ -97,6 +98,22 @@ export default function AdminStudents() {
     return errors;
   };
 
+  const handleDelete = async (s) => {
+    if (!window.confirm(`Are you sure you want to delete student '${s.full_name}' and their schedule?`)) return;
+    try {
+      const r = await fetch(`${API}/admin/students/${s._id}`, { method: 'DELETE', headers: getHeaders() });
+      const d = await r.json();
+      if (d.success) {
+        setAlert({ type: 'success', msg: 'Student deleted successfully' });
+        fetchStudents();
+      } else {
+        setAlert({ type: 'error', msg: d.message || 'Error deleting' });
+      }
+    } catch {
+      setAlert({ type: 'error', msg: 'Server error' });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAlert(null); setCredentials(null); setValidationErrors([]);
@@ -136,6 +153,7 @@ export default function AdminStudents() {
     // Parse programs back to array
     const progArr = s.program ? s.program.split(',').map(x => x.trim()).filter(Boolean) : [];
     setForm({
+      email: s.email || '', password: '',
       full_name: s.full_name || '', family_name: s.family_name || '',
       teacher_id: s.teacher_id || '',
       hourly_rate: s.hourly_rate || '', status: s.status || 'active',
@@ -184,6 +202,18 @@ export default function AdminStudents() {
               <input value={form.family_name} onChange={e => setForm({...form, family_name: e.target.value})}
                 placeholder="Family / Last name" required />
             </div>
+            {editingId && (
+              <>
+                <div className="dash-form-group">
+                  <label>Email</label>
+                  <input value={form.email} onChange={e => setForm({...form, email: e.target.value})} placeholder="Email address" />
+                </div>
+                <div className="dash-form-group">
+                  <label>New Password <span style={{color:'var(--color-text-muted)', fontSize:'12px'}}>(leave blank to keep current)</span></label>
+                  <input value={form.password} onChange={e => setForm({...form, password: e.target.value})} placeholder="Min 8 characters" minLength="8" />
+                </div>
+              </>
+            )}
             <div className="dash-form-group">
               <label>Phone Number <span style={{color:'var(--color-gold)'}}>*</span></label>
               <input type="tel" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} 
@@ -344,6 +374,9 @@ export default function AdminStudents() {
                   <td>{s.phone}</td>
                   <td style={{ textAlign: 'center' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                      <button onClick={() => handleDelete(s)} style={{ background: 'transparent', border: 'none', color: '#e07a5f', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(224,122,95,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Delete">
+                        <Trash2 size={16} />
+                      </button>
                       <button onClick={() => handleEdit(s)} style={{ background: 'transparent', border: 'none', color: 'var(--color-gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px', borderRadius: '4px', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background='rgba(200,167,99,0.1)'} onMouseLeave={e => e.currentTarget.style.background='transparent'} title="Edit">
                         <Edit2 size={16} />
                       </button>
