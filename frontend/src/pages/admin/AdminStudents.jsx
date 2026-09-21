@@ -344,7 +344,7 @@ export default function AdminStudents() {
               <tr>
                 <th>ID</th><th>Name</th><th>Family</th><th>Email</th><th>Password</th>
                 <th>Age</th><th>Teacher</th><th>Programs</th>
-                <th>Rate/mo</th><th>Status</th><th>Phone</th><th style={{textAlign: 'center'}}>Actions</th>
+                <th>Rate/hr</th><th>Status</th><th>Phone</th><th style={{textAlign: 'center'}}>Actions</th>
               </tr>
             </thead>
             <tbody>

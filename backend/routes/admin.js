@@ -125,15 +125,26 @@ router.get('/dashboard', async (req, res) => {
     const hrsResult = await db.collection('sessions').aggregate(pipeline).toArray();
     const teaching_minutes = hrsResult.length > 0 ? (hrsResult[0].total || 0) : 0;
 
-    // Student payments aggregation
-    const spPipeline = [];
-    if (Object.keys(matchSp).length > 0) spPipeline.push({ $match: matchSp });
-    spPipeline.push({ $group: { _id: null, due: { $sum: '$total_due' }, paid: { $sum: '$amount_paid' }, remaining: { $sum: '$remaining' } } });
+    // Subscriptions aggregation (Replaces student_payments)
+    let matchSub = {};
+    if (periodParts.length === 2 && monthNames.includes(periodParts[0])) {
+      const mIndex = monthNames.indexOf(periodParts[0]);
+      const y = parseInt(periodParts[1]);
+      if (!isNaN(y)) {
+        const startDate = new Date(y, mIndex, 1);
+        const endDate = new Date(y, mIndex + 1, 1);
+        matchSub = { created_at: { $gte: startDate, $lt: endDate } };
+      }
+    }
 
-    const spResult = await db.collection('student_payments').aggregate(spPipeline).toArray();
-    const total_due = spResult.length > 0 ? (spResult[0].due || 0) : 0;
-    const total_paid = spResult.length > 0 ? (spResult[0].paid || 0) : 0;
-    const remaining = spResult.length > 0 ? (spResult[0].remaining || 0) : 0;
+    const subPipeline = [];
+    if (Object.keys(matchSub).length > 0) subPipeline.push({ $match: matchSub });
+    subPipeline.push({ $group: { _id: null, paid: { $sum: '$payment_amount' }, consumed: { $sum: '$consumed_amount' } } });
+
+    const subResult = await db.collection('subscriptions').aggregate(subPipeline).toArray();
+    const total_paid = subResult.length > 0 ? (subResult[0].paid || 0) : 0;
+    const total_due = total_paid; // Since it's a prepaid subscription cycle
+    const remaining = 0; // No outstanding debts in this model
 
     // Teacher payments aggregation
     const tpPipeline = [];
@@ -394,11 +405,28 @@ router.get('/calendar', async (req, res) => {
       reviewMap[r.session_id] = r;
     });
 
-    const past = past_sessions.map(s => ({
-      ...s, 
-      _id: s._id.toString(),
-      student_review: reviewMap[s._id.toString()] || null
-    }));
+    const past = past_sessions.map(s => {
+      let startTime = s.start_time;
+      let endTime = s.end_time;
+      
+      try {
+        const d = new Date(s.date);
+        const dayOfWeek = d.toLocaleDateString('en-US', { weekday: 'long' });
+        const sched = allScheduled.find(sch => sch.student_id === s.student_id && sch.day === dayOfWeek);
+        if (sched && sched.start_time) {
+          startTime = sched.start_time;
+          endTime = sched.end_time || '';
+        }
+      } catch (e) {}
+
+      return {
+        ...s, 
+        start_time: startTime,
+        end_time: endTime,
+        _id: s._id.toString(),
+        student_review: reviewMap[s._id.toString()] || null
+      };
+    });
 
     return res.json({ success: true, data: { scheduled: data, past_sessions: past } });
   } catch (err) {
@@ -586,46 +614,117 @@ router.get('/subscriptions', async (req, res) => {
   }
 });
 
+router.get('/unbilled-sessions/:familyId', async (req, res) => {
+  try {
+    const db = getDB();
+    const familyId = req.params.familyId;
+    
+    // Find oldest session for this family that does not have a subscription_id
+    const oldestSession = await db.collection('sessions').findOne(
+      { student_family_id: familyId, subscription_id: { $exists: false } },
+      { sort: { date: 1, start_time: 1 } }
+    );
+    
+    if (oldestSession) {
+      return res.json({ success: true, date: oldestSession.date });
+    } else {
+      return res.json({ success: true, date: null });
+    }
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 router.post('/subscriptions', async (req, res) => {
   try {
-    const { family_id, student_id, payment_amount, student_rate, lesson_duration, package_name, start_date } = req.body || {};
+    const { family_id, payment_amount, start_date, students } = req.body || {};
     const db = getDB();
 
-    if (!student_id || !payment_amount || !student_rate || !lesson_duration) {
+    if (!family_id || !payment_amount || !students || students.length === 0) {
       return res.status(400).json({ success: false, message: 'Missing required fields for subscription' });
     }
 
     const pAmount = parseFloat(payment_amount);
-    const sRate = parseFloat(student_rate);
-    const lDur = parseFloat(lesson_duration); // in minutes
-
-    const lessonCharge = sRate * (lDur / 60);
-    if (lessonCharge <= 0) {
-      return res.status(400).json({ success: false, message: 'Invalid rate or duration' });
-    }
-
-    const totalLessons = Math.floor(pAmount / lessonCharge);
+    
+    // Prepare the student array
+    let processedStudents = students.map(s => {
+      const charge = parseFloat(s.charge || 0);
+      const totalL = parseInt(s.lessons || 0);
+      return {
+        student_id: s.student_id,
+        rate: parseFloat(s.rate || 0),
+        duration: parseInt(s.duration || 0),
+        lesson_charge: charge,
+        total_lessons: totalL,
+        used_lessons: 0,
+        remaining_lessons: totalL
+      };
+    });
 
     const subDoc = {
-      family_id: family_id || '',
-      student_id: student_id || '',
+      family_id: family_id,
       start_date: start_date || new Date().toISOString().split('T')[0],
       payment_amount: pAmount,
-      student_rate: sRate,
-      lesson_duration: lDur,
-      lesson_charge: lessonCharge,
-      package: package_name || '',
-      total_lessons: totalLessons,
-      used_lessons: 0,
-      remaining_lessons: totalLessons,
       consumed_amount: 0,
       remaining_balance: pAmount,
+      students: processedStudents,
       status: 'active',
       created_at: new Date(),
     };
 
     const result = await db.collection('subscriptions').insertOne(subDoc);
-    return res.json({ success: true, message: 'Subscription Cycle created', data: { ...subDoc, _id: result.insertedId.toString() } });
+    const subIdStr = result.insertedId.toString();
+    subDoc._id = subIdStr;
+
+    // --- Retroactive Deduction Logic ---
+    // Find unbilled sessions on or after the start_date for this family
+    const unbilledSessions = await db.collection('sessions').find({
+      student_family_id: family_id,
+      date: { $gte: subDoc.start_date },
+      subscription_id: { $exists: false },
+      status: { $in: ['present', 'absent'] }
+    }).sort({ date: 1, start_time: 1 }).toArray();
+
+    let updatedConsumed = 0;
+    
+    for (const sess of unbilledSessions) {
+      const stIdx = subDoc.students.findIndex(s => s.student_id === sess.student_id);
+      if (stIdx !== -1) {
+        const studentObj = subDoc.students[stIdx];
+        
+        // Deduct lesson
+        subDoc.students[stIdx].used_lessons += 1;
+        subDoc.students[stIdx].remaining_lessons -= 1;
+        updatedConsumed += studentObj.lesson_charge;
+        
+        // Update session
+        await db.collection('sessions').updateOne(
+          { _id: sess._id },
+          { $set: { subscription_id: subIdStr, lesson_charge: studentObj.lesson_charge } }
+        );
+      }
+    }
+    
+    // Check if any student completed their lessons to update global status if needed, 
+    // but typically the cycle is 'active' until all students are done, or we just leave it active 
+    // and rely on individual student remaining_lessons <= 0 check.
+    const allCompleted = subDoc.students.every(s => s.remaining_lessons <= 0);
+    const finalStatus = allCompleted ? 'completed' : 'active';
+    
+    // Update subscription with the new totals
+    await db.collection('subscriptions').updateOne(
+      { _id: result.insertedId },
+      { 
+        $set: { 
+          students: subDoc.students,
+          consumed_amount: updatedConsumed,
+          remaining_balance: pAmount - updatedConsumed,
+          status: finalStatus
+        } 
+      }
+    );
+
+    return res.json({ success: true, message: 'Subscription Cycle created', data: subDoc });
   } catch (err) {
     return res.status(500).json({ success: false, message: 'Server error creating subscription' });
   }

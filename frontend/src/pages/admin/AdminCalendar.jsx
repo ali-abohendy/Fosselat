@@ -86,7 +86,7 @@ export default function AdminCalendar() {
       // Unrecorded recurring scheduled classes
       const scheduledEvents = scheduled.filter(s => s.day === dayOfWeekStr && s.active);
       const unrecordedScheduled = scheduledEvents.filter(s => {
-        return !recordedEvents.some(re => re.student_id === s.student_id && re.start_time === s.start_time);
+        return !recordedEvents.some(re => re.student_id === s.student_id);
       }).map(s => ({...s, isPast: false}));
 
       events.push(...unrecordedScheduled);

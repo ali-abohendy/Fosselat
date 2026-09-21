@@ -196,41 +196,50 @@ router.post('/sessions', async (req, res) => {
 
       // Student subscription deduction
       if (student && student._id && (status === 'present' || status === 'absent')) {
-        const lastSubArr = await db.collection('subscriptions').find({ student_id: student._id.toString() }).sort({ created_at: -1 }).limit(1).toArray();
+        const lastSubArr = await db.collection('subscriptions')
+          .find({ "students.student_id": student._id.toString(), status: "active" })
+          .sort({ created_at: -1 }).limit(1).toArray();
+          
         if (lastSubArr.length > 0) {
           const sub = lastSubArr[0];
-          const lessonCharge = sub.lesson_charge || 0;
-          const newRemainingLessons = (sub.remaining_lessons || 0) - 1;
-          const newUsedLessons = (sub.used_lessons || 0) + 1;
-          const newConsumedAmount = (sub.consumed_amount || 0) + lessonCharge;
-          const newRemainingBalance = (sub.remaining_balance || 0) - lessonCharge;
+          const stIdx = sub.students.findIndex(s => s.student_id === student._id.toString());
           
-          let newStatus = sub.status;
-          let compDate = sub.completion_date;
-          
-          if (newRemainingLessons <= 0) {
-            newStatus = 'completed';
-            if (!compDate) compDate = new Date().toISOString().split('T')[0];
-          }
-          
-          await db.collection('subscriptions').updateOne(
-            { _id: sub._id },
-            { 
-              $set: { 
-                remaining_lessons: newRemainingLessons,
-                used_lessons: newUsedLessons,
-                consumed_amount: newConsumedAmount,
-                remaining_balance: newRemainingBalance,
-                status: newStatus,
-                completion_date: compDate
-              } 
+          if (stIdx !== -1) {
+            const studentObj = sub.students[stIdx];
+            const lessonCharge = studentObj.lesson_charge || 0;
+            
+            sub.students[stIdx].remaining_lessons = (studentObj.remaining_lessons || 0) - 1;
+            sub.students[stIdx].used_lessons = (studentObj.used_lessons || 0) + 1;
+            
+            const newConsumedAmount = (sub.consumed_amount || 0) + lessonCharge;
+            const newRemainingBalance = (sub.remaining_balance || 0) - lessonCharge;
+            
+            const allCompleted = sub.students.every(s => s.remaining_lessons <= 0);
+            let newStatus = allCompleted ? 'completed' : sub.status;
+            let compDate = sub.completion_date;
+            
+            if (newStatus === 'completed' && !compDate) {
+              compDate = new Date().toISOString().split('T')[0];
             }
-          );
+            
+            await db.collection('subscriptions').updateOne(
+              { _id: sub._id },
+              { 
+                $set: { 
+                  students: sub.students,
+                  consumed_amount: newConsumedAmount,
+                  remaining_balance: newRemainingBalance,
+                  status: newStatus,
+                  completion_date: compDate
+                } 
+              }
+            );
 
-          await db.collection('sessions').updateOne(
-            { _id: new ObjectId(sessionDoc._id) },
-            { $set: { subscription_id: sub._id.toString(), lesson_charge: lessonCharge } }
-          );
+            await db.collection('sessions').updateOne(
+              { _id: result.insertedId },
+              { $set: { subscription_id: sub._id.toString(), lesson_charge: lessonCharge } }
+            );
+          }
         }
       }
     } catch (e) {

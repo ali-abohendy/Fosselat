@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Edit2, Trash2, FileText, X } from 'lucide-react';
+import { Edit2, Trash2, X } from 'lucide-react';
 import Button from '../../components/Button';
 import SearchableSelect from '../../components/SearchableSelect';
 import API from '../../config';
@@ -11,11 +11,9 @@ const getHeaders = () => ({
 
 const emptyForm = { 
   family_id: '', 
-  student_id: '', 
   payment_amount: '', 
-  student_rate: '', 
-  lesson_duration: '',
-  start_date: new Date().toISOString().split('T')[0]
+  start_date: new Date().toISOString().split('T')[0],
+  students: []
 };
 
 export default function AdminStudentPayments() {
@@ -25,10 +23,9 @@ export default function AdminStudentPayments() {
   const [alert, setAlert] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Ledger Modal State
-  const [ledgerModalOpen, setLedgerModalOpen] = useState(false);
-  const [activeLedger, setActiveLedger] = useState(null);
-  const [activeLedgerData, setActiveLedgerData] = useState([]);
+  // Edit Modal State
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [activeSub, setActiveSub] = useState(null);
 
   useEffect(() => {
     document.title = 'Student Subscriptions — Admin';
@@ -44,34 +41,49 @@ export default function AdminStudentPayments() {
 
   const familyIds = [...new Set(students.map(s => s.student_id))].filter(Boolean);
   const getFamilyMembers = (fid) => students.filter(s => s.student_id === fid);
-  const familyMembers = form.family_id ? getFamilyMembers(form.family_id) : [];
 
-  const handleFamilyChange = (fid) => {
-    setForm({ ...emptyForm, family_id: fid });
+  const handleFamilyChange = async (fid) => {
+    const fMems = getFamilyMembers(fid);
+    const initialStudents = fMems.map(s => {
+      const r = parseFloat(s.hourly_rate || 8);
+      const d = parseFloat(s.class_duration || 30);
+      return {
+        student_id: s._id,
+        name: s.full_name,
+        rate: r,
+        duration: d,
+        charge: (r * (d / 60)).toFixed(2),
+        lessons: 0
+      };
+    });
+
+    let startDate = new Date().toISOString().split('T')[0];
+    try {
+      if (fid) {
+        const res = await fetch(`${API}/admin/unbilled-sessions/${fid}`, { headers: getHeaders() });
+        const d = await res.json();
+        if (d.success && d.date) {
+           startDate = d.date.split('T')[0];
+        }
+      }
+    } catch(e) {}
+
+    setForm({ 
+      ...emptyForm, 
+      family_id: fid, 
+      students: initialStudents,
+      start_date: startDate
+    });
   };
 
-  const handleStudentChange = (sid) => {
-    const student = students.find(s => s._id === sid);
-    if (student) {
-      setForm(prev => ({
-        ...prev,
-        student_id: sid,
-        student_rate: student.hourly_rate || 8,
-        lesson_duration: student.class_duration || 30,
-      }));
-    } else {
-      setForm(prev => ({ ...prev, student_id: sid }));
-    }
-  };
-
-  const calculatedLessons = () => {
-    const p = parseFloat(form.payment_amount);
-    const r = parseFloat(form.student_rate);
-    const d = parseFloat(form.lesson_duration);
-    if (!p || !r || !d) return 0;
-    const charge = r * (d / 60);
-    if (charge <= 0) return 0;
-    return Math.floor(p / charge);
+  const handleStudentLessonChange = (student_id, lessons) => {
+    const newStudents = form.students.map(s => {
+      if (s.student_id === student_id) {
+        return { ...s, lessons: parseInt(lessons) || 0 };
+      }
+      return s;
+    });
+    setForm(prev => ({ ...prev, students: newStudents }));
   };
 
   const handleSubmit = async (e) => {
@@ -84,7 +96,7 @@ export default function AdminStudentPayments() {
       });
       const d = await r.json();
       if (d.success) {
-        setAlert({ type: 'success', msg: 'Subscription Cycle created successfully!' });
+        setAlert({ type: 'success', msg: 'Family Subscription Cycle created successfully!' });
         setForm(emptyForm);
         fetchSubscriptions();
       } else setAlert({ type: 'error', msg: d.message || 'Error' });
@@ -101,28 +113,37 @@ export default function AdminStudentPayments() {
     } catch { setAlert({ type: 'error', msg: 'Server error' }); }
   };
 
-  const openLedger = async (sub) => {
-    setActiveLedger(sub);
-    setLedgerModalOpen(true);
+  const openEdit = (sub) => {
+    setActiveSub(JSON.parse(JSON.stringify(sub))); // Deep copy
+    setEditModalOpen(true);
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const r = await fetch(`${API}/admin/subscriptions/${sub._id}/ledger`, { headers: getHeaders() });
+      const r = await fetch(`${API}/admin/subscriptions/${activeSub._id}`, { 
+        method: 'PUT', 
+        headers: getHeaders(), 
+        body: JSON.stringify(activeSub) 
+      });
       const d = await r.json();
-      if (d.success) setActiveLedgerData(d.data);
-    } catch (e) {
-      console.error(e);
-    }
+      if (d.success) {
+        setEditModalOpen(false);
+        fetchSubscriptions();
+      } else alert(d.message || 'Error updating subscription');
+    } catch { alert('Server error'); }
   };
 
   return (
     <>
       <div className="dash-page-header">
-        <h2>Student Subscriptions</h2>
+        <h2>Family Subscriptions</h2>
         <p>Record new payments and track active subscription cycles</p>
       </div>
       {alert && <div className={`dash-alert dash-alert-${alert.type}`}>{alert.msg}</div>}
 
       <div className="dash-form-container">
-        <h3>Record New Payment (Create Cycle)</h3>
+        <h3>Record New Family Payment</h3>
         <form onSubmit={handleSubmit}>
           <div className="dash-form-grid">
 
@@ -138,46 +159,41 @@ export default function AdminStudentPayments() {
             </div>
 
             <div className="dash-form-group">
-              <label>Student</label>
-              <select value={form.student_id} onChange={e => handleStudentChange(e.target.value)} required disabled={!form.family_id}>
-                <option value="">Select Student</option>
-                {familyMembers.map(m => <option key={m._id} value={m._id}>{m.full_name}</option>)}
-              </select>
-            </div>
-
-            <div className="dash-form-group">
               <label>Payment Amount ($)</label>
               <input type="number" step="0.01" min="1" value={form.payment_amount}
-                onChange={e => setForm({...form, payment_amount: e.target.value})} required />
+                onChange={e => setForm({...form, payment_amount: e.target.value})} required disabled={!form.family_id} />
             </div>
 
             <div className="dash-form-group">
-              <label>Student Rate ($/hr)</label>
-              <input type="number" step="0.01" min="0.1" value={form.student_rate}
-                onChange={e => setForm({...form, student_rate: e.target.value})} required />
+              <label>Cycle Start Date</label>
+              <input type="date" value={form.start_date}
+                onChange={e => setForm({...form, start_date: e.target.value})} required disabled={!form.family_id} />
             </div>
 
-            <div className="dash-form-group">
-              <label>Lesson Duration (minutes)</label>
-              <select value={form.lesson_duration} onChange={e => setForm({...form, lesson_duration: e.target.value})} required>
-                <option value="">Select Duration</option>
-                <option value="30">30 min</option>
-                <option value="45">45 min</option>
-                <option value="60">60 min</option>
-                <option value="90">90 min</option>
-                <option value="120">120 min</option>
-              </select>
-            </div>
-
-            <div className="dash-form-group">
-              <label>Calculated Entitlement</label>
-              <div style={{ padding: '10px 14px', background: 'rgba(200,167,99,0.1)', borderRadius: '8px', color: 'var(--color-gold)', fontWeight: 600 }}>
-                {calculatedLessons()} Lessons
+            {form.students.length > 0 && (
+              <div className="dash-form-group" style={{ gridColumn: '1 / -1', background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '12px' }}>
+                <h4 style={{ marginBottom: '16px', color: 'var(--color-gold)' }}>Allocate Lessons</h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
+                  {form.students.map(st => (
+                    <div key={st.student_id} style={{ background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '8px' }}>
+                      <div style={{ fontWeight: 600, color: 'var(--color-cream)', marginBottom: '8px' }}>{st.name}</div>
+                      <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '12px' }}>
+                        Rate: ${st.rate}/hr | Dur: {st.duration}m | Charge/lesson: ${st.charge}
+                      </div>
+                      <label style={{ fontSize: '12px', marginBottom: '4px', display: 'block' }}>Lessons Allocated</label>
+                      <input 
+                        type="number" min="0" value={st.lessons}
+                        onChange={e => handleStudentLessonChange(st.student_id, e.target.value)}
+                        style={{ width: '100%', padding: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'var(--color-white)' }}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="dash-form-actions" style={{gridColumn:'1 / -1'}}>
-              <Button type="submit" variant="primary">Record Payment</Button>
+              <Button type="submit" variant="primary" disabled={!form.family_id}>Record Payment & Cycle</Button>
             </div>
           </div>
         </form>
@@ -210,12 +226,10 @@ export default function AdminStudentPayments() {
             <thead>
               <tr>
                 <th>Family ID</th>
-                <th>Student</th>
                 <th>Start Date</th>
-                <th>Payment</th>
-                <th>Rate / Dur</th>
-                <th>Lessons (Used/Tot)</th>
-                <th>Balance</th>
+                <th>Total Paid</th>
+                <th>Family Balance</th>
+                <th>Students & Lessons</th>
                 <th>Status</th>
                 <th style={{textAlign: 'center'}}>Actions</th>
               </tr>
@@ -227,33 +241,35 @@ export default function AdminStudentPayments() {
                   const q = searchQuery.toLowerCase();
                   return (s.family_id || '').toLowerCase().includes(q);
                 })
-                .map(sub => {
-                  const st = students.find(s => s._id === sub.student_id);
-                  const stName = st ? st.full_name : 'Unknown';
-                  return (
+                .map(sub => (
                     <tr key={sub._id}>
                       <td style={{color:'var(--color-gold)',fontWeight:600}}>{sub.family_id}</td>
-                      <td>{stName}</td>
                       <td>{sub.start_date}</td>
                       <td style={{fontWeight: 700}}>${sub.payment_amount}</td>
-                      <td style={{fontSize: '12px'}}>${sub.student_rate}/hr <br/> {sub.lesson_duration}m</td>
+                      <td style={{color: sub.remaining_balance < 0 ? '#ef4444' : 'inherit'}}>${sub.remaining_balance.toFixed(2)}</td>
                       <td>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <div style={{ 
-                            width: '100%', maxWidth: '80px', height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' 
-                          }}>
-                            <div style={{
-                              height: '100%', 
-                              background: sub.status === 'completed' ? '#4ade80' : 'var(--color-gold)',
-                              width: `${(sub.used_lessons / sub.total_lessons) * 100}%`
-                            }} />
-                          </div>
-                          <span style={{fontSize: '11px', color: 'var(--color-text-muted)'}}>
-                            {sub.used_lessons} / {sub.total_lessons}
-                          </span>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {sub.students.map(st => {
+                            const stObj = students.find(s => s._id === st.student_id);
+                            const name = stObj ? stObj.full_name : 'Unknown';
+                            return (
+                              <div key={st.student_id} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', background: 'rgba(255,255,255,0.02)', padding: '6px', borderRadius: '4px' }}>
+                                <div style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</div>
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ width: '60px', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden', marginBottom: '4px' }}>
+                                    <div style={{
+                                      height: '100%', 
+                                      background: st.remaining_lessons <= 0 ? '#4ade80' : 'var(--color-gold)',
+                                      width: `${Math.min((st.used_lessons / (st.total_lessons || 1)) * 100, 100)}%`
+                                    }} />
+                                  </div>
+                                  <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>{st.used_lessons}/{st.total_lessons} lessons</span>
+                                </div>
+                              </div>
+                            )
+                          })}
                         </div>
                       </td>
-                      <td style={{color: sub.remaining_balance < 0 ? '#ef4444' : 'inherit'}}>${sub.remaining_balance.toFixed(2)}</td>
                       <td>
                         <span className={`status-badge status-${sub.status === 'active' ? 'active' : 'inactive'}`}>
                           {sub.status.toUpperCase()}
@@ -261,8 +277,8 @@ export default function AdminStudentPayments() {
                       </td>
                       <td style={{ textAlign: 'center' }}>
                         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                          <button onClick={() => openLedger(sub)} style={{ background: 'transparent', border: 'none', color: '#60a5fa', cursor: 'pointer', padding: '6px', borderRadius: '4px' }} title="View Ledger">
-                            <FileText size={16} />
+                          <button onClick={() => openEdit(sub)} style={{ background: 'transparent', border: 'none', color: '#60a5fa', cursor: 'pointer', padding: '6px', borderRadius: '4px' }} title="Edit">
+                            <Edit2 size={16} />
                           </button>
                           <button onClick={() => handleDelete(sub._id)} style={{ background: 'transparent', border: 'none', color: '#f87171', cursor: 'pointer', padding: '6px', borderRadius: '4px' }} title="Delete">
                             <Trash2 size={16} />
@@ -271,14 +287,14 @@ export default function AdminStudentPayments() {
                       </td>
                     </tr>
                   )
-              })}
-              {!subscriptions.length && <tr><td colSpan="9" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No subscription cycles found</td></tr>}
+              )}
+              {!subscriptions.length && <tr><td colSpan="7" style={{textAlign:'center',color:'var(--color-text-muted)'}}>No subscription cycles found</td></tr>}
             </tbody>
           </table>
         </div>
       </div>
 
-      {ledgerModalOpen && activeLedger && (
+      {editModalOpen && activeSub && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, 
           background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)',
@@ -286,48 +302,69 @@ export default function AdminStudentPayments() {
         }}>
           <div style={{
             background: 'var(--color-bg)', border: '1px solid rgba(200,167,99,0.2)',
-            borderRadius: '12px', width: '90%', maxWidth: '600px', maxHeight: '80vh',
+            borderRadius: '12px', width: '90%', maxWidth: '600px', maxHeight: '90vh',
             display: 'flex', flexDirection: 'column'
           }}>
             <div style={{ padding: '20px', borderBottom: '1px solid rgba(200,167,99,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <h3 style={{ margin: 0, color: 'var(--color-white)', fontSize: '18px' }}>Ledger</h3>
-                <p style={{ margin: '4px 0 0', color: 'var(--color-text-muted)', fontSize: '13px' }}>
-                  Student: {students.find(s => s._id === activeLedger.student_id)?.full_name || 'Unknown'} | Start: {activeLedger.start_date}
-                </p>
+                <h3 style={{ margin: 0, color: 'var(--color-white)', fontSize: '18px' }}>Edit Subscription</h3>
+                <p style={{ margin: '4px 0 0', color: 'var(--color-text-muted)', fontSize: '13px' }}>Family: {activeSub.family_id}</p>
               </div>
-              <button onClick={() => setLedgerModalOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}>
+              <button onClick={() => setEditModalOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer' }}>
                 <X size={20} />
               </button>
             </div>
             
-            <div style={{ padding: '20px', overflowY: 'auto' }}>
-              <table className="dash-table" style={{ width: '100%' }}>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Transaction</th>
-                    <th>Charge</th>
-                    <th>Payment</th>
-                    <th>Balance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {activeLedgerData.map((row, idx) => (
-                    <tr key={idx}>
-                      <td>{row.date}</td>
-                      <td>{row.transaction}</td>
-                      <td style={{ color: '#f87171' }}>{row.charge > 0 ? `-$${row.charge.toFixed(2)}` : '—'}</td>
-                      <td style={{ color: '#4ade80' }}>{row.payment > 0 ? `+$${row.payment.toFixed(2)}` : '—'}</td>
-                      <td style={{ fontWeight: 600 }}>${row.balance.toFixed(2)}</td>
-                    </tr>
-                  ))}
-                  {activeLedgerData.length === 0 && (
-                    <tr><td colSpan="5" style={{textAlign: 'center'}}>Loading ledger...</td></tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+            <form onSubmit={handleEditSubmit} style={{ padding: '20px', overflowY: 'auto' }}>
+              <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: '1fr 1fr' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', color: 'var(--color-cream)' }}>Payment Amount ($)</label>
+                  <input type="number" step="0.01" value={activeSub.payment_amount} onChange={e => setActiveSub({...activeSub, payment_amount: parseFloat(e.target.value) || 0})} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: 'var(--color-white)' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', color: 'var(--color-cream)' }}>Start Date</label>
+                  <input type="date" value={activeSub.start_date} onChange={e => setActiveSub({...activeSub, start_date: e.target.value})} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: 'var(--color-white)' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', color: 'var(--color-cream)' }}>Status</label>
+                  <select value={activeSub.status} onChange={e => setActiveSub({...activeSub, status: e.target.value})} style={{ width: '100%', padding: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: 'var(--color-white)' }}>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+
+              <h4 style={{ margin: '24px 0 12px', color: 'var(--color-gold)' }}>Student Allocations</h4>
+              <div style={{ display: 'grid', gap: '12px' }}>
+                {activeSub.students.map((st, idx) => {
+                  const stObj = students.find(s => s._id === st.student_id);
+                  const name = stObj ? stObj.full_name : 'Unknown';
+                  return (
+                    <div key={st.student_id} style={{ background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', display: 'flex', gap: '12px', alignItems: 'center' }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: '13px', color: 'var(--color-cream)' }}>{name}</div>
+                        <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Used: {st.used_lessons} | Remaining: {st.remaining_lessons}</div>
+                      </div>
+                      <div style={{ width: '100px' }}>
+                        <label style={{ fontSize: '11px', display: 'block', marginBottom: '4px' }}>Total Lessons</label>
+                        <input type="number" min="0" value={st.total_lessons} onChange={e => {
+                          const newTotal = parseInt(e.target.value) || 0;
+                          const newStudents = [...activeSub.students];
+                          newStudents[idx].total_lessons = newTotal;
+                          newStudents[idx].remaining_lessons = newTotal - newStudents[idx].used_lessons;
+                          setActiveSub({...activeSub, students: newStudents});
+                        }} style={{ width: '100%', padding: '6px', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', color: 'var(--color-white)' }} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div style={{ marginTop: '24px', display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                <Button type="button" variant="outline" onClick={() => setEditModalOpen(false)}>Cancel</Button>
+                <Button type="submit" variant="primary">Save Changes</Button>
+              </div>
+            </form>
           </div>
         </div>
       )}
