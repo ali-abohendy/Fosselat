@@ -35,7 +35,7 @@ export default function Pricing() {
     if (!plan || !dur) return null;
     const base = plan.classes * 4 * dur.rate;
     const discount = plan.discount ? base * plan.discount : 0;
-    return { base: base.toFixed(2), discount: discount.toFixed(2), total: (base - discount).toFixed(2), hasDiscount: !!plan.discount, discountPct: plan.discount * 100, planName: plan.name };
+    return { base: base.toFixed(2), discount: discount.toFixed(2), total: (base - discount).toFixed(2), hasDiscount: !!plan.discount, discountPct: Math.round(plan.discount * 100), planName: plan.name };
   };
 
   const pricing = calculateMonthly();
@@ -65,7 +65,7 @@ export default function Pricing() {
                   className={`pricing-plan-card ${selectedPlan === p.id ? 'selected' : ''} ${p.popular ? 'popular' : ''}`}
                   onClick={() => setSelectedPlan(p.id)}>
                   {p.popular && <div className="plan-badge">⭐ Most Popular</div>}
-                  {p.discount > 0 && <div className="plan-badge plan-badge-discount">{p.discount * 100}% OFF</div>}
+                  {p.discount > 0 && <div className="plan-badge plan-badge-discount">{Math.round(p.discount * 100)}% OFF</div>}
                   <div className="plan-icon">{p.icon}</div>
                   <h3>{p.name}</h3>
                   <div className="plan-classes">{p.classes} Classes / Week</div>
