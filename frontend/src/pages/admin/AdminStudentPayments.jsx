@@ -36,7 +36,25 @@ export default function AdminStudentPayments() {
 
   const fetchSubscriptions = () => {
     fetch(`${API}/admin/subscriptions`, { headers: getHeaders() })
-      .then(r => r.json()).then(d => { if (d.success) setSubscriptions(d.data); }).catch(() => {});
+      .then(r => r.json()).then(d => { 
+        if (d.success) {
+          const normalized = d.data.map(sub => {
+            if (!sub.students) {
+              sub.students = [{
+                student_id: sub.student_id,
+                rate: sub.student_rate,
+                duration: sub.lesson_duration,
+                lesson_charge: sub.lesson_charge,
+                total_lessons: sub.total_lessons,
+                used_lessons: sub.used_lessons,
+                remaining_lessons: sub.remaining_lessons
+              }];
+            }
+            return sub;
+          });
+          setSubscriptions(normalized); 
+        } 
+      }).catch(() => {});
   };
 
   const familyIds = [...new Set(students.map(s => s.student_id))].filter(Boolean);
