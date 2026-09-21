@@ -7,19 +7,19 @@ const WHATSAPP_BASE = 'https://wa.me/966595796177';
 const WHATSAPP_TRIAL = 'https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20Free%20trial%20lesson,%20please.';
 
 const PLANS = [
-  { id: 'starter', name: 'Starter', icon: <Leaf size={32} color="#4ade80" />, classes: 2, desc: 'Perfect for steady progress.' },
-  { id: 'growth', name: 'Growth', icon: <BookOpen size={32} color="#60a5fa" />, classes: 3, desc: 'Balanced learning and consistent improvement.', popular: true },
-  { id: 'excellence', name: 'Excellence', icon: <Star size={32} color="#f472b6" />, classes: 4, desc: 'Faster progress and greater achievement.' },
+  { id: 'starter', name: 'Starter', icon: <Leaf size={32} color="#4ade80" />, classes: 2, desc: 'Perfect for steady progress.', discount: 0 },
+  { id: 'growth', name: 'Growth', icon: <BookOpen size={32} color="#60a5fa" />, classes: 3, desc: 'Balanced learning and consistent improvement.', popular: true, discount: 0.05 },
+  { id: 'excellence', name: 'Excellence', icon: <Star size={32} color="#f472b6" />, classes: 4, desc: 'Faster progress and greater achievement.', discount: 0.07 },
   { id: 'elite', name: 'Elite', icon: <Trophy size={32} color="var(--color-gold)" />, classes: 5, desc: 'Maximum progress and intensive learning.', discount: 0.10 },
 ];
 
 const DURATIONS = [
-  { minutes: 30, rate: 5 },
-  { minutes: 40, rate: 6.67 },
-  { minutes: 45, rate: 7.5 },
-  { minutes: 60, rate: 10 },
-  { minutes: 90, rate: 15 },
-  { minutes: 120, rate: 20 },
+  { minutes: 30, rate: 4 },
+  { minutes: 40, rate: 5.33 },
+  { minutes: 45, rate: 6 },
+  { minutes: 60, rate: 8 },
+  { minutes: 90, rate: 12 },
+  { minutes: 120, rate: 16 },
 ];
 
 export default function Pricing() {
@@ -35,7 +35,7 @@ export default function Pricing() {
     if (!plan || !dur) return null;
     const base = plan.classes * 4 * dur.rate;
     const discount = plan.discount ? base * plan.discount : 0;
-    return { base: base.toFixed(2), discount: discount.toFixed(2), total: (base - discount).toFixed(2), hasDiscount: !!plan.discount };
+    return { base: base.toFixed(2), discount: discount.toFixed(2), total: (base - discount).toFixed(2), hasDiscount: !!plan.discount, discountPct: plan.discount * 100, planName: plan.name };
   };
 
   const pricing = calculateMonthly();
@@ -65,7 +65,7 @@ export default function Pricing() {
                   className={`pricing-plan-card ${selectedPlan === p.id ? 'selected' : ''} ${p.popular ? 'popular' : ''}`}
                   onClick={() => setSelectedPlan(p.id)}>
                   {p.popular && <div className="plan-badge">⭐ Most Popular</div>}
-                  {p.discount && <div className="plan-badge plan-badge-discount">10% OFF</div>}
+                  {p.discount > 0 && <div className="plan-badge plan-badge-discount">{p.discount * 100}% OFF</div>}
                   <div className="plan-icon">{p.icon}</div>
                   <h3>{p.name}</h3>
                   <div className="plan-classes">{p.classes} Classes / Week</div>
@@ -118,7 +118,7 @@ export default function Pricing() {
                         <span className="price-strike">${pricing.base}</span>
                       </div>
                       <div className="summary-row summary-discount">
-                        <span>Elite Discount (10%):</span>
+                        <span>{pricing.planName} Discount ({pricing.discountPct}%):</span>
                         <span>-${pricing.discount}</span>
                       </div>
                     </>

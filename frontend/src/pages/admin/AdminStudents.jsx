@@ -23,10 +23,10 @@ const PROGRAM_TRACKS = [
 ];
 
 const PLANS = [
-  { id: 'starter', name: 'Starter (2/week)', classes: 2 },
-  { id: 'growth', name: 'Growth (3/week)', classes: 3 },
-  { id: 'excellence', name: 'Excellence (4/week)', classes: 4 },
-  { id: 'elite', name: 'Elite (5/week, 10% off)', classes: 5 },
+  { id: 'starter', name: 'Starter (2/week)', classes: 2, discount: 0 },
+  { id: 'growth', name: 'Growth (3/week, 5% off)', classes: 3, discount: 0.05 },
+  { id: 'excellence', name: 'Excellence (4/week, 7% off)', classes: 4, discount: 0.07 },
+  { id: 'elite', name: 'Elite (5/week, 10% off)', classes: 5, discount: 0.10 },
 ];
 
 const DURATIONS = [
@@ -65,11 +65,14 @@ export default function AdminStudents() {
   useEffect(() => { document.title = 'Students — Admin'; fetchStudents(); fetchTeachers(); }, []);
 
 
-  // Set default hourly rate if it changes
+  // Auto-calculate rate based on standard $8/hr and plan discount
   useEffect(() => {
     if (form.plan && form.class_duration) {
-      if (form.hourly_rate === '') {
-        setForm(prev => ({ ...prev, hourly_rate: 8 })); // Default $8/hr, Admin can change this
+      const planObj = PLANS.find(p => p.id === form.plan);
+      if (planObj) {
+        const standardRate = 8;
+        const discountedRate = standardRate * (1 - (planObj.discount || 0));
+        setForm(prev => ({ ...prev, hourly_rate: discountedRate.toFixed(2) }));
       }
     }
   }, [form.plan, form.class_duration]);
