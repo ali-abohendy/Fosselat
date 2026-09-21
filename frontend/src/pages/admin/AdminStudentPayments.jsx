@@ -263,25 +263,26 @@ export default function AdminStudentPayments() {
                     <tr key={sub._id}>
                       <td style={{color:'var(--color-gold)',fontWeight:600}}>{sub.family_id}</td>
                       <td>{sub.start_date}</td>
-                      <td style={{fontWeight: 700}}>${sub.payment_amount}</td>
-                      <td style={{color: sub.remaining_balance < 0 ? '#ef4444' : 'inherit'}}>${sub.remaining_balance.toFixed(2)}</td>
+                      <td style={{fontWeight: 700}}>${(sub.payment_amount || 0)}</td>
+                      <td style={{color: (sub.remaining_balance || 0) < 0 ? '#ef4444' : 'inherit'}}>${(sub.remaining_balance || 0).toFixed(2)}</td>
                       <td>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                          {sub.students.map(st => {
+                          {(sub.students || []).map(st => {
+                            if (!st) return null;
                             const stObj = students.find(s => s._id === st.student_id);
                             const name = stObj ? stObj.full_name : 'Unknown';
                             return (
-                              <div key={st.student_id} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', background: 'rgba(255,255,255,0.02)', padding: '6px', borderRadius: '4px' }}>
+                              <div key={st.student_id || Math.random()} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', background: 'rgba(255,255,255,0.02)', padding: '6px', borderRadius: '4px' }}>
                                 <div style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</div>
                                 <div style={{ flex: 1 }}>
                                   <div style={{ width: '60px', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden', marginBottom: '4px' }}>
                                     <div style={{
                                       height: '100%', 
-                                      background: st.remaining_lessons <= 0 ? '#4ade80' : 'var(--color-gold)',
-                                      width: `${Math.min((st.used_lessons / (st.total_lessons || 1)) * 100, 100)}%`
+                                      background: (st.remaining_lessons || 0) <= 0 ? '#4ade80' : 'var(--color-gold)',
+                                      width: `${Math.min(((st.used_lessons || 0) / (st.total_lessons || 1)) * 100, 100)}%`
                                     }} />
                                   </div>
-                                  <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>{st.used_lessons}/{st.total_lessons} lessons</span>
+                                  <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>{(st.used_lessons || 0)}/{(st.total_lessons || 0)} lessons</span>
                                 </div>
                               </div>
                             )
@@ -289,8 +290,8 @@ export default function AdminStudentPayments() {
                         </div>
                       </td>
                       <td>
-                        <span className={`status-badge status-${sub.status === 'active' ? 'active' : 'inactive'}`}>
-                          {sub.status.toUpperCase()}
+                        <span className={`status-badge status-${(sub.status || 'active') === 'active' ? 'active' : 'inactive'}`}>
+                          {(sub.status || 'active').toUpperCase()}
                         </span>
                       </td>
                       <td style={{ textAlign: 'center' }}>
@@ -354,22 +355,23 @@ export default function AdminStudentPayments() {
 
               <h4 style={{ margin: '24px 0 12px', color: 'var(--color-gold)' }}>Student Allocations</h4>
               <div style={{ display: 'grid', gap: '12px' }}>
-                {activeSub.students.map((st, idx) => {
+                {(activeSub.students || []).map((st, idx) => {
+                  if (!st) return null;
                   const stObj = students.find(s => s._id === st.student_id);
                   const name = stObj ? stObj.full_name : 'Unknown';
                   return (
-                    <div key={st.student_id} style={{ background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <div key={st.student_id || Math.random()} style={{ background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', display: 'flex', gap: '12px', alignItems: 'center' }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: '13px', color: 'var(--color-cream)' }}>{name}</div>
-                        <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Used: {st.used_lessons} | Remaining: {st.remaining_lessons}</div>
+                        <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Used: {st.used_lessons || 0} | Remaining: {st.remaining_lessons || 0}</div>
                       </div>
                       <div style={{ width: '100px' }}>
                         <label style={{ fontSize: '11px', display: 'block', marginBottom: '4px' }}>Total Lessons</label>
-                        <input type="number" min="0" value={st.total_lessons} onChange={e => {
+                        <input type="number" min="0" value={st.total_lessons || 0} onChange={e => {
                           const newTotal = parseInt(e.target.value) || 0;
                           const newStudents = [...activeSub.students];
                           newStudents[idx].total_lessons = newTotal;
-                          newStudents[idx].remaining_lessons = newTotal - newStudents[idx].used_lessons;
+                          newStudents[idx].remaining_lessons = newTotal - (newStudents[idx].used_lessons || 0);
                           setActiveSub({...activeSub, students: newStudents});
                         }} style={{ width: '100%', padding: '6px', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', color: 'var(--color-white)' }} />
                       </div>
