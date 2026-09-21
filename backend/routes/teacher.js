@@ -194,26 +194,42 @@ router.post('/sessions', async (req, res) => {
         }
       }
 
-      // Student payments
-      if (student && student.student_id && (status === 'present' || status === 'absent')) {
-        const sp = await db.collection('student_payments').findOne({ family_id: student.student_id, month: monthStr });
-        if (sp) {
-          const hoursAdded = durMinutes / 60;
-          const rate = student.plan === 'elite' ? 9 : 10;
-          const dueAdded = hoursAdded * rate;
-          const newDue = (parseFloat(sp.total_due || 0) + dueAdded).toFixed(2);
-          const amountPaid = parseFloat(sp.amount_paid || 0);
-          const newRem = (parseFloat(newDue) - amountPaid).toFixed(2);
+      // Student subscription deduction
+      if (student && student._id && (status === 'present' || status === 'absent')) {
+        const lastSubArr = await db.collection('subscriptions').find({ student_id: student._id.toString() }).sort({ created_at: -1 }).limit(1).toArray();
+        if (lastSubArr.length > 0) {
+          const sub = lastSubArr[0];
+          const lessonCharge = sub.lesson_charge || 0;
+          const newRemainingLessons = (sub.remaining_lessons || 0) - 1;
+          const newUsedLessons = (sub.used_lessons || 0) + 1;
+          const newConsumedAmount = (sub.consumed_amount || 0) + lessonCharge;
+          const newRemainingBalance = (sub.remaining_balance || 0) - lessonCharge;
           
-          let newStatus = 'unpaid';
-          if (parseFloat(newDue) === 0 && amountPaid === 0) newStatus = 'paid';
-          else if (amountPaid === 0) newStatus = 'unpaid';
-          else if (parseFloat(newRem) <= 0) newStatus = amountPaid > parseFloat(newDue) ? 'credit' : 'paid';
-          else newStatus = 'partial';
+          let newStatus = sub.status;
+          let compDate = sub.completion_date;
           
-          await db.collection('student_payments').updateOne(
-            { _id: sp._id },
-            { $set: { total_due: parseFloat(newDue), remaining: parseFloat(newRem), status: newStatus } }
+          if (newRemainingLessons <= 0) {
+            newStatus = 'completed';
+            if (!compDate) compDate = new Date().toISOString().split('T')[0];
+          }
+          
+          await db.collection('subscriptions').updateOne(
+            { _id: sub._id },
+            { 
+              $set: { 
+                remaining_lessons: newRemainingLessons,
+                used_lessons: newUsedLessons,
+                consumed_amount: newConsumedAmount,
+                remaining_balance: newRemainingBalance,
+                status: newStatus,
+                completion_date: compDate
+              } 
+            }
+          );
+
+          await db.collection('sessions').updateOne(
+            { _id: new ObjectId(sessionDoc._id) },
+            { $set: { subscription_id: sub._id.toString(), lesson_charge: lessonCharge } }
           );
         }
       }

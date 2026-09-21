@@ -71,10 +71,14 @@ export default function TeacherSettings() {
 
       {alert && <div className={`dash-alert dash-alert-${alert.type}`}>{alert.msg}</div>}
 
-      <div className="dash-form-container" style={{ maxWidth: '800px' }}>
-        <h3>Personal Information</h3>
+      <div className="dash-form-container" style={{ paddingTop: '24px' }}>
         <form onSubmit={handleSubmit}>
           <div className="dash-form-grid">
+            <div className="dash-form-group" style={{ gridColumn: '1 / -1' }}>
+              <h3 style={{ borderBottom: '1px solid rgba(200, 167, 99, 0.2)', paddingBottom: '8px', marginBottom: '8px', marginTop: '0', color: 'var(--color-cream)' }}>
+                Personal Information
+              </h3>
+            </div>
             <div className="dash-form-group">
               <label>First Name <span style={{color:'var(--color-gold)'}}>*</span></label>
               <input 

@@ -575,69 +575,120 @@ router.delete('/schedule/:id', async (req, res) => {
   }
 });
 
-// Payments: Students
-router.get('/payments/students', async (req, res) => {
+// Subscriptions (Replaces student_payments)
+router.get('/subscriptions', async (req, res) => {
   try {
     const db = getDB();
-    const payments = await db.collection('student_payments').find().sort({ created_at: -1 }).toArray();
-    return res.json({ success: true, data: payments.map((p) => ({ ...p, _id: p._id.toString() })) });
+    const subs = await db.collection('subscriptions').find().sort({ start_date: -1, created_at: -1 }).toArray();
+    return res.json({ success: true, data: subs.map(s => ({ ...s, _id: s._id.toString() })) });
   } catch (err) {
-    return res.status(500).json({ success: false, message: 'Server error' });
+    return res.status(500).json({ success: false, message: 'Server error fetching subscriptions' });
   }
 });
 
-router.post('/payments/students', async (req, res) => {
+router.post('/subscriptions', async (req, res) => {
   try {
-    const { family_id, members, month, total_due, amount_paid, remaining, status } = req.body || {};
+    const { family_id, student_id, payment_amount, student_rate, lesson_duration, package_name, start_date } = req.body || {};
     const db = getDB();
 
-    const existing = await db.collection('student_payments').findOne({ family_id, month });
-    if (existing) {
-      return res.status(400).json({ success: false, message: 'Payment record for this family and month already exists' });
+    if (!student_id || !payment_amount || !student_rate || !lesson_duration) {
+      return res.status(400).json({ success: false, message: 'Missing required fields for subscription' });
     }
 
-    await db.collection('student_payments').insertOne({
-      family_id: family_id || '',
-      members: members || '',
-      month: month || '',
-      total_due: parseFloat(total_due || 0),
-      amount_paid: parseFloat(amount_paid || 0),
-      remaining: parseFloat(remaining || 0),
-      status: status || 'unpaid',
-      created_at: new Date(),
-    });
+    const pAmount = parseFloat(payment_amount);
+    const sRate = parseFloat(student_rate);
+    const lDur = parseFloat(lesson_duration); // in minutes
 
-    return res.json({ success: true, message: 'Payment recorded' });
+    const lessonCharge = sRate * (lDur / 60);
+    if (lessonCharge <= 0) {
+      return res.status(400).json({ success: false, message: 'Invalid rate or duration' });
+    }
+
+    const totalLessons = Math.floor(pAmount / lessonCharge);
+
+    const subDoc = {
+      family_id: family_id || '',
+      student_id: student_id || '',
+      start_date: start_date || new Date().toISOString().split('T')[0],
+      payment_amount: pAmount,
+      student_rate: sRate,
+      lesson_duration: lDur,
+      lesson_charge: lessonCharge,
+      package: package_name || '',
+      total_lessons: totalLessons,
+      used_lessons: 0,
+      remaining_lessons: totalLessons,
+      consumed_amount: 0,
+      remaining_balance: pAmount,
+      status: 'active',
+      created_at: new Date(),
+    };
+
+    const result = await db.collection('subscriptions').insertOne(subDoc);
+    return res.json({ success: true, message: 'Subscription Cycle created', data: { ...subDoc, _id: result.insertedId.toString() } });
   } catch (err) {
-    return res.status(500).json({ success: false, message: 'Server error' });
+    return res.status(500).json({ success: false, message: 'Server error creating subscription' });
   }
 });
 
-router.put('/payments/students/:pid', async (req, res) => {
+router.put('/subscriptions/:sid', async (req, res) => {
   try {
     const db = getDB();
     const updateData = { ...req.body };
     delete updateData._id;
     delete updateData.created_at;
 
-    ['total_due', 'amount_paid', 'remaining'].forEach((f) => {
-      if (updateData[f] !== undefined) updateData[f] = parseFloat(updateData[f] || 0);
-    });
-
-    await db.collection('student_payments').updateOne({ _id: new ObjectId(req.params.pid) }, { $set: updateData });
-    return res.json({ success: true, message: 'Payment updated' });
+    await db.collection('subscriptions').updateOne({ _id: new ObjectId(req.params.sid) }, { $set: updateData });
+    return res.json({ success: true, message: 'Subscription updated' });
   } catch (err) {
-    return res.status(500).json({ success: false, message: 'Server error' });
+    return res.status(500).json({ success: false, message: 'Server error updating subscription' });
   }
 });
 
-router.delete('/payments/students/:pid', async (req, res) => {
+router.delete('/subscriptions/:sid', async (req, res) => {
   try {
     const db = getDB();
-    await db.collection('student_payments').deleteOne({ _id: new ObjectId(req.params.pid) });
-    return res.json({ success: true, message: 'Payment record deleted' });
+    await db.collection('subscriptions').deleteOne({ _id: new ObjectId(req.params.sid) });
+    // Note: We might want to clear subscription_id from related sessions, but maybe leave it for history
+    return res.json({ success: true, message: 'Subscription record deleted' });
   } catch (err) {
-    return res.status(500).json({ success: false, message: 'Server error' });
+    return res.status(500).json({ success: false, message: 'Server error deleting subscription' });
+  }
+});
+
+router.get('/subscriptions/:sid/ledger', async (req, res) => {
+  try {
+    const db = getDB();
+    const sub = await db.collection('subscriptions').findOne({ _id: new ObjectId(req.params.sid) });
+    if (!sub) return res.status(404).json({ success: false, message: 'Subscription not found' });
+    
+    const sessions = await db.collection('sessions').find({ subscription_id: req.params.sid }).sort({ last_updated: 1 }).toArray();
+    
+    const ledger = [];
+    ledger.push({
+      date: sub.start_date || new Date(sub.created_at).toISOString().split('T')[0],
+      transaction: 'Subscription Payment',
+      charge: 0,
+      payment: sub.payment_amount,
+      balance: sub.payment_amount
+    });
+    
+    let currentBalance = sub.payment_amount;
+    sessions.forEach(sess => {
+      const charge = sess.lesson_charge || 0;
+      currentBalance -= charge;
+      ledger.push({
+        date: sess.date || new Date(sess.last_updated).toISOString().split('T')[0],
+        transaction: `Lesson (${sess.status})`,
+        charge: charge,
+        payment: 0,
+        balance: currentBalance
+      });
+    });
+    
+    return res.json({ success: true, data: ledger });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error fetching ledger' });
   }
 });
 

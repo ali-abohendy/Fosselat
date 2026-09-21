@@ -65,15 +65,11 @@ export default function AdminStudents() {
   useEffect(() => { document.title = 'Students — Admin'; fetchStudents(); fetchTeachers(); }, []);
 
 
-  // Auto-calculate rate when plan/duration change
+  // Set default hourly rate if it changes
   useEffect(() => {
     if (form.plan && form.class_duration) {
-      const plan = PLANS.find(p => p.id === form.plan);
-      const dur = DURATIONS.find(d => d.minutes === parseInt(form.class_duration));
-      if (plan && dur) {
-        const base = plan.classes * 4 * dur.rate;
-        const discount = plan.id === 'elite' ? base * 0.10 : 0;
-        setForm(prev => ({ ...prev, hourly_rate: (base - discount).toFixed(2) }));
+      if (form.hourly_rate === '') {
+        setForm(prev => ({ ...prev, hourly_rate: 8 })); // Default $8/hr, Admin can change this
       }
     }
   }, [form.plan, form.class_duration]);
@@ -295,9 +291,9 @@ export default function AdminStudents() {
               </select>
             </div>
             <div className="dash-form-group">
-              <label>Monthly Rate ($) {form.plan && form.class_duration ? '(auto-calculated)' : ''}</label>
+              <label>Custom Rate ($/hr)</label>
               <input type="number" value={form.hourly_rate} onChange={e => setForm({...form, hourly_rate: e.target.value})}
-                style={form.plan && form.class_duration ? { opacity: 0.7 } : {}} required />
+                placeholder="e.g. 7.50" required />
             </div>
             <div className="dash-form-group">
               <label>Status</label>
