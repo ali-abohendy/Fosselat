@@ -178,7 +178,7 @@ export default function AdminStudentPayments() {
 
             <div className="dash-form-group">
               <label>Payment Amount ($)</label>
-              <input type="number" step="0.01" min="1" value={form.payment_amount}
+              <input type="number" step="0.01" min="0" value={form.payment_amount}
                 onChange={e => setForm({...form, payment_amount: e.target.value})} required disabled={!form.family_id} />
             </div>
 
