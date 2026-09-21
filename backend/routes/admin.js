@@ -117,15 +117,16 @@ router.get('/dashboard', async (req, res) => {
     const present_times = await db.collection('sessions').countDocuments({ ...matchSession, status: 'present' });
     const absent_times = await db.collection('sessions').countDocuments({ ...matchSession, status: 'absent' });
 
-    // Aggregate teaching hours
+    // Aggregate teaching hours & Revenue
     const pipeline = [];
     if (Object.keys(matchSession).length > 0) pipeline.push({ $match: matchSession });
-    pipeline.push({ $group: { _id: null, total: { $sum: '$duration_minutes' } } });
+    pipeline.push({ $group: { _id: null, total: { $sum: '$duration_minutes' }, revenue: { $sum: '$lesson_charge' } } });
 
     const hrsResult = await db.collection('sessions').aggregate(pipeline).toArray();
     const teaching_minutes = hrsResult.length > 0 ? (hrsResult[0].total || 0) : 0;
+    const revenue = hrsResult.length > 0 ? (hrsResult[0].revenue || 0) : 0;
 
-    // Subscriptions aggregation (Replaces student_payments)
+    // Subscriptions aggregation
     let matchSub = {};
     if (periodParts.length === 2 && monthNames.includes(periodParts[0])) {
       const mIndex = monthNames.indexOf(periodParts[0]);
@@ -139,24 +140,23 @@ router.get('/dashboard', async (req, res) => {
 
     const subPipeline = [];
     if (Object.keys(matchSub).length > 0) subPipeline.push({ $match: matchSub });
-    subPipeline.push({ $group: { _id: null, paid: { $sum: '$payment_amount' }, consumed: { $sum: '$consumed_amount' } } });
+    subPipeline.push({ $group: { _id: null, paid: { $sum: '$payment_amount' } } });
 
     const subResult = await db.collection('subscriptions').aggregate(subPipeline).toArray();
     const total_paid = subResult.length > 0 ? (subResult[0].paid || 0) : 0;
-    const total_due = total_paid; // Since it's a prepaid subscription cycle
-    const remaining = 0; // No outstanding debts in this model
+    
+    // Remaining (debt across all active cycles)
+    const activeSubs = await db.collection('subscriptions').find({ status: 'active' }).toArray();
+    const remaining = activeSubs.reduce((sum, s) => sum + (s.remaining_balance < 0 ? Math.abs(s.remaining_balance) : 0), 0);
+    const total_due = total_paid + remaining;
 
     // Teacher payments aggregation
     const tpPipeline = [];
     if (Object.keys(matchTp).length > 0) tpPipeline.push({ $match: matchTp });
-    tpPipeline.push({ $group: { _id: null, total: { $sum: '$total_salary' }, net_dollar: { $sum: '$net_salary' } } });
+    tpPipeline.push({ $group: { _id: null, net_dollar: { $sum: '$net_salary' } } });
 
     const tpResult = await db.collection('teacher_payments').aggregate(tpPipeline).toArray();
-    const total_payroll_le = tpResult.length > 0 ? (tpResult[0].total || 0) : 0;
-    // The dashboard expects total_payroll to be in dollars, and net_salary in teacher_payments is L.E.
-    // So we divide by 50 here. Wait, actually we can just sum net_salary and divide by 50.
-    const net_salary_sum = tpResult.length > 0 ? (tpResult[0].net_dollar || 0) : 0;
-    const total_payroll = Number((net_salary_sum / 50).toFixed(2));
+    const total_payroll = tpResult.length > 0 ? (tpResult[0].net_dollar || 0) : 0;
 
     return res.json({
       success: true,
@@ -642,6 +642,28 @@ router.post('/subscriptions', async (req, res) => {
 
     if (!family_id || !payment_amount || !students || students.length === 0) {
       return res.status(400).json({ success: false, message: 'Missing required fields for subscription' });
+    }
+
+    // --- Duplicate Subscription Check ---
+    const existingActive = await db.collection('subscriptions').find({ family_id: family_id, status: 'active' }).toArray();
+    if (existingActive.length > 0) {
+      let allStudentsHaveLessons = true;
+      for (const sub of existingActive) {
+        if (sub.students) {
+          const anyFinished = sub.students.some(s => (s.remaining_lessons || 0) <= 0);
+          if (anyFinished) {
+            allStudentsHaveLessons = false;
+            break;
+          }
+        }
+      }
+      
+      if (allStudentsHaveLessons) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'This family already has an active subscription with remaining lessons. You cannot record a new payment until at least one student finishes their allocated lessons.' 
+        });
+      }
     }
 
     const pAmount = parseFloat(payment_amount);
