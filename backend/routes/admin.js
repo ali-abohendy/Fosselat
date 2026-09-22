@@ -3,6 +3,32 @@ import bcrypt from 'bcryptjs';
 import { getDB, ObjectId } from '../db.js';
 import { authMiddleware, adminMiddleware } from '../middleware/auth.js';
 
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function applyTimezoneDiff(day, timeStr, diffStr) {
+  if (!day || !timeStr || !diffStr) return { adjustedDay: day, adjustedTime: timeStr };
+  const diffHours = parseFloat(diffStr);
+  if (isNaN(diffHours)) return { adjustedDay: day, adjustedTime: timeStr };
+
+  const [h, m] = timeStr.split(':').map(Number);
+  const totalMins = h * 60 + m + (diffHours * 60);
+  let adjustedH = Math.floor(totalMins / 60);
+  const adjustedM = ((totalMins % 60) + 60) % 60;
+  
+  let dayOffset = 0;
+  while (adjustedH < 0) { adjustedH += 24; dayOffset -= 1; }
+  while (adjustedH >= 24) { adjustedH -= 24; dayOffset += 1; }
+
+  const currentDayIdx = DAYS.indexOf(day);
+  let newDayIdx = (currentDayIdx + dayOffset) % 7;
+  if (newDayIdx < 0) newDayIdx += 7;
+
+  return {
+    adjustedDay: DAYS[newDayIdx],
+    adjustedTime: `${adjustedH.toString().padStart(2, '0')}:${Math.round(adjustedM).toString().padStart(2, '0')}`
+  };
+}
+
 const router = express.Router();
 
 // Apply auth + admin check to all admin routes
@@ -390,10 +416,27 @@ router.get('/calendar', async (req, res) => {
     delete scheduledQuery.date;
     const allScheduled = await db.collection('scheduled_sessions').find({ ...scheduledQuery, active: true }).toArray();
 
-    const data = allScheduled.map((s) => ({
-      ...s,
-      _id: s._id.toString()
-    }));
+    const data = allScheduled.map((s) => {
+      let finalDay = s.day;
+      let finalStart = s.start_time;
+      let finalEnd = s.end_time;
+      
+      if (s.timezone_diff) {
+        const adjustedStart = applyTimezoneDiff(s.day, s.start_time, s.timezone_diff);
+        const adjustedEnd = applyTimezoneDiff(s.day, s.end_time, s.timezone_diff);
+        finalDay = adjustedStart.adjustedDay;
+        finalStart = adjustedStart.adjustedTime;
+        finalEnd = adjustedEnd.adjustedTime;
+      }
+
+      return {
+        ...s,
+        _id: s._id.toString(),
+        day: finalDay,
+        start_time: finalStart,
+        end_time: finalEnd
+      };
+    });
 
     const past_sessions = await db.collection('sessions').find(query).toArray();
     
@@ -412,7 +455,7 @@ router.get('/calendar', async (req, res) => {
       try {
         const d = new Date(s.date);
         const dayOfWeek = d.toLocaleDateString('en-US', { weekday: 'long' });
-        const sched = allScheduled.find(sch => sch.student_id === s.student_id && sch.day === dayOfWeek);
+        const sched = data.find(sch => sch.student_id === s.student_id && sch.day === dayOfWeek);
         if (sched && sched.start_time) {
           startTime = sched.start_time;
           endTime = sched.end_time || '';
