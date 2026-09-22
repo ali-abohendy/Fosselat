@@ -62,16 +62,33 @@ export default function AdminStudentPayments() {
 
   const handleFamilyChange = async (fid) => {
     const fMems = getFamilyMembers(fid);
+    const familyDiscount = fMems.length > 1 ? 0.10 : 0;
+    let totalPay = 0;
+
     const initialStudents = fMems.map(s => {
+      // Rate in DB already contains plan discount!
       const r = parseFloat(s.hourly_rate || 8);
       const d = parseFloat(s.class_duration || 30);
+      
+      let lessons = 0;
+      if (s.plan === 'starter') lessons = 8;
+      else if (s.plan === 'growth') lessons = 12;
+      else if (s.plan === 'excellence') lessons = 16;
+      else if (s.plan === 'elite') lessons = 20;
+
+      const baseChargePerLesson = r * (d / 60);
+      const finalChargePerLesson = baseChargePerLesson * (1 - familyDiscount);
+      
+      totalPay += finalChargePerLesson * lessons;
+
       return {
         student_id: s._id,
         name: s.full_name,
         rate: r,
         duration: d,
-        charge: (r * (d / 60)).toFixed(2),
-        lessons: 0
+        charge: finalChargePerLesson.toFixed(2),
+        lessons: lessons,
+        plan: s.plan
       };
     });
 
@@ -90,6 +107,7 @@ export default function AdminStudentPayments() {
       ...emptyForm, 
       family_id: fid, 
       students: initialStudents,
+      payment_amount: totalPay.toFixed(2),
       start_date: startDate
     });
   };
@@ -106,17 +124,10 @@ export default function AdminStudentPayments() {
     let totalPay = 0;
 
     newStudents = newStudents.map(st => {
+      // st.rate already has the plan discount applied from the database!
       const baseChargePerLesson = (st.rate || 0) * ((st.duration || 0) / 60);
-      const weeklyLessons = (st.lessons || 0) / 4;
-      let planDiscount = 0;
       
-      if (weeklyLessons >= 5) planDiscount = 0.10;
-      else if (weeklyLessons >= 4) planDiscount = 0.07;
-      else if (weeklyLessons >= 3) planDiscount = 0.05;
-
-      const totalDiscount = planDiscount + familyDiscount;
-      const finalChargePerLesson = baseChargePerLesson * (1 - totalDiscount);
-      
+      const finalChargePerLesson = baseChargePerLesson * (1 - familyDiscount);
       totalPay += finalChargePerLesson * (st.lessons || 0);
 
       return { ...st, charge: finalChargePerLesson.toFixed(2) };
