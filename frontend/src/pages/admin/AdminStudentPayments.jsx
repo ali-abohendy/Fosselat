@@ -104,6 +104,36 @@ export default function AdminStudentPayments() {
     setForm(prev => ({ ...prev, students: newStudents }));
   };
 
+  useEffect(() => {
+    if (!form.students || form.students.length === 0) return;
+    
+    // Family discount: 10% if more than 1 student
+    const familyDiscount = form.students.length > 1 ? 0.10 : 0;
+    let totalPay = 0;
+    
+    form.students.forEach(st => {
+      const baseChargeForCycle = (st.rate || 0) * ((st.duration || 0) / 60) * (st.lessons || 0);
+      
+      const weeklyLessons = (st.lessons || 0) / 4;
+      let planDiscount = 0;
+      if (weeklyLessons >= 5) planDiscount = 0.10; // Elite
+      else if (weeklyLessons >= 4) planDiscount = 0.07; // Excellence
+      else if (weeklyLessons >= 3) planDiscount = 0.05; // Growth
+      
+      // Stack discounts
+      const totalDiscount = planDiscount + familyDiscount;
+      const finalChargeForStudent = baseChargeForCycle * (1 - totalDiscount);
+      
+      totalPay += finalChargeForStudent;
+    });
+
+    setForm(prev => {
+      const newAmount = totalPay.toFixed(2);
+      if (prev.payment_amount === newAmount) return prev;
+      return { ...prev, payment_amount: newAmount };
+    });
+  }, [form.students]);
+
   const handleSubmit = async (e) => {
     e.preventDefault(); setAlert(null);
     try {

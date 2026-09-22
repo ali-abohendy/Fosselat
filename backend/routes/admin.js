@@ -143,14 +143,14 @@ router.get('/dashboard', async (req, res) => {
     const present_times = await db.collection('sessions').countDocuments({ ...matchSession, status: 'present' });
     const absent_times = await db.collection('sessions').countDocuments({ ...matchSession, status: 'absent' });
 
-    // Aggregate teaching hours & Revenue
+    // Aggregate teaching hours & Due (sum of lesson_charge for actually recorded sessions)
     const pipeline = [];
     if (Object.keys(matchSession).length > 0) pipeline.push({ $match: matchSession });
-    pipeline.push({ $group: { _id: null, total: { $sum: '$duration_minutes' }, revenue: { $sum: '$lesson_charge' } } });
+    pipeline.push({ $group: { _id: null, total: { $sum: '$duration_minutes' }, due: { $sum: '$lesson_charge' } } });
 
     const hrsResult = await db.collection('sessions').aggregate(pipeline).toArray();
     const teaching_minutes = hrsResult.length > 0 ? (hrsResult[0].total || 0) : 0;
-    const revenue = hrsResult.length > 0 ? (hrsResult[0].revenue || 0) : 0;
+    const total_due = hrsResult.length > 0 ? (hrsResult[0].due || 0) : 0;
 
     // Subscriptions aggregation
     let matchSub = {};
@@ -171,10 +171,10 @@ router.get('/dashboard', async (req, res) => {
     const subResult = await db.collection('subscriptions').aggregate(subPipeline).toArray();
     const total_paid = subResult.length > 0 ? (subResult[0].paid || 0) : 0;
     
-    // Remaining (debt across all active cycles)
+    // Remaining = -(net of all family balances)
     const activeSubs = await db.collection('subscriptions').find({ status: 'active' }).toArray();
-    const remaining = activeSubs.reduce((sum, s) => sum + (s.remaining_balance < 0 ? Math.abs(s.remaining_balance) : 0), 0);
-    const total_due = total_paid + remaining;
+    const net_balances = activeSubs.reduce((sum, s) => sum + (s.remaining_balance || 0), 0);
+    const remaining = -net_balances;
 
     // Teacher payments aggregation
     const tpPipeline = [];
@@ -183,6 +183,8 @@ router.get('/dashboard', async (req, res) => {
 
     const tpResult = await db.collection('teacher_payments').aggregate(tpPipeline).toArray();
     const total_payroll = tpResult.length > 0 ? (tpResult[0].net_dollar || 0) : 0;
+
+    const revenue = total_paid + remaining - total_payroll;
 
     return res.json({
       success: true,
