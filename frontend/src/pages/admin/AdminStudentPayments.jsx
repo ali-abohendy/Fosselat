@@ -95,44 +95,35 @@ export default function AdminStudentPayments() {
   };
 
   const handleStudentLessonChange = (student_id, lessons) => {
-    const newStudents = form.students.map(s => {
+    let newStudents = form.students.map(s => {
       if (s.student_id === student_id) {
         return { ...s, lessons: parseInt(lessons) || 0 };
       }
       return s;
     });
-    setForm(prev => ({ ...prev, students: newStudents }));
-  };
 
-  useEffect(() => {
-    if (!form.students || form.students.length === 0) return;
-    
-    // Family discount: 10% if more than 1 student
-    const familyDiscount = form.students.length > 1 ? 0.10 : 0;
+    const familyDiscount = newStudents.length > 1 ? 0.10 : 0;
     let totalPay = 0;
-    
-    form.students.forEach(st => {
-      const baseChargeForCycle = (st.rate || 0) * ((st.duration || 0) / 60) * (st.lessons || 0);
-      
+
+    newStudents = newStudents.map(st => {
+      const baseChargePerLesson = (st.rate || 0) * ((st.duration || 0) / 60);
       const weeklyLessons = (st.lessons || 0) / 4;
       let planDiscount = 0;
-      if (weeklyLessons >= 5) planDiscount = 0.10; // Elite
-      else if (weeklyLessons >= 4) planDiscount = 0.07; // Excellence
-      else if (weeklyLessons >= 3) planDiscount = 0.05; // Growth
       
-      // Stack discounts
+      if (weeklyLessons >= 5) planDiscount = 0.10;
+      else if (weeklyLessons >= 4) planDiscount = 0.07;
+      else if (weeklyLessons >= 3) planDiscount = 0.05;
+
       const totalDiscount = planDiscount + familyDiscount;
-      const finalChargeForStudent = baseChargeForCycle * (1 - totalDiscount);
+      const finalChargePerLesson = baseChargePerLesson * (1 - totalDiscount);
       
-      totalPay += finalChargeForStudent;
+      totalPay += finalChargePerLesson * (st.lessons || 0);
+
+      return { ...st, charge: finalChargePerLesson.toFixed(2) };
     });
 
-    setForm(prev => {
-      const newAmount = totalPay.toFixed(2);
-      if (prev.payment_amount === newAmount) return prev;
-      return { ...prev, payment_amount: newAmount };
-    });
-  }, [form.students]);
+    setForm(prev => ({ ...prev, students: newStudents, payment_amount: totalPay.toFixed(2) }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); setAlert(null);
