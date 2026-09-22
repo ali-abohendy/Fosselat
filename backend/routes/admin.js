@@ -198,8 +198,7 @@ router.get('/dashboard', async (req, res) => {
         present_times,
         balance: total_paid - total_payroll,
         total_payroll,
-        total_payroll_le,
-        revenue: Number((total_paid + remaining - total_payroll).toFixed(2)),
+        revenue,
         remaining,
       },
     });
