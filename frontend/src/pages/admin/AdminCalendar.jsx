@@ -187,7 +187,7 @@ export default function AdminCalendar() {
       {loading ? (
         <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-text-muted)' }}>Loading sessions...</div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '20px', alignItems: 'start' }}>
           {dayEvents.length > 0 ? dayEvents.map((evt, idx) => {
             const isPresent = evt.status === 'completed' || evt.status === 'present';
             const isAbsent = evt.status === 'absent' || evt.status === 'cancelled';

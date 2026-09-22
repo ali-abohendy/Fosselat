@@ -87,7 +87,7 @@ export default function StudentPlacementTests() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         
         {/* STATS ROW */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '20px' }}>
           <div style={{ background: 'var(--color-bg-light)', padding: '24px', borderRadius: '12px', border: '1px solid rgba(200,167,99,0.15)', display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ background: 'rgba(200,167,99,0.1)', padding: '16px', borderRadius: '12px', color: 'var(--color-gold)' }}>
               <CheckCircle size={24} />

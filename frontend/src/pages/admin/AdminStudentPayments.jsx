@@ -191,7 +191,7 @@ export default function AdminStudentPayments() {
             {form.students.length > 0 && (
               <div className="dash-form-group" style={{ gridColumn: '1 / -1', background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '12px' }}>
                 <h4 style={{ marginBottom: '16px', color: 'var(--color-gold)' }}>Allocate Lessons</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '16px' }}>
                   {form.students.map(st => (
                     <div key={st.student_id} style={{ background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '8px' }}>
                       <div style={{ fontWeight: 600, color: 'var(--color-cream)', marginBottom: '8px' }}>{st.name}</div>

@@ -83,7 +83,7 @@ export default function StudentTimeSlots() {
       </div>
       {alert && <div className={`dash-alert dash-alert-${alert.type}`}>{alert.msg}</div>}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))', gap: '16px' }}>
         {DAYS.map(day => {
           const hasSlots = slots[day].length > 0;
           return (
