@@ -29,51 +29,55 @@ export default function TeacherTimeSlots() {
       .catch(() => {});
   }, []);
 
-  const addSlot = (day) => {
-    setSlots(prev => ({
-      ...prev,
-      [day]: [...prev[day], { day, start_time: '09:00', end_time: '10:00' }],
-    }));
-  };
-
-  const removeSlot = (day, idx) => {
-    setSlots(prev => ({
-      ...prev,
-      [day]: prev[day].filter((_, i) => i !== idx),
-    }));
-  };
-
-  const updateSlot = (day, idx, field, value) => {
-    setSlots(prev => {
-      const daySlots = [...prev[day]];
-      const slot = { ...daySlots[idx], [field]: value };
-      
-      if (field === 'start_time') {
-        const start = value;
-        const end = slot.end_time;
-        if (end <= start) {
-          const [h, m] = start.split(':').map(Number);
-          const nextH = (h + 1).toString().padStart(2, '0');
-          slot.end_time = `${nextH}:${m.toString().padStart(2, '0')}`;
-        }
-      }
-      
-      daySlots[idx] = slot;
-      return { ...prev, [day]: daySlots };
-    });
-  };
-
-  const handleSave = async () => {
+  const handleSave = async (currentSlots) => {
     setAlert(null);
-    const allSlots = DAYS.flatMap(day => slots[day].map(s => {
+    const allSlots = DAYS.flatMap(day => currentSlots[day].map(s => {
       return { day, start_time: s.start_time, end_time: s.end_time };
     }));
     try {
       const r = await fetch(`${API}/teacher/slots`, { method: 'PUT', headers: getHeaders(), body: JSON.stringify({ slots: allSlots }) });
       const d = await r.json();
       if (d.success) setAlert({ type: 'success', msg: 'Time slots saved!' });
-      else setAlert({ type: 'error', msg: d.message || 'Error' });
+      else setAlert({ type: 'error', msg: d.message || 'Error saving slots' });
     } catch { setAlert({ type: 'error', msg: 'Server error' }); }
+  };
+
+  const addSlot = (day) => {
+    const newSlots = {
+      ...slots,
+      [day]: [...slots[day], { day, start_time: '09:00', end_time: '10:00' }],
+    };
+    setSlots(newSlots);
+    handleSave(newSlots);
+  };
+
+  const removeSlot = (day, idx) => {
+    const newSlots = {
+      ...slots,
+      [day]: slots[day].filter((_, i) => i !== idx),
+    };
+    setSlots(newSlots);
+    handleSave(newSlots);
+  };
+
+  const updateSlot = (day, idx, field, value) => {
+    const daySlots = [...slots[day]];
+    const slot = { ...daySlots[idx], [field]: value };
+    
+    if (field === 'start_time') {
+      const start = value;
+      const end = slot.end_time;
+      if (end <= start) {
+        const [h, m] = start.split(':').map(Number);
+        const nextH = (h + 1).toString().padStart(2, '0');
+        slot.end_time = `${nextH}:${m.toString().padStart(2, '0')}`;
+      }
+    }
+    
+    daySlots[idx] = slot;
+    const newSlots = { ...slots, [day]: daySlots };
+    setSlots(newSlots);
+    handleSave(newSlots);
   };
 
   return (
@@ -144,10 +148,6 @@ export default function TeacherTimeSlots() {
             </div>
           );
         })}
-      </div>
-
-      <div style={{ marginTop: '24px', marginBottom: '40px', display: 'flex', justifyContent: 'flex-start' }}>
-        <Button variant="primary" size="sm" onClick={handleSave}>Save All Slots</Button>
       </div>
     </>
   );

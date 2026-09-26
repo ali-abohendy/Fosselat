@@ -281,12 +281,19 @@ router.get('/sessions', async (req, res) => {
 router.put('/sessions/:id', async (req, res) => {
   try {
     const db = getDB();
-    const { notes, status, subject } = req.body;
+    const { notes, status, subject, date, start_time, end_time, duration, student_id } = req.body;
     
     let updateFields = { last_updated: new Date() };
     if (notes !== undefined) updateFields.notes = notes;
     if (status !== undefined) updateFields.status = status;
     if (subject !== undefined) updateFields.subject = Array.isArray(subject) ? subject.join(', ') : subject;
+    if (date !== undefined) updateFields.date = date;
+    if (start_time !== undefined) updateFields.start_time = start_time;
+    if (end_time !== undefined) updateFields.end_time = end_time;
+    if (duration !== undefined) updateFields.duration = duration;
+    
+    // Note: student_id can also be updated if we want to allow changing the student
+    if (student_id !== undefined) updateFields.student_id = student_id;
 
     const result = await db.collection('sessions').updateOne(
       { _id: new ObjectId(req.params.id), teacher_id: req.userId },
@@ -298,6 +305,25 @@ router.put('/sessions/:id', async (req, res) => {
     }
 
     return res.json({ success: true, message: 'Session updated' });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// DELETE /api/teacher/sessions/:id
+router.delete('/sessions/:id', async (req, res) => {
+  try {
+    const db = getDB();
+    const result = await db.collection('sessions').deleteOne({
+      _id: new ObjectId(req.params.id),
+      teacher_id: req.userId
+    });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ success: false, message: 'Session not found or unauthorized' });
+    }
+
+    return res.json({ success: true, message: 'Session deleted' });
   } catch (err) {
     return res.status(500).json({ success: false, message: 'Server error' });
   }

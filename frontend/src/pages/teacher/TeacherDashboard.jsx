@@ -61,7 +61,7 @@ export default function TeacherDashboard() {
     <>
       <div className="dash-page-header">
         <h2>Teacher Dashboard</h2>
-        <p>Your teaching overview</p>
+        <p>Welcome, {user?.full_name || 'Teacher'}!</p>
       </div>
 
       {/* Today's Sessions */}

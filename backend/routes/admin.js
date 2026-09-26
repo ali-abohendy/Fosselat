@@ -78,11 +78,17 @@ async function generateCredentials(db, fullName, familyName, studentId = null) {
 router.put('/attendance/:id', async (req, res) => {
   try {
     const db = getDB();
-    const { status, subject, notes } = req.body;
+    const { status, subject, notes, date, start_time, end_time, duration, student_id, teacher_id } = req.body;
     let updateFields = { last_updated: new Date() };
     if (status !== undefined) updateFields.status = status;
     if (subject !== undefined) updateFields.subject = Array.isArray(subject) ? subject.join(', ') : subject;
     if (notes !== undefined) updateFields.notes = notes;
+    if (date !== undefined) updateFields.date = date;
+    if (start_time !== undefined) updateFields.start_time = start_time;
+    if (end_time !== undefined) updateFields.end_time = end_time;
+    if (duration !== undefined) updateFields.duration = duration;
+    if (student_id !== undefined) updateFields.student_id = student_id;
+    if (teacher_id !== undefined) updateFields.teacher_id = teacher_id;
 
     const result = await db.collection('sessions').updateOne(
       { _id: new ObjectId(req.params.id) },
