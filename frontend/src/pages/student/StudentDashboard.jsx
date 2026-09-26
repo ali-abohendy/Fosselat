@@ -89,7 +89,7 @@ export default function StudentDashboard() {
     <>
       <div className="dash-page-header">
         <h2>Student Dashboard</h2>
-        <p>Welcome to your learning space</p>
+        <p>Welcome, {user?.full_name || 'Student'}!</p>
       </div>
 
       {(() => {

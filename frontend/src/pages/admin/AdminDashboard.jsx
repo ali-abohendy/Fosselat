@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import API from '../../config';
 const getHeaders = () => ({
   'Content-Type': 'application/json',
@@ -6,6 +7,7 @@ const getHeaders = () => ({
 });
 
 export default function AdminDashboard() {
+  const { user } = useAuth();
   const [stats, setStats] = useState({
     active_students: 0, total_sessions: 0, total_due: 0,
     active_teachers: 0, inactive_teachers: 0, total_paid: 0,
@@ -50,7 +52,7 @@ export default function AdminDashboard() {
     <>
       <div className="dash-page-header">
         <h2>Admin Dashboard</h2>
-        <p>Overview of Fosselat Academy</p>
+        <p>Welcome, {user?.full_name || 'Admin'}!</p>
       </div>
       
       <div style={{display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap'}}>
