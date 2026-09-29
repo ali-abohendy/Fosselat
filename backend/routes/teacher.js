@@ -54,10 +54,8 @@ router.get('/dashboard', async (req, res) => {
     const sessions = await db.collection('sessions').find(matchSession).toArray();
     let totalMinutes = 0;
     sessions.forEach((s) => {
-      let dm = s.duration_minutes;
-      if (typeof dm !== 'number') {
-        dm = parseInt((s.duration || '').replace(/\D/g, ''), 10) || 0;
-      }
+      let dm = parseInt((s.duration || '').toString().replace(/\D/g, ''), 10);
+      if (isNaN(dm) || dm <= 0) dm = s.duration_minutes || 0;
       totalMinutes += dm;
     });
 
@@ -294,8 +292,10 @@ router.put('/sessions/:id', async (req, res) => {
     if (date !== undefined) updateFields.date = date;
     if (start_time !== undefined) updateFields.start_time = start_time;
     if (end_time !== undefined) updateFields.end_time = end_time;
-    if (duration !== undefined) updateFields.duration = duration;
-    
+    if (duration !== undefined) {
+      updateFields.duration = duration;
+      updateFields.duration_minutes = parseInt(duration.replace(/\D/g, ''), 10) || 60;
+    }
     // Note: student_id can also be updated if we want to allow changing the student
     if (student_id !== undefined) updateFields.student_id = student_id;
 

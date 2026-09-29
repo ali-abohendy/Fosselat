@@ -86,7 +86,10 @@ router.put('/attendance/:id', async (req, res) => {
     if (date !== undefined) updateFields.date = date;
     if (start_time !== undefined) updateFields.start_time = start_time;
     if (end_time !== undefined) updateFields.end_time = end_time;
-    if (duration !== undefined) updateFields.duration = duration;
+    if (duration !== undefined) {
+      updateFields.duration = duration;
+      updateFields.duration_minutes = parseInt(duration.replace(/\D/g, ''), 10) || 60;
+    }
     if (student_id !== undefined) updateFields.student_id = student_id;
     if (teacher_id !== undefined) updateFields.teacher_id = teacher_id;
 
@@ -152,13 +155,11 @@ router.get('/dashboard', async (req, res) => {
     let teaching_minutes = 0;
     let total_due = 0;
     
-    // Some sessions might not have duration_minutes if they are old. Let's calculate manually.
+    // Some sessions might not have accurate duration_minutes if they were edited. Let's calculate manually.
     const allSessions = await db.collection('sessions').find(matchSession).toArray();
     allSessions.forEach(s => {
-      let dm = s.duration_minutes;
-      if (typeof dm !== 'number') {
-        dm = parseInt((s.duration || '').replace(/\D/g, ''), 10) || 0;
-      }
+      let dm = parseInt((s.duration || '').toString().replace(/\D/g, ''), 10);
+      if (isNaN(dm) || dm <= 0) dm = s.duration_minutes || 0;
       teaching_minutes += dm;
       total_due += s.lesson_charge || 0;
     });
