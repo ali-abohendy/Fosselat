@@ -54,7 +54,11 @@ router.get('/dashboard', async (req, res) => {
     const sessions = await db.collection('sessions').find(matchSession).toArray();
     let totalMinutes = 0;
     sessions.forEach((s) => {
-      totalMinutes += s.duration_minutes || 0;
+      let dm = s.duration_minutes;
+      if (typeof dm !== 'number') {
+        dm = parseInt((s.duration || '').replace(/\D/g, ''), 10) || 0;
+      }
+      totalMinutes += dm;
     });
 
     const hours = Math.floor(totalMinutes / 60);
@@ -84,10 +88,10 @@ router.get('/dashboard', async (req, res) => {
         lessons: sessions.length,
         time_hours: hours,
         time_minutes: minutes,
-        rate_hour: rate,
-        payroll: calculated_payroll,
-        bonuses,
-        deductions
+        rate_hour: Number(rate.toFixed(2)),
+        payroll: Number(calculated_payroll.toFixed(2)),
+        bonuses: Number(bonuses.toFixed(2)),
+        deductions: Number(deductions.toFixed(2))
       },
     });
   } catch (err) {

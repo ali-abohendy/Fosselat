@@ -27,10 +27,6 @@ export default function AdminAttendance() {
   const [search, setSearch] = useState('');
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
-
-  const [teachers, setTeachers] = useState([]);
-  
-  // Edit State
   const [editingSession, setEditingSession] = useState(null);
   const [editForm, setEditForm] = useState(null);
 

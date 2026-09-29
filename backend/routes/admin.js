@@ -149,14 +149,19 @@ router.get('/dashboard', async (req, res) => {
     const present_times = await db.collection('sessions').countDocuments({ ...matchSession, status: 'present' });
     const absent_times = await db.collection('sessions').countDocuments({ ...matchSession, status: 'absent' });
 
-    // Aggregate teaching hours & Due (sum of lesson_charge for actually recorded sessions)
-    const pipeline = [];
-    if (Object.keys(matchSession).length > 0) pipeline.push({ $match: matchSession });
-    pipeline.push({ $group: { _id: null, total: { $sum: '$duration_minutes' }, due: { $sum: '$lesson_charge' } } });
-
-    const hrsResult = await db.collection('sessions').aggregate(pipeline).toArray();
-    const teaching_minutes = hrsResult.length > 0 ? (hrsResult[0].total || 0) : 0;
-    const total_due = hrsResult.length > 0 ? (hrsResult[0].due || 0) : 0;
+    let teaching_minutes = 0;
+    let total_due = 0;
+    
+    // Some sessions might not have duration_minutes if they are old. Let's calculate manually.
+    const allSessions = await db.collection('sessions').find(matchSession).toArray();
+    allSessions.forEach(s => {
+      let dm = s.duration_minutes;
+      if (typeof dm !== 'number') {
+        dm = parseInt((s.duration || '').replace(/\D/g, ''), 10) || 0;
+      }
+      teaching_minutes += dm;
+      total_due += s.lesson_charge || 0;
+    });
 
     // Subscriptions aggregation
     let matchSub = {};
@@ -197,17 +202,17 @@ router.get('/dashboard', async (req, res) => {
       data: {
         active_students,
         total_sessions,
-        total_due,
+        total_due: Number(total_due.toFixed(2)),
         active_teachers,
         inactive_teachers,
-        total_paid,
+        total_paid: Number(total_paid.toFixed(2)),
         teaching_hours: Number((teaching_minutes / 60).toFixed(1)),
         absent_times,
         present_times,
-        balance: total_paid - total_payroll,
-        total_payroll,
-        revenue,
-        remaining,
+        balance: Number((total_paid - total_payroll).toFixed(2)),
+        total_payroll: Number(total_payroll.toFixed(2)),
+        revenue: Number(revenue.toFixed(2)),
+        remaining: Number(remaining.toFixed(2)),
       },
     });
   } catch (err) {
