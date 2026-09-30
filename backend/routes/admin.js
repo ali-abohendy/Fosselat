@@ -517,13 +517,19 @@ router.get('/attendance', async (req, res) => {
       reviewMap[r.session_id] = r;
     });
 
-    const data = sessions.map((s) => ({
-      ...s,
-      _id: s._id.toString(),
-      teacher_id: s.teacher_id ? s.teacher_id.toString() : '',
-      student_id: s.student_id ? s.student_id.toString() : '',
-      student_review: reviewMap[s._id.toString()] || null,
-    }));
+    const data = sessions.map((s) => {
+      let dm = parseInt((s.duration || '').toString().replace(/\D/g, ''), 10);
+      if (isNaN(dm) || dm <= 0) dm = s.duration_minutes || 0;
+
+      return {
+        ...s,
+        duration_minutes: dm,
+        _id: s._id.toString(),
+        teacher_id: s.teacher_id ? s.teacher_id.toString() : '',
+        student_id: s.student_id ? s.student_id.toString() : '',
+        student_review: reviewMap[s._id.toString()] || null,
+      };
+    });
 
     return res.json({ success: true, data });
   } catch (err) {
