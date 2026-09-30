@@ -64,9 +64,9 @@ router.get('/dashboard', async (req, res) => {
     const rate = parseFloat(req.user.hourly_rate || 0);
     const calculated_payroll = Number(((totalMinutes / 60) * rate).toFixed(2));
 
-    // Fetch bonuses and deductions from teacher_payments
     let bonuses = 0;
     let deductions = 0;
+    let deduction_reason = '';
     try {
       const payment = await db.collection('teacher_payments').findOne({
         teacher_id: userId,
@@ -75,6 +75,7 @@ router.get('/dashboard', async (req, res) => {
       if (payment) {
         bonuses = payment.bonuses || 0;
         deductions = payment.deductions || 0;
+        deduction_reason = payment.deduction_reason || '';
       }
     } catch (e) {
       // Ignore errors here
@@ -89,7 +90,8 @@ router.get('/dashboard', async (req, res) => {
         rate_hour: Number(rate.toFixed(2)),
         payroll: Number(calculated_payroll.toFixed(2)),
         bonuses: Number(bonuses.toFixed(2)),
-        deductions: Number(deductions.toFixed(2))
+        deductions: Number(deductions.toFixed(2)),
+        deduction_reason: deduction_reason
       },
     });
   } catch (err) {

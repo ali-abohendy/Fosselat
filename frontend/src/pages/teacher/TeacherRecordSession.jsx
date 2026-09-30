@@ -60,6 +60,7 @@ export default function TeacherRecordSession() {
   const handleSubmit = async (e) => {
     e.preventDefault(); setAlert(null);
     if (!form.student_id) { setAlert({ type: 'error', msg: 'Select a student' }); return; }
+    if (!form.subject || form.subject.length === 0) { setAlert({ type: 'error', msg: 'Subject is required' }); return; }
     
     // Ensure we are not recording in the future
     const selectedDate = new Date(form.date);

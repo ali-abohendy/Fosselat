@@ -52,6 +52,10 @@ export default function AdminAttendance() {
 
   const saveEdit = async (e) => {
     e.preventDefault();
+    if (!editForm.subject || editForm.subject.length === 0) {
+      alert('Subject is required');
+      return;
+    }
     try {
       const r = await fetch(`${API}/admin/attendance/${editingSession._id}`, {
         method: 'PUT',

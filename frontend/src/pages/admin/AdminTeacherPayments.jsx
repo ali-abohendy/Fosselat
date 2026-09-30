@@ -8,7 +8,7 @@ const getHeaders = () => ({
   Authorization: `Bearer ${localStorage.getItem('fossclat_token')}`,
 });
 
-const emptyForm = { teacher_id: '', teacher_name: '', month: '', time_hours: '', total_salary: '', bonuses: '', deductions: '', net_salary: '' };
+const emptyForm = { teacher_id: '', teacher_name: '', month: '', time_hours: '', total_salary: '', bonuses: '', deductions: '', deduction_reason: '', net_salary: '' };
 
 export default function AdminTeacherPayments() {
   const [payments, setPayments] = useState([]);
@@ -66,7 +66,12 @@ export default function AdminTeacherPayments() {
           const teacherSessions = await fetchSessions(form.teacher_id, prefix);
           const presentSessions = teacherSessions.filter(s => s.status === 'present' || s.status === 'absent');
           
-          const totalMins = presentSessions.reduce((acc, s) => acc + (Number(s.duration_minutes) || parseInt(s.duration) || 0), 0);
+          const totalMins = presentSessions.reduce((acc, s) => {
+            let dm = parseInt((s.duration || '').toString().replace(/\D/g, ''), 10);
+            if (isNaN(dm) || dm <= 0) dm = Number(s.duration_minutes) || 0;
+            return acc + dm;
+          }, 0);
+          
           const hours = (totalMins / 60).toFixed(2);
           
           const rate = parseFloat(t.hourly_rate) || 0;
@@ -92,6 +97,10 @@ export default function AdminTeacherPayments() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); setAlert(null);
+    if (parseFloat(form.deductions) > 0 && !form.deduction_reason.trim()) {
+      setAlert({ type: 'error', msg: 'Deduction Reason is required if deductions are greater than 0' });
+      return;
+    }
     try {
       const url = editingId ? `${API}/admin/payments/teachers/${editingId}` : `${API}/admin/payments/teachers`;
       const method = editingId ? 'PUT' : 'POST';
@@ -117,6 +126,7 @@ export default function AdminTeacherPayments() {
       total_salary: p.total_salary || '',
       bonuses: p.bonuses || '',
       deductions: p.deductions || '',
+      deduction_reason: p.deduction_reason || '',
       net_salary: p.net_salary || '',
     });
   };
@@ -178,6 +188,12 @@ export default function AdminTeacherPayments() {
               <label>Deductions (L.E) (Editable)</label>
               <input type="number" step="0.01" min="0" value={form.deductions} onChange={e => setForm({...form, deductions: e.target.value})} />
             </div>
+            {parseFloat(form.deductions) > 0 && (
+              <div className="dash-form-group" style={{gridColumn: '1 / -1'}}>
+                <label>Deduction Reason (Required)</label>
+                <input type="text" value={form.deduction_reason} onChange={e => setForm({...form, deduction_reason: e.target.value})} placeholder="e.g. Missed a session without notice" required />
+              </div>
+            )}
             <div className="dash-form-group">
               <label>Net Salary (L.E) — Auto-converted to $ internally</label>
               <input type="number" step="0.01" value={form.net_salary} readOnly style={{opacity: 0.7, fontWeight: 'bold'}} />
@@ -242,7 +258,7 @@ export default function AdminTeacherPayments() {
                   <td>{p.time_hours}h</td>
                   <td>{p.total_salary} L.E</td>
                   <td>{p.bonuses || 0} L.E</td>
-                  <td>{p.deductions || 0} L.E</td>
+                  <td title={p.deduction_reason ? `Reason: ${p.deduction_reason}` : ''} style={{ cursor: p.deduction_reason ? 'help' : 'default', textDecoration: p.deduction_reason ? 'underline dotted' : 'none' }}>{p.deductions || 0} L.E</td>
                   <td>{p.net_salary || 0} L.E</td>
                   <td style={{fontWeight: 'bold', color: 'var(--color-gold)'}}>${(parseFloat(p.net_salary || 0) / 50).toFixed(2)}</td>
                   <td style={{ textAlign: 'center' }}>

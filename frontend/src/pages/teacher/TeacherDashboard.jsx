@@ -192,6 +192,11 @@ export default function TeacherDashboard() {
           <div className="stat-icon"><XCircle size={28} color="#B0453B" /></div>
           <div className="stat-value" style={{ color: '#B0453B' }}>{stats.deductions} L.E</div>
           <div className="stat-label">Deductions</div>
+          {stats.deductions > 0 && stats.deduction_reason && (
+            <div style={{ fontSize: '11px', color: '#B0453B', marginTop: '6px', fontStyle: 'italic' }}>
+              Reason: {stats.deduction_reason}
+            </div>
+          )}
         </div>
       </div>
     </>

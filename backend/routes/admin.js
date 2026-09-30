@@ -194,9 +194,10 @@ router.get('/dashboard', async (req, res) => {
     tpPipeline.push({ $group: { _id: null, net_dollar: { $sum: '$net_salary' } } });
 
     const tpResult = await db.collection('teacher_payments').aggregate(tpPipeline).toArray();
-    const total_payroll = tpResult.length > 0 ? (tpResult[0].net_dollar || 0) : 0;
+    const total_payroll_le = tpResult.length > 0 ? (tpResult[0].net_dollar || 0) : 0;
+    const total_payroll_dollars = total_payroll_le / 50; // Convert L.E to $ (50:1 exchange rate)
 
-    const revenue = total_paid + remaining - total_payroll;
+    const revenue = total_due - total_payroll_dollars;
 
     return res.json({
       success: true,
@@ -210,8 +211,8 @@ router.get('/dashboard', async (req, res) => {
         teaching_hours: Number((teaching_minutes / 60).toFixed(1)),
         absent_times,
         present_times,
-        balance: Number((total_paid - total_payroll).toFixed(2)),
-        total_payroll: Number(total_payroll.toFixed(2)),
+        balance: Number((total_paid - total_payroll_dollars).toFixed(2)),
+        total_payroll: Number(total_payroll_dollars.toFixed(2)),
         revenue: Number(revenue.toFixed(2)),
         remaining: Number(remaining.toFixed(2)),
       },
@@ -905,6 +906,7 @@ router.post('/payments/teachers', async (req, res) => {
       total_salary: parseFloat(total_salary || 0),
       bonuses: parseFloat(bonuses || 0),
       deductions: parseFloat(deductions || 0),
+      deduction_reason: req.body.deduction_reason || '',
       net_salary: parseFloat(net_salary || 0),
       created_at: new Date(),
     });
