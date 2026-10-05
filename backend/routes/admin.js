@@ -431,24 +431,9 @@ router.get('/calendar', async (req, res) => {
     const allScheduled = await db.collection('scheduled_sessions').find({ ...scheduledQuery, active: true }).toArray();
 
     const data = allScheduled.map((s) => {
-      let finalDay = s.day;
-      let finalStart = s.start_time;
-      let finalEnd = s.end_time;
-      
-      if (s.timezone_diff) {
-        const adjustedStart = applyTimezoneDiff(s.day, s.start_time, s.timezone_diff);
-        const adjustedEnd = applyTimezoneDiff(s.day, s.end_time, s.timezone_diff);
-        finalDay = adjustedStart.adjustedDay;
-        finalStart = adjustedStart.adjustedTime;
-        finalEnd = adjustedEnd.adjustedTime;
-      }
-
       return {
         ...s,
-        _id: s._id.toString(),
-        day: finalDay,
-        start_time: finalStart,
-        end_time: finalEnd
+        _id: s._id.toString()
       };
     });
 
@@ -462,17 +447,25 @@ router.get('/calendar', async (req, res) => {
       reviewMap[r.session_id] = r;
     });
 
+    // Fetch timezone diffs for past sessions
+    const pastStudentIds = [...new Set(past_sessions.map(s => s.student_id).filter(Boolean))];
+    const pastSchedules = await db.collection('scheduled_sessions').find({ student_id: { $in: pastStudentIds } }).toArray();
+    const tzMap = {};
+    pastSchedules.forEach(sch => {
+      if (sch.timezone_diff) tzMap[sch.student_id] = sch.timezone_diff;
+    });
+
     const past = past_sessions.map(s => {
       let startTime = s.start_time;
       let endTime = s.end_time;
+      let tzDiff = tzMap[s.student_id] || '0';
       
       try {
-        const d = new Date(s.date);
-        const dayOfWeek = d.toLocaleDateString('en-US', { weekday: 'long' });
-        const sched = data.find(sch => sch.student_id === s.student_id && sch.day === dayOfWeek);
-        if (sched && sched.start_time) {
-          startTime = sched.start_time;
-          endTime = sched.end_time || '';
+
+        const exactSched = data.find(sch => sch.student_id === s.student_id && sch.day === dayOfWeek);
+        if (exactSched && exactSched.start_time) {
+          startTime = exactSched.start_time;
+          endTime = exactSched.end_time || '';
         }
       } catch (e) {}
 
@@ -480,6 +473,7 @@ router.get('/calendar', async (req, res) => {
         ...s, 
         start_time: startTime,
         end_time: endTime,
+        timezone_diff: tzDiff,
         _id: s._id.toString(),
         student_review: reviewMap[s._id.toString()] || null
       };
