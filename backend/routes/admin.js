@@ -683,7 +683,32 @@ router.get('/subscriptions', async (req, res) => {
   try {
     const db = getDB();
     const subs = await db.collection('subscriptions').find().sort({ start_date: -1, created_at: -1 }).toArray();
-    return res.json({ success: true, data: subs.map(s => ({ ...s, _id: s._id.toString() })) });
+    
+    // Sum exact minutes directly from attendance records
+    const allLinkedSessions = await db.collection('sessions').find({ subscription_id: { $exists: true } }).toArray();
+    const usageMap = {};
+    for (const sess of allLinkedSessions) {
+      if (!sess.student_id) continue;
+      const key = `${sess.subscription_id}_${sess.student_id.toString()}`;
+      let dm = parseInt((sess.duration || '').toString().replace(/\D/g, ''), 10);
+      if (isNaN(dm) || dm <= 0) dm = sess.duration_minutes || 0;
+      if (!usageMap[key]) usageMap[key] = 0;
+      usageMap[key] += dm;
+    }
+
+    const data = subs.map(s => {
+      const subId = s._id.toString();
+      const updatedStudents = (s.students || []).map(st => {
+         const key = `${subId}_${st.student_id}`;
+         return {
+           ...st,
+           actual_used_minutes: usageMap[key] || 0
+         };
+      });
+      return { ...s, _id: subId, students: updatedStudents };
+    });
+
+    return res.json({ success: true, data });
   } catch (err) {
     return res.status(500).json({ success: false, message: 'Server error fetching subscriptions' });
   }

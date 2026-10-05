@@ -304,8 +304,8 @@ export default function AdminStudentPayments() {
                             const name = stObj ? stObj.full_name : 'Unknown';
                             const actualDur = parseInt(st.duration) || (stObj ? parseInt(stObj.class_duration) : 0) || 30;
                             const actualTotalMins = st.total_minutes !== undefined ? st.total_minutes : (st.total_lessons || 0) * actualDur;
-                            const actualUsedMins = st.used_minutes !== undefined ? st.used_minutes : (st.used_lessons || 0) * actualDur;
-                            const actualRemainingMins = st.remaining_minutes !== undefined ? st.remaining_minutes : (st.remaining_lessons || 0) * actualDur;
+                            const actualUsedMins = st.actual_used_minutes !== undefined ? st.actual_used_minutes : (st.used_minutes !== undefined ? st.used_minutes : (st.used_lessons || 0) * actualDur);
+                            const actualRemainingMins = actualTotalMins - actualUsedMins;
 
                             return (
                               <div key={st.student_id || Math.random()} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', background: 'rgba(255,255,255,0.02)', padding: '6px', borderRadius: '4px' }}>
