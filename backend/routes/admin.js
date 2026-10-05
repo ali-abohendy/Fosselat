@@ -157,23 +157,10 @@ router.get('/dashboard', async (req, res) => {
     
     const allStudents = await db.collection('users').find({ role: 'student' }).toArray();
     
-    // Count members per family for discount
-    const familyCounts = {};
-    allStudents.forEach(st => {
-      if (st.student_id) {
-        familyCounts[st.student_id] = (familyCounts[st.student_id] || 0) + 1;
-      }
-    });
-
     const rateMap = {};
     allStudents.forEach(st => {
       if (st.hourly_rate) {
-        let rate = parseFloat(st.hourly_rate);
-        const count = st.student_id ? (familyCounts[st.student_id] || 1) : 1;
-        if (count > 1) {
-          rate = rate * 0.90; // 10% family discount
-        }
-        rateMap[st._id.toString()] = rate;
+        rateMap[st._id.toString()] = parseFloat(st.hourly_rate);
       }
     });
 
