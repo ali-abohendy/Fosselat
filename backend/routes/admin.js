@@ -183,10 +183,10 @@ router.get('/dashboard', async (req, res) => {
     const subResult = await db.collection('subscriptions').aggregate(subPipeline).toArray();
     const total_paid = subResult.length > 0 ? (subResult[0].paid || 0) : 0;
     
-    // Remaining = net of all family balances
+    // Remaining = -(net of all family balances)
     const activeSubs = await db.collection('subscriptions').find({ status: 'active' }).toArray();
     const net_balances = activeSubs.reduce((sum, s) => sum + (s.remaining_balance || 0), 0);
-    const remaining = net_balances;
+    const remaining = -net_balances;
 
     // Teacher payments aggregation
     const tpPipeline = [];
