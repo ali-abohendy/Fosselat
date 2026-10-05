@@ -698,7 +698,20 @@ router.get('/subscriptions', async (req, res) => {
 
     const data = subs.map(s => {
       const subId = s._id.toString();
-      const updatedStudents = (s.students || []).map(st => {
+      let studentList = s.students;
+      if (!studentList || studentList.length === 0) {
+        studentList = [{
+          student_id: s.student_id,
+          rate: s.student_rate,
+          duration: s.lesson_duration,
+          lesson_charge: s.lesson_charge,
+          total_lessons: s.total_lessons,
+          used_lessons: s.used_lessons,
+          remaining_lessons: s.remaining_lessons
+        }];
+      }
+
+      const updatedStudents = studentList.map(st => {
          const key = `${subId}_${st.student_id}`;
          return {
            ...st,

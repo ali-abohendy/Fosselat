@@ -35,24 +35,10 @@ export default function AdminStudentPayments() {
   }, []);
 
   const fetchSubscriptions = () => {
-    fetch(`${API}/admin/subscriptions`, { headers: getHeaders() })
+    fetch(`${API}/admin/subscriptions?t=${new Date().getTime()}`, { headers: getHeaders() })
       .then(r => r.json()).then(d => { 
         if (d.success) {
-          const normalized = d.data.map(sub => {
-            if (!sub.students) {
-              sub.students = [{
-                student_id: sub.student_id,
-                rate: sub.student_rate,
-                duration: sub.lesson_duration,
-                lesson_charge: sub.lesson_charge,
-                total_lessons: sub.total_lessons,
-                used_lessons: sub.used_lessons,
-                remaining_lessons: sub.remaining_lessons
-              }];
-            }
-            return sub;
-          });
-          setSubscriptions(normalized); 
+          setSubscriptions(d.data);
         } 
       }).catch(() => {});
   };
@@ -302,7 +288,7 @@ export default function AdminStudentPayments() {
                             if (!st) return null;
                             const stObj = students.find(s => s._id === st.student_id);
                             const name = stObj ? stObj.full_name : 'Unknown';
-                            const actualDur = parseInt(st.duration) || (stObj ? parseInt(stObj.class_duration) : 0) || 30;
+                            const actualDur = parseInt(st.duration) || 30;
                             const actualTotalMins = st.total_minutes !== undefined ? st.total_minutes : (st.total_lessons || 0) * actualDur;
                             const actualUsedMins = st.actual_used_minutes !== undefined ? st.actual_used_minutes : (st.used_minutes !== undefined ? st.used_minutes : (st.used_lessons || 0) * actualDur);
                             const actualRemainingMins = actualTotalMins - actualUsedMins;
