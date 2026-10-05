@@ -42,9 +42,7 @@ export default function AdminDashboard() {
     { icon: 'Present', label: 'Present Times', value: stats.present_times },
     { icon: 'Absent', label: 'Absent Times', value: stats.absent_times },
     { icon: 'Due', label: 'Total Due', value: `$${stats.total_due}` },
-    { icon: 'Paid', label: 'Total Paid', value: `$${stats.total_paid}` },
     { icon: 'Payroll', label: 'Total Payroll', value: `$${stats.total_payroll}` },
-    { icon: 'Remaining', label: 'Remaining', value: `$${stats.remaining || 0}` },
     { icon: 'Revenue', label: 'Revenue', value: `$${stats.revenue !== undefined ? stats.revenue : stats.balance}` },
   ];
 
