@@ -236,18 +236,18 @@ export default function AdminCalendar() {
                 
                 {/* Header: Time and Status */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ background: 'rgba(200,167,99,0.1)', padding: '10px', borderRadius: '10px', color: 'var(--color-gold)' }}>
-                      <Clock size={20} />
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ background: 'rgba(200,167,99,0.1)', padding: '12px', borderRadius: '10px', color: 'var(--color-gold)', display: 'flex' }}>
+                      <Clock size={22} />
                     </div>
-                    <div>
-                      <div style={{ color: 'var(--color-cream)', fontWeight: 'bold', fontSize: '16px', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: '2px' }}>
+                      <div style={{ color: 'var(--color-cream)', fontWeight: 'bold', fontSize: '15px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         <span>{formatTime12h(evt.start_time)} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Teacher)</span></span>
                         {evt.timezone_diff && evt.timezone_diff !== '0' && (
                           <span>{formatTime12h(applyTimezoneDiff(evt.start_time, evt.timezone_diff))} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Student)</span></span>
                         )}
                       </div>
-                      <div style={{ color: 'var(--color-text-muted)', fontSize: '12px', marginTop: '4px' }}>
+                      <div style={{ color: 'var(--color-text-muted)', fontSize: '12px' }}>
                         {String(evt.duration).includes('min') ? evt.duration : `${evt.duration} mins`}
                       </div>
                     </div>
