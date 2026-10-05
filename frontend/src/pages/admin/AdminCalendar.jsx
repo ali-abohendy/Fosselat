@@ -100,15 +100,43 @@ export default function AdminCalendar() {
     });
   }, [currentDate, scheduled, pastSessions]);
 
-  const formatTimeStr = (timeStr) => {
+  const applyTimezoneDiff = (timeStr, diffStr) => {
+    if (!timeStr || !diffStr) return timeStr;
+    const diffHours = parseFloat(diffStr);
+    if (isNaN(diffHours)) return timeStr;
+
+    const [hStr, mStr] = timeStr.split(':');
+    let h = parseInt(hStr, 10);
+    let m = parseInt(mStr, 10);
+    if (isNaN(h) || isNaN(m)) return timeStr;
+
+    const totalMins = h * 60 + m + (diffHours * 60);
+    let adjustedH = Math.floor(totalMins / 60);
+    const adjustedM = ((totalMins % 60) + 60) % 60;
+    
+    while (adjustedH < 0) { adjustedH += 24; }
+    while (adjustedH >= 24) { adjustedH -= 24; }
+
+    return `${adjustedH.toString().padStart(2, '0')}:${Math.round(adjustedM).toString().padStart(2, '0')}`;
+  };
+
+  const formatTime12h = (timeStr) => {
     if (!timeStr) return '';
+    let [hStr, mStr] = timeStr.split(':');
     if (timeStr.includes('T')) {
       try {
         const d = new Date(timeStr);
-        return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
+        hStr = d.getHours().toString().padStart(2, '0');
+        mStr = d.getMinutes().toString().padStart(2, '0');
       } catch { return timeStr; }
     }
-    return timeStr;
+    
+    let h = parseInt(hStr, 10);
+    if (isNaN(h)) return timeStr;
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h ? h : 12;
+    return `${h}:${mStr} ${ampm}`;
   };
 
   return (
@@ -203,8 +231,13 @@ export default function AdminCalendar() {
                       <Clock size={20} />
                     </div>
                     <div>
-                      <div style={{ color: 'var(--color-cream)', fontWeight: 'bold', fontSize: '18px' }}>{formatTimeStr(evt.start_time)}</div>
-                      <div style={{ color: 'var(--color-text-muted)', fontSize: '12px' }}>{evt.duration} mins</div>
+                      <div style={{ color: 'var(--color-cream)', fontWeight: 'bold', fontSize: '16px', display: 'flex', flexDirection: 'column' }}>
+                        <span>{formatTime12h(evt.start_time)} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Teacher)</span></span>
+                        {evt.timezone_diff && evt.timezone_diff !== '0' && (
+                          <span>{formatTime12h(applyTimezoneDiff(evt.start_time, evt.timezone_diff))} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Student)</span></span>
+                        )}
+                      </div>
+                      <div style={{ color: 'var(--color-text-muted)', fontSize: '12px', marginTop: '4px' }}>{evt.duration} mins</div>
                     </div>
                   </div>
                   {evt.isPast && (

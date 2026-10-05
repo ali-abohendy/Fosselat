@@ -183,10 +183,10 @@ router.get('/dashboard', async (req, res) => {
     const subResult = await db.collection('subscriptions').aggregate(subPipeline).toArray();
     const total_paid = subResult.length > 0 ? (subResult[0].paid || 0) : 0;
     
-    // Remaining = -(net of all family balances)
+    // Remaining = net of all family balances
     const activeSubs = await db.collection('subscriptions').find({ status: 'active' }).toArray();
     const net_balances = activeSubs.reduce((sum, s) => sum + (s.remaining_balance || 0), 0);
-    const remaining = -net_balances;
+    const remaining = net_balances;
 
     // Teacher payments aggregation
     const tpPipeline = [];
@@ -517,13 +517,21 @@ router.get('/attendance', async (req, res) => {
       reviewMap[r.session_id] = r;
     });
 
+    const studentIds = [...new Set(sessions.map(s => s.student_id ? new ObjectId(s.student_id) : null).filter(Boolean))];
+    const students = await db.collection('users').find({ _id: { $in: studentIds } }).toArray();
+    const studentMap = {};
+    students.forEach(st => { studentMap[st._id.toString()] = st; });
+
     const data = sessions.map((s) => {
       let dm = parseInt((s.duration || '').toString().replace(/\D/g, ''), 10);
       if (isNaN(dm) || dm <= 0) dm = s.duration_minutes || 0;
+      
+      const stObj = s.student_id ? studentMap[s.student_id.toString()] : null;
 
       return {
         ...s,
         duration_minutes: dm,
+        timezone_diff: stObj ? stObj.timezone_diff : '',
         _id: s._id.toString(),
         teacher_id: s.teacher_id ? s.teacher_id.toString() : '',
         student_id: s.student_id ? s.student_id.toString() : '',
@@ -731,18 +739,21 @@ router.post('/subscriptions', async (req, res) => {
 
     const pAmount = parseFloat(payment_amount);
     
-    // Prepare the student array
     let processedStudents = students.map(s => {
-      const charge = parseFloat(s.charge || 0);
-      const totalL = parseInt(s.lessons || 0);
+      const chargePerMin = parseFloat(s.charge_per_minute || 0);
+      const totalM = parseInt(s.minutes || 0);
       return {
         student_id: s.student_id,
         rate: parseFloat(s.rate || 0),
         duration: parseInt(s.duration || 0),
-        lesson_charge: charge,
-        total_lessons: totalL,
+        charge_per_minute: chargePerMin,
+        total_minutes: totalM,
+        used_minutes: 0,
+        remaining_minutes: totalM,
+        // Keep these for backward compatibility with old data in some UI if needed, or just initialize them to 0
+        total_lessons: 0,
         used_lessons: 0,
-        remaining_lessons: totalL
+        remaining_lessons: 0
       };
     });
 
@@ -777,23 +788,27 @@ router.post('/subscriptions', async (req, res) => {
       if (stIdx !== -1) {
         const studentObj = subDoc.students[stIdx];
         
-        // Deduct lesson
-        subDoc.students[stIdx].used_lessons += 1;
-        subDoc.students[stIdx].remaining_lessons -= 1;
-        updatedConsumed += studentObj.lesson_charge;
+        let dm = parseInt((sess.duration || '').toString().replace(/\D/g, ''), 10);
+        if (isNaN(dm) || dm <= 0) dm = sess.duration_minutes || 60; // fallback
+
+        const sessionCharge = dm * (studentObj.charge_per_minute || 0);
+
+        // Deduct minutes
+        subDoc.students[stIdx].used_minutes = (subDoc.students[stIdx].used_minutes || 0) + dm;
+        subDoc.students[stIdx].remaining_minutes = (subDoc.students[stIdx].remaining_minutes || 0) - dm;
+        updatedConsumed += sessionCharge;
         
         // Update session
         await db.collection('sessions').updateOne(
           { _id: sess._id },
-          { $set: { subscription_id: subIdStr, lesson_charge: studentObj.lesson_charge } }
+          { $set: { subscription_id: subIdStr, lesson_charge: sessionCharge } }
         );
       }
     }
     
     // Check if any student completed their lessons to update global status if needed, 
     // but typically the cycle is 'active' until all students are done, or we just leave it active 
-    // and rely on individual student remaining_lessons <= 0 check.
-    const allCompleted = subDoc.students.every(s => s.remaining_lessons <= 0);
+    const allCompleted = subDoc.students.every(s => (s.remaining_minutes || 0) <= 0);
     const finalStatus = allCompleted ? 'completed' : 'active';
     
     // Update subscription with the new totals

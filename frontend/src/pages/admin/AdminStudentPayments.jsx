@@ -76,18 +76,19 @@ export default function AdminStudentPayments() {
       else if (s.plan === 'excellence') lessons = 16;
       else if (s.plan === 'elite') lessons = 20;
 
-      const baseChargePerLesson = r * (d / 60);
-      const finalChargePerLesson = baseChargePerLesson * (1 - familyDiscount);
+      const baseChargePerMinute = r / 60;
+      const finalChargePerMinute = baseChargePerMinute * (1 - familyDiscount);
+      const totalMinutes = lessons * d;
       
-      totalPay += finalChargePerLesson * lessons;
+      totalPay += finalChargePerMinute * totalMinutes;
 
       return {
         student_id: s._id,
         name: s.full_name,
         rate: r,
         duration: d,
-        charge: finalChargePerLesson.toFixed(2),
-        lessons: lessons,
+        charge_per_minute: finalChargePerMinute,
+        minutes: totalMinutes,
         plan: s.plan
       };
     });
@@ -112,10 +113,10 @@ export default function AdminStudentPayments() {
     });
   };
 
-  const handleStudentLessonChange = (student_id, lessons) => {
+  const handleStudentLessonChange = (student_id, minutes) => {
     let newStudents = form.students.map(s => {
       if (s.student_id === student_id) {
-        return { ...s, lessons: parseInt(lessons) || 0 };
+        return { ...s, minutes: parseInt(minutes) || 0 };
       }
       return s;
     });
@@ -124,13 +125,11 @@ export default function AdminStudentPayments() {
     let totalPay = 0;
 
     newStudents = newStudents.map(st => {
-      // st.rate already has the plan discount applied from the database!
-      const baseChargePerLesson = (st.rate || 0) * ((st.duration || 0) / 60);
-      
-      const finalChargePerLesson = baseChargePerLesson * (1 - familyDiscount);
-      totalPay += finalChargePerLesson * (st.lessons || 0);
+      const baseChargePerMinute = (st.rate || 0) / 60;
+      const finalChargePerMinute = baseChargePerMinute * (1 - familyDiscount);
+      totalPay += finalChargePerMinute * (st.minutes || 0);
 
-      return { ...st, charge: finalChargePerLesson.toFixed(2) };
+      return { ...st, charge_per_minute: finalChargePerMinute };
     });
 
     setForm(prev => ({ ...prev, students: newStudents, payment_amount: totalPay.toFixed(2) }));
@@ -222,17 +221,17 @@ export default function AdminStudentPayments() {
 
             {form.students.length > 0 && (
               <div className="dash-form-group" style={{ gridColumn: '1 / -1', background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '12px' }}>
-                <h4 style={{ marginBottom: '16px', color: 'var(--color-gold)' }}>Allocate Lessons</h4>
+                <h4 style={{ marginBottom: '16px', color: 'var(--color-gold)' }}>Allocate Minutes</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '16px' }}>
                   {form.students.map(st => (
                     <div key={st.student_id} style={{ background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '8px' }}>
                       <div style={{ fontWeight: 600, color: 'var(--color-cream)', marginBottom: '8px' }}>{st.name}</div>
                       <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', marginBottom: '12px' }}>
-                        Rate: ${st.rate}/hr | Dur: {st.duration}m | Charge/lesson: ${st.charge}
+                        Rate: ${st.rate}/hr | Charge/minute: ${(st.charge_per_minute || 0).toFixed(3)}
                       </div>
-                      <label style={{ fontSize: '12px', marginBottom: '4px', display: 'block' }}>Lessons Allocated</label>
+                      <label style={{ fontSize: '12px', marginBottom: '4px', display: 'block' }}>Minutes Allocated</label>
                       <input 
-                        type="number" min="0" value={st.lessons}
+                        type="number" min="0" value={st.minutes}
                         onChange={e => handleStudentLessonChange(st.student_id, e.target.value)}
                         style={{ width: '100%', padding: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', color: 'var(--color-white)' }}
                       />
@@ -310,11 +309,11 @@ export default function AdminStudentPayments() {
                                   <div style={{ width: '60px', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden', marginBottom: '4px' }}>
                                     <div style={{
                                       height: '100%', 
-                                      background: (st.remaining_lessons || 0) <= 0 ? '#4ade80' : 'var(--color-gold)',
-                                      width: `${Math.min(((st.used_lessons || 0) / (st.total_lessons || 1)) * 100, 100)}%`
+                                      background: (st.remaining_minutes || 0) <= 0 ? '#4ade80' : 'var(--color-gold)',
+                                      width: `${Math.min(((st.used_minutes || 0) / (st.total_minutes || 1)) * 100, 100)}%`
                                     }} />
                                   </div>
-                                  <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>{(st.used_lessons || 0)}/{(st.total_lessons || 0)} lessons</span>
+                                  <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>{(st.used_minutes || 0)}/{(st.total_minutes || 0)} mins</span>
                                 </div>
                               </div>
                             )

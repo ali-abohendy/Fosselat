@@ -208,17 +208,25 @@ router.post('/sessions', async (req, res) => {
           const sub = lastSubArr[0];
           const stIdx = sub.students.findIndex(s => s.student_id === student._id.toString());
           
-          if (stIdx !== -1) {
-            const studentObj = sub.students[stIdx];
-            const lessonCharge = studentObj.lesson_charge || 0;
-            
-            sub.students[stIdx].remaining_lessons = (studentObj.remaining_lessons || 0) - 1;
-            sub.students[stIdx].used_lessons = (studentObj.used_lessons || 0) + 1;
+            if (stIdx !== -1) {
+              const studentObj = sub.students[stIdx];
+              
+              let dm = parseInt((duration || '').toString().replace(/\D/g, ''), 10);
+              if (isNaN(dm) || dm <= 0) dm = duration_minutes || 60; // fallback
+
+              const lessonCharge = dm * (studentObj.charge_per_minute || (studentObj.lesson_charge / (studentObj.duration || 30)) || 0);
+              
+              sub.students[stIdx].remaining_minutes = (studentObj.remaining_minutes || 0) - dm;
+              sub.students[stIdx].used_minutes = (studentObj.used_minutes || 0) + dm;
+              
+              // Fallback backward compat
+              sub.students[stIdx].remaining_lessons = (studentObj.remaining_lessons || 0) - 1;
+              sub.students[stIdx].used_lessons = (studentObj.used_lessons || 0) + 1;
             
             const newConsumedAmount = (sub.consumed_amount || 0) + lessonCharge;
             const newRemainingBalance = (sub.remaining_balance || 0) - lessonCharge;
             
-            const allCompleted = sub.students.every(s => s.remaining_lessons <= 0);
+            const allCompleted = sub.students.every(s => (s.remaining_minutes || 0) <= 0);
             let newStatus = allCompleted ? 'completed' : sub.status;
             let compDate = sub.completion_date;
             
