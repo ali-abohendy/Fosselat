@@ -242,9 +242,13 @@ export default function AdminCalendar() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: '2px' }}>
                       <div style={{ color: 'var(--color-cream)', fontWeight: 'bold', fontSize: '15px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                        <span>{formatTime12h(evt.start_time)} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Teacher)</span></span>
-                        {evt.timezone_diff && evt.timezone_diff !== '0' && (
-                          <span>{formatTime12h(applyTimezoneDiff(evt.start_time, evt.timezone_diff))} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Student)</span></span>
+                        {evt.timezone_diff && evt.timezone_diff !== '0' ? (
+                          <>
+                            <span>{formatTime12h(applyTimezoneDiff(evt.start_time, evt.timezone_diff))} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Teacher)</span></span>
+                            <span>{formatTime12h(evt.start_time)} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Student)</span></span>
+                          </>
+                        ) : (
+                          <span>{formatTime12h(evt.start_time)} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Teacher)</span></span>
                         )}
                       </div>
                       <div style={{ color: 'var(--color-text-muted)', fontSize: '12px' }}>
