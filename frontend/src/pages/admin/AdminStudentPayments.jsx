@@ -302,6 +302,10 @@ export default function AdminStudentPayments() {
                             if (!st) return null;
                             const stObj = students.find(s => s._id === st.student_id);
                             const name = stObj ? stObj.full_name : 'Unknown';
+                            const actualTotalMins = st.total_minutes !== undefined ? st.total_minutes : (st.total_lessons || 0) * (st.duration || 30);
+                            const actualUsedMins = st.used_minutes !== undefined ? st.used_minutes : (st.used_lessons || 0) * (st.duration || 30);
+                            const actualRemainingMins = st.remaining_minutes !== undefined ? st.remaining_minutes : (st.remaining_lessons || 0) * (st.duration || 30);
+
                             return (
                               <div key={st.student_id || Math.random()} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', background: 'rgba(255,255,255,0.02)', padding: '6px', borderRadius: '4px' }}>
                                 <div style={{ flex: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</div>
@@ -309,14 +313,12 @@ export default function AdminStudentPayments() {
                                   <div style={{ width: '60px', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden', marginBottom: '4px' }}>
                                     <div style={{
                                       height: '100%', 
-                                      background: (st.remaining_minutes ?? st.remaining_lessons ?? 0) <= 0 ? '#4ade80' : 'var(--color-gold)',
-                                      width: `${Math.min(((st.used_minutes ?? st.used_lessons ?? 0) / (st.total_minutes || st.total_lessons || 1)) * 100, 100)}%`
+                                      background: actualRemainingMins <= 0 ? '#4ade80' : 'var(--color-gold)',
+                                      width: `${Math.min((actualUsedMins / (actualTotalMins || 1)) * 100, 100)}%`
                                     }} />
                                   </div>
                                   <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>
-                                    {st.total_minutes !== undefined 
-                                      ? `${st.used_minutes || 0}/${st.total_minutes || 0} mins` 
-                                      : `${st.used_lessons || 0}/${st.total_lessons || 0} lessons`}
+                                    {actualUsedMins}/{actualTotalMins} mins
                                   </span>
                                 </div>
                               </div>
