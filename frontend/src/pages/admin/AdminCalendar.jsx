@@ -105,7 +105,17 @@ export default function AdminCalendar() {
     const diffHours = parseFloat(diffStr);
     if (isNaN(diffHours)) return timeStr;
 
-    const [hStr, mStr] = timeStr.split(':');
+    let hStr, mStr;
+    if (timeStr.includes('T')) {
+      try {
+        const d = new Date(timeStr);
+        hStr = d.getHours().toString();
+        mStr = d.getMinutes().toString();
+      } catch { return timeStr; }
+    } else {
+      [hStr, mStr] = timeStr.split(':');
+    }
+
     let h = parseInt(hStr, 10);
     let m = parseInt(mStr, 10);
     if (isNaN(h) || isNaN(m)) return timeStr;
@@ -237,7 +247,9 @@ export default function AdminCalendar() {
                           <span>{formatTime12h(applyTimezoneDiff(evt.start_time, evt.timezone_diff))} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Student)</span></span>
                         )}
                       </div>
-                      <div style={{ color: 'var(--color-text-muted)', fontSize: '12px', marginTop: '4px' }}>{evt.duration} mins</div>
+                      <div style={{ color: 'var(--color-text-muted)', fontSize: '12px', marginTop: '4px' }}>
+                        {String(evt.duration).includes('min') ? evt.duration : `${evt.duration} mins`}
+                      </div>
                     </div>
                   </div>
                   {evt.isPast && (

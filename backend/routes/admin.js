@@ -517,21 +517,25 @@ router.get('/attendance', async (req, res) => {
       reviewMap[r.session_id] = r;
     });
 
-    const studentIds = [...new Set(sessions.map(s => s.student_id ? new ObjectId(s.student_id) : null).filter(Boolean))];
-    const students = await db.collection('users').find({ _id: { $in: studentIds } }).toArray();
-    const studentMap = {};
-    students.forEach(st => { studentMap[st._id.toString()] = st; });
+    const studentIds = [...new Set(sessions.map(s => s.student_id ? s.student_id.toString() : null).filter(Boolean))];
+    const scheduledDocs = await db.collection('scheduled_sessions').find({ student_id: { $in: studentIds } }).toArray();
+    const tzMap = {};
+    scheduledDocs.forEach(doc => {
+      if (doc.timezone_diff && doc.timezone_diff !== '0') {
+        tzMap[doc.student_id.toString()] = doc.timezone_diff;
+      }
+    });
 
     const data = sessions.map((s) => {
       let dm = parseInt((s.duration || '').toString().replace(/\D/g, ''), 10);
       if (isNaN(dm) || dm <= 0) dm = s.duration_minutes || 0;
       
-      const stObj = s.student_id ? studentMap[s.student_id.toString()] : null;
+      const stIdStr = s.student_id ? s.student_id.toString() : '';
 
       return {
         ...s,
         duration_minutes: dm,
-        timezone_diff: stObj ? stObj.timezone_diff : '',
+        timezone_diff: tzMap[stIdStr] || '',
         _id: s._id.toString(),
         teacher_id: s.teacher_id ? s.teacher_id.toString() : '',
         student_id: s.student_id ? s.student_id.toString() : '',
