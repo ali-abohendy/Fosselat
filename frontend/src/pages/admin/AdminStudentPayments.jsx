@@ -309,11 +309,15 @@ export default function AdminStudentPayments() {
                                   <div style={{ width: '60px', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden', marginBottom: '4px' }}>
                                     <div style={{
                                       height: '100%', 
-                                      background: (st.remaining_minutes || 0) <= 0 ? '#4ade80' : 'var(--color-gold)',
-                                      width: `${Math.min(((st.used_minutes || 0) / (st.total_minutes || 1)) * 100, 100)}%`
+                                      background: (st.remaining_minutes ?? st.remaining_lessons ?? 0) <= 0 ? '#4ade80' : 'var(--color-gold)',
+                                      width: `${Math.min(((st.used_minutes ?? st.used_lessons ?? 0) / (st.total_minutes || st.total_lessons || 1)) * 100, 100)}%`
                                     }} />
                                   </div>
-                                  <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>{(st.used_minutes || 0)}/{(st.total_minutes || 0)} mins</span>
+                                  <span style={{ color: 'var(--color-text-muted)', fontSize: '10px' }}>
+                                    {st.total_minutes !== undefined 
+                                      ? `${st.used_minutes || 0}/${st.total_minutes || 0} mins` 
+                                      : `${st.used_lessons || 0}/${st.total_lessons || 0} lessons`}
+                                  </span>
                                 </div>
                               </div>
                             )
