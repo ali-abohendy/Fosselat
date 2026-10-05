@@ -226,7 +226,12 @@ router.post('/sessions', async (req, res) => {
             const newConsumedAmount = (sub.consumed_amount || 0) + lessonCharge;
             const newRemainingBalance = (sub.remaining_balance || 0) - lessonCharge;
             
-            const allCompleted = sub.students.every(s => (s.remaining_minutes || 0) <= 0);
+            const allCompleted = sub.students.every(s => {
+              if (s.remaining_minutes !== undefined) {
+                return s.remaining_minutes <= 0;
+              }
+              return (s.remaining_lessons || 0) <= 0;
+            });
             let newStatus = allCompleted ? 'completed' : sub.status;
             let compDate = sub.completion_date;
             
