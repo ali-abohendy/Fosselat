@@ -302,9 +302,10 @@ export default function AdminStudentPayments() {
                             if (!st) return null;
                             const stObj = students.find(s => s._id === st.student_id);
                             const name = stObj ? stObj.full_name : 'Unknown';
-                            const actualTotalMins = st.total_minutes !== undefined ? st.total_minutes : (st.total_lessons || 0) * (st.duration || 30);
-                            const actualUsedMins = st.used_minutes !== undefined ? st.used_minutes : (st.used_lessons || 0) * (st.duration || 30);
-                            const actualRemainingMins = st.remaining_minutes !== undefined ? st.remaining_minutes : (st.remaining_lessons || 0) * (st.duration || 30);
+                            const actualDur = parseInt(st.duration) || (stObj ? parseInt(stObj.class_duration) : 0) || 30;
+                            const actualTotalMins = st.total_minutes !== undefined ? st.total_minutes : (st.total_lessons || 0) * actualDur;
+                            const actualUsedMins = st.used_minutes !== undefined ? st.used_minutes : (st.used_lessons || 0) * actualDur;
+                            const actualRemainingMins = st.remaining_minutes !== undefined ? st.remaining_minutes : (st.remaining_lessons || 0) * actualDur;
 
                             return (
                               <div key={st.student_id || Math.random()} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', background: 'rgba(255,255,255,0.02)', padding: '6px', borderRadius: '4px' }}>
