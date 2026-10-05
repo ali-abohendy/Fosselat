@@ -100,7 +100,7 @@ export default function AdminCalendar() {
     });
   }, [currentDate, scheduled, pastSessions]);
 
-  const applyTimezoneDiff = (timeStr, diffStr) => {
+  const applyTimezoneDiff = (timeStr, diffStr, isPast) => {
     if (!timeStr || !diffStr) return timeStr;
     const diffHours = parseFloat(diffStr);
     if (isNaN(diffHours)) return timeStr;
@@ -120,7 +120,9 @@ export default function AdminCalendar() {
     let m = parseInt(mStr, 10);
     if (isNaN(h) || isNaN(m)) return timeStr;
 
-    const totalMins = h * 60 + m - (diffHours * 60);
+    const diffMins = diffHours * 60;
+    const totalMins = isPast ? (h * 60 + m - diffMins) : (h * 60 + m + diffMins);
+    
     let adjustedH = Math.floor(totalMins / 60);
     const adjustedM = ((totalMins % 60) + 60) % 60;
     
@@ -242,9 +244,9 @@ export default function AdminCalendar() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', paddingTop: '2px' }}>
                       <div style={{ color: 'var(--color-cream)', fontWeight: 'bold', fontSize: '15px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                        <span>{formatTime12h(evt.start_time)} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Teacher)</span></span>
+                        <span>{formatTime12h(evt.isPast ? evt.start_time : applyTimezoneDiff(evt.start_time, evt.timezone_diff, false))} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Teacher)</span></span>
                         {evt.timezone_diff && evt.timezone_diff !== '0' && (
-                          <span>{formatTime12h(applyTimezoneDiff(evt.start_time, evt.timezone_diff))} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Student)</span></span>
+                          <span>{formatTime12h(evt.isPast ? applyTimezoneDiff(evt.start_time, evt.timezone_diff, true) : evt.start_time)} <span style={{fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 'normal'}}>(Student)</span></span>
                         )}
                       </div>
                       <div style={{ color: 'var(--color-text-muted)', fontSize: '12px' }}>
