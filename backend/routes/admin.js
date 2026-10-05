@@ -155,13 +155,41 @@ router.get('/dashboard', async (req, res) => {
     let teaching_minutes = 0;
     let total_due = 0;
     
+    const allStudents = await db.collection('users').find({ role: 'student' }).toArray();
+    
+    // Count members per family for discount
+    const familyCounts = {};
+    allStudents.forEach(st => {
+      if (st.student_id) {
+        familyCounts[st.student_id] = (familyCounts[st.student_id] || 0) + 1;
+      }
+    });
+
+    const rateMap = {};
+    allStudents.forEach(st => {
+      if (st.hourly_rate) {
+        let rate = parseFloat(st.hourly_rate);
+        const count = st.student_id ? (familyCounts[st.student_id] || 1) : 1;
+        if (count > 1) {
+          rate = rate * 0.90; // 10% family discount
+        }
+        rateMap[st._id.toString()] = rate;
+      }
+    });
+
     // Some sessions might not have accurate duration_minutes if they were edited. Let's calculate manually.
     const allSessions = await db.collection('sessions').find(matchSession).toArray();
     allSessions.forEach(s => {
       let dm = parseInt((s.duration || '').toString().replace(/\D/g, ''), 10);
       if (isNaN(dm) || dm <= 0) dm = s.duration_minutes || 0;
       teaching_minutes += dm;
-      total_due += s.lesson_charge || 0;
+      
+      if (s.student_id && rateMap[s.student_id]) {
+        const minuteRate = rateMap[s.student_id] / 60;
+        total_due += (minuteRate * dm);
+      } else {
+        total_due += s.lesson_charge || 0;
+      }
     });
 
     // Subscriptions aggregation
