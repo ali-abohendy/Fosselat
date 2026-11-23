@@ -131,7 +131,7 @@ export const UNIFIED_CURRICULUM = [
               "Assimilation of adjacent letters: identical, homorganic, proximate and distant categories.",
               "Waqf and ibtida: stop types, the seven stop signs, invalid stops and their repair.",
               "The prescribed pauses of the adopted narration; recitation speeds from deliberate to brisk.",
-              "Exceptional orthography and readings encountered in the mushaf (imalah, ishmam, tashil, the seen/sad substitutions). — 9 — FOSSE LAT ACADE MY  ·  OFF I CI A L AC ADE MI C CU R R I CUL U M F R A ME WO R K"
+              "Exceptional orthography and readings encountered in the mushaf (imalah, ishmam, tashil, the seen/sad substitutions)."
             ]
           }
         ]

@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
-import StatCounter from '../components/StatCounter';
 import Button from '../components/Button';
+import HowClassWorks from '../components/HowClassWorks';
+import IjazahExplainer from '../components/IjazahExplainer';
 import { GraduationCap, Users, ClipboardList, FileText, Trophy, Clock, Star, DollarSign } from '../components/Icons';
+import { buildWhatsAppUrl, trackWhatsAppClick } from '../utils/siteActions';
 import './About.css';
 
 export default function About() {
@@ -9,20 +11,19 @@ export default function About() {
     document.title = 'About Us — Fosselat Academy';
   }, []);
 
-  const WHATSAPP_NUMBER = '966595796177';
-  const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20Free%20trial%20lesson,%20please.`;
+  const trialUrl = buildWhatsAppUrl({ page: 'About Us', intent: 'trial' });
 
   const values = [
-    { icon: <GraduationCap size={24} />, title: 'Certified & Ijazah-Certified Teachers', desc: 'Learn from qualified teachers with authenticated chains of transmission.' },
-    { icon: <Users size={24} />, title: 'Age-Based Learning Paths', desc: 'Structured curriculum tailored for kids and adults at every level.' },
-    { icon: <ClipboardList size={24} />, title: 'Initial Placement Test', desc: 'Find your perfect starting level with our adaptive assessment.' },
-    { icon: <FileText size={24} />, title: 'Placement Test After Every Level', desc: 'Track your progress with assessments at each milestone.' },
+    { icon: <GraduationCap size={24} />, title: 'Al-Azhar & Ijazah-Certified Teachers', desc: 'Learn from qualified teachers with authenticated chains of transmission and English teaching fluency.' },
+    { icon: <Users size={24} />, title: 'Age-Based Learning Paths', desc: 'Structured curriculum tailored for both adults and kids at every level — from absolute zero to fluent recitation.' },
+    { icon: <ClipboardList size={24} />, title: 'Initial Placement Test', desc: 'Find your perfect starting level in 3–5 minutes with our free adaptive assessment.' },
+    { icon: <FileText size={24} />, title: 'Assessment After Every Level', desc: 'Track your progress clearly with structured reviews at each milestone.' },
     { icon: <Trophy size={24} />, title: 'Certificates After Every Level', desc: 'Earn official certificates of achievement as you advance.' },
-    { icon: <Users size={24} />, title: 'Personal One-on-One Classes', desc: 'Every lesson is private, focused entirely on your learning needs.' },
-    { icon: <Clock size={24} />, title: 'Learn at Your Preferred Time', desc: 'Choose the schedule that fits your lifestyle perfectly.' },
-    { icon: <Star size={24} />, title: 'Free Trial Before You Enroll', desc: 'Try a complimentary class before making any commitment.' },
-    { icon: <Users size={24} />, title: 'Try Another Teacher for Free', desc: 'Not the right fit? Switch teachers at no extra cost.' },
-    { icon: <DollarSign size={24} />, title: '30-Day Money-Back Guarantee', desc: 'Full refund within 30 days if you are not satisfied.' }
+    { icon: <Users size={24} />, title: 'Personal 1-on-1 Live Classes in English', desc: 'Every lesson is private on Zoom or Google Meet, taught clearly in English at your personal pace.' },
+    { icon: <Clock size={24} />, title: 'Flexible Global Time Zones', desc: 'Choose class times that fit your local schedule across North America, Europe, UK, Australia, and the Gulf.' },
+    { icon: <Star size={24} />, title: 'Free 30-Minute Trial Before Enrolling', desc: 'Try a full complimentary 1-on-1 class before making any commitment.' },
+    { icon: <Users size={24} />, title: 'Switch Teachers Free Anytime', desc: 'Not the right fit? Switch to another teacher at zero extra cost.' },
+    { icon: <DollarSign size={24} />, title: '30-Day Money-Back Guarantee', desc: 'Full refund within 30 days if you are not satisfied with your experience.' },
   ];
 
   return (
@@ -32,7 +33,7 @@ export default function About() {
         <div className="about-hero-overlay" />
         <div className="container about-hero-content">
           <h1>About Fosselat Academy</h1>
-          <p>Learn Qur'an. The Right Way.</p>
+          <p>Structured 1-on-1 Qur&apos;an, Arabic &amp; Islamic Studies — Taught in Clear English for Adults &amp; Kids</p>
         </div>
       </section>
 
@@ -41,29 +42,33 @@ export default function About() {
         <div className="container about-mission-grid" style={{ gridTemplateColumns: '1fr', textAlign: 'center' }}>
           <div className="about-mission-text animate-fade-in-up">
             <span className="about-label">Our Mission</span>
-            <h2>Accessible Online Education</h2>
+            <h2>Accessible, Authentic Online Education</h2>
             <div className="gold-line" style={{ margin: '0 auto 20px auto' }} />
-            <p className="mission-statement" style={{ maxWidth: '800px', margin: '0 auto 20px auto' }}>
-              At Fosselat Academy, we are committed to making Quran, Arabic, and Islamic Studies accessible to learners of all ages and backgrounds through engaging, personalized online education.
+            <p className="mission-statement" style={{ maxWidth: '820px', margin: '0 auto 20px auto' }}>
+              At Fosselat Academy, we are committed to making Qur&apos;an, Arabic, and Islamic Studies accessible to non-Arabic-speaking learners of all ages through engaging, 1-on-1 online lessons delivered in clear English.
             </p>
-            <p style={{ maxWidth: '800px', margin: '0 auto 20px auto' }}>
-              Our mission is to provide every student with a structured learning journey led by certified and Ijazah-certified teachers who combine authentic Islamic knowledge with effective teaching methods. Whether you're a beginner or an advanced learner, our age-based curriculum and personalized one-on-one classes ensure that every lesson is tailored to your goals and learning pace.
+            <p style={{ maxWidth: '820px', margin: '0 auto 20px auto' }}>
+              Our mission is to provide every student with a structured learning journey led by Al-Azhar graduates and Ijazah-certified teachers who combine authentic Islamic scholarship with modern, patient teaching methods. Whether you are an adult starting from the very first Arabic letter or a parent seeking an encouraging teacher for your child, every lesson is tailored to your goals and pace.
             </p>
-            <p style={{ maxWidth: '800px', margin: '0 auto 20px auto' }}>
-              We begin with an initial placement test to determine the right starting level, followed by placement assessments after every level to track your progress. Upon successful completion of each stage, students receive an official certificate of achievement.
+            <p style={{ maxWidth: '820px', margin: '0 auto 20px auto' }}>
+              We begin with a free 30-minute trial class and a quick placement assessment to pinpoint your ideal level. Classes are scheduled flexibly across all international time zones, and upon completing each stage you receive an official certificate of achievement.
             </p>
-            <p style={{ maxWidth: '800px', margin: '0 auto 20px auto' }}>
-              To make learning as convenient as possible, you can choose the schedule that fits your lifestyle, enjoy a free trial class before enrolling, and even switch to another teacher for free if needed. Your satisfaction is our priority, which is why we also offer a 30-day money-back guarantee.
+            <p style={{ maxWidth: '820px', margin: '0 auto 30px auto' }}>
+              Your peace of mind matters to us: you can switch teachers anytime for free, and every enrollment is protected by our transparent 30-day money-back guarantee.
             </p>
-            <p style={{ maxWidth: '800px', margin: '0 auto' }}>
-              At Fosselat Academy, we're not just teaching lessons—we're helping students build a lifelong connection with the Quran, the Arabic language, and authentic Islamic knowledge.
-            </p>
+
+            <div style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'left' }}>
+              <IjazahExplainer />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* How a Class Works + Sample Video */}
+      <HowClassWorks pageSource="About Us" />
+
       {/* Key Features / Values */}
-      <section className="section" style={{ background: 'var(--color-bg-light)' }}>
+      <section className="section">
         <div className="container">
           <div className="section-title text-center" style={{ marginBottom: '40px' }}>
             <h2>Why Choose <span className="text-gold">Fosselat</span>?</h2>
@@ -73,14 +78,14 @@ export default function About() {
             {values.map((v, i) => (
               <div key={i} style={{
                 background: 'var(--gradient-card)',
-                border: '1px solid rgba(200,167,99,0.1)',
+                border: '1px solid rgba(200,167,99,0.14)',
                 padding: '24px',
                 borderRadius: '12px',
                 display: 'flex',
                 gap: '16px',
-                alignItems: 'flex-start'
+                alignItems: 'flex-start',
               }}>
-                <div style={{ color: 'var(--color-gold)', background: 'rgba(200,167,99,0.1)', padding: '10px', borderRadius: '50%' }}>
+                <div style={{ color: 'var(--color-gold)', background: 'rgba(200,167,99,0.1)', padding: '10px', borderRadius: '50%', flexShrink: 0 }}>
                   {v.icon}
                 </div>
                 <div>
@@ -94,12 +99,25 @@ export default function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="section" style={{ textAlign: 'center' }}>
+      <section className="section" style={{ textAlign: 'center', background: 'var(--color-bg-light)' }}>
         <div className="container">
-          <h2 style={{ marginBottom: '20px' }}>Start Your Journey Today</h2>
-          <Button href={WHATSAPP_URL} variant="primary" size="lg">
-            Book a Free Trial
-          </Button>
+          <h2 style={{ marginBottom: '12px' }}>Start Your Journey Today</h2>
+          <p style={{ color: 'var(--color-text-muted)', marginBottom: '26px' }}>
+            Meet our qualified teachers or book your free 30-minute trial class right now.
+          </p>
+          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Button
+              href={trialUrl}
+              variant="primary"
+              size="lg"
+              onClick={() => trackWhatsAppClick('about_cta_trial')}
+            >
+              Book a Free Trial
+            </Button>
+            <Button to="/teachers" variant="outline" size="lg">
+              Meet Our Teachers
+            </Button>
+          </div>
         </div>
       </section>
     </div>

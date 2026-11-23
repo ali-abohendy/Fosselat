@@ -21,9 +21,16 @@
 
 .footer-content {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: var(--spacing-3xl);
+  grid-template-columns: 1.4fr 1fr 1fr 0.9fr 1.2fr;
+  gap: var(--spacing-2xl);
   margin-bottom: var(--spacing-3xl);
+}
+
+.footer-payment-note {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
 }
 
 /* Brand Section */
@@ -191,11 +198,22 @@
   color: var(--color-gold);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive (iPad & Mobile) */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 40px 0 84px;
+  }
   .footer-content {
     grid-template-columns: 1fr;
-    gap: var(--spacing-2xl);
+    gap: 24px;
+    margin-bottom: 24px;
   }
 
   .footer-brand {
@@ -222,11 +240,20 @@
 }
 
 @media (max-width: 640px) {
+  .footer {
+    padding-bottom: 84px;
+  }
+
   .footer-links {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 6px 14px;
+  }
+
+  .footer-links a {
+    min-height: 40px;
+    padding: 6px 4px;
   }
 }
 

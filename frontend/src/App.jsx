@@ -29,6 +29,12 @@ import Pricing from './pages/Pricing';
 import Curriculum from './pages/Curriculum';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import ThankYou from './pages/ThankYou';
+import Terms from './pages/Terms';
+import PrivacyPolicy from './pages/DataPolicy';
+import RefundPolicy from './pages/RefundPolicy';
+import LandingLearnQuran from './pages/LandingLearnQuran';
+import { trackPageView } from './utils/siteActions';
 
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -90,10 +96,23 @@ const studentMenu = [
   { path: '/student/settings', label: 'Settings', icon: <Settings size={18} /> },
 ];
 
-// Scroll to top on route change
+// Scroll to top & push GTM SPA page_view on route change
 function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+    const timer = setTimeout(() => {
+      trackPageView(pathname, document.title);
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -126,10 +145,21 @@ function PublicLayout({ children }) {
   );
 }
 
-// Determine if route is a dashboard route
-function AppRoutes() {
+// Determine if route is a dashboard route or standalone ad landing page
+export function AppRoutes() {
   const location = useLocation();
-  const isDashboard = ['/admin', '/teacher', '/student'].some(p => location.pathname.startsWith(p));
+  const isDashboard = ['/admin', '/teacher', '/student'].some(
+    p => location.pathname === p || location.pathname.startsWith(`${p}/`)
+  );
+  const isFocusedLanding = location.pathname === '/learn-quran-from-zero';
+
+  if (isFocusedLanding) {
+    return (
+      <Routes>
+        <Route path="/learn-quran-from-zero" element={<LandingLearnQuran />} />
+      </Routes>
+    );
+  }
 
   if (isDashboard) {
     return (
@@ -208,6 +238,10 @@ function AppRoutes() {
         <Route path="/placement-tests" element={<PlacementTest />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PublicLayout>

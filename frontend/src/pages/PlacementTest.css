@@ -34,13 +34,31 @@
 
   --font-arabic: 'Amiri Quran', 'Amiri', 'Noto Naskh Arabic', 'Noto Sans Arabic', 'Traditional Arabic', serif;
 
-  background: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 68% 55% at 50% 38%, rgba(200, 167, 99, 0.13) 0%, transparent 65%),
+    radial-gradient(circle at 14% 22%, rgba(20, 90, 102, 0.32) 0%, transparent 45%),
+    radial-gradient(circle at 86% 78%, rgba(15, 61, 70, 0.34) 0%, transparent 48%),
+    linear-gradient(160deg, #07131f 0%, #0b1d2c 52%, #091724 100%);
   color: var(--color-cream);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: inherit;
   padding-top: var(--navbar-height, 80px);
+}
+
+/* Subtle Islamic geometric lattice watermark across Placement Test backdrop */
+.placement-test-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.065;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23C8A763' stroke-width='0.9'%3E%3Cpolygon points='48,6 60,36 90,48 60,60 48,90 36,60 6,48 36,36'/%3E%3Crect x='22' y='22' width='52' height='52' transform='rotate(45 48 48)'/%3E%3Ccircle cx='48' cy='48' r='10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 96px 96px;
 }
 
 .placement-test-container *,
@@ -170,18 +188,30 @@
 
 /* Cards */
 .pt-card {
-  background: var(--card-bg);
-  border: 1px solid rgba(200, 167, 99, 0.2);
+  position: relative;
+  background: linear-gradient(155deg, rgba(18, 44, 56, 0.82) 0%, rgba(10, 24, 38, 0.94) 100%);
+  border: 1px solid rgba(200, 167, 99, 0.32);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 24px 64px -18px rgba(0, 0, 0, 0.65), 0 0 36px rgba(200, 167, 99, 0.08);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
 }
 
 .pt-card-hero {
-  padding: clamp(28px, 5vw, 56px);
+  padding: clamp(30px, 5vw, 54px);
   text-align: center;
   max-width: 720px;
   margin: 0 auto;
+}
+
+.pt-card-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
 }
 
 .pt-card-narrow {
@@ -197,8 +227,50 @@
   padding: clamp(28px, 5vw, 48px);
 }
 
-.pt-card-hero .pt-display { margin: 6px 0 14px; }
-.pt-card-hero .pt-lede { color: var(--color-text-muted); }
+.pt-card-hero .pt-display { margin: 4px 0 12px; }
+.pt-card-hero .pt-lede { color: var(--color-cream); opacity: 0.85; margin: 0 auto; max-width: 44ch; }
+
+.pt-welcome-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 24px auto 0;
+  max-width: 480px;
+  background: rgba(10, 26, 40, 0.55);
+  border: 1px solid rgba(200, 167, 99, 0.22);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.pt-welcome-fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 13px 8px;
+  position: relative;
+}
+
+.pt-welcome-fact:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 1px;
+  background: rgba(200, 167, 99, 0.2);
+}
+
+.pt-welcome-fact strong {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.pt-welcome-fact span {
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+}
 
 /* Buttons */
 .pt-btn {
@@ -778,7 +850,17 @@
 @media (max-width: 760px) {
   .pt-choice-grid-2, .pt-choice-grid-3 { grid-template-columns: 1fr; }
   .pt-results-grid { grid-template-columns: 1fr; }
-  .pt-intro-stats { grid-template-columns: 1fr; gap: 10px; }
+  .pt-intro-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+    margin: 14px 0 4px;
+    padding: 12px 0;
+  }
+  .pt-intro-stats dd {
+    font-size: 0.96rem;
+    line-height: 1.25;
+  }
   .pt-progress-wrap { max-width: none; }
 }
 

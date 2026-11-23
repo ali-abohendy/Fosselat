@@ -355,6 +355,9 @@
 }
 
 @media (max-width: 640px) {
+  .page-hero {
+    padding: calc(var(--navbar-height) + 24px) 0 28px;
+  }
   .pricing-programs-grid { grid-template-columns: 1fr; }
   .pricing-plans-grid { grid-template-columns: 1fr; }
   .pricing-durations-grid { grid-template-columns: repeat(2, 1fr); }  /* FIX: 2 columns, not 1 */

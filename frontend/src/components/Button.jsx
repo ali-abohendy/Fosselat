@@ -25,7 +25,7 @@ export default function Button({
   // Render as React Router Link
   if (to) {
     return (
-      <Link to={to} className={classes} {...props}>
+      <Link to={to} className={classes} onClick={onClick} {...props}>
         {children}
       </Link>
     );
@@ -34,7 +34,7 @@ export default function Button({
   // Render as external anchor
   if (href) {
     return (
-      <a href={href} className={classes} target="_blank" rel="noopener noreferrer" {...props}>
+      <a href={href} className={classes} target="_blank" rel="noopener noreferrer" onClick={onClick} {...props}>
         {children}
       </a>
     );

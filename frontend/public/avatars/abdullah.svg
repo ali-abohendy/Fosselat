@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Teacher Avatar">
+  
+  <defs>
+    <radialGradient id="bg-abdullah" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#174E5A"/>
+      <stop offset="60%" stop-color="#0E303B"/>
+      <stop offset="100%" stop-color="#081622"/>
+    </radialGradient>
+    <linearGradient id="gold-abdullah" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5CF95"/>
+      <stop offset="50%" stop-color="#C8A763"/>
+      <stop offset="100%" stop-color="#9E7C38"/>
+    </linearGradient>
+    <clipPath id="clip-abdullah">
+      <circle cx="120" cy="120" r="108"/>
+    </clipPath>
+  </defs>
+
+  <circle cx="120" cy="120" r="118" fill="#0A1A28"/>
+  <circle cx="120" cy="120" r="112" fill="none" stroke="url(#gold-abdullah)" stroke-width="2.5"/>
+  <g clip-path="url(#clip-abdullah)">
+    <circle cx="120" cy="120" r="108" fill="url(#bg-abdullah)"/>
+    
+  <g opacity="0.11" stroke="#C8A763" stroke-width="1" fill="none">
+    <circle cx="120" cy="120" r="92"/>
+    <polygon points="120,24 146,94 216,120 146,146 120,216 94,146 24,120 94,94"/>
+    <polygon points="120,24 146,94 216,120 146,146 120,216 94,146 24,120 94,94" transform="rotate(45 120 120)"/>
+    <circle cx="120" cy="120" r="64" stroke-dasharray="3 4"/>
+  </g>
+
+    <!-- Subtle warm halo -->
+    <circle cx="120" cy="112" r="56" fill="#C8A763" opacity="0.09"/>
+    <!-- Shoulders & scholarly robe/jacket -->
+    <path d="M36 238 C42 184 74 166 120 166 C166 166 198 184 204 238 Z" fill="#134946"/>
+    <path d="M96 168 L120 202 L144 168 L138 164 L120 186 L102 164 Z" fill="#D4BA80"/>
+    <path d="M118 198 L122 198 L122 238 L118 238 Z" fill="#C8A763" opacity="0.55"/>
+    <!-- Collar details -->
+    <path d="M98 166 Q120 182 142 166" fill="none" stroke="#C8A763" stroke-width="2" opacity="0.7"/>
+    <!-- Neck -->
+    <path d="M105 144 L105 170 Q120 180 135 170 L135 144 Z" fill="#CA9772"/>
+    <!-- Ears -->
+    <ellipse cx="78" cy="114" rx="7" ry="11" fill="#CA9772"/>
+    <ellipse cx="162" cy="114" rx="7" ry="11" fill="#CA9772"/>
+    <!-- Face -->
+    <path d="M82 96 C82 68 158 68 158 96 L156 126 C155 148 139 160 120 160 C101 160 85 148 84 126 Z" fill="#E3B48F"/>
+    <!-- Hair -->
+    <path d="M80 102 C78 66 96 54 120 54 C144 54 162 66 160 102 C156 84 146 76 120 76 C94 76 84 84 80 102 Z" fill="#221C18"/>
+    
+    <!-- Eyebrows -->
+    <path d="M94 101 Q104 97 112 100" fill="none" stroke="#221C18" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M128 100 Q136 97 146 101" fill="none" stroke="#221C18" stroke-width="2.8" stroke-linecap="round"/>
+    <!-- Eyes -->
+    <circle cx="104" cy="111" r="3.4" fill="#1C1917"/>
+    <circle cx="136" cy="111" r="3.4" fill="#1C1917"/>
+    <circle cx="105.2" cy="109.8" r="1.1" fill="#FFFFFF"/>
+    <circle cx="137.2" cy="109.8" r="1.1" fill="#FFFFFF"/>
+    
+    <!-- Nose -->
+    <path d="M120 112 L117 125 Q120 127 124 125" fill="none" stroke="#CA9772" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- Neat Beard -->
+    <path d="M84 122 C85 149 101 163 120 163 C139 163 155 149 156 122 C152 134 143 142 133 144 C129 140 125 138 120 138 C115 138 111 140 107 144 C97 142 88 134 84 122 Z" fill="#221C18" opacity="0.95"/>
+    <!-- Warm Smile -->
+    <path d="M111 135 Q120 142 129 135" fill="none" stroke="#F7F3E6" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  
+</svg>

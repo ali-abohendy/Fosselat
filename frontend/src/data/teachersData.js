@@ -1,0 +1,398 @@
+// Official Fosselat Academy Teachers Directory (10 Verified Instructors)
+
+export const TEACHERS_DATA = [
+  {
+    _id: 'abdelrahman-el-sayed',
+    name: 'Ustadh Abdelrahman El Sayed Ahmad',
+    shortName: 'Abdelrahman El Sayed Ahmad',
+    gender: 'male',
+    title: "Qur'an & Tajweed Instructor | Hafs & Shu'bah Narrations",
+    avatar: '/avatars/abdelrahman.svg',
+    hasIjazah: true,
+    ijazahBadge: "Ijazah in Hafs & Shu'bah",
+    experienceLabel: 'Several Years Experience',
+    languages: ['Arabic (Native)', 'English (Very Good)'],
+    languagesShort: 'English & Arabic',
+    shortBio:
+      "Graduate of the Faculty of Medicine (Mansoura University) holding an authentic Ijazah in Hafs & Shu'bah 'an 'Asim, Tuhfat Al-Atfal, and Al-Muqaddimah Al-Jazariyyah. Teaches learners aged 7 to 50.",
+    about: [
+      "Abdelrahman is a dedicated Qur'an and Tajweed instructor and a graduate of the Faculty of Medicine, Mansoura University. With several years of teaching experience, he has helped students from diverse backgrounds and age groups develop accurate, confident, and beautiful Qur'an recitation.",
+      "He holds an authentic Ijazah in the recitation of Imam 'Asim through both Hafs and Shu'bah narrations, alongside specialized authorizations in classical Tajweed texts.",
+    ],
+    qualifications: [
+      "Ijazah in Hafs and Shu'bah 'an 'Asim with an authentic chain of transmission.",
+      'Ijazah and authorization in teaching Tuhfat Al-Atfal.',
+      'Ijazah and authorization in teaching Al-Muqaddimah Al-Jazariyyah.',
+      "Specialized studies in theoretical and practical Tajweed and Qur'anic recitation.",
+    ],
+    experiencePoints: [
+      "Several years of experience teaching Qur'an and Tajweed.",
+      'Experience teaching Arabic and non-Arabic speakers.',
+      'Has taught students ranging from approximately 7 to 50 years old.',
+      'Experience in online academies and educational platforms, as well as mosque-based teaching.',
+    ],
+    specializations: [
+      "Qur'an Recitation & Correction",
+      "Qur'an Memorization (Hifz)",
+      "Revision & Retention (Muraja'ah)",
+      'Theoretical & Practical Tajweed',
+      "Hafs & Shu'bah Narrations",
+    ],
+    approach: [
+      "Abdelrahman's teaching approach is built around personalized learning, gradual progress, consistent revision, and practical application of Tajweed rules. He creates an encouraging learning environment where every student can develop at their own pace while maintaining accuracy and consistency.",
+      'His goal goes beyond teaching correct pronunciation; he strives to help every student build a lasting connection with the Book of Allah.',
+    ],
+  },
+  {
+    _id: 'shahd-hassan',
+    name: 'Ustadha Shahd Hassan',
+    shortName: 'Shahd Hassan',
+    gender: 'female',
+    title: "Qur'an, Tajweed, Arabic & Islamic Studies Teacher",
+    avatar: '/avatars/shahd.svg',
+    hasIjazah: true,
+    ijazahBadge: 'Ijazah in Al-Jazariyyah',
+    experienceLabel: '5 Years Experience',
+    languages: ['Arabic (Native)', 'English'],
+    languagesShort: 'English & Arabic',
+    shortBio:
+      "Experienced online teacher with 5 years of teaching Arabic and non-Arabic speakers. Holds an Ijazah in Al-Muqaddimah Al-Jazariyyah and builds strong foundations through interactive practice.",
+    about: [
+      "Ustadha Shahd Hassan is an experienced Qur'an, Arabic, and Islamic Studies teacher with five years of online teaching experience. She has worked with students of different ages and backgrounds, both Arabic and non-Arabic speakers, helping them develop their Qur'anic recitation, Arabic language skills, and Islamic knowledge.",
+    ],
+    qualifications: [
+      'Holds an Ijazah in Al-Muqaddimah Al-Jazariyyah.',
+      "Currently pursuing an Ijazah in Qur'an Recitation, Insha'Allah.",
+      "Knowledge of Tajweed and the theoretical and practical aspects of Qur'anic recitation.",
+      'Studied at Cairo University, Department of Therapeutic Nutrition (European Section).',
+    ],
+    experiencePoints: [
+      '5 years of online teaching experience across diverse age groups and backgrounds.',
+      'Provides structured lessons tailored to each student’s level and learning needs.',
+    ],
+    specializations: [
+      "Qur'an Recitation & Correction",
+      "Qur'an Memorization & Revision",
+      'Tajweed',
+      'Arabic for Non-Native Speakers',
+      'Islamic Studies',
+    ],
+    approach: [
+      "Ustadha Shahd believes in building strong foundations through interactive activities, consistent practice, and positive encouragement. She aims to create a supportive and engaging learning environment where students gain confidence, make steady progress, and develop a genuine love for the Qur'an and the Arabic language.",
+    ],
+  },
+  {
+    _id: 'eid-baumy-omar',
+    name: 'Ustadh Eid Baumy Omar',
+    shortName: 'Eid Baumy Omar',
+    gender: 'male',
+    title: "Qur'an, Tajweed & Qira'at Teacher",
+    avatar: '/avatars/eid.svg',
+    hasIjazah: true,
+    ijazahBadge: "Ijazah in Hafs & Shu'bah",
+    experienceLabel: '2+ Years Experience',
+    languages: ['Arabic (Native)', 'English (B2 Upper-Intermediate)'],
+    languagesShort: 'English (B2) & Arabic',
+    shortBio:
+      "Specializes in Qur'anic recitation, Tajweed, and Qira'at. Holds Ijazah in Hafs & Shu'bah 'an 'Asim and completed studies in Qalun 'an Nafi', with English B2 proficiency.",
+    about: [
+      "Eid Baumy Omar is a Qur'an teacher specializing in Qur'anic recitation, Tajweed, and the authentic transmission of Qur'anic readings. He holds recognized Qur'anic qualifications and has around two years of experience teaching Qur'an to both Arabic and non-Arabic speakers.",
+      "His teaching combines accurate recitation, a strong understanding of Tajweed, and a structured approach to helping students improve their relationship with the Qur'an.",
+    ],
+    qualifications: [
+      "Ijazah in the recitation of Imam 'Asim through both Hafs 'an 'Asim and Shu'bah 'an 'Asim.",
+      "Completed studies in the recitation of Qalun 'an Nafi'.",
+      'Currently studying the recitation of Ibn Kathir.',
+      'Specialized study of theoretical and practical Tajweed.',
+    ],
+    experiencePoints: [
+      'Around two years of teaching experience with native and non-native Arabic speakers across age groups.',
+      "Correcting Qur'anic recitation, teaching theoretical & practical Tajweed, and systematic memorization & revision.",
+      "Helping non-Arabic-speaking students develop accurate Qur'an reading skills.",
+    ],
+    specializations: [
+      "Qur'an Recitation & Correction",
+      "Qur'an Memorization & Revision",
+      'Theoretical & Practical Tajweed',
+      "Hafs & Shu'bah Recitations",
+      'Qalun Recitation Studies',
+      "Qur'an Reading for Non-Arabic Speakers",
+      'Islamic Studies',
+    ],
+    approach: [
+      "Eid follows a structured and student-centered teaching approach, adapting lessons to each student's level and learning goals. He emphasizes accuracy, gradual improvement, regular revision, and practical application of Tajweed rules.",
+      "Beyond memorization and recitation, he encourages students to reflect on the meanings of Qur'anic verses and develop a deeper understanding of the guidance of the Qur'an.",
+    ],
+  },
+  {
+    _id: 'mustafa-mohamed',
+    name: 'Ustadh Mustafa Mohamed Ahmed',
+    shortName: 'Mustafa Mohamed Ahmed',
+    gender: 'male',
+    title: "Qur'an & Arabic Language Instructor | Islamic Studies",
+    avatar: '/avatars/mustafa.svg',
+    hasIjazah: false,
+    experienceLabel: '3+ Years Experience',
+    languages: ['Arabic (Native)', 'English'],
+    languagesShort: 'English & Arabic',
+    shortBio:
+      'Graduate of the Faculty of Languages and Translation (Islamic Studies Dept.) with 3+ years of online experience teaching children and adults from around the world.',
+    about: [
+      "Mustafa Mohamed Ahmed is a dedicated Qur'an and Arabic teacher specializing in teaching non-native Arabic speakers. He is a graduate of the Faculty of Languages and Translation, Department of Islamic Studies, and has over three years of experience in online education.",
+      "Throughout his teaching career, he has taught dozens of students from different countries and cultural backgrounds, helping them improve their Arabic language skills, memorize the Holy Qur'an with proper Tajweed, and develop a strong foundation in Islamic knowledge and values.",
+    ],
+    qualifications: [
+      'Graduate of the Faculty of Languages and Translation.',
+      'Department of Islamic Studies.',
+    ],
+    experiencePoints: [
+      'Over 3 years of online teaching experience.',
+      'Has taught dozens of students from around the world.',
+      'Experienced in teaching both children and adults.',
+      'Specialized in teaching non-native Arabic speakers.',
+    ],
+    specializations: [
+      "Qur'an Reading & Recitation",
+      "Qur'an Memorization & Revision",
+      'Basic & Practical Tajweed',
+      'Arabic for Non-Native Speakers',
+      'Islamic Studies & Upbringing',
+    ],
+    approach: [
+      "Mustafa is known for his patience, friendly attitude, and clear teaching style. He believes that every student has different learning needs and goals, so he carefully adapts his lessons to each student's level and pace.",
+      "His aim is to make learning enjoyable, effective, and meaningful while helping students build confidence in their Arabic, strengthen their relationship with the Qur'an, and develop sound Islamic values.",
+    ],
+  },
+  {
+    _id: 'habiba-elsayed',
+    name: 'Ustadha Habiba Elsayed Ahmed',
+    shortName: 'Habiba Elsayed Ahmed',
+    gender: 'female',
+    title: "Qur'an, Arabic & Islamic Studies Instructor | English B2",
+    avatar: '/avatars/habiba.svg',
+    hasIjazah: false,
+    experienceLabel: 'Al-Azhar Graduate · Noorani Qaida',
+    languages: ['Arabic (Native)', 'English (B2)'],
+    languagesShort: 'English (B2) & Arabic',
+    shortBio:
+      'Al-Azhar University graduate in English Language & Simultaneous Interpretation, certified in Al-Qaida Al-Nooraniyah and Teaching Arabic to Non-Native Speakers.',
+    about: [
+      'Habiba Elsayed Ahmed is a dedicated and enthusiastic instructor with an academic background in English Language, Literature, and Simultaneous Interpretation from Al-Azhar University.',
+      'She has completed specialized teacher-training courses in teaching Arabic to non-native speakers through Buruj Academy and Linguatism Platform, in addition to completing a course in Al-Qaida Al-Nooraniyah.',
+      'With previous experience teaching young children, Habiba combines her language background, educational training, and interactive teaching style to create an enjoyable and supportive learning experience for her students.',
+    ],
+    qualifications: [
+      'Licentiate Degree in English Language, Literature, and Simultaneous Interpretation — Faculty of Humanities, Al-Azhar University (2026).',
+      'Teachers Training Course in Teaching Arabic to Non-Native Speakers — Buruj Academy.',
+      'Teachers Training Course in Teaching Arabic to Non-Native Speakers — Linguatism Platform.',
+      'Al-Qaida Al-Nooraniyah Course — Certificate of Completion.',
+      'English Language Course — Level 4 (B2).',
+    ],
+    experiencePoints: [
+      'English Language Teacher — Kindergarten, Giza, Egypt (Summer 2024).',
+      'Prepared engaging, age-appropriate educational activities to build vocabulary, pronunciation, and communication.',
+    ],
+    specializations: [
+      'Al-Qaida Al-Nooraniyah (Noorani Qaida)',
+      "Qur'an Memorization (Hifz)",
+      'Practical Tajweed for Non-Arabic Speakers',
+      'Arabic for Non-Native Speakers',
+      'Islamic Studies',
+    ],
+    approach: [
+      "Habiba follows a student-centered and interactive teaching approach, focusing on simplifying concepts, explaining lessons step by step, and adapting her methods to each student's age, level, and individual needs.",
+      "In Qur'an and Tajweed lessons, she emphasizes correct pronunciation, gradual learning, repetition, and continuous practice so students feel comfortable, motivated, and confident in their progress.",
+    ],
+  },
+  {
+    _id: 'toqa-omar',
+    name: 'Ustadha Toqa Omar',
+    shortName: 'Toqa Omar',
+    gender: 'female',
+    title: "Qur'an, Arabic & Islamic Studies Teacher",
+    avatar: '/avatars/toqa.svg',
+    hasIjazah: false,
+    experienceLabel: '2.5 Years Experience',
+    languages: ['Arabic (Native)', 'English (Fluent)'],
+    languagesShort: 'Fluent English & Arabic',
+    shortBio:
+      'Al-Azhar University Islamic Studies student with 2.5 years of experience teaching English-speaking students using interactive games and engaging, meaning-focused lessons.',
+    about: [
+      "Toqa Omar is a dedicated Qur'an, Arabic, and Islamic Studies teacher, currently studying at Al-Azhar University, Faculty of Islamic Studies. She has 2.5 years of experience teaching English-speaking students, helping them develop their Qur'anic, Arabic, and Islamic knowledge in an engaging and supportive learning environment.",
+    ],
+    qualifications: [
+      'Currently studying at Al-Azhar University, Faculty of Islamic Studies.',
+      'Completed several English language courses (fluent in communication and teaching).',
+      "Attended specialized training courses in teaching Qur'an to non-native Arabic speakers.",
+    ],
+    experiencePoints: [
+      '2.5 years of experience teaching English-speaking students.',
+      "Adapts lessons thoughtfully to each student's age, level, and non-native learning needs.",
+    ],
+    specializations: [
+      "Qur'an Memorization",
+      "Tajweed & Recitation Correction",
+      'Arabic Foundation Programs',
+      'Arabic Conversation Programs',
+      'Islamic Studies',
+    ],
+    approach: [
+      "Toqa believes that learning should be an enjoyable and motivating experience. She uses educational games and a variety of interactive teaching methods suited to each student's age and level, making lessons engaging and encouraging active participation.",
+      "She also places special emphasis on helping students understand the meanings and messages of the Qur'an, not simply memorize its verses, while building a positive and lasting connection with the Book of Allah.",
+    ],
+  },
+  {
+    _id: 'asmaa-el-ramady',
+    name: 'Ustadha Asmaa El-Ramady',
+    shortName: 'Asmaa El-Ramady',
+    gender: 'female',
+    title: "Qur'an, Tajweed & Arabic Reading Teacher",
+    avatar: '/avatars/asmaa.svg',
+    hasIjazah: false,
+    experienceLabel: 'Al-Azhar Graduate · Noor Al-Bayan',
+    languages: ['Arabic (Native)', 'English'],
+    languagesShort: 'English & Arabic',
+    shortBio:
+      'Al-Azhar graduate in Languages & Simultaneous Interpretation trained in Noor Al-Bayan, Al-Baghdadiyyah, and Tajweed. Uses Canva visual aids and interactive games for kids & beginners.',
+    about: [
+      "Asmaa El-Ramady is a highly qualified Qur'an and Tajweed teacher with a strong academic background in Languages and Simultaneous Interpretation from Al-Azhar University. She combines her linguistic expertise with specialized training in Qur'an reading and Tajweed, enabling her to explain Qur'anic concepts and Tajweed rules clearly in both Arabic and English.",
+    ],
+    qualifications: [
+      "Bachelor's degree in Languages and Simultaneous Interpretation, Al-Azhar University.",
+      'Completed the Noor Al-Bayan course, qualifying her to teach and explain its lessons.',
+      'Completed courses in Al-Baghdadiyyah.',
+      'Completed a specialized Tajweed course with strong theoretical and practical mastery in Arabic and English.',
+    ],
+    experiencePoints: [
+      'Proficient in Qur’an recitation and specialized preparation in beginner reading instruction.',
+      'Teaches via Zoom and Google Meet using Canva presentations, visual teaching aids, and educational games.',
+    ],
+    specializations: [
+      'Noor Al-Bayan',
+      "Qur'an Reading & Recitation",
+      'Tajweed Rules & Practical Application',
+      'Arabic Reading Foundations',
+      'Al-Baghdadiyyah',
+    ],
+    approach: [
+      "Asmaa focuses on making learning enjoyable, interactive, and easy to understand, particularly for children and non-Arabic-speaking students. She uses simple English explanations tailored to each student's level, educational games, interactive activities, and visual presentations to encourage participation.",
+      'She emphasizes positive encouragement and regular revision, helping students build confidence and a lasting connection with the Book of Allah.',
+    ],
+  },
+  {
+    _id: 'abdullah-mansour',
+    name: 'Ustadh Abdullah Mansour',
+    shortName: 'Abdullah Mansour',
+    gender: 'male',
+    title: "Arabic Language & Qur'an Instructor | Native & Non-Native Speakers",
+    avatar: '/avatars/abdullah.svg',
+    hasIjazah: false,
+    experienceLabel: 'Al-Azhar · TASOL Trained',
+    languages: ['Arabic (Native)', 'English'],
+    languagesShort: 'English & Arabic',
+    shortBio:
+      'Al-Azhar University Arabic Language scholar trained in TASOL (Teaching Arabic to Speakers of Other Languages). Blends step-by-step instruction with interactive games and presentations.',
+    about: [
+      "Abdullah Mansour is a passionate Arabic language and Qur'an instructor currently studying at Al-Azhar University, Faculty of Islamic Studies and Arabic Language, Department of Arabic Language.",
+      "He has experience teaching Qur'an and Arabic to students of different ages and proficiency levels. With a strong interest in Arabic language sciences and Qur'anic Tajweed, Abdullah is committed to continuous learning and providing effective, engaging lessons.",
+    ],
+    qualifications: [
+      'Currently studying at Al-Azhar University, Faculty of Islamic Studies and Arabic Language (Department of Arabic Language).',
+      "Studied theoretical and practical Qur'anic Tajweed under qualified teachers.",
+      'Completed professional training courses in Teaching Arabic to Speakers of Other Languages (TASOL).',
+    ],
+    experiencePoints: [
+      "Experience teaching Qur'an and Arabic to diverse ages and proficiency levels.",
+      'Incorporates educational games, interactive activities, presentations, and practical exercises.',
+    ],
+    specializations: [
+      "Qur'an Recitation, Memorization & Revision",
+      "Qur'an Recitation Correction",
+      'Theoretical & Practical Tajweed',
+      'Arabic for Non-Native Speakers',
+      'Arabic Reading for Beginners',
+      'Arabic Reading, Writing & Speaking',
+    ],
+    approach: [
+      "Abdullah follows a gradual and interactive teaching approach, introducing concepts step by step and adapting lessons to each student's age, level, and learning goals.",
+      'He incorporates educational games, interactive activities, presentations, and practical exercises, and encourages students to ask questions and learn confidently. Whenever appropriate, he introduces Modern Standard Arabic (Fusha) to build strong communication skills.',
+    ],
+  },
+  {
+    _id: 'ahmed-khalifa',
+    name: 'Ustadh Ahmed Khalifa Mohamed Eletr',
+    shortName: 'Ahmed Khalifa Mohamed Eletr',
+    gender: 'male',
+    title: "Qur'an & Tajweed Instructor | Hafiz of the Holy Qur'an",
+    avatar: '/avatars/ahmed.svg',
+    hasIjazah: false,
+    experienceLabel: '1.5 Years Experience · Hafiz',
+    languages: ['Arabic (Native)', 'English'],
+    languagesShort: 'English & Arabic',
+    shortBio:
+      "Hafiz of the Holy Qur'an and Al-Azhar Medical Student with 1.5 years of online experience explaining Tajweed rules in clear, simple English for children and non-Arabic speakers.",
+    about: [
+      "Ahmed Khalifa Mohamed Eletr is a dedicated Qur'an and Tajweed instructor with 1.5 years of experience teaching non-Arabic speakers through online platforms. As a Hafiz of the Holy Qur'an and a medical student at Al-Azhar University, Faculty of Medicine, he combines his Qur'anic knowledge with a patient and structured approach to teaching.",
+      "He is passionate about helping students improve their recitation, master the basics of Tajweed, and memorize the Holy Qur'an through clear explanations and personalized lessons.",
+    ],
+    qualifications: [
+      'Medical Student — Faculty of Medicine, Al-Azhar University, Assiut.',
+      "Hafiz of the Holy Qur'an.",
+      "Qur'an recitation in Hafs 'an 'Asim.",
+      'Knowledge of theoretical and practical Tajweed rules.',
+    ],
+    experiencePoints: [
+      "1.5 years teaching Qur'an recitation and memorization online to non-Arabic speakers.",
+      'Explains Tajweed rules in clear, simple English using interactive methods tailored to student age and level.',
+    ],
+    specializations: [
+      "Qur'an Memorization (Hifz)",
+      "Qur'an Recitation & Correction",
+      'Tajweed Rules',
+      'Noor Al-Bayan',
+      'Teaching Children & Non-Arabic Speakers',
+    ],
+    approach: [
+      "Ahmed follows a simple, interactive, and student-centered teaching approach. He adapts his lessons to each student's age, level, and individual learning needs, focusing on gradual progress, consistent practice, and building confidence.",
+      "He aims to make Qur'an learning an enjoyable and rewarding experience while helping students develop accurate recitation and a lasting connection with the Holy Qur'an.",
+    ],
+  },
+  {
+    _id: 'dalia-elharby',
+    name: 'Ustadha Dalia Elharby',
+    shortName: 'Dalia Elharby',
+    gender: 'female',
+    title: "Qur'an & Arabic Teacher",
+    avatar: '/avatars/dalia.svg',
+    hasIjazah: false,
+    experienceLabel: 'Al-Azhar · Arabic Teaching Diploma',
+    languages: ['Arabic (Native)', 'English'],
+    languagesShort: 'English & Arabic',
+    shortBio:
+      "Medical student at Al-Azhar University (Cairo) holding a 6-month diploma in teaching Arabic to non-native speakers, specializing in Noor Al-Bayan, Qur'an reading, and young learners.",
+    about: [
+      "Dalia Elharby is a dedicated Qur'an and Arabic teacher currently studying at the Faculty of Medicine, Al-Azhar University (Girls' Branch), Cairo. She is passionate about helping non-Arabic-speaking students develop their Qur'an reading and recitation skills through clear, structured, and supportive lessons.",
+    ],
+    qualifications: [
+      "Medical student at Al-Azhar University, Faculty of Medicine (Girls' Branch), Cairo.",
+      'Completed a six-month diploma in teaching Arabic to non-native speakers.',
+    ],
+    experiencePoints: [
+      "Online academy teaching experience covering Noor Al-Bayan, Qur'an reading, and Tajweed.",
+      'Experience introducing Islamic Studies to young children in a gentle, supportive setting.',
+    ],
+    specializations: [
+      'Noor Al-Bayan',
+      "Qur'an Reading & Recitation",
+      "Qur'an Memorization",
+      'Basic Tajweed & Recitation Correction',
+    ],
+    approach: [
+      "Dalia aims to create a comfortable and encouraging learning environment where students can progress step by step. She focuses on explaining lessons clearly, helping students improve their pronunciation, and building a strong foundation in Qur'an reading and recitation.",
+    ],
+  },
+];
+
+export function getTeacherById(id) {
+  return TEACHERS_DATA.find((t) => t._id === id) || null;
+}

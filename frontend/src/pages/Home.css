@@ -1,38 +1,33 @@
 /* ========================================
-   HOME PAGE — Styles
+   HOME PAGE — Classic Serene Hero + Upgraded Sections
    ======================================== */
 
-/* ---- Hero Section ---- */
+/* ---- Classic Hero Section (Restored Glowing Child & Golden Arch Background) ---- */
 .hero {
   position: relative;
   min-height: calc(100vh - var(--navbar-height));
   display: flex;
   align-items: center;
-  padding-top: var(--navbar-height);
+  padding: calc(var(--navbar-height) + 24px) 0 48px;
   overflow: hidden;
   background: var(--color-bg);
-  margin-top: var(--navbar-height);
 }
 
-/* Image fills from right, full height, never crops */
 .hero::before {
   content: '';
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
-  /* width matches the image aspect ratio (1774/887 ≈ 2:1) relative to height */
   width: 200%;
   max-width: 100%;
   background-image: url('/hero-bg.jpg');
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
-  object-fit: contain;
   z-index: 0;
 }
 
-/* Four separate edge-fade divs via a single ::after with stacked gradients */
 .hero::after {
   content: '';
   position: absolute;
@@ -40,40 +35,19 @@
   z-index: 1;
   pointer-events: none;
   background:
-
-    /* bottom: fade into next section */
-    linear-gradient(to top,
-      var(--color-bg) 5%,
-      transparent 20%
-    ),
-
-    /* left: dark for text readability */
-    linear-gradient(to right,
+    linear-gradient(to top, var(--color-bg) 4%, transparent 22%),
+    linear-gradient(
+      to right,
       #07141a 0%,
-      #07141a 15%,
-      rgba(7,20,26,0.85) 28%,
-      rgba(7,20,26,0.40) 44%,
-      rgba(7,20,26,0.08) 58%,
-      transparent 70%
+      #07141a 22%,
+      rgba(7, 20, 26, 0.9) 38%,
+      rgba(7, 20, 26, 0.55) 54%,
+      rgba(7, 20, 26, 0.14) 68%,
+      transparent 78%
     ),
-    /* top: fade into navbar */
-    linear-gradient(to bottom,
-      rgba(7,20,26,0.85) 0%,
-      transparent 16%
-    ),
-
-    /* right: fade right edge */
-    linear-gradient(to left,
-      rgba(7,20,26,0.80) 0%,
-      transparent 15%
-    );
+    linear-gradient(to bottom, rgba(7, 20, 26, 0.82) 0%, transparent 16%),
+    linear-gradient(to left, rgba(7, 20, 26, 0.72) 0%, transparent 14%);
 }
-
-.hero-bg-image   { display: none; }
-.hero-bg-overlay { display: none; }
-.hero-ornament   { display: none; }
-.hero-image      { display: none; }
-.hero-bg-pattern { display: none; }
 
 .hero-container {
   position: relative;
@@ -86,64 +60,194 @@
 
 .hero-content {
   max-width: 520px;
-  animation: slideInLeft 0.8s ease forwards;
+  text-align: left;
+}
+
+.hero-english-headline {
+  font-size: clamp(1.85rem, 3.1vw, 2.55rem);
+  font-weight: 800;
+  line-height: 1.24;
+  color: var(--color-white);
+  margin-bottom: 18px;
+}
+
+.hero-ayah-bridge {
+  border-left: 2.5px solid rgba(200, 167, 99, 0.75);
+  padding: 2px 0 2px 16px;
+  margin-bottom: 26px;
 }
 
 .hero-ayah {
-  font-size: var(--font-size-3xl);
+  font-size: clamp(1.2rem, 1.9vw, 1.55rem);
   font-weight: 700;
-  line-height: 1.8;
-  margin-bottom: var(--spacing-xl);
+  line-height: 1.65;
+  margin-bottom: 6px;
   background: var(--gradient-gold);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-align: right;
+  text-align: left;
   font-family: 'Amiri', 'Cairo', serif;
 }
 
-.hero-subtitle {
-  font-size: var(--font-size-lg);
+.hero-ayah-meaning {
+  font-size: 0.92rem;
+  color: var(--color-text-body);
+  line-height: 1.6;
+}
+
+.hero-ayah-meaning em {
   color: var(--color-cream);
-  margin-bottom: var(--spacing-2xl);
-  line-height: 1.8;
-  font-weight: 500;
-  text-align: right;
 }
 
 .hero-buttons {
   display: flex;
   gap: var(--spacing-md);
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
-/* ---- Responsive ---- */
-@media (max-width: 1024px) {
-  .hero::before {
-    width: 130%;
-    background-position: right center;
-  }
-  .hero-content { max-width: 420px; }
+/* ---- Reusable Hero Showcase Classes (used on LP-1) ---- */
+.hero-visual-arch {
+  background: linear-gradient(160deg, rgba(17, 54, 66, 0.85) 0%, rgba(10, 26, 40, 0.95) 100%);
+  border: 1.5px solid rgba(200, 167, 99, 0.38);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.45), 0 0 36px rgba(200, 167, 99, 0.12);
 }
 
-@media (max-width: 640px) {
-  .hero {
-    min-height: auto;
-    padding-top: calc(var(--navbar-height) + var(--spacing-2xl));
-    padding-bottom: var(--spacing-3xl);
-  }
-  .hero::before {
-    width: 100%;
-    background-position: center center;
-  }
-  .hero::after {
-    background: rgba(7,20,26,0.82);
-  }
-  .hero-content  { max-width: 100%; text-align: center; }
-  .hero-ayah     { font-size: var(--font-size-xl); text-align: center; }
-  .hero-subtitle { text-align: center; }
-  .hero-buttons  { justify-content: center; }
+.hero-visual-header {
+  margin-bottom: 20px;
+}
+
+.hero-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #5ee694;
+  background: rgba(39, 174, 96, 0.14);
+  border: 1px solid rgba(39, 174, 96, 0.35);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 10px;
+}
+
+.hero-live-pill::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+.hero-visual-header h3 {
+  font-size: 1.35rem;
+  color: var(--color-white);
+}
+
+.hero-audiences-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hero-audience-card {
+  background: rgba(7, 19, 30, 0.72);
+  border: 1px solid rgba(200, 167, 99, 0.22);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.hero-aud-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 6px;
+}
+
+.hero-audience-card h4 {
+  font-size: 0.96rem;
+  color: var(--color-white);
+  margin-bottom: 6px;
+}
+
+.hero-audience-card p {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.hero-teachers-preview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(200, 167, 99, 0.08);
+  border: 1px solid rgba(200, 167, 99, 0.25);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+}
+
+.hero-avatar-stack {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.hero-mini-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--color-gold);
+  margin-left: -8px;
+  background: var(--color-bg);
+  flex-shrink: 0;
+}
+
+.hero-mini-avatar:first-child {
+  margin-left: 0;
+}
+
+.hero-teachers-preview-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hero-teachers-preview-text strong {
+  font-size: 0.9rem;
+  color: var(--color-white);
+}
+
+.hero-teachers-preview-text span {
+  font-size: 0.78rem;
+  color: var(--color-gold-light);
+}
+
+.hero-visual-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-visual-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--color-cream);
+}
+
+.hero-visual-checklist li svg {
+  color: var(--color-gold);
+  flex-shrink: 0;
 }
 
 /* ---- Features Section ---- */
@@ -164,7 +268,7 @@
 
 .elegant-feature-card {
   background: var(--gradient-card);
-  border: 1px solid rgba(200, 167, 99, 0.1);
+  border: 1px solid rgba(200, 167, 99, 0.12);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   display: flex;
@@ -177,7 +281,7 @@
 
 .elegant-feature-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(200, 167, 99, 0.4);
+  border-color: rgba(200, 167, 99, 0.42);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -189,6 +293,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .elegant-feature-text h3 {
@@ -204,50 +309,12 @@
   line-height: 1.6;
 }
 
-/* ---- Courses Section ---- */
-.courses-section {
-  background: var(--color-bg-light);
-  position: relative;
-}
-
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xl);
-}
-
-/* ---- Stats Section ---- */
-.stats-section {
+.teachers-preview-section {
   background: var(--color-bg);
-  position: relative;
 }
 
-.stats-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(200, 167, 99, 0.3),
-    transparent
-  );
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-xl);
-  text-align: center;
-}
-
-/* ---- Placement Teaser Section ---- */
 .placement-teaser {
-  padding-bottom: var(--spacing-xl) !important;
+  padding-bottom: var(--spacing-3xl) !important;
 }
 
 /* ---- Blog Section ---- */
@@ -268,18 +335,12 @@
   border: 1px solid rgba(200, 167, 99, 0.1);
   padding: var(--spacing-xl);
   transition: all var(--transition-base);
-  cursor: pointer;
 }
 
 .blog-card:hover {
   border-color: rgba(200, 167, 99, 0.3);
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-}
-
-.blog-card-icon {
-  font-size: 2rem;
-  margin-bottom: var(--spacing-sm);
 }
 
 .blog-card-category {
@@ -333,87 +394,17 @@
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
-
-  .hero {
-    margin-top: 0;
+  .hero::before {
+    width: 130%;
+    background-position: right center;
   }
-
- .hero::after {
-  background:
-
-    /* bottom: fade into next section */
-    linear-gradient(to top,
-      var(--color-bg) 5%,
-      transparent 80%
-    ),
-
-    /* left: dark for text readability */
-    linear-gradient(to right,
-      rgba(7,20,26,0.85) 2%,
-      transparent
-    ),
-    /* top: fade into navbar */
-    linear-gradient(to bottom,
-      rgba(7,20,26,0.85) 0%,
-      transparent 16%
-    ),
-
-    /* right: fade right edge */
-    linear-gradient(to left,
-      rgba(7,20,26,0.80) 0%,
-      transparent 15%
-    );
+  .hero::after {
+    background: rgba(7, 20, 26, 0.78);
   }
-
-  .hero-container {
-    justify-content: center;
-    text-align: center;
-  }
-
   .hero-content {
     max-width: 100%;
-    text-align: center;
-    animation: none;
   }
-
-  .hero-ayah {
-    text-align: center;
-  }
-
-  .hero-subtitle {
-    text-align: center;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-  }
-
-  /* On tablet: image fills more of frame */
-  .hero-bg-image {
-    background-position: 20% center;
-  }
-
-  .hero-bg-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(10, 35, 40, 0.5) 0%,
-      rgba(10, 35, 40, 0.75) 40%,
-      rgba(10, 35, 40, 0.85) 100%
-    );
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .courses-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+  .features-grid,
   .blog-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -422,70 +413,60 @@
 @media (max-width: 640px) {
   .hero {
     min-height: auto;
-    padding-top: calc(var(--navbar-height) + var(--spacing-2xl));
-    padding-bottom: var(--spacing-3xl);
-    margin-top: 0;
+    padding: calc(var(--navbar-height) + 22px) 0 30px;
   }
-
-  .hero::after {
-  background:
-
-    /* bottom: fade into next section */
-    linear-gradient(to top,
-      var(--color-bg) 5%,
-      rgba(7,20,26,0.08)
-    ),
-
-    /* left: dark for text readability */
-    linear-gradient(to right,
-      #07141a 0%,
-      #07141a 15%,
-      rgba(7,20,26,0.85) 28%,
-      rgba(7,20,26,0.40) 44%,
-      rgba(7,20,26,0.08) 58%,
-      transparent 70%
-    ),
-    /* top: fade into navbar */
-    linear-gradient(to bottom,
-      rgba(7,20,26,0.85) 0%,
-      transparent 16%
-    ),
-
-    /* right: fade right edge */
-    linear-gradient(to left,
-      rgba(7,20,26,0.80) 0%,
-      transparent 15%
-    );
+  .hero-english-headline {
+    font-size: 1.65rem;
+    margin-bottom: 14px;
   }
-
+  .hero-ayah-bridge {
+    padding-left: 12px;
+    margin-bottom: 20px;
+  }
   .hero-ayah {
-    font-size: var(--font-size-xl);
+    font-size: 1.15rem;
+    margin-bottom: 4px;
   }
-
-  /* Mobile: center boy in bg */
-  .hero-bg-image {
-    background-position: 25% center;
+  .hero-ayah-meaning {
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
-
-  .hero-bg-overlay {
-    background: rgba(10, 35, 40, 0.82);
+  .hero::before {
+    width: 100%;
+    background-position: center center;
   }
-
-  .features-grid {
-    grid-template-columns: 1fr;
+  .hero::after {
+    background: rgba(7, 20, 26, 0.84);
   }
-
-  .courses-grid {
-    grid-template-columns: 1fr;
+  .hero-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
   }
-
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-lg);
+  .hero-buttons .btn {
+    width: auto;
+    flex: 1 1 140px;
+    padding: 10px 16px;
+    font-size: 0.92rem;
+    text-align: center;
   }
-
+  .hero-audiences-grid,
+  .features-grid,
   .blog-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .elegant-feature-card {
+    padding: 16px;
+    gap: 14px;
+  }
+  .elegant-feature-icon {
+    padding: 10px;
+  }
+  .blog-card {
+    padding: 18px;
+  }
+  .hero-visual-arch {
+    padding: 18px 16px;
   }
 }
-

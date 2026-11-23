@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Teacher Avatar">
+  
+  <defs>
+    <radialGradient id="bg-toqa" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#174E5A"/>
+      <stop offset="60%" stop-color="#0E303B"/>
+      <stop offset="100%" stop-color="#081622"/>
+    </radialGradient>
+    <linearGradient id="gold-toqa" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5CF95"/>
+      <stop offset="50%" stop-color="#C8A763"/>
+      <stop offset="100%" stop-color="#9E7C38"/>
+    </linearGradient>
+    <clipPath id="clip-toqa">
+      <circle cx="120" cy="120" r="108"/>
+    </clipPath>
+  </defs>
+
+  <circle cx="120" cy="120" r="118" fill="#0A1A28"/>
+  <circle cx="120" cy="120" r="112" fill="none" stroke="url(#gold-toqa)" stroke-width="2.5"/>
+  <g clip-path="url(#clip-toqa)">
+    <circle cx="120" cy="120" r="108" fill="url(#bg-toqa)"/>
+    
+  <g opacity="0.11" stroke="#C8A763" stroke-width="1" fill="none">
+    <circle cx="120" cy="120" r="92"/>
+    <polygon points="120,24 146,94 216,120 146,146 120,216 94,146 24,120 94,94"/>
+    <polygon points="120,24 146,94 216,120 146,146 120,216 94,146 24,120 94,94" transform="rotate(45 120 120)"/>
+    <circle cx="120" cy="120" r="64" stroke-dasharray="3 4"/>
+  </g>
+
+    <!-- Subtle warm halo -->
+    <circle cx="120" cy="110" r="58" fill="#C8A763" opacity="0.09"/>
+    <!-- Modest Abaya shoulders -->
+    <path d="M32 238 C38 184 70 166 120 166 C170 166 202 184 208 238 Z" fill="#132A3E"/>
+    <!-- Outer Hijab Drape -->
+    <path d="M62 114 C62 60 178 60 178 114 C180 156 174 188 164 214 C144 222 96 222 76 214 C66 188 60 156 62 114 Z" fill="#EDE4CE"/>
+    <!-- Hijab Layered Fold & Shadow -->
+    <path d="M66 138 C76 178 104 196 146 194 C162 193 172 186 175 174 C172 194 166 208 162 216 C140 224 98 224 76 214 C69 194 64 168 66 138 Z" fill="#CBBFA0" opacity="0.72"/>
+    <path d="M72 152 Q120 184 168 152" fill="none" stroke="#C8A763" stroke-width="1.8" opacity="0.7"/>
+    <!-- Inner Under-cap -->
+    <path d="M84 96 C86 70 154 70 156 96 C142 84 98 84 84 96 Z" fill="#CBBFA0"/>
+    <!-- Face -->
+    <path d="M86 102 C86 78 154 78 154 102 L152 126 C150 146 137 156 120 156 C103 156 90 146 88 126 Z" fill="#E8BC9A"/>
+    <!-- Gold Hijab Pin -->
+    <circle cx="120" cy="161" r="3.5" fill="#C8A763"/>
+    <!-- Soft Eyebrows -->
+    <path d="M96 104 Q105 100 112 103" fill="none" stroke="#3B2B23" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M128 103 Q135 100 144 104" fill="none" stroke="#3B2B23" stroke-width="2.2" stroke-linecap="round"/>
+    <!-- Eyes -->
+    <circle cx="105" cy="113" r="3.2" fill="#231815"/>
+    <circle cx="135" cy="113" r="3.2" fill="#231815"/>
+    <circle cx="106" cy="111.8" r="1.1" fill="#FFFFFF"/>
+    <circle cx="136" cy="111.8" r="1.1" fill="#FFFFFF"/>
+    
+    <!-- Gentle Nose -->
+    <path d="M120 114 L118 124 Q120 126 123 124" fill="none" stroke="#CFA07D" stroke-width="1.8" stroke-linecap="round"/>
+    <!-- Soft Blush -->
+    <ellipse cx="98" cy="125" rx="6" ry="3.2" fill="#D98A7C" opacity="0.22"/>
+    <ellipse cx="142" cy="125" rx="6" ry="3.2" fill="#D98A7C" opacity="0.22"/>
+    <!-- Warm Friendly Smile -->
+    <path d="M111 135 Q120 142 129 135" fill="none" stroke="#9E564E" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  
+</svg>

@@ -390,17 +390,30 @@ ul, ol {
 .status-credit { background: rgba(52,152,219,0.15); color: #3498DB; border: 1px solid rgba(52,152,219,0.3); }
 
 /* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .section {
+    padding: 56px 0;
+  }
+  .section-title {
+    margin-bottom: 34px;
+  }
+}
+
 @media (max-width: 768px) {
   h1 { font-size: var(--font-size-3xl); }
   h2 { font-size: var(--font-size-2xl); }
   h3 { font-size: var(--font-size-xl); }
   
   .container {
-    padding: 0 var(--spacing-md);
+    padding: 0 16px;
   }
   
   .section {
-    padding: var(--spacing-3xl) 0;
+    padding: 40px 0;
+  }
+
+  .section-title {
+    margin-bottom: 24px;
   }
 }
 

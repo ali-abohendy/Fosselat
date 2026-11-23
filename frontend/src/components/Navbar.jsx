@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Phone, Mail, Facebook, Instagram, Tiktok, ArrowRight, ArrowLeft } from './Icons';
+import { Phone, Mail, Facebook, Instagram, ArrowRight, ArrowLeft } from './Icons';
+import { buildWhatsAppUrl, trackWhatsAppClick } from '../utils/siteActions';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -9,7 +10,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { user, logout } = useAuth();
   const location = useLocation();
-  const isDashboard = ['/admin', '/teacher', '/student'].some(p => location.pathname.startsWith(p));
+  const isDashboard = ['/admin', '/teacher', '/student'].some(
+    p => location.pathname === p || location.pathname.startsWith(`${p}/`)
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,6 +87,7 @@ export default function Navbar() {
             </li>
             {user && <li><NavLink to={getDashboardLink()} onClick={closeMenu}>Dashboard</NavLink></li>}
             <li><NavLink to="/curriculum" onClick={closeMenu}>Curriculum</NavLink></li>
+            <li><NavLink to="/teachers" onClick={closeMenu}>Teachers</NavLink></li>
             {(!user || user.role === 'student') && (
               <li><NavLink to="/placement-tests" onClick={closeMenu}>{user ? 'Tests' : 'Placement Tests'}</NavLink></li>
             )}
@@ -97,11 +101,14 @@ export default function Navbar() {
           <div className="navbar-mobile-footer">
             {!user && (
               <a 
-                href="https://wa.me/966595796177?text=Assalam%20alikom%20warahmatuallah%20wabarakatu.%20I%20want%20to%20book%20a%20Free%20trial%20lesson,%20please." 
+                href={buildWhatsAppUrl({ page: location.pathname || 'Home', intent: 'trial' })} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="navbar-mobile-cta"
-                onClick={closeMenu}
+                onClick={() => {
+                  trackWhatsAppClick('navbar_mobile_trial');
+                  closeMenu();
+                }}
               >
                 Book a Free Trial
               </a>
@@ -120,11 +127,8 @@ export default function Navbar() {
               <a href="https://www.facebook.com/profile.php?id=61590983983531" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <Facebook size={22} />
               </a>
-              <a href="https://www.instagram.com/fosselatacademy2001/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/fosselat_academy?lqvp=eGVqeGdiNDFnOHZ6" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <Instagram size={22} />
-              </a>
-              <a href="https://www.tiktok.com/@user4744086184577?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                <Tiktok size={22} />
               </a>
             </div>
           </div>

@@ -569,7 +569,7 @@
 @media (max-width: 640px) {
   .cur-cert-grid { grid-template-columns: 1fr; }
   .cur-glossary { grid-template-columns: 1fr; }
-  .cur-track-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; justify-content: flex-start; }
+  .cur-track-tabs { flex-wrap: wrap; overflow-x: visible; padding-bottom: 0; justify-content: center; gap: 8px; }
   .cur-program-header { width: 100%; }
   .cur-mission { padding: 16px; }
 }

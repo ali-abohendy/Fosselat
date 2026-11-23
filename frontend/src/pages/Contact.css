@@ -26,7 +26,7 @@
 .contact-hero-content {
   position: relative;
   text-align: center;
-  padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+  padding: var(--spacing-4xl) 16px var(--spacing-3xl);
   animation: fadeInDown 0.7s ease;
 }
 

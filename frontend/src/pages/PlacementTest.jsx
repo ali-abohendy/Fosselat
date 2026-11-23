@@ -803,18 +803,37 @@ export default function PlacementTest() {
   const renderWelcome = () => (
     <div className="pt-screen">
       <div className="pt-card pt-card-hero">
-        <h1 className="pt-display">Determine your path.</h1>
-        <p className="pt-lede">Our adaptive assessment finds exactly where you should start in our curriculum.</p>
+        <div className="pt-eyebrow">Free Placement Assessment</div>
+        <h1 className="pt-display">Determine Your Path</h1>
+        <p className="pt-lede">
+          Find your exact starting level and receive an instant personalized roadmap.
+        </p>
+
+        <div className="pt-welcome-facts">
+          <div className="pt-welcome-fact">
+            <strong>100% Free</strong>
+            <span>No commitment</span>
+          </div>
+          <div className="pt-welcome-fact">
+            <strong>3–5 Min</strong>
+            <span>Adaptive quiz</span>
+          </div>
+          <div className="pt-welcome-fact">
+            <strong>No Account</strong>
+            <span>Instant result</span>
+          </div>
+        </div>
+
         {resumeData && (
           <div className="pt-resume-banner">
             <p>You have a saved session: <strong>{resumeData.track.label} — {resumeData.program.label}</strong></p>
-            <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="pt-btn pt-btn-primary" onClick={doResume}>Resume</button>
               <button className="pt-btn pt-btn-ghost" onClick={() => { clearProgress(); setResumeData(null); }}>Start Fresh Instead</button>
             </div>
           </div>
         )}
-        <button className="pt-btn pt-btn-primary pt-btn-lg" style={{ marginTop: '32px' }} onClick={() => {
+        <button className="pt-btn pt-btn-primary pt-btn-lg" style={{ marginTop: '26px' }} onClick={() => {
           if (user && user.age) {
             handleAudienceSelect(parseInt(user.age) >= 15, true);
           } else {
@@ -966,7 +985,7 @@ const renderProgram = () => {
             <div><dt>Est. Time</dt><dd>{Math.max(2, Math.round(minQ * 0.4))}–{Math.max(4, Math.round(maxQ * 0.5))} min</dd></div>
             <div><dt>Choices</dt><dd>Multiple choice</dd></div>
           </div>
-          <button className="pt-btn pt-btn-primary pt-btn-block" style={{ marginTop: '32px' }} onClick={() => {
+          <button className="pt-btn pt-btn-primary pt-btn-block" style={{ marginTop: '20px' }} onClick={() => {
             if (!user) {
               if (!validateUserInfo()) return;
               const ageNum = userInfo.age.trim() ? parseInt(userInfo.age, 10) : 25;
